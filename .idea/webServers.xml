@@ -2,11 +2,12 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="ae5b1a84-1742-4496-9fc4-48a20e8ff34a" name="been (project level)" url="http://46.38.233.241">
+      <webServer id="ae5b1a84-1742-4496-9fc4-48a20e8ff34a" name="been" url="http://46.38.233.241">
         <fileTransfer host="46.38.233.241" port="25000" rootFolder="/var/www/hue-pro" accessType="SFTP" password="df8bdff8dfc9dfe8dfcfdf87dfd9dfd8dfdcdf95" username="beessh">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
+          <option name="port" value="25000" />
         </fileTransfer>
       </webServer>
     </option>

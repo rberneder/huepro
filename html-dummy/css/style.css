@@ -10,15 +10,54 @@
 }
 .row--gutter-width-5 { margin: 0 -5px; }
 .row--gutter-width-5 .col { padding: 0 5px; }
-
-.icon {
-
+.bg-green { background: #56714f; }
+.text-white { color: #fff; }
+.embed-responsive {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    padding: 0;
 }
+.embed-responsive-item {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    height: auto;
+    width: 100%;
+}
+.embed-responsive-month { padding-bottom: 30% !important; }
+.embed-responsive-item,
+.embed-responsive h2 {
+    font-size: 40px;
+    color: #fff;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.85);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.mt-10 { margin: 0; margin-top: 10px; }
+
 
 /* MAIN */
 body {
     font-family: Quicksand, sans-serif;
     background: #56714f;
+}
+body.bg-img {
+    background: url(../img/gemuese.jpg) center center no-repeat;
+    background-size: auto 100vw;
+}
+body.bg-img:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.35);
 }
 p {
     margin-top: 0;
@@ -34,6 +73,21 @@ h1 {
     background: #fff;
 }
 
+header.subpage {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    background: #56714f;
+    border-bottom: 1px solid #fff;
+}
+
+.month-selector,
+section.hl {
+    margin-top: 40px;
+}
+
 .jetzt-reif    { background: #fff; }
 .jetzt-reif article { padding: 0 15px; }
 .jetzt-reif h2 { font-size: 18px; margin: 0 0 10px; }
@@ -45,7 +99,12 @@ h1 {
 .jetzt-reif.gemuese a,
 .jetzt-reif.gemuese h3 { color: #9dca91; }
 
-footer { margin-top: 30px; }
+footer {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+}
 footer input {
     display: inline-block;
     padding: 5px;
@@ -64,4 +123,23 @@ footer button.btn {
 footer small {
     margin-top: 10px;
     display: block;
+}
+
+.back-btn {
+    margin: 10px 0 10px 10px;
+    font-size: 20px;
+}
+
+.month-content { margin-top: 20px; padding-bottom: 40px; }
+
+.thumb { margin-bottom: 10px; }
+.thumb h3 {
+    margin: 0 0 7px 0;
+}
+
+.details {
+    color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.25);
 }
