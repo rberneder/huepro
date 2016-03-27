@@ -1,0 +1,67 @@
+/* OOCSS */
+.text-center { text-align: center; }
+.text-right  { text-align: right;  }
+.btn-primary {
+    font-size: 16px;
+    background: #ffba00;
+    border-radius: 0;
+    border: 2px solid #fff;
+    padding: 3px 5px;
+}
+.row--gutter-width-5 { margin: 0 -5px; }
+.row--gutter-width-5 .col { padding: 0 5px; }
+
+.icon {
+
+}
+
+/* MAIN */
+body {
+    font-family: Quicksand, sans-serif;
+    background: #56714f;
+}
+p {
+    margin-top: 0;
+}
+
+h1 {
+    color: #ffba00;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 20px 0;
+    padding: 5px 10px;
+    display: inline-block;
+    background: #fff;
+}
+
+.jetzt-reif    { background: #fff; }
+.jetzt-reif article { padding: 0 15px; }
+.jetzt-reif h2 { font-size: 18px; margin: 0 0 10px; }
+.jetzt-reif h3 { font-size: 16px; margin: 0 0 5px 0; }
+.jetzt-reif.obst h2    { background: #e7934a; color: #91541f; }
+.jetzt-reif.gemuese h2 { background: #9dca91; color: #56714f; }
+.jetzt-reif.obst a,
+.jetzt-reif.obst h3    { color: #e7934a; }
+.jetzt-reif.gemuese a,
+.jetzt-reif.gemuese h3 { color: #9dca91; }
+
+footer { margin-top: 30px; }
+footer input {
+    display: inline-block;
+    padding: 5px;
+    width: 90%;
+    margin-top: 10px;
+    border: none;
+}
+footer button.btn {
+    border-radius: 0;
+    width: 10%;
+    margin-left: -5px;
+    height: 30px;
+    line-height: 15px;
+    margin-top: -4px;
+}
+footer small {
+    margin-top: 10px;
+    display: block;
+}
