@@ -63,6 +63,10 @@ p {
     margin-top: 0;
 }
 
+a {
+    color: #333;
+}
+
 h1 {
     color: #ffba00;
     font-size: 20px;
@@ -83,8 +87,7 @@ header.subpage {
     border-bottom: 1px solid #fff;
 }
 
-.month-selector,
-section.hl {
+.month-selector {
     margin-top: 40px;
 }
 
@@ -101,9 +104,11 @@ section.hl {
 
 footer {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
     width: 100%;
+    background-color: #56714f;
+    padding: 15px 0;
 }
 footer input {
     display: inline-block;
@@ -130,16 +135,30 @@ footer small {
     font-size: 20px;
 }
 
-.month-content { margin-top: 20px; padding-bottom: 40px; }
+.month-content { margin-top: 20px; padding-bottom: 50px; }
 
 .thumb { margin-bottom: 10px; }
 .thumb h3 {
     margin: 0 0 7px 0;
 }
 
-.details {
-    color: #fff;
-    padding: 10px;
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.25);
+.product-image-section {
+    margin-top: 48px;
+}
+
+.product-detail-section {
+    padding-bottom: 20px;
+}
+
+ul.rezept {
+    padding: 0;
+    list-style-type: none;
+}
+
+.main-content {
+    margin-bottom: 120px;
+}
+
+.rezept-content {
+    margin-bottom: 50px;
 }
