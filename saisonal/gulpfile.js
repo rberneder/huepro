@@ -13,6 +13,7 @@ var ext_replace = require('gulp-ext-replace');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('autoprefixer');
+var sass = require('gulp-sass');
 var precss = require('precss');
 var cssnano = require('cssnano');
 
@@ -28,6 +29,7 @@ var tsProject = typescript.createProject('tsconfig.json');
 gulp.task('build-css', function () {
     return gulp.src(assetsDev + 'scss/*.scss')
         .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss([precss, autoprefixer, cssnano]))
         .pipe(sourcemaps.write())
         .pipe(ext_replace('.css'))
@@ -58,7 +60,7 @@ gulp.task('build-html', function () {
 
 gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['build-ts']);
-    gulp.watch(assetsDev + 'scss/**/*.scss', ['build-css']);
+    gulp.watch(assetsDev + 'scss/**/[^_]*.scss', ['build-css']);
     gulp.watch(assetsDev + 'img/*', ['build-img']);
 });
 
