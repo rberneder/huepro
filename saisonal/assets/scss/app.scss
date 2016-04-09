@@ -1,6 +1,9 @@
+@import "general/fonts";
+@import "general/variables";
+
+@import "components/header";
+
 body {
-  padding: 32px;
-  margin: 32px;
   font-family: "Roboto", Arial, sans-serif;
   font-size: 16px;
 }
