@@ -38,7 +38,7 @@ var consolidate = require('gulp-consolidate');
 /*
 * TASKS
 * */
-gulp.task('build-css', function () {
+gulp.task('css', function () {
     return gulp.src(assetsDev + 'scss/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -103,7 +103,7 @@ gulp.task('iconfont', function() {
 
 });
 
-gulp.task('build-ts', function () {
+gulp.task('ts', function () {
     return gulp.src(appDev + '**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
@@ -112,7 +112,7 @@ gulp.task('build-ts', function () {
         .pipe(gulp.dest(appProd));
 });
 
-gulp.task('build-img', function () {
+gulp.task('img', function () {
     return gulp.src(assetsDev + 'img/**/*')
         .pipe(imagemin({
             progressive: true
@@ -120,15 +120,15 @@ gulp.task('build-img', function () {
         .pipe(gulp.dest(assetsProd + 'img/'));
 });
 
-gulp.task('build-html', function () {
+gulp.task('html', function () {
     return gulp.src(appDev + '**/*.html')
         .pipe(gulp.dest(appProd));
 });
 
 gulp.task('watch', function () {
-    gulp.watch(appDev + '**/*.ts', ['build-ts']);
-    gulp.watch(assetsDev + 'scss/**/[^_]*.scss', ['build-css']);
-    gulp.watch(assetsDev + 'img/*', ['build-img']);
+    gulp.watch(appDev + '**/*.ts', ['ts']);
+    gulp.watch(assetsDev + 'scss/**/[^_]*.scss', ['css']);
+    gulp.watch(assetsDev + 'img/*', ['img']);
 });
 
-gulp.task('default', ['watch', 'build-ts', 'iconfont', 'build-css']);
+gulp.task('default', ['watch', 'ts', 'iconfont', 'css']);
