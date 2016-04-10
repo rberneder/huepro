@@ -1,7 +1,22 @@
+/*
+ * LIBRARIES
+ */
+@import "lib/bootstrap/bootstrap";
+
+
+/*
+ * GENERAL
+ */
 @import "general/fonts";
 @import "general/variables";
 
+
+/*
+ * COMPONENTS
+ */
 @import "components/header";
+
+
 
 body {
   font-family: "Roboto", Arial, sans-serif;
