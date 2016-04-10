@@ -1,0 +1,25 @@
+<header>
+    <img src="/src/img/bg.jpg" id="header-bg">
+    <h1 class="main-hl">Saisonal</h1>
+
+    <nav id="menu--main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4"><a [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a></div>
+                <div class="col-sm-4"><a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a></div>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="icon icon-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="content--main">
+    <router-outlet></router-outlet>
+</div>
