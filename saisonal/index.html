@@ -20,33 +20,21 @@
     <link rel="stylesheet" href="src/css/app.css">
 </head>
 <body>
-
-
-<header>
-    <img src="/src/img/bg.jpg" id="header-bg">
-    <h1 class="main-hl">Saisonal</h1>
-
-    <nav id="menu--main">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4"><a href="#" class="btn btn-default btn-block">Saisonkalender</a></div>
-                <div class="col-sm-4"><a href="#" class="btn btn-default btn-block">Rezepte</a></div>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <input type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><span class="icon icon-search"></span></button>
-                        </span>
+<div id="wrapper">
+    <app>
+        <div style="background: #f3f1ef; position: absolute; left: 0; right: 0; top: 0; bottom: 0;">
+            <div class="container" style="margin-top: 20vh;">
+                <div class="row">
+                    <div class="col-xs-offset-5 col-xs-2">
+                        <img src="/src/img/loader.gif" class="img-responsive">
                     </div>
+                </div>
+                <div class="text-center">
+                    Initializing app...
                 </div>
             </div>
         </div>
-    </nav>
-</header>
-
-
-<div id="content--main">
-    <app>Initializing app...</app>
+    </app>
 </div>
 
 <script>
