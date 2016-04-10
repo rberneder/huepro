@@ -81,19 +81,32 @@ header {
     }
   }
 
-  .main-hl {
-    font-family: Niconne;
-    color: #fff;
-    text-shadow: 4px 4px 0 #7f6937;
-    font-size: 75px;
+  #header-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 0;
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 150px;
+    .main-hl {
+      font-family: Niconne;
+      color: #fff;
+      text-shadow: 4px 4px 0 #7f6937;
+      font-size: 75px;
+      margin: 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 150px;
+      }
+    }
+
+    #popular-products {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 1300ms ease-out;
+
+      &.open {
+        max-height: 500px;
+      }
     }
   }
 }
