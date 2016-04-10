@@ -13,7 +13,7 @@ header {
     height: auto;
     z-index: 0;
 
-    @media (min-width: 768px) {
+    @media (max-width: $screen-xs-max) {
       & {
         height: 100vh;
       }
@@ -40,7 +40,7 @@ header {
     transform: translate(-50%, -50%);
     margin: 0;
 
-    @media (min-width: 768px) {
+    @media (min-width: $screen-sm-min) {
       font-size: 150px;
     }
   }
