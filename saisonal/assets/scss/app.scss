@@ -15,5 +15,11 @@
 /*
  * COMPONENTS
  */
+// General
 @import "components/header";
 @import "components/main-content";
+// Season-Calendar
+@import "components/season-calendar/general";
+@import "components/season-calendar/menu";
+@import "components/season-calendar/product-list";
+@import "components/season-calendar/product-thumb";
