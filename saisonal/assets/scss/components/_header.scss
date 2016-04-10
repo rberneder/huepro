@@ -27,6 +27,54 @@ header {
     bottom: 0;
     border-top: 3px solid #fff;
     background: #7f6937;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+    [class^="col"] {
+      margin-bottom: 15px;
+    }
+    [class^="col"]:last-child {
+      margin-bottom: 0;
+    }
+
+    #search--main {
+      height: 39px;
+      box-shadow: none;
+    }
+
+    .btn-default,
+    #search--main {
+      font-size: 15px;
+    }
+    .btn-default {
+      border-width: 3px;
+      font-family: Quicksand-Bold;
+
+      &:hover {
+        color: #fff;
+        background: rgba(255,255,255,0.25);
+      }
+    }
+
+    @media (min-width: $screen-sm-min) {
+      & {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      #search--main,
+      .btn-default {
+        font-size: 20px;
+      }
+      #search--main {
+        height: 46px;
+      }
+
+      [class^="col"] {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .main-hl {
