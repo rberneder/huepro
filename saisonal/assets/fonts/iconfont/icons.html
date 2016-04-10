@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,nofollow" />
+	<title>Saisonal Icons</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/src/css/app.css">
+
+	<style type="text/css">
+		.bs-glyphicons {
+			margin: 0 -10px 20px;
+			overflow: hidden
+		}
+
+		.bs-glyphicons-list {
+			padding-left: 0;
+			list-style: none
+		}
+
+		.bs-glyphicons li {
+			float: left;
+			width: 25%;
+			height: 115px;
+			padding: 10px;
+			font-size: 10px;
+			line-height: 1.4;
+			text-align: center;
+			background-color: #f9f9f9;
+			border: 1px solid #fff;
+			overflow: hidden;
+
+			-webkit-transition: all 200ms ease-in-out;
+			-moz-transition:    all 200ms ease-in-out;
+			-ms-transition:         all 200ms ease-in-out;
+			-o-transition:      all 200ms ease-in-out;
+			transition:         all 200ms ease-in-out;
+			cursor: pointer;
+		}
+		.bs-glyphicons li:hover {
+			overflow: visible;
+		}
+		.col-xs-5 .bs-glyphicons li {
+			width: 25%;
+		}
+
+		.bs-glyphicons .glyphicon {
+			margin-top: 5px;
+			margin-bottom: 10px;
+			font-size: 24px
+		}
+
+		.bs-glyphicons .glyphicon-class {
+			padding-top: 10px;
+			display: block;
+			text-align: center;
+			word-wrap: break-word
+		}
+
+
+		.zeroclipboard-is-hover,
+		.bs-glyphicons li:hover {
+			color: #fff;
+			background-color: #FF3200
+		}
+
+		.icon-height{
+			font-size: 30px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-ms-user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bs-glyphicons {
+				margin-right: 0;
+				margin-left: 0
+			}
+
+			.bs-glyphicons li {
+				width: 12.5%;
+				font-size: 12px
+			}
+
+			.col-xs-5 .bs-glyphicons li {
+				width: 25.5%;
+				font-size: 12px
+			}
+		}
+
+		/*Copy alert*/
+		#copy-alert {
+			padding: 30px;
+			position: absolute;
+			right: 20px;
+			top: 60px;
+			width: 300px;
+		}
+		#copy-alert h3 {
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron">
+		<h1>Saisonal Icons <small>(<%= glyphs.length %>)</small></h1>
+	</div>
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1">
+			<div class="bs-glyphicons">
+				<ul class="bs-glyphicons-list">
+					<% _.each(glyphs, function(glyph) { %>
+					<li>
+						<span class="icon-height <%= className %> <%= className %>-<%= glyph.name %>" aria-hidden="true"></span>
+						<span class="glyphicon-class"><%= className %> <%= className %>-<%= glyph.name %></span>
+					</li>
+					<% }); %>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-5 col-xs-offset-1">
+			<h2>Rotate</h2>
+			<div class="bs-glyphicons">
+				<ul class="bs-glyphicons-list">
+					<li>
+						<span class="icon-height <%= className %>-rotate-90 <%= className %> <%= className %>-<%= glyphs[0].name %>" aria-hidden="true"></span>
+						<span class="glyphicon-class"><%= className %> <%= className %>-rotate-90 <%= className %>-<%= glyphs[0].name %></span>
+					</li>
+					<li>
+						<span class="icon-height <%= className %>-rotate-180 <%= className %> <%= className %>-<%= glyphs[0].name %>" aria-hidden="true"></span>
+						<span class="glyphicon-class"><%= className %> <%= className %>-rotate-180 <%= className %>-<%= glyphs[0].name %></span>
+					</li>
+					<li>
+						<span class="icon-height <%= className %>-rotate-270 <%= className %> <%= className %>-<%= glyphs[0].name %>" aria-hidden="true"></span>
+						<span class="glyphicon-class"><%= className %> <%= className %>-rotate-270 <%= className %>-<%= glyphs[0].name %></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-xs-5">
+			<h2>Flip</h2>
+			<div class="bs-glyphicons">
+				<ul class="bs-glyphicons-list">
+					<li>
+						<span class="icon-height <%= className %>-flip-horizontal <%= className %> <%= className %>-<%= glyphs[0].name %>" aria-hidden="true"></span>
+						<span class="glyphicon-class"><%= className %> <%= className %>-flip-horizontal <%= className %>-<%= glyphs[0].name %></span>
+					</li>
+					<li>
+						<span class="icon-height <%= className %>-flip-vertical <%= className %> <%= className %>-<%= glyphs[0].name %>" aria-hidden="true"></span>
+						<span class="glyphicon-class"><%= className %> <%= className %>-flip-vertical <%= className %>-<%= glyphs[0].name %></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div id="copy-alert" class="bg-success text-success hidden">
+		<h3>Copy class command was successful</h3>
+	</div>
+</div>
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function(e){
+		var glyphListItem = document.querySelectorAll('.bs-glyphicons-list li');
+		var glyphItems = document.querySelectorAll('.glyphicon-class');
+		for (var i = 0; i < glyphItems.length; i++)
+			if (glyphItems[i]) {
+				glyphListItem[i].onclick= iconClickHandler;
+			}
+		function iconClickHandler() {
+			var range = document.createRange();
+			range.selectNode(this.querySelector('.glyphicon-class'));
+			window.getSelection().addRange(range);
+
+			try{
+				var successful = document.execCommand('copy');
+				var msg = successful ? 'successful' : 'unsuccessful';
+				console.log('Copy class command was ' + msg);
+
+				document.getElementById('copy-alert').classList.remove('hidden');
+				setTimeout("document.getElementById('copy-alert').classList.add('hidden');", 2000);
+
+			}catch(err){
+				console.log('Oops, unable to copy');
+			}
+
+			window.getSelection().removeAllRanges();
+		}
+	});
+</script>
+</body>
+</html>
