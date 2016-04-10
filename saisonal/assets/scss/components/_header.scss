@@ -51,9 +51,13 @@ header {
       border-width: 3px;
       font-family: Quicksand-Bold;
 
-      &:hover {
+      &:hover,
+      &.router-link-active {
         color: #fff;
         background: rgba(255,255,255,0.25);
+      }
+      &.router-link-active {
+        pointer-events: none;
       }
     }
 
