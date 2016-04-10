@@ -8,6 +8,7 @@ var appProd = 'app/';
 
 /* Mixed */
 var ext_replace = require('gulp-ext-replace');
+var debug = require('gulp-debug');
 
 /* CSS */
 var postcss = require('gulp-postcss');
@@ -20,12 +21,23 @@ var cssnano = require('cssnano');
 /* JS & TS */
 var jsuglify = require('gulp-uglify');
 var typescript = require('gulp-typescript');
+var tsProject = typescript.createProject('tsconfig.json');
 
 /* Images */
 var imagemin = require('gulp-imagemin');
 
-var tsProject = typescript.createProject('tsconfig.json');
+/* Iconfonts */
+var fs = require('fs');
+var lodash = require('lodash');
+var iconfont = require('gulp-iconfont');
+var plumber = require('gulp-plumber');
+var consolidate = require('gulp-consolidate');
 
+
+
+/*
+* TASKS
+* */
 gulp.task('build-css', function () {
     return gulp.src(assetsDev + 'scss/*.scss')
         .pipe(sourcemaps.init())
@@ -34,6 +46,61 @@ gulp.task('build-css', function () {
         .pipe(sourcemaps.write())
         .pipe(ext_replace('.css'))
         .pipe(gulp.dest(assetsProd + 'css/'));
+});
+
+gulp.task('iconfont', function() {
+
+    fs.readdir('assets/fonts/iconfont/svg/', function(err, files){ // '/' denotes the root folder
+        if(err){
+            throw err;
+        }
+        files.forEach(function(file) {
+            var matches = file.match(/^(?:u([0-9a-f]{4,6})\-)(.*).svg$/i);
+            if (matches) {
+                var icon = lodash.indexOf(files, matches[2]+'.svg');
+                if (icon >= 0) {
+                    var fileName = matches[0];
+                    var filesIcon = files[icon];
+                    fs.unlink( 'assets/fonts/iconfont/svg/' + fileName);
+                    fs.renameSync( 'assets/fonts/iconfont/svg/' + filesIcon, 'assets/fonts/iconfont/svg/' + fileName );
+                }
+            }
+        });
+        gulp.src(['assets/fonts/iconfont/svg/*.svg'])
+            .pipe(plumber())
+            .pipe(iconfont({
+                fontName: 'iconfont', // required
+                prependUnicode: true, // recommended option
+                centerHorizontally: true,
+                normalize: true
+            }))
+            .on('glyphs', function(glyphs, options) {
+                gulp.src('assets/fonts/iconfont/_icons.scss')
+                    .pipe(plumber())
+                    .pipe(consolidate('lodash', {
+                        glyphs: glyphs,
+                        fontName: 'iconfont',
+                        fontPath: '/assets/fonts/iconfont/',
+                        className: 'icon'
+                    }))
+                    .pipe(plumber.stop())
+                    .pipe(gulp.dest('assets/scss/general'));
+
+                gulp.src('assets/fonts/iconfont/icons.html')
+                    .pipe(plumber())
+                    .pipe(consolidate('lodash', {
+                        glyphs: glyphs,
+                        fontName: 'iconfont',
+                        fontPath: '/assets/fonts/iconfont/',
+                        className: 'icon'
+                    }))
+                    .pipe(plumber.stop())
+                    .pipe(gulp.dest('assets'));
+            })
+            .pipe(plumber.stop())
+            .pipe(gulp.dest('assets/fonts/iconfont'));
+    });
+
 });
 
 gulp.task('build-ts', function () {
@@ -64,4 +131,4 @@ gulp.task('watch', function () {
     gulp.watch(assetsDev + 'img/*', ['build-img']);
 });
 
-gulp.task('default', ['watch', 'build-ts', 'build-css']);
+gulp.task('default', ['watch', 'build-ts', 'iconfont', 'build-css']);
