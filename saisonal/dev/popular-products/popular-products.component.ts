@@ -6,9 +6,10 @@ import {OnInit} from "angular2/core";
     templateUrl: '/templates/popular-products/popular-products.template.html',
 })
 export class PopularProductsComponent implements OnInit {
-
+    public loaded = false;
+    
     ngOnInit():any {
-        this.
+        this.loaded = true;
         console.log('Popular-Products loaded');
     }
 }
