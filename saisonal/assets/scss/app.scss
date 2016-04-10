@@ -8,6 +8,7 @@
  * GENERAL
  */
 @import "general/fonts";
+@import "general/icons";
 @import "general/variables";
 
 
@@ -15,10 +16,3 @@
  * COMPONENTS
  */
 @import "components/header";
-
-
-
-body {
-  font-family: "Roboto", Arial, sans-serif;
-  font-size: 16px;
-}
