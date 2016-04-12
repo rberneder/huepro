@@ -1,29 +1,29 @@
 <header>
-    <img src="/src/img/bg.jpg" id="header-bg">
     <div id="header-box">
-        <h1 class="main-hl text-center">Saisonal</h1>
-
-        <popular-products></popular-products>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="main-hl">Saisonal-Manager</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
     <nav id="menu--main">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
-                    <a [routerLink]="['SeasonCalendar', {month: month}]" class="btn btn-default btn-block">Saisonkalender</a>
-                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
+                <div class="col-sm-6">
+                    <a [routerLink]="['Products']" class="btn">
+                        Produkte
+                        <img src="http://placehold.it/800x480" class="img-responsive" />
+                        <div>Zur Obst & Gemüse - Liste</div>
+                    </a>
                 </div>
-                <div class="col-sm-4">
-                    <a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
-                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
-                </div>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <input type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><span class="icon icon-search"></span></button>
-                        </span>
-                    </div>
+                <div class="col-sm-6">
+                    <a [routerLink]="['Recipes']" class="btn">Rezepte
+                        <img src="http://placehold.it/800x480" class="img-responsive" />
+                        <div>Zur Rezept - Liste</div>
+                    </a>
                 </div>
             </div>
         </div>
