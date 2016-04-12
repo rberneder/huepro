@@ -1,0 +1,54 @@
+<div id="season-calendar">
+    <section id="season-calendar__menu">
+        <div class="container">
+            <div class="pull-left">
+                <span>Reif im: </span>
+                <a class="btn btn-default"><span class="icon icon-arrow-left"></span></a>
+                <span>September</span>
+                <a class="btn btn-default"><span class="icon icon-arrow-right"></span></a>
+            </div>
+
+            <div class="pull-right">
+                <span>Filter:</span>
+                <a href="#" class="btn btn-default btn-sm">Alle</a>
+                <a href="#" class="btn btn-default btn-sm">Obst</a>
+                <a href="#" class="btn btn-default btn-sm">Gemüse</a>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="season-calendar__product-list">
+
+        <style>
+            #test {
+                font-family: Niconne;
+                font-size: 50px;
+            }
+        </style>
+        <h2 class="text-white text-center" id="test">September</h2>
+
+        <div class="container">
+
+            <article
+                *ngFor="#product of products"
+                (click)="testFunction(product._id)"
+                class="product-thumb fruit"
+            ><!-- TODO load category dynamically -->
+                <div class="headline">
+                    <h3>{{product.name}}</h3>
+                </div>
+                <div class="family">
+                    {{product.family_id}}
+                </div>
+                <figure>
+                    <img src="http://placehold.it/250x180" class="img-responsive">
+                    <figcaption>
+                        {{product.shortDescription}}
+                    </figcaption>
+                </figure>
+            </article>
+
+        </div>
+    </section>
+</div>
