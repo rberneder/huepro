@@ -127,7 +127,7 @@ gulp.task('html', function () {
 
 gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['ts']);
-    gulp.watch(assetsDev + 'scss/**/[^_]*.scss', ['css']);
+    gulp.watch(assetsDev + 'scss/**/*.scss', ['css']);
     gulp.watch(assetsDev + 'img/*', ['img']);
 });
 
