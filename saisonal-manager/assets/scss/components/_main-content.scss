@@ -1,3 +1,8 @@
+body {
+  background-color: $beige;
+}
+
 #content--main {
   position: relative;
+  min-height: 100vh;
 }
