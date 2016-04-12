@@ -2,15 +2,9 @@ export interface Product {
     _id: number,
     name: string,
     family_id: string,
-    plantStart: {
-        month: number,
-        day: number
-    },
+    plantStart: string,
     plantDays: number,
-    harvestStart: {
-        month: number,
-        day: number
-    },
+    harvestStart: string,
     harvestDays: number,
     storageDays: number,
     shortDescription: string,

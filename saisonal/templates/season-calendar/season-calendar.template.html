@@ -30,17 +30,21 @@
 
         <div class="container">
 
-            <article class="product-thumb fruit">
+            <article
+                *ngFor="#product of products"
+                (click)="testFunction(product._id)"
+                class="product-thumb fruit"
+            ><!-- TODO load category dynamically -->
                 <div class="headline">
-                    <h3>Jonagold</h3>
+                    <h3>{{product.name}}</h3>
                 </div>
                 <div class="family">
-                    Apfel
+                    {{product.family_id}}
                 </div>
                 <figure>
                     <img src="http://placehold.it/250x180" class="img-responsive">
                     <figcaption>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid eaque id maxime natus nulla ut?
+                        {{product.shortDescription}}
                     </figcaption>
                 </figure>
             </article>
