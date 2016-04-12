@@ -1,28 +1,23 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES, Router} from "angular2/router";
 import {RouteConfig} from "angular2/router";
-import {ContactListComponent} from "./contacts/contact-list.component";
-import {NewContactComponent} from "./contacts/new-contact.component";
+import {SeasonCalendarComponent} from "./season-calendar/season-calendar.component";
+import {RecipesComponent} from "./recipes/recipes.component";
+import {PopularProductsComponent} from "./popular-products/popular-products.component";
 
 @Component({
     selector: 'app',
-    template: `
-        <header>
-            <nav>
-                <a [routerLink]="['Contacts']">Contacts</a>
-                <a [routerLink]="['NewContact']">New Contact</a>
-            </nav>
-        </header>
-        <div class="main">
-            <router-outlet></router-outlet>
-        </div>
-    `,
-    directives: [ContactListComponent, ROUTER_DIRECTIVES]
+    templateUrl: '/templates/app.template.html',
+    directives: [SeasonCalendarComponent, ROUTER_DIRECTIVES, PopularProductsComponent]
 })
 @RouteConfig([
-    {path: '/contacts', name: 'Contacts', component: ContactListComponent, useAsDefault: true},
-    {path: '/newcontact', name: 'NewContact', component: NewContactComponent}
+    {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
+    {path: '/rezepte', name: 'Recipes', component: RecipesComponent}
 ])
 export class AppComponent {
+    private month;
 
+    constructor(private _router: Router) {
+        this.month = new Date().getMonth();
+    };
 }

@@ -1,10 +1,26 @@
-body {
-  padding: 32px;
-  margin: 32px;
-  font-family: "Roboto", Arial, sans-serif;
-  font-size: 16px;
-}
+/*
+ * LIBRARIES
+ */
+@import "lib/bootstrap/bootstrap";
 
-.selected {
-  color: red;
-}
+
+/*
+ * GENERAL
+ */
+@import "general/fonts";
+@import "general/icons";
+@import "general/variables";
+@import "general/oocss";
+
+
+/*
+ * COMPONENTS
+ */
+// General
+@import "components/header";
+@import "components/main-content";
+// Season-Calendar
+@import "components/season-calendar/general";
+@import "components/season-calendar/menu";
+@import "components/season-calendar/product-list";
+@import "components/season-calendar/product-thumb";
