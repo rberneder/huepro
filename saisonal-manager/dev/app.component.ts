@@ -1,23 +1,19 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from "angular2/router";
 import {RouteConfig} from "angular2/router";
-import {SeasonCalendarComponent} from "./season-calendar/season-calendar.component";
+import {ProductsComponent} from "./products/products.component";
 import {RecipesComponent} from "./recipes/recipes.component";
-import {PopularProductsComponent} from "./popular-products/popular-products.component";
 
 @Component({
     selector: 'app',
     templateUrl: '/templates/app.template.html',
-    directives: [SeasonCalendarComponent, ROUTER_DIRECTIVES, PopularProductsComponent]
+    directives: [ProductsComponent, RecipesComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-    {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
+    {path: '/produkte', name: 'Products', component: ProductsComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent}
 ])
-export class AppComponent {
-    private month;
 
-    constructor(private _router: Router) {
-        this.month = new Date().getMonth();
-    };
+export class AppComponent{
+    
 }
