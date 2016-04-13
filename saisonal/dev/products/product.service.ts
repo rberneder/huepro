@@ -21,7 +21,18 @@ export class ProductService {
         return Promise.resolve(foundProduct);
     }
 
-    insertContact(product: Product) {
+    getProductsOfMonth(month) {
+        let foundProducts = [];
+        for (let product of PRODUCTS) {
+            if (product.harvestStart.month === month) {
+                foundProducts.push(product);
+            }
+        }
+        return Promise.resolve(foundProducts);
+    }
+    
+    
+    insertProduct(product: Product) {
         Promise.resolve(PRODUCTS).then((products: Product[]) => products.push(product));
     }
 }

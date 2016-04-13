@@ -1,29 +1,37 @@
 import {Component} from "angular2/core";
-import {Router, RouteParams} from "angular2/router";
+import {ROUTER_DIRECTIVES, Router, RouteParams, RouteConfig} from "angular2/router";
 import {OnInit} from "angular2/core";
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
 import {MONTHS} from "../util/month.seed";
+import {Month} from "../util/month";
+import {ProductDetailsComponent} from "../products/product-details.component";
 
 @Component({
     selector: "season-calendar",
     templateUrl: '/templates/season-calendar/season-calendar.template.html',
     providers: [ProductService],
+    directives: [ROUTER_DIRECTIVES]
 })
+@RouteConfig([
+    {path: '/product/:productId', name: 'ProductDetails', component: ProductDetailsComponent},
+])
 export class SeasonCalendarComponent implements OnInit {
-    private actMonth;
-    private prevMonth;
-    private nextMonth;
-    private monthNames;
-    private products: Product[];
+    private actMonth:number;
+    private prevMonth:number;
+    private nextMonth:number;
+    private monthNames:Month[];
+    private products:Product[];
+    private filterMenuOpen:boolean;
 
     constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
         this.setMonth(_routeParams.get('month'));
         this.monthNames = MONTHS;
+        this.filterMenuOpen = false;
     };
     
     ngOnInit():any {
-        this.getContacts();
+        this.getProducts();
     }
     
     setMonth(month) {
@@ -39,8 +47,8 @@ export class SeasonCalendarComponent implements OnInit {
         }
     }
 
-    getContacts() {
-        this._productService.getProducts().then((products: Product[]) => this.products = products);
+    getProducts() {
+        this._productService.getProductsOfMonth(this.actMonth).then((products: Product[]) => this.products = products);
     }
 
     gotoPrevMonth() {
@@ -51,7 +59,8 @@ export class SeasonCalendarComponent implements OnInit {
         this._router.navigate(['SeasonCalendar', {month: this.nextMonth}]);
     }
 
-    testFunction(id) {
-        console.log(this._productService.getProduct(id));
+    toggleFilterMenu() {
+        this.filterMenuOpen = !this.filterMenuOpen;
+        console.log('CALL: ' + this.filterMenuOpen);
     }
 }
