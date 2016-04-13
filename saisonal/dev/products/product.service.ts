@@ -8,18 +8,18 @@ export class ProductService {
         return Promise.resolve(PRODUCTS);
     }
 
+
     getProduct(id) {
         let foundProduct = null;
-
-        for (let i = 0; i < PRODUCTS.length; i++) {
-            if (PRODUCTS[i]._id === id) {
-                foundProduct = PRODUCTS[i];
+        for (let product of PRODUCTS) {
+            if (product._id === id) {
+                foundProduct = product;
                 break;
             }
         }
-
         return Promise.resolve(foundProduct);
     }
+
 
     getProductsOfMonth(month) {
         let foundProducts = [];
