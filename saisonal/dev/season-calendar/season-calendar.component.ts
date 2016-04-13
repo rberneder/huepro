@@ -13,9 +13,6 @@ import {ProductDetailsComponent} from "../products/product-details.component";
     providers: [ProductService],
     directives: [ROUTER_DIRECTIVES]
 })
-@RouteConfig([
-    {path: '/product/:productId', name: 'ProductDetails', component: ProductDetailsComponent},
-])
 export class SeasonCalendarComponent implements OnInit {
     private actMonth:number;
     private prevMonth:number;
