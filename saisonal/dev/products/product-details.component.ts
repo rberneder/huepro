@@ -1,10 +1,10 @@
 import {Component} from "angular2/core";
-import {Router} from "angular2/router";
-import {RouteParams} from "angular2/router";
+import {ROUTER_DIRECTIVES, Router, RouteParams} from "angular2/router";
 import {OnInit} from "angular2/core";
 import {ProductService} from "./product.service";
 
 @Component({
+    templateUrl: '/templates/products/product-details.template.html',
     providers: [ProductService]
 })
 export class ProductDetailsComponent implements OnInit {

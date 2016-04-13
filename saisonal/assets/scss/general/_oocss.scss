@@ -1,3 +1,27 @@
+/*
+ * TYPO
+ */
 .text-white {
   color: #fff;
 }
+
+/*
+ * COLORS
+ */
+.bg-light-beige { background: $lightBeige; }
+.bg-beige       { background: $beige;      }
+.bg-light-brown { background: $lightBrown; }
+.bg-brown       { background: $brown;      }
+.bg-light-green { background: $lightGreen; }
+.bg-green       { background: $green;      }
+.bg-gray        { background: $gray;       }
+.bg-gray-brown  { background: $grayBrown;  }
+.bg-orange      { background: $orange;     }
+.bg-light-blue  { background: $lightBlue;  }
+.bg-blue        { background: $blue;       }
+
+/*
+ * LAYOUT
+ */
+.inline-block { display: inline-block; }
+.block        { display: block;        }

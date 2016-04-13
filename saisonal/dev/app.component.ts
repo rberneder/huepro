@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router} from "angular2/router";
-import {RouteConfig} from "angular2/router";
+import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
 import {SeasonCalendarComponent} from "./season-calendar/season-calendar.component";
 import {RecipesComponent} from "./recipes/recipes.component";
 import {PopularProductsComponent} from "./popular-products/popular-products.component";
@@ -11,8 +10,8 @@ import {PopularProductsComponent} from "./popular-products/popular-products.comp
     directives: [SeasonCalendarComponent, ROUTER_DIRECTIVES, PopularProductsComponent]
 })
 @RouteConfig([
-    {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
-    {path: '/rezepte', name: 'Recipes', component: RecipesComponent}
+    {path: '/saisonkalender/:month/...', name: 'SeasonCalendar', component: SeasonCalendarComponent},
+    {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
 ])
 export class AppComponent {
     private month;
