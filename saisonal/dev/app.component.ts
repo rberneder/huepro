@@ -4,6 +4,7 @@ import { SeasonCalendarComponent } from "./season-calendar/season-calendar.compo
 import { RecipesComponent } from "./recipes/recipes.component";
 import { PopularProductsComponent } from "./popular-products/popular-products.component";
 import { ProductDetailsComponent } from "./products/product-details.component";
+import {ProductListComponent} from "./products/product-list.component";
 
 
 
@@ -16,6 +17,7 @@ import { ProductDetailsComponent } from "./products/product-details.component";
     {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
     {path: '/produkt/:productId', name: 'ProductDetails', component: ProductDetailsComponent},
+    {path: '/produkte', name: 'Products', component: ProductListComponent},
 ])
 export class AppComponent implements OnInit {
 
