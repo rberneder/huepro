@@ -17,6 +17,8 @@ var autoprefixer = require('autoprefixer');
 var sass = require('gulp-sass');
 var precss = require('precss');
 var cssnano = require('cssnano');
+var concatCSS = require('gulp-concat-css');
+var uglifyCSS = require('gulp-uglifycss');
 
 /* JS & TS */
 var jsuglify = require('gulp-uglify');
@@ -39,12 +41,16 @@ var consolidate = require('gulp-consolidate');
 * TASKS
 * */
 gulp.task('css', function () {
-    return gulp.src(assetsDev + 'scss/*.scss')
+    return gulp.src([assetsDev + 'css/style.css', assetsDev + 'scss/*.scss'])
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([precss, autoprefixer, cssnano]))
         .pipe(sourcemaps.write())
-        .pipe(ext_replace('.css'))
+        .pipe(concatCSS('app.css'))
+        .pipe(uglifyCSS({
+            "maxLineLen": 80,
+            "uglyComments": true
+        }))
         .pipe(gulp.dest(assetsProd + 'css/'));
 });
 
@@ -128,6 +134,7 @@ gulp.task('html', function () {
 gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['ts']);
     gulp.watch(assetsDev + 'scss/**/*.scss', ['css']);
+    gulp.watch(assetsDev + 'css/**/*.css', ['css']);
     gulp.watch(assetsDev + 'img/*', ['img']);
 });
 
