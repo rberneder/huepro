@@ -1,6 +1,5 @@
-import {Component} from "angular2/core";
+import {Component, OnInit} from "angular2/core";
 import {ROUTER_DIRECTIVES, Router, RouteParams, RouteConfig} from "angular2/router";
-import {OnInit} from "angular2/core";
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
 import {MONTHS} from "../util/month.seed";
@@ -20,6 +19,8 @@ export class SeasonCalendarComponent implements OnInit {
     private monthNames:Month[];
     private products:Product[];
     private filterMenuOpen:boolean;
+    
+    private test = "";
 
     constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
         this.setMonth(_routeParams.get('month'));
@@ -29,6 +30,7 @@ export class SeasonCalendarComponent implements OnInit {
     
     ngOnInit():any {
         this.getProducts();
+        this.getTestDate();
     }
     
     setMonth(month) {
@@ -59,5 +61,14 @@ export class SeasonCalendarComponent implements OnInit {
     toggleFilterMenu() {
         this.filterMenuOpen = !this.filterMenuOpen;
         console.log('CALL: ' + this.filterMenuOpen);
+    }
+    
+    getTestDate() {
+        this._productService.getTimeTest()
+            .subscribe(
+                data => this.test = JSON.stringify(data),
+                error => console.warn('Nothing transmitted'),
+                () => console.log('Loaded')
+            );
     }
 }
