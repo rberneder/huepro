@@ -13,7 +13,7 @@ import {ProductDetailsComponent} from "./products/product-details.component";
 @RouteConfig([
     {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
-    {path: '/product/:productId', name: 'ProductDetails', component: ProductDetailsComponent},
+    {path: '/produkt/:productId', name: 'ProductDetails', component: ProductDetailsComponent},
 ])
 export class AppComponent {
     private month;
