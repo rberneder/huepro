@@ -1,9 +1,24 @@
-import {Injectable} from "angular2/core";
-import {PRODUCTS} from "./mock-products";
-import {Product} from "./product";
+import { Injectable } from "angular2/core";
+import { Http } from "angular2/http";
+import { PRODUCTS } from "./mock-products";
+import { Product } from "./product";
+import "rxjs/add/operator/map"; // TODO remove this import when implemented in angular2
 
 @Injectable()
 export class ProductService {
+
+    constructor(private _http: Http) {
+
+    }
+
+    getTimeTest() {
+        return this._http.get('http://date.jsontest.com').map(res => res.json());
+    }
+
+    postJsonTest() {
+
+    }
+
     getProducts() {
         return Promise.resolve(PRODUCTS);
     }
