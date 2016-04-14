@@ -11,15 +11,19 @@
     <nav id="menu--main">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
+                    <a [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
+                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
+                </div>
+                <div class="col-sm-3">
                     <a [routerLink]="['SeasonCalendar', {month: month}]" class="btn btn-default btn-block">Saisonkalender</a>
                     <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
                     <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="input-group">
                         <input type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
                         <span class="input-group-btn">
