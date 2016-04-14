@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h1 class="main-hl">Saisonal-Manager</h1>
+                    <a href="/"><h1 class="main-hl">Saisonal-Manager</h1></a>
                 </div>
             </div>
         </div>
@@ -13,14 +13,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <a [routerLink]="['Products']" class="btn">
+                    <a [routerLink]="['Products']" [class.menuActive]="smallMenu === true" (click)="menuActive()" class="btn">
                         Produkte
                         <img src="http://placehold.it/800x480" class="img-responsive" />
                         <div>Zur Obst & Gemüse - Liste</div>
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <a [routerLink]="['Recipes']" class="btn">Rezepte
+                    <a [routerLink]="['Recipes']" [class.menuActive]="smallMenu === true" (click)="menuActive()" class="btn">Rezepte
                         <img src="http://placehold.it/800x480" class="img-responsive" />
                         <div>Zur Rezept - Liste</div>
                     </a>

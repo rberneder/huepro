@@ -14,6 +14,11 @@ import {RecipesComponent} from "./recipes/recipes.component";
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent}
 ])
 
+
 export class AppComponent{
-    
+    public smallMenu = false;
+
+    menuActive() {
+        this.smallMenu = true;
+    }
 }
