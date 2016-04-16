@@ -19,8 +19,6 @@ export class SeasonCalendarComponent implements OnInit {
     private monthNames:Month[];
     private products:Product[];
     private filterMenuOpen:boolean;
-    
-    private test = "";
 
     constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
         this.setMonth(_routeParams.get('month'));
@@ -30,7 +28,6 @@ export class SeasonCalendarComponent implements OnInit {
     
     ngOnInit():any {
         this.getProducts();
-        this.getTestDate();
     }
     
     setMonth(month) {
@@ -47,7 +44,11 @@ export class SeasonCalendarComponent implements OnInit {
     }
 
     getProducts() {
-        this._productService.getProductsOfMonth(this.actMonth).then((products: Product[]) => this.products = products);
+        this._productService.getProductsOfMonth(this.actMonth)
+            .subscribe(
+                data => this.products = data,
+                error => console.warn('Error while products loaded.')
+            );
     }
 
     gotoPrevMonth() {
@@ -61,14 +62,5 @@ export class SeasonCalendarComponent implements OnInit {
     toggleFilterMenu() {
         this.filterMenuOpen = !this.filterMenuOpen;
         console.log('CALL: ' + this.filterMenuOpen);
-    }
-    
-    getTestDate() {
-        this._productService.getTimeTest()
-            .subscribe(
-                data => this.test = JSON.stringify(data),
-                error => console.warn('Nothing transmitted'),
-                () => console.log('Loaded')
-            );
     }
 }

@@ -41,7 +41,8 @@ app.use(express.static(path.join(__dirname), { maxAge: 31557600000 }));
 * ROUTES
 * */
 app.get('/', homeController.index);
-
+app.get('/api/products', apiController.getProducts);
+app.get('/api/products/month/:month', apiController.getProductsOfMonth);
 
 /*
 * ERROR HANDLER

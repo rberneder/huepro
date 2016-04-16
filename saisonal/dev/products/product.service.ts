@@ -7,43 +7,24 @@ import "rxjs/add/operator/map"; // TODO remove this import when implemented in a
 @Injectable()
 export class ProductService {
 
-    constructor(private _http: Http) {
+    constructor(private _http: Http) {}
 
-    }
-
-    getTimeTest() {
-        return this._http.get('http://date.jsontest.com').map(res => res.json());
-    }
-
-    postJsonTest() {
-
-    }
 
     getProducts() {
-        return Promise.resolve(PRODUCTS);
+        return this._http.get("/api/products/")
+            .map(response => response.json());
     }
 
 
     getProduct(id) {
-        let foundProduct = null;
-        for (let product of PRODUCTS) {
-            if (product._id === id) {
-                foundProduct = product;
-                break;
-            }
-        }
-        return Promise.resolve(foundProduct);
+        return this._http.get("/api/products/id/" + id)
+            .map(response => response.json());
     }
 
 
     getProductsOfMonth(month) {
-        let foundProducts = [];
-        for (let product of PRODUCTS) {
-            if (product.harvestStart.month === month) {
-                foundProducts.push(product);
-            }
-        }
-        return Promise.resolve(foundProducts);
+        return this._http.get("/api/products/month/" + month)
+            .map(response => response.json());
     }
     
     

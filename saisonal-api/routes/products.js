@@ -3,14 +3,29 @@ var router = express.Router();
 
 var products = require('../controllers/productController');
 
-/* POST /products */
-router.post('/', products.post);
+
+/*
+* GET
+* */
 
 /* GET /products */
-router.get('/', products.get);
+router.get('/', products.getAllProducts);
 
-/* GET /products/asdfj23k2of9f32 */
-router.get('/:productId', products.show);
+/* GET /products/month/3 */
+router.get('/month/:month', products.getProductsOfMonth);
+
+/* GET /products/id/asdfj23k2of9f32 */
+router.get('/id/:productId', products.show);
+
+
+
+
+/*
+* POST
+* */
+
+/* POST /products */
+router.post('/', products.post);
 
 /* PUT /products/af243ec243c2c23423  --> body: Datenobjekt */
 router.put('/:productId', products.put);

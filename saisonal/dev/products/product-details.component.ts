@@ -17,12 +17,14 @@ export class ProductDetailsComponent implements OnInit {
     ngOnInit():any {
         let productId = parseInt(this._routerParams.get('productId'));
         this._productService.getProduct(productId)
-            .then((product:Product) => {
-                this.product = product;
+            .subscribe(
+                (product:Product) => {
+                    this.product = product;
 
-                if (!this.product) {
-                    this._router.navigate(['SeasonCalendar', {month: new Date().getMonth()}]);
+                    if (!this.product) {
+                        this._router.navigate(['SeasonCalendar', {month: new Date().getMonth()}]);
+                    }
                 }
-            });
+            );
     }
 }
