@@ -28,12 +28,14 @@ var app = express();
 * EXPRESS CONFIGURATION
 * */
 app.set('port', 25080);
-//app.set('view engine', 'jade');
-app.use(compress());
+// app.set('views', path.join(__dirname, '/public'));
+// app.engine('html', require('ejs').renderFile);
+// app.set('view engine', 'html');
+// app.use(compress());
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(cookieParser());
 app.use(express.static(path.join(__dirname), { maxAge: 31557600000 }));
 
 
@@ -43,11 +45,28 @@ app.use(express.static(path.join(__dirname), { maxAge: 31557600000 }));
 app.get('/', homeController.index);
 app.get('/api/products', apiController.getProducts);
 app.get('/api/products/month/:month', apiController.getProductsOfMonth);
+app.get('*', function(req, res, next) {
+    var err = new Error();
+    err.status = 404;
+    next(err);
+});
 
 /*
 * ERROR HANDLER
 * */
-app.use(errorHandler());
+if (app.get('env') === 'development') {
+    //app.use(errorHandler());
+}
+app.use(function(err, req, res, next) {
+    if (req.xhr) {
+        res.status(404).send({ error: 'Something went wrong!' });
+    } else {
+        res.status(404);
+        res.sendFile(path.join(__dirname, '/index.html'));
+    }
+});
+
+
 
 
 /*

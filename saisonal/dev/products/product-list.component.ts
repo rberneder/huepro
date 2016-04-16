@@ -7,7 +7,8 @@ import {ProductService} from "./product.service";
 @Component({
     selector: "product-list",
     templateUrl: '/templates/products/product-list.template.html',
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ProductService]
 })
 export class ProductListComponent implements OnInit {
 
@@ -17,6 +18,11 @@ export class ProductListComponent implements OnInit {
         
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this._productService.getProducts()
+            .subscribe(
+                data => this.products = data
+            )
+    }
     
 }

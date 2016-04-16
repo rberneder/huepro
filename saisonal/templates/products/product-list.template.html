@@ -1,9 +1,28 @@
 <section id="product-list">
     <div class="container">
-        <h2 class="text-center text-white">PRODUCT LIST</h2>
+        <div>
+            <article
+                    *ngFor="#product of products"
+                    class="product-thumb fruit"
+            ><!-- TODO load category dynamically -->
+                <div class="headline">
+                    <h3>{{product.name}}</h3>
+                </div>
+                <div class="family">
+                    {{product.family_id}}
+                </div>
+                <figure>
+                    <img src="http://placehold.it/250x180" class="img-responsive">
+                    <figcaption>
+                        {{product.shortDescription}}
+                    </figcaption>
+                </figure>
 
-        <ul>
-            <li *ngFor="#product of products">{{product.name}}</li>
-        </ul>
+                <div>
+                    <a [routerLink]="['ProductDetails', {productId: product._id}]" class="btn btn-sm bg-beige">mehr</a>
+                </div>
+            </article>
+        </div>
+        <h2>&nbsp;</h2>
     </div>
 </section>

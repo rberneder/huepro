@@ -10,8 +10,11 @@ var request = require('request');
  */
 exports.getProducts = function(req, res) {
     request.get('http://127.0.0.1:25090/products', function(err, request, body) {
-        // TODO error handling
-        res.send(JSON.parse(body));
+        if  (err) {
+            res.send('"Error": "Something went wrong!"');
+        } else {
+            res.send(JSON.parse(body));
+        }
     });
 };
 
