@@ -6,16 +6,20 @@ var Product = mongoose.model('Product');
 
 /** Lists all products. */
 exports.getAllProducts = function(req, res) {
-    Product.find().exec(function(err, products) {
-        res.jsonp(products);
+    Product.find()
+        .sort({'name': 'asc'})
+        .exec(function(err, products) {
+            res.jsonp(products);
     });
 };
 
 
 /** Lists all products of month. */
 exports.getProductsOfMonth = function(req, res) {
-    Product.find({'harvestStart.month': req.params.month}).exec(function(err, products) {
-        res.jsonp(products);
+    Product.find({'harvestStart.month': req.params.month})
+        .sort({'name': 'asc'})
+        .exec(function(err, products) {
+            res.jsonp(products);
     });
 };
 
