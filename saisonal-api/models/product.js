@@ -8,7 +8,7 @@ var ProductSchema = new Schema({
     },
     name: String,
     image: String,
-    productFamily: Number,
+    productFamily_id: Number,
     plantStart: {
         month: Number,
         day: Number
