@@ -29,3 +29,18 @@ exports.getProductsOfMonth = function(req, res) {
         res.send(JSON.parse(body));
     });
 };
+
+
+/**
+ * GET /api/products/id/:id
+ * Returns product matching passed id.
+ */
+exports.getProduct = function(req, res) {
+    request.get('http://127.0.0.1:25090/products/id/' + req.params.id, function(err, request, body) {
+        if  (err) {
+            res.send('"Error": "Something went wrong!"');
+        } else {
+            res.send(JSON.parse(body));
+        }
+    });
+};

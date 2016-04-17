@@ -14,6 +14,14 @@ exports.getAllProducts = function(req, res) {
 };
 
 
+/** Returns the product corresponding the passed ID. */
+exports.show = function(req, res) {
+    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
+        res.jsonp(product);
+    });
+};
+
+
 /** Lists all products of month. */
 exports.getProductsOfMonth = function(req, res) {
     Product.find({'harvestStart.month': req.params.month})
@@ -31,13 +39,6 @@ exports.post = function(req, res) {
     res.jsonp(product);
 };
 
-
-/** Returns the product corresponding the passed ID. */
-exports.show = function(req, res) {
-    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
-        res.jsonp(product);
-    });
-};
 
 
 /** Updates product. */

@@ -1,5 +1,44 @@
 <section id="product-details">
     <div class="container">
-        <h2 class="text-center text-white">{{product?.name}}</h2>
+        <div class="row">
+            <div class="col-xs-1">
+                <!-- TODO change this link to angular native function -->
+                <a onclick="window.history.back()"><h1 class="text-center text-white"><span class="icon icon-arrow-left"></span></h1></a>
+            </div>
+            <div class="col-xs-10">
+                <h1 class="text-center text-white niconne">{{product?.name}}</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="http://placehold.it/400x400" class="img-responsive">
+                <h3 class="text-center text-white"><em>{{product?.shortDescription}}</em></h3>
+            </div>
+            <div class="col-sm-8 bg-white">
+                <table class="table table-responsive table-striped">
+                    <tr>
+                        <td>Familie</td>
+                        <td>{{product?.productFamily_id}}</td>
+                    </tr>
+                    <tr>
+                        <td>Anbaubeginn</td>
+                        <td>{{monthNames[product?.plantStart?.month]?.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Erntebeginn</td>
+                        <td>{{monthNames[product?.harvestStart?.month]?.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Lagerfähigkeit</td>
+                        <td>ca. {{product?.storageDays}} Tage</td>
+                    </tr>
+                </table>
+
+                <p>
+                    <em>{{product?.description}}</em>
+                </p>
+            </div>
+        </div>
     </div>
 </section>

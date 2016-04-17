@@ -3,8 +3,8 @@ var gulp = require('gulp');
 var assetsDev = 'public/assets/';
 var assetsProd = 'public/src/';
 
-var appDev = 'dev/';
-var appProd = 'app/';
+var appDev = 'public/dev/';
+var appProd = 'public/app/';
 
 /* Mixed */
 var ext_replace = require('gulp-ext-replace');
