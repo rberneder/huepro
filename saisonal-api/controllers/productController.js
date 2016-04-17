@@ -41,7 +41,7 @@ exports.put = function(req, res) {
     Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
 
         product = _.extend(product, req.body);
-
+        
         product.save(function(err) {
             res.jsonp(product);
         });
