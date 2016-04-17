@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 
-var assetsDev = 'assets/';
-var assetsProd = 'src/';
+var assetsDev = 'public/assets/';
+var assetsProd = 'public/src/';
 
 var appDev = 'dev/';
 var appProd = 'app/';
@@ -56,7 +56,7 @@ gulp.task('css', function () {
 
 gulp.task('iconfont', function() {
 
-    fs.readdir('assets/fonts/iconfont/svg/', function(err, files){ // '/' denotes the root folder
+    fs.readdir(assetsDev + 'fonts/iconfont/svg/', function(err, files){ // '/' denotes the root folder
         if(err){
             throw err;
         }
@@ -67,12 +67,12 @@ gulp.task('iconfont', function() {
                 if (icon >= 0) {
                     var fileName = matches[0];
                     var filesIcon = files[icon];
-                    fs.unlink( 'assets/fonts/iconfont/svg/' + fileName);
-                    fs.renameSync( 'assets/fonts/iconfont/svg/' + filesIcon, 'assets/fonts/iconfont/svg/' + fileName );
+                    fs.unlink(assetsDev + '/fonts/iconfont/svg/' + fileName);
+                    fs.renameSync(assetsDev + '/fonts/iconfont/svg/' + filesIcon, assetsDev + '/fonts/iconfont/svg/' + fileName );
                 }
             }
         });
-        gulp.src(['assets/fonts/iconfont/svg/*.svg'])
+        gulp.src([assetsDev + '/fonts/iconfont/svg/*.svg'])
             .pipe(plumber())
             .pipe(iconfont({
                 fontName: 'iconfont', // required
@@ -81,30 +81,30 @@ gulp.task('iconfont', function() {
                 normalize: true
             }))
             .on('glyphs', function(glyphs, options) {
-                gulp.src('assets/fonts/iconfont/_icons.scss')
+                gulp.src(assetsDev + '/fonts/iconfont/_icons.scss')
                     .pipe(plumber())
                     .pipe(consolidate('lodash', {
                         glyphs: glyphs,
                         fontName: 'iconfont',
-                        fontPath: '/assets/fonts/iconfont/',
+                        fontPath: assetsDev + '/fonts/iconfont/',
                         className: 'icon'
                     }))
                     .pipe(plumber.stop())
-                    .pipe(gulp.dest('assets/scss/general'));
+                    .pipe(gulp.dest(assetsDev + '/scss/general'));
 
-                gulp.src('assets/fonts/iconfont/icons.html')
+                gulp.src(assetsDev + '/fonts/iconfont/icons.html')
                     .pipe(plumber())
                     .pipe(consolidate('lodash', {
                         glyphs: glyphs,
                         fontName: 'iconfont',
-                        fontPath: '/assets/fonts/iconfont/',
+                        fontPath: assetsDev + '/fonts/iconfont/',
                         className: 'icon'
                     }))
                     .pipe(plumber.stop())
-                    .pipe(gulp.dest('assets'));
+                    .pipe(gulp.dest(assetsDev));
             })
             .pipe(plumber.stop())
-            .pipe(gulp.dest('assets/fonts/iconfont'));
+            .pipe(gulp.dest(assetsDev + '/fonts/iconfont'));
     });
 
 });
