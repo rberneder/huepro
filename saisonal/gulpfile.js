@@ -86,7 +86,7 @@ gulp.task('iconfont', function() {
                     .pipe(consolidate('lodash', {
                         glyphs: glyphs,
                         fontName: 'iconfont',
-                        fontPath: assetsDev + '/fonts/iconfont/',
+                        fontPath: '/assets/fonts/iconfont/',
                         className: 'icon'
                     }))
                     .pipe(plumber.stop())
@@ -97,7 +97,7 @@ gulp.task('iconfont', function() {
                     .pipe(consolidate('lodash', {
                         glyphs: glyphs,
                         fontName: 'iconfont',
-                        fontPath: assetsDev + '/fonts/iconfont/',
+                        fontPath: '/assets/fonts/iconfont/',
                         className: 'icon'
                     }))
                     .pipe(plumber.stop())

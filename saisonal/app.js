@@ -65,7 +65,7 @@ app.use(function(err, req, res, next) {
     if (req.xhr) {
         res.status(404).send({ error: 'Something went wrong!' });
     } else {
-        res.status(404);
+        res.status(200);
         res.sendFile(path.join(__dirname, '/public/index.html'));
     }
 });

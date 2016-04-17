@@ -4,7 +4,7 @@
   margin-top: 15px;
   margin-right: 30px;
   background: #fff;
-  box-shadow: 2px 2px 1px $brown;
+  box-shadow: 2px 2px 1px rgba($brown, 0.75);
   width: calc(50% - 15px);
 
   &.fruit .headline     { background: $lightGreen; }
