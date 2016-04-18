@@ -8,10 +8,16 @@ var ProductSchema = new Schema({
     },
     name: String,
     image: String,
-    productFamily: Number,
-    plantStart: Date,
+    productFamily_id: Number,
+    plantStart: {
+        month: Number,
+        day: Number
+    },
     plantDays: Number,
-    harvestStart: Date,
+    harvestStart: {
+        month: Number,
+        day: Number
+    },
     harvestDays: Number,
     storageDays: Number,
     shortDescription: String,
