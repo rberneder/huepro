@@ -1,3 +1,40 @@
-<div class="bg-primary text-center">
+<div id="product-list" class="bg-primary text-center">
     <strong>PRODUKTE</strong>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <button [routerLink]="['NewProduct']">add new product</button>
+            </div>
+            <div class="col-xs-12">
+                <router-output></router-output>
+            </div>
+            <div class="col-xs-12">
+                <table class="table table-striped">
+                    <thead>
+                         <tr>
+                             <th>Name</th>
+                             <th>Family_ID</th>
+                             <th>Options</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="#product of products">
+                            <td>{{product.name}}</td>
+                            <td>{{product.family_id}}</td>
+                            <td>
+                                <div class="btn" (click)="onEdit()">edit</div>
+                                <div class="btn">delete</div>
+                                <div class="btn">copy</div>
+                            </td>
+
+                            <div class="edit-overlay" [class.editing]="editing === true" >
+                                Name: <input [(ngModel)]="product.name" type="text"><br/>
+                                Family_id: <input [(ngModel)]="product.family_id" type="text">
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

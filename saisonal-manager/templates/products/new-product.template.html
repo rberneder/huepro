@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div id="new-product" class="col-xs-12">
+            <form #newProductForm="ngForm" (ngSubmit)="onSubmit()">
+                <div>
+                    <label for="name">Name:</label>
+                    <input id="name" type="text"
+                        ngControl="name"
+                        required
+                        [(ngModel)]="newProduct.name"
+
+                    />
+                </div>
+                <div>
+                    <label for="family_id">Family name:</label>
+                    <input id="family_id" type="text"
+                       ngControl="family_id"
+                       required
+                           [(ngModel)]="newProduct.family_id"
+                    />
+                </div>
+                <div>
+                    <label for="plantStart">Plant start:</label>
+                    <input id="plantStart" type="text"
+                           ngControl="plantStart"
+                           [(ngModel)]="newProduct.plantStart"
+                    />
+                </div>
+                <div>
+                    <label for="plantDays">Plant days:</label>
+                    <input id="plantDays" type="number"
+                           ngControl="plantDays"
+                           [(ngModel)]="newProduct.plantDays"
+                    />
+                </div>
+                <div>
+                    <label for="harvestStart">Harvest start:</label>
+                    <input id="harvestStart" type="text"
+                           ngControl="harvestStart"
+                           [(ngModel)]="newProduct.harvestStart"
+                    />
+                </div>
+                <div>
+                    <label for="harvestDays">Harvest days:</label>
+                    <input id="harvestDays" type="number"
+                           ngControl="harvestDays"
+                           [(ngModel)]="newProduct.harvestDays"
+                    />
+                </div>
+                <div>
+                    <label for="storageDays">Storage days:</label>
+                    <input id="storageDays" type="number"
+                           ngControl="storageDays"
+                           [(ngModel)]="newProduct.storageDays"
+                    />
+                </div>
+                <div>
+                    <label for="shortDescription">Short description:</label>
+                    <textarea id="shortDescription"
+                              ngControl="shortDescription"
+                              [(ngModel)]="newProduct.shortDescription"
+                    ></textarea>
+                </div>
+                <div>
+                    <label for="Description">Description:</label>
+                    <textarea id="Description"
+                              ngControl="description"
+                              [(ngModel)]="newProduct.description"
+                    ></textarea>
+                </div>
+                <button type="submit">Create Product</button>
+            </form>
+        </div>
+    </div>
+</div>
