@@ -17,6 +17,9 @@ router.get('/month/:month', products.getProductsOfMonth);
 /* GET /products/id/asdfj23k2of9f32 */
 router.get('/id/:productId', products.show);
 
+/* GET /products/search?str=jona */
+router.get('/search/:str', products.searchProductNames);
+
 
 
 

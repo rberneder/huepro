@@ -32,6 +32,16 @@ exports.getProductsOfMonth = function(req, res) {
 };
 
 
+exports.searchProductNames = function (req, res) {
+    var str = decodeURI(req.params.str);
+    Product.find({'name': new RegExp('(' + str + ')', 'i')})
+        .sort({'name': 'asc'})
+        .exec(function(err, products) {
+            res.jsonp(products)
+        });
+}
+
+
 /** Adds a new product. */
 exports.post = function(req, res) {
     var product = new Product(req.body);    // TODO Werte überprüfen

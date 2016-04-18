@@ -31,7 +31,7 @@ app.set('port', 25080);
 // app.set('views', path.join(__dirname, '/public'));
 // app.engine('html', require('ejs').renderFile);
 // app.set('view engine', 'html');
-// app.use(compress());
+app.use(compress());
 app.use(logger('dev'));
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 app.get('/', homeController.index);
 app.get('/api/products', apiController.getProducts);
 app.get('/api/products/id/:id', apiController.getProduct);
+app.get('/api/products/search/:str', apiController.searchProducts);
 app.get('/api/products/month/:month', apiController.getProductsOfMonth);
 app.get('/node_modules/*', function(req, res, next) {
     res.sendFile(path.join(__dirname, req.url));

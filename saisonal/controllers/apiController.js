@@ -2,7 +2,7 @@
 * DEPENDENCIES
 * */
 var request = require('request');
-var apiPortNr = 25070;
+var apiUrl = 'http://127.0.0.1:25070';
 
 
 /**
@@ -10,7 +10,7 @@ var apiPortNr = 25070;
  * List of all products.
  */
 exports.getProducts = function(req, res) {
-    request.get('http://127.0.0.1:' + apiPortNr + '/products', function(err, request, body) {
+    request.get(apiUrl + '/products', function(err, request, body) {
         if  (err) {
             res.send('"Error": "Something went wrong!"');
         } else {
@@ -25,7 +25,7 @@ exports.getProducts = function(req, res) {
  * List of all products in passed month.
  */
 exports.getProductsOfMonth = function(req, res) {
-    request.get('http://127.0.0.1:25090' + apiPortNr + '/products/month/' + req.params.month, function(err, request, body) {
+    request.get(apiUrl + '/products/month/' + req.params.month, function(err, request, body) {
         // TODO error handling
         res.send(JSON.parse(body));
     });
@@ -37,7 +37,7 @@ exports.getProductsOfMonth = function(req, res) {
  * Returns product matching passed id.
  */
 exports.getProduct = function(req, res) {
-    request.get('http://127.0.0.1:' + apiPortNr + '/products/id/' + req.params.id, function(err, request, body) {
+    request.get(apiUrl + '/products/id/' + req.params.id, function(err, request, body) {
         if  (err) {
             res.send('"Error": "Something went wrong!"');
         } else {
@@ -45,3 +45,22 @@ exports.getProduct = function(req, res) {
         }
     });
 };
+
+
+/*
+* GET /api/products/search?str=test
+* Returns products that contain passed string in array.
+* */
+exports.searchProducts = function(req, res) {
+    var str = req.params.str;
+
+    if (str) {
+        request.get(apiUrl + '/products/search/' + str, function(err, request, body) {
+            if (err) {
+                res.send(JSON.parse("[]"));
+            } else {
+                res.send(JSON.parse(body));
+            }
+        });
+    }
+}

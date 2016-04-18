@@ -22,6 +22,13 @@ export class ProductService {
     }
 
 
+    searchFor(str) {
+        var strEsc = encodeURI(str);
+        return this._http.get("/api/products/search/" + strEsc)
+            .map(response => response.json());
+    }
+
+
     getProductsOfMonth(month) {
         return this._http.get("/api/products/month/" + month)
             .map(response => response.json());

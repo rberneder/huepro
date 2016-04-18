@@ -21,12 +21,13 @@ export class SeasonCalendarComponent implements OnInit {
     private filterMenuOpen:boolean;
 
     constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
-        this.setMonth(_routeParams.get('month'));
+       // this.setMonth(_routeParams.get('month'));
         this.monthNames = MONTHS;
         this.filterMenuOpen = false;
     };
     
     ngOnInit():any {
+        this.setMonth(this._routeParams.get('month'));
         this.getProducts();
     }
     

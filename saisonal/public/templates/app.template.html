@@ -25,11 +25,23 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
-                        <input type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
+                        <input
+                                (keyup)="searchFor(searchInput.value)"
+                                #searchInput
+                                type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button"><span class="icon icon-search"></span></button>
                         </span>
                     </div>
+                </div>
+            </div>
+
+            <div [class.hidden]="searchResults?.length < 1" class="row">
+                <div class="col-sm-offset-8 col-sm-4">
+                    <h3 class="text-white">Ergebnisse</h3>
+                    <ul>
+                        <li *ngFor="#result of searchResults">{{result.name}} - ID: {{result._id}}</li>
+                    </ul>
                 </div>
             </div>
         </div>
