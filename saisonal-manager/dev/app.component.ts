@@ -3,15 +3,17 @@ import {ROUTER_DIRECTIVES, Router} from "angular2/router";
 import {RouteConfig} from "angular2/router";
 import {ProductsComponent} from "./products/products.component";
 import {RecipesComponent} from "./recipes/recipes.component";
+import {NewProductComponent} from "./products/new-product.component";
 
 @Component({
     selector: 'app',
     templateUrl: '/templates/app.template.html',
-    directives: [ProductsComponent, RecipesComponent, ROUTER_DIRECTIVES]
+    directives: [ProductsComponent, RecipesComponent, NewProductComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
     {path: '/produkte', name: 'Products', component: ProductsComponent},
-    {path: '/rezepte', name: 'Recipes', component: RecipesComponent}
+    {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
+    {path: '/produkte/neu', name: 'NewProduct', component: NewProductComponent},
 ])
 
 

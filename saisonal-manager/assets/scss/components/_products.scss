@@ -1,4 +1,5 @@
 #product-list {
+	color: black;
 	table {
 		tbody {
 			tr:nth-of-type(odd) {
@@ -6,26 +7,30 @@
 			}
 			tr:nth-of-type(even) {
 				background-color: $lightBeige;
+
 			}
 
-			.edit-overlay {
-				display: none;
-				position: absolute;
-				left: 0;
-				top: 0;
-				width: 100%;
-				background-color: red;
-				color: black;
-				padding: 30px;
 
-				input {
-					color: black;
-				}
-				
-				&.editing {
-					display: block;
-				}
-			}
+			//.edit-overlay {
+			//	display: none;
+			//	position: absolute;
+			//	left: 0;
+			//	top: 0;
+			//	width: 100%;
+			//	background-color: red;
+			//	color: black;
+
+			//	padding: 30px;
+			//
+			//	input {
+			//		color: black;
+			//	}
+			//
+			//	&.editing {
+			//		display: block;
+			//	}
+			//}
+
 		}
 	}
 }
