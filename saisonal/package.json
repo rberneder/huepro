@@ -14,7 +14,7 @@
     "body-parser": "^1.15.0",
     "compression": "^1.6.1",
     "cookie-parser": "^1.4.1",
-    "css-animator": "0.0.5",
+    "css-animator": "0.1.0",
     "errorhandler": "^1.4.3",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.35.0",
