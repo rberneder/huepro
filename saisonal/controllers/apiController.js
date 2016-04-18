@@ -2,6 +2,7 @@
 * DEPENDENCIES
 * */
 var request = require('request');
+var apiPortNr = 25070;
 
 
 /**
@@ -9,7 +10,7 @@ var request = require('request');
  * List of all products.
  */
 exports.getProducts = function(req, res) {
-    request.get('http://127.0.0.1:25090/products', function(err, request, body) {
+    request.get('http://127.0.0.1:' + apiPortNr + '/products', function(err, request, body) {
         if  (err) {
             res.send('"Error": "Something went wrong!"');
         } else {
@@ -24,7 +25,7 @@ exports.getProducts = function(req, res) {
  * List of all products in passed month.
  */
 exports.getProductsOfMonth = function(req, res) {
-    request.get('http://127.0.0.1:25090/products/month/' + req.params.month, function(err, request, body) {
+    request.get('http://127.0.0.1:25090' + apiPortNr + '/products/month/' + req.params.month, function(err, request, body) {
         // TODO error handling
         res.send(JSON.parse(body));
     });
@@ -36,7 +37,7 @@ exports.getProductsOfMonth = function(req, res) {
  * Returns product matching passed id.
  */
 exports.getProduct = function(req, res) {
-    request.get('http://127.0.0.1:25090/products/id/' + req.params.id, function(err, request, body) {
+    request.get('http://127.0.0.1:' + apiPortNr + '/products/id/' + req.params.id, function(err, request, body) {
         if  (err) {
             res.send('"Error": "Something went wrong!"');
         } else {
