@@ -1,25 +1,41 @@
 <section id="search">
     <div class="container">
-        <div>
-            <div class="input-group">
-                <input
-                    (keyup)="searchFor(searchInput.value)"
-                    #searchInput
-                    type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
+        <div class="page-header">
+            <h1 class="niconne text-center text-white">Suche</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input
+                                (keyup)="searchFor(searchInput.value)"
+                                #searchInput
+                                type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button"><span class="icon icon-search"></span></button>
                 </span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div>
             <h3 class="text-white">Ergebnisse</h3>
-            <ul class="list-group">
-                <li class="list-group-item"
-                    *ngFor="#result of searchResults">
-                    {{result.name}} - ID: {{result._id}}
-                </li>
-            </ul>
+            <div class="list-group">
+                <a class="list-group-item"
+                    *ngFor="#result of searchResults"
+                    [routerLink]="['ProductDetails', {productId: result._id}]"
+                >
+                    <div class="row">
+                        <div class="col-xs-3"><img src="http://placehold.it/100x100" class="img-responsive"></div>
+                        <div class="col-xs-7">{{result.name}} <span class="badge bg-light-green">jetzt reif</span></div>
+                    </div>
+                </a>
+            </div>
+            <p [class.hidden]="!(searchInput.value.length > 1 && searchResults.length < 1)">
+                <em>Keine Ergebnisse gefunden.</em>
+            </p>
         </div>
     </div>
 </section>

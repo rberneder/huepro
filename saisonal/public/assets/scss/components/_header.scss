@@ -39,14 +39,7 @@ header {
       margin-bottom: 0;
     }
 
-    #search--main {
-      height: 39px;
-      box-shadow: none;
-      border: none;
-    }
-
-    .btn-default,
-    #search--main {
+    .btn-default {
       font-size: 15px;
     }
     .btn-default {
@@ -86,12 +79,8 @@ header {
         padding-bottom: 20px;
       }
 
-      #search--main,
       .btn-default {
         font-size: 20px;
-      }
-      #search--main {
-        height: 46px;
       }
 
       [class^="col"] {
