@@ -1,6 +1,6 @@
 import {Component} from "angular2/core";
 import {OnInit} from "angular2/core";
-import {ProductService} from "./product.service";
+import {ProductService} from "./product.service.ts";
 import {Product} from "./product";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 

@@ -16,8 +16,8 @@
   ],
   "exclude": [
     "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+    "public/typings/main",
+    "public/typings/main.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": true

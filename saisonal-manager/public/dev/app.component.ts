@@ -1,9 +1,9 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from "angular2/router";
 import {RouteConfig} from "angular2/router";
-import {ProductsComponent} from "./products/products.component";
-import {RecipesComponent} from "./recipes/recipes.component";
-import {NewProductComponent} from "./products/new-product.component";
+import {ProductsComponent} from "./products/products.component.ts";
+import {RecipesComponent} from "./recipes/recipes.component.ts";
+import {NewProductComponent} from "./products/new-product.component.ts";
 
 @Component({
     selector: 'app',
