@@ -6,7 +6,7 @@ import {PopularProductsComponent} from "./popular-products/popular-products.comp
 import {ProductDetailsComponent} from "./products/product-details.component";
 import {ProductListComponent} from "./products/product-list.component";
 import {ProductService} from "./products/product.service";
-import {Product} from "./products/product";
+import {SearchComponent} from "./search/search.component";
 
 
 
@@ -21,34 +21,15 @@ import {Product} from "./products/product";
     {path: '/produkte', name: 'Products', component: ProductListComponent},
     {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
+    {path: '/suche', name: 'Search', component: SearchComponent},
 ])
 export class AppComponent implements OnInit {
 
     private month;
-    private products:Product[]; // needed for search
-    private searchResults;
 
-    constructor(private _router: Router, private _productService:ProductService) {
+    constructor(private _productService:ProductService) {
         this.month = new Date().getMonth();
-        this.searchResults = [];
-        this.products = [];
     };
 
     ngOnInit() {}
-
-    searchFor(str) {
-        this.searchResults = [];
-        if (str.length > 1) {
-            if (!this.products.length) {
-                this._productService.getProducts().subscribe(
-                    products => this.products = products
-                );
-            }
-            for (var product of this.products) {
-                if (product.name.match(new RegExp('(' + str + ')', 'i'))) {
-                    this.searchResults.push(product);
-                }
-            }
-        }
-    }
 }
