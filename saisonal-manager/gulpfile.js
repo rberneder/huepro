@@ -1,10 +1,10 @@
 var gulp = require('gulp');
 
-var assetsDev = 'assets/';
-var assetsProd = 'src/';
+var assetsDev = 'public/assets/';
+var assetsProd = 'public/src/';
 
-var appDev = 'dev/';
-var appProd = 'app/';
+var appDev = 'public/dev/';
+var appProd = 'public/app/';
 
 /* Mixed */
 var ext_replace = require('gulp-ext-replace');
@@ -17,6 +17,8 @@ var autoprefixer = require('autoprefixer');
 var sass = require('gulp-sass');
 var precss = require('precss');
 var cssnano = require('cssnano');
+var concatCSS = require('gulp-concat-css');
+var uglifyCSS = require('gulp-uglifycss');
 
 /* JS & TS */
 var jsuglify = require('gulp-uglify');
@@ -36,21 +38,25 @@ var consolidate = require('gulp-consolidate');
 
 
 /*
-* TASKS
-* */
+ * TASKS
+ * */
 gulp.task('css', function () {
-    return gulp.src(assetsDev + 'scss/*.scss')
+    return gulp.src([assetsDev + 'css/style.css', assetsDev + 'scss/*.scss'])
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([precss, autoprefixer, cssnano]))
         .pipe(sourcemaps.write())
-        .pipe(ext_replace('.css'))
+        .pipe(concatCSS('app.css'))
+        .pipe(uglifyCSS({
+            "maxLineLen": 80,
+            "uglyComments": true
+        }))
         .pipe(gulp.dest(assetsProd + 'css/'));
 });
 
 gulp.task('iconfont', function() {
 
-    fs.readdir('assets/fonts/iconfont/svg/', function(err, files){ // '/' denotes the root folder
+    fs.readdir(assetsDev + 'fonts/iconfont/svg/', function(err, files){ // '/' denotes the root folder
         if(err){
             throw err;
         }
@@ -61,12 +67,12 @@ gulp.task('iconfont', function() {
                 if (icon >= 0) {
                     var fileName = matches[0];
                     var filesIcon = files[icon];
-                    fs.unlink( 'assets/fonts/iconfont/svg/' + fileName);
-                    fs.renameSync( 'assets/fonts/iconfont/svg/' + filesIcon, 'assets/fonts/iconfont/svg/' + fileName );
+                    fs.unlink(assetsDev + '/fonts/iconfont/svg/' + fileName);
+                    fs.renameSync(assetsDev + '/fonts/iconfont/svg/' + filesIcon, assetsDev + '/fonts/iconfont/svg/' + fileName );
                 }
             }
         });
-        gulp.src(['assets/fonts/iconfont/svg/*.svg'])
+        gulp.src([assetsDev + '/fonts/iconfont/svg/*.svg'])
             .pipe(plumber())
             .pipe(iconfont({
                 fontName: 'iconfont', // required
@@ -75,7 +81,7 @@ gulp.task('iconfont', function() {
                 normalize: true
             }))
             .on('glyphs', function(glyphs, options) {
-                gulp.src('assets/fonts/iconfont/_icons.scss')
+                gulp.src(assetsDev + '/fonts/iconfont/_icons.scss')
                     .pipe(plumber())
                     .pipe(consolidate('lodash', {
                         glyphs: glyphs,
@@ -84,9 +90,9 @@ gulp.task('iconfont', function() {
                         className: 'icon'
                     }))
                     .pipe(plumber.stop())
-                    .pipe(gulp.dest('assets/scss/general'));
+                    .pipe(gulp.dest(assetsDev + '/scss/general'));
 
-                gulp.src('assets/fonts/iconfont/icons.html')
+                gulp.src(assetsDev + '/fonts/iconfont/icons.html')
                     .pipe(plumber())
                     .pipe(consolidate('lodash', {
                         glyphs: glyphs,
@@ -95,10 +101,10 @@ gulp.task('iconfont', function() {
                         className: 'icon'
                     }))
                     .pipe(plumber.stop())
-                    .pipe(gulp.dest('assets'));
+                    .pipe(gulp.dest(assetsDev));
             })
             .pipe(plumber.stop())
-            .pipe(gulp.dest('assets/fonts/iconfont'));
+            .pipe(gulp.dest(assetsDev + '/fonts/iconfont'));
     });
 
 });
@@ -128,6 +134,7 @@ gulp.task('html', function () {
 gulp.task('watch', function () {
     gulp.watch(appDev + '**/*.ts', ['ts']);
     gulp.watch(assetsDev + 'scss/**/*.scss', ['css']);
+    gulp.watch(assetsDev + 'css/**/*.css', ['css']);
     gulp.watch(assetsDev + 'img/*', ['img']);
 });
 
