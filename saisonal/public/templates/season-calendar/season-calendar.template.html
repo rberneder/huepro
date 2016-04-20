@@ -5,13 +5,13 @@
                 <div class="col-sm-offset-3 col-sm-6 text-white text-center month-selector">
                     <div class="row">
                         <div class="col-xs-4">
-                            <span (click)="gotoPrevMonth()" class="month-switch icon icon-arrow-circle-left"></span>
+                            <span (click)="goToPrevMonth()" class="month-switch icon icon-arrow-circle-left"></span>
                         </div>
                         <div class="col-xs-4">
                             <h2 class="inline-block" id="season-calendar__month">{{monthNames[actMonth].name}}</h2>
                         </div>
                         <div class="col-xs-4">
-                            <span (click)="gotoNextMonth()" class="month-switch icon icon-arrow-circle-right"></span>
+                            <span (click)="goToNextMonth()" class="month-switch icon icon-arrow-circle-right"></span>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
 
             <article
                 *ngFor="#product of products"
-                (click)="testFunction(product._id)"
+                (click)="goToProduct(product._id)"
                 class="product-thumb fruit"
             ><!-- TODO load category dynamically -->
                 <div class="headline">

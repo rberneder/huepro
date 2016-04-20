@@ -52,11 +52,15 @@ export class SeasonCalendarComponent implements OnInit {
             );
     }
 
-    gotoPrevMonth() {
+    goToProduct(id) {
+        this._router.navigate(['ProductDetails', {productId: id}]);
+    }
+
+    goToPrevMonth() {
         this._router.navigate(['SeasonCalendar', {month: this.prevMonth}]);
     }
 
-    gotoNextMonth() {
+    goToNextMonth() {
         this._router.navigate(['SeasonCalendar', {month: this.nextMonth}]);
     }
 

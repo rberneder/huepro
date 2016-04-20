@@ -8,12 +8,14 @@
 
                 <article
                         *ngFor="#product of group.products"
-                        class="product-thumb fruit"><!-- TODO load category dynamically -->
+                        [class.fruit]="product.category.name === 'Obst'"
+                        [class.vegetable]="product.category.name === 'Gemüse'"
+                        class="product-thumb">
                     <div class="headline">
                         <h3>{{product.name}}</h3>
                     </div>
                     <div class="family">
-                        {{product.family_id}}
+                        {{product.family.name}}
                     </div>
                     <figure>
                         <img src="http://placehold.it/250x180" class="img-responsive">

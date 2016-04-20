@@ -11,7 +11,7 @@ var apiUrl = 'http://127.0.0.1:25070';
  */
 exports.getProducts = function(req, res) {
     request.get(apiUrl + '/products', function(err, request, body) {
-        if  (err) {
+        if (err) {
             res.send('"Error": "Something went wrong!"');
         } else {
             res.send(JSON.parse(body));
@@ -38,7 +38,7 @@ exports.getProductsOfMonth = function(req, res) {
  */
 exports.getProduct = function(req, res) {
     request.get(apiUrl + '/products/id/' + req.params.id, function(err, request, body) {
-        if  (err) {
+        if (err) {
             res.send('"Error": "Something went wrong!"');
         } else {
             res.send(JSON.parse(body));
