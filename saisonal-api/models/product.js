@@ -6,19 +6,31 @@ var ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     image: String,
-    productFamily_id: Number,
+    productFamily_id: {
+        type: String,
+        required: true
+    },
     plantStart: {
         month: Number,
         day: Number
     },
     plantDays: Number,
     harvestStart: {
-        month: Number,
+        month: {
+            type: Number,
+            required: true
+        },
         day: Number
     },
-    harvestDays: Number,
+    harvestDays: {
+        type: Number,
+        required: false
+    },
     storageDays: Number,
     shortDescription: String,
     description: String

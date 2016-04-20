@@ -1,15 +1,49 @@
 require('../models/product');
+require('../models/productFamily');
+require('../models/productCategory');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var Product = mongoose.model('Product');
-
+var Family = mongoose.model('ProductFamily');
+var Category = mongoose.model('ProductCategory');
 
 /** Lists all products. */
 exports.getAllProducts = function(req, res) {
-    Product.find()
-        .sort({'name': 'asc'})
-        .exec(function(err, products) {
-            res.jsonp(products);
+    Category.find().exec(function(err, categories) {
+        Family.find().exec(function(err, families) {
+            Product.find()
+                .sort({'name': 'asc'})
+                .exec(function(err, products) {
+                    var result = [];
+
+                    for (var product of products) {
+                        var family;
+                        var category;
+                        var addProduct = JSON.parse(JSON.stringify(product));
+
+                        for (var fam of families) {
+                            if (fam._id == product.productFamily_id) {
+                                family = fam;
+                                break;
+                            }
+                        }
+
+                        for (var cat of categories) {
+                            if (cat._id == family.productCategory_id) {
+                                category = cat;
+                                break;
+                            }
+                        }
+
+                        addProduct.family = family;
+                        addProduct.category = category;
+                        
+                        result.push(addProduct);
+                    }
+
+                    res.jsonp(result);
+                });
+        });
     });
 };
 

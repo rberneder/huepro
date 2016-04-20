@@ -3,6 +3,7 @@ var router = express.Router();
 
 var products = require('../controllers/productController');
 var families = require('../controllers/productFamilyController');
+var categories = require('../controllers/productCategoryController');
 
 
 /* # # # # # # # # # # # # #  PRODUCTS  # # # # # # # # # # # # # */
@@ -49,7 +50,7 @@ router.delete('/:productId', products.delete)
 router.get('/families', families.getAllFamilies);
 
 // GET /products/family/ade2k34k2a3gr2
-router.get('/families/:familyId', families.show);
+router.get('/family/:familyId', families.show);
 
 /*
 * POST
@@ -63,6 +64,35 @@ router.put('/family/:familyId', families.put);
 
 // DELETE /products/family/132423f24f24f
 router.delete('/family/:familyId', families.delete);
+
+
+
+
+
+
+/* # # # # # # # # # # # # #  PRODUCT CATEGORIES  # # # # # # # # # # # # # */
+/*
+ * GET
+ * */
+
+// GET /products/categories
+router.get('/categories', categories.getAllCategories);
+
+// GET /products/category/ade2k34k2a3gr2
+router.get('/category/:categoryId', categories.show);
+
+/*
+ * POST
+ * */
+
+// POST /products/category
+router.post('/category', categories.post);
+
+// PUT /products/category/3sdf2323f24f2f
+router.put('/category/:categoryId', categories.put);
+
+// DELETE /products/category/132423f24f24f
+router.delete('/category/:categoryId', categories.delete);
 
 
 

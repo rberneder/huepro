@@ -6,8 +6,14 @@ var ProductFamilySchema = new Schema({
         type: Date,
         default: Date.now
     },
-    name: String,
-    productCategory_id: String
+    name: {
+        type: String,
+        required: true
+    },
+    productCategory_id: {
+        type: String,
+        required: true
+    }
 });
 
 
