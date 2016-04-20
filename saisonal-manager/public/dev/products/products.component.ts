@@ -1,6 +1,5 @@
-import {Component} from "angular2/core";
-import {OnInit} from "angular2/core";
-import {ProductService} from "./product.service.ts";
+import {Component, OnInit} from "angular2/core";
+import {ProductService} from "./product.service";
 import {Product} from "./product";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 
@@ -19,16 +18,18 @@ export class ProductsComponent implements OnInit {
 	constructor(private _productService: ProductService) {}
 
 
-	getProducts() {
-		this._productService.getProducts().then((products: Product[]) => this.products = products);
-	}
 
 	onEdit() {
 		this.editing = true;
 	}
 
 	ngOnInit():any {
-		this.getProducts();
-		console.log('Products loaded');
+		console.log('#####!!!!!#######');
+		this._productService.getProducts()
+			.subscribe(
+				data => { this.products = data },
+				err => console.error(err),
+				() => console.log('Products loaded!!')
+			);
 	}
 }

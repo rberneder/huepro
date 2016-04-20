@@ -1,5 +1,5 @@
 import {Component, OnInit} from "angular2/core";
-import {ProductService} from "./product.service.ts";
+import {ProductService} from "./product.service";
 import {Product} from "./product";
 import {Router} from "angular2/router";
 import {ControlGroup, FormBuilder, Validators} from "angular2/common";
@@ -27,13 +27,13 @@ export class NewProductComponent {
 			'id': [''],
 			'name': ['', Validators.required],
 			'family_id': ['', Validators.required],
-			'plantStart': ['', Validators.required],
-			'plantDays': ['', Validators.required],
-			'harvestStart': ['', Validators.required],
-			'harvestDays': ['', Validators.required],
-			'storageDays': ['', Validators.required],
-			'shortDescription': ['', Validators.required],
-			'description': ['', Validators.required]
+			'plantStart': [''],
+			'plantDays': [''],
+			'harvestStart': [''],
+			'harvestDays': [''],
+			'storageDays': [''],
+			'shortDescription': [''],
+			'description': ['']
 		});
 	}
 }
