@@ -1,11 +1,11 @@
 import {Component, OnInit} from "angular2/core";
+import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
 import {ProductService} from "./product.service";
 import {Product} from "./product";
-import {ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
 	selector: "products",
-	templateUrl: '/templates/products/products.template.html',
+	templateUrl: '/templates/products/new-product.template.html',
 	providers: [ProductService],
 	directives: [ROUTER_DIRECTIVES]
 
@@ -24,12 +24,10 @@ export class ProductsComponent implements OnInit {
 	}
 
 	ngOnInit():any {
-		console.log('#####!!!!!#######');
 		this._productService.getProducts()
 			.subscribe(
 				data => { this.products = data },
-				err => console.error(err),
-				() => console.log('Products loaded!!')
+				err => console.error(err)
 			);
 	}
 }

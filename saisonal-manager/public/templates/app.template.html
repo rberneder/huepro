@@ -9,23 +9,10 @@
         </div>
     </div>
 
-    <nav id="menu--main">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <a [routerLink]="['Products']" [class.menuActive]="smallMenu === true" (click)="menuActive()" class="btn">
-                        Produkte
-                        <img src="http://placehold.it/800x480" class="img-responsive" />
-                        <div>Zur Obst & Gemüse - Liste</div>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <a [routerLink]="['Recipes']" [class.menuActive]="smallMenu === true" (click)="menuActive()" class="btn">Rezepte
-                        <img src="http://placehold.it/800x480" class="img-responsive" />
-                        <div>Zur Rezept - Liste</div>
-                    </a>
-                </div>
-            </div>
+    <nav class="container">
+        <div class="btn-group" role="group">
+            <a [routerLink]="['Products']" type="button" class="btn btn-default">Produkte</a>
+            <a [routerLink]="['Recipes']" type="button" class="btn btn-default">Rezepte</a>
         </div>
     </nav>
 </header>
