@@ -82,8 +82,8 @@ exports.addProduct = function(req, res) {
 
 
 /**
- * GET /api/products
- * List of all products.
+ * GET /api/products/categories
+ * List of all categories.
  */
 exports.getCategories = function(req, res) {
     request.get(apiUrl + '/products/categories', function(err, request, body) {
@@ -97,11 +97,41 @@ exports.getCategories = function(req, res) {
 
 
 /*
- * POST /api/products
- * Adds the product and returns the created API-entry.
+ * POST /api/products/category
+ * Adds the category and returns the created API-entry.
  * */
 exports.addCategory = function(req, res) {
     request.post({url: apiUrl + '/products/category', form: req.body}, function(err, request, body) {
+        if (err) {
+            res.send(JSON.parse("[]"));
+        } else {
+            res.send(JSON.parse(body));
+        }
+    });
+}
+
+
+/**
+ * GET /api/products/families
+ * List of all families.
+ */
+exports.getFamilies = function(req, res) {
+    request.get(apiUrl + '/products/families', function(err, request, body) {
+        if  (err) {
+            res.send('"Error": "Something went wrong!"');
+        } else {
+            res.send(JSON.parse(body));
+        }
+    });
+};
+
+
+/*
+ * POST /api/products/family
+ * Adds the family and returns the created API-entry.
+ * */
+exports.addFamily = function(req, res) {
+    request.post({url: apiUrl + '/products/family', form: req.body}, function(err, request, body) {
         if (err) {
             res.send(JSON.parse("[]"));
         } else {

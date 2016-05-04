@@ -3,6 +3,7 @@ import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
 import {ProductService} from "./product.service";
 import {NewProductComponent} from "./new-product.component";
 import {NewCategoryComponent} from "./category/new-category.component";
+import {NewFamilyComponent} from "./family/new-family.component";
 
 @Component({
 	selector: "products",
@@ -14,6 +15,7 @@ import {NewCategoryComponent} from "./category/new-category.component";
 @RouteConfig([
 	{path: '/neu', name: 'NewProduct', component: NewProductComponent, useAsDefault: true},
 	{path: '/kategorie-neu', name: 'NewCategory', component: NewCategoryComponent},
+	{path: '/familie-neu', name: 'NewFamily', component: NewFamilyComponent},
 ])
 export class ProductsContainerComponent {
 }

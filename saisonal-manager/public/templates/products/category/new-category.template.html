@@ -1,18 +1,18 @@
 <style>
-    #new-product label {
+    #new-category label {
         width: 200px;
     }
 </style>
 
 <div class="container">
-    <div [class.hidden]="!productAdded" class="row">
+    <div [class.hidden]="!categoryAdded" class="row">
         <div class="col-xs-6 alert-success">
             Kategorie hinzugefügt.
         </div>
     </div>
 
     <div class="row">
-        <div id="new-product" class="col-xs-12">
+        <div id="new-category" class="col-xs-12">
             <form [ngFormModel]="newCategoryForm" (ngSubmit)="onSubmit(newCategoryForm.value)">
                 <div>
                     <label for="name">Name:</label>
