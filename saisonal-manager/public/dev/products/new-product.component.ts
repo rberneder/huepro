@@ -1,36 +1,41 @@
 import {Component, OnInit} from "angular2/core";
 import {ProductService} from "./product.service";
-import {Product} from "./product";
 import {Router} from "angular2/router";
 import {ControlGroup, FormBuilder, Validators} from "angular2/common";
 
 @Component({
-	selector: "newProduct",
+	selector: "new-product",
 	templateUrl: '/templates/products/new-product.template.html',
 	providers: [ProductService]
 })
-
-export class NewProductComponent {
+export class NewProductComponent implements OnInit {
 
 	newProductForm: ControlGroup;
+	productAdded = false;
 
 	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder){}
 
 	onSubmit(value) {
-		this._productService.insertProduct(value);
-		this._router.navigate(['Products']);
-
+		this._productService
+			.addProduct(value)
+			.subscribe(data => {
+				this.productAdded = true;
+			});
 	}
 
 	ngOnInit():any {
 		this.newProductForm = this._formBuilder.group({
-			'id': [''],
 			'name': ['', Validators.required],
-			'family_id': ['', Validators.required],
-			'plantStart': [''],
-			'plantDays': [''],
-			'harvestStart': [''],
-			'harvestDays': [''],
+			'family': ['', Validators.required],
+			'category': [''], // TODO if [''] is filled --> invisible default value
+			'plantStartMonth': [''],
+			'plantStartDay': [''],
+			'plantEndMonth': [''],
+			'plantEndDay': [''],
+			'harvestStartMonth': [''],
+			'harvestStartDay': [''],
+			'harvestEndMonth': [''],
+			'harvestEndDay': [''],
 			'storageDays': [''],
 			'shortDescription': [''],
 			'description': ['']

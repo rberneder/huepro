@@ -64,3 +64,18 @@ exports.searchProducts = function(req, res) {
         });
     }
 }
+
+
+/*
+ * POST /api/products
+ * Adds the product and returns the created API-entry.
+ * */
+exports.addProduct = function(req, res) {
+    request.post({url: apiUrl + '/products', form: req.body}, function(err, request, body) {
+        if (err) {
+            res.send(JSON.parse("[]"));
+        } else {
+            res.send(JSON.parse(body));
+        }
+    });
+}

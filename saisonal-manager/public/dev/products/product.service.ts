@@ -1,5 +1,5 @@
 import { Injectable } from "angular2/core";
-import { Http } from "angular2/http";
+import { Http, Headers, Request, RequestOptions, RequestMethod } from "angular2/http";
 import { Product } from "./product";
 import "rxjs/add/operator/map"; // TODO remove this import when implemented in angular2
 
@@ -35,8 +35,18 @@ export class ProductService {
     }
 
 
-    insertProduct(product: Product) {
-        Promise.resolve(PRODUCTS).then((products: Product[]) => products.push(product));
+    addProduct(product: Product) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        var options = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            url: '/api/products/',
+            body: JSON.stringify(product)
+        });
+
+
+        return this._http.request(new Request(options));
     }
-    
 }

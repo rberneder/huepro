@@ -1,4 +1,16 @@
+<style>
+    #new-product label {
+        width: 200px;
+    }
+</style>
+
 <div class="container">
+    <div [class.hidden]="!productAdded" class="row">
+        <div class="col-xs-6 alert-success">
+            Produkt hinzugefügt.
+        </div>
+    </div>
+
     <div class="row">
         <div id="new-product" class="col-xs-12">
             <form [ngFormModel]="newProductForm" (ngSubmit)="onSubmit(newProductForm.value)">
@@ -8,56 +20,98 @@
                            [ngFormControl]="newProductForm.controls['name']"
                     />
                 </div>
-                <div>
-                    <label for="family_id">Family name:</label>
-                    <input id="family_id" type="text"
-                           [ngFormControl]="newProductForm.controls['family_id']"
-                    />
-                </div>
-                <div>
-                    <label for="plantStart">Plant start:</label>
-                    <input id="plantStart" type="text"
-                           [ngFormControl]="newProductForm.controls['plantStart']"
-                    />
-                </div>
-                <div>
-                    <label for="plantDays">Plant days:</label>
-                    <input id="plantDays" type="number"
-                           [ngFormControl]="newProductForm.controls['plantDays']"
-                    />
 
-                </div>
                 <div>
-                    <label for="harvestStart">Harvest start:</label>
-                    <input id="harvestStart" type="text"
-                           [ngFormControl]="newProductForm.controls['harvestStart']"
+                    <label for="family">Familie:</label>
+                    <input id="family" type="text"
+                           [ngFormControl]="newProductForm.controls['family']"
                     />
                 </div>
+
                 <div>
-                    <label for="harvestDays">Harvest days:</label>
-                    <input id="harvestDays" type="number"
-                           [ngFormControl]="newProductForm.controls['harvestDays']"
+                    <label for="category">Kategorie:</label>
+                    <input id="category" type="text"
+                           [ngFormControl]="newProductForm.controls['category']"
                     />
                 </div>
+
                 <div>
-                    <label for="storageDays">Storage days:</label>
+                    <label for="plantStartMonth">Saatmonat Start:</label>
+                    <input id="plantStartMonth" type="number"
+                           [ngFormControl]="newProductForm.controls['plantStartMonth']"
+                    />
+                </div>
+
+                <div>
+                    <label for="plantStartDay">Saattag Start:</label>
+                    <input id="plantStartDay" type="number"
+                           [ngFormControl]="newProductForm.controls['plantStartDay']"
+                    />
+                </div>
+
+                <div>
+                    <label for="plantEndMonth">Saatmonat Ende:</label>
+                    <input id="plantEndMonth" type="number"
+                           [ngFormControl]="newProductForm.controls['plantEndMonth']"
+                    />
+                </div>
+
+                <div>
+                    <label for="plantEndDay">Saattag Ende:</label>
+                    <input id="plantEndDay" type="number"
+                           [ngFormControl]="newProductForm.controls['plantEndDay']"
+                    />
+                </div>
+
+                <div>
+                    <label for="harvestStartMonth">Erntemonat Start:</label>
+                    <input id="harvestStartMonth" type="number"
+                           [ngFormControl]="newProductForm.controls['harvestStartMonth']"
+                    />
+                </div>
+
+                <div>
+                    <label for="harvestStartDay">Erntetag Start:</label>
+                    <input id="harvestStartDay" type="number"
+                           [ngFormControl]="newProductForm.controls['harvestStartDay']"
+                    />
+                </div>
+
+                <div>
+                    <label for="harvestEndMonth">Erntemonat Ende:</label>
+                    <input id="harvestEndMonth" type="number"
+                           [ngFormControl]="newProductForm.controls['harvestEndMonth']"
+                    />
+                </div>
+
+                <div>
+                    <label for="harvestEndDay">Erntetag Ende:</label>
+                    <input id="harvestEndDay" type="number"
+                           [ngFormControl]="newProductForm.controls['harvestEndDay']"
+                    />
+                </div>
+
+                <div>
+                    <label for="storageDays">Lagertage:</label>
                     <input id="storageDays" type="number"
                            [ngFormControl]="newProductForm.controls['storageDays']"
                     />
                 </div>
+
                 <div>
-                    <label for="shortDescription">Short description:</label>
+                    <label for="shortDescription">Kurzbeschreibung:</label>
                     <textarea id="shortDescription"
                               [ngFormControl]="newProductForm.controls['shortDescription']"
                     ></textarea>
                 </div>
+
                 <div>
-                    <label for="Description">Description:</label>
+                    <label for="Description">Langtext:</label>
                     <textarea id="Description"
                               [ngFormControl]="newProductForm.controls['description']"
                     ></textarea>
                 </div>
-                <button type="submit" [disabled]="!newProductForm.valid">Create Product</button>
+                <button type="submit" [disabled]="!newProductForm.valid">Produkt speichern</button>
             </form>
         </div>
     </div>
