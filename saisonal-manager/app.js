@@ -44,10 +44,12 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
  * */
 app.get('/', homeController.index);
 app.get('/api/products', apiController.getProducts);
+app.get('/api/products/categories', apiController.getCategories);
 app.get('/api/products/id/:id', apiController.getProduct);
 app.get('/api/products/search/:str', apiController.searchProducts);
 app.get('/api/products/month/:month', apiController.getProductsOfMonth);
 app.post('/api/products', apiController.addProduct);
+app.post('/api/products/category', apiController.addCategory);
 app.get('/node_modules/*', function(req, res, next) {
 	res.sendFile(path.join(__dirname, req.url));
 });

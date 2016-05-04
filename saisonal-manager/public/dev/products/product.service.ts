@@ -1,7 +1,8 @@
 import { Injectable } from "angular2/core";
 import { Http, Headers, Request, RequestOptions, RequestMethod } from "angular2/http";
 import { Product } from "./product";
-import "rxjs/add/operator/map"; // TODO remove this import when implemented in angular2
+import {Category} from "./category/category";
+import "rxjs/add/operator/map";     // TODO remove this import when implemented in angular2
 
 
 @Injectable()
@@ -38,15 +39,25 @@ export class ProductService {
     addProduct(product: Product) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-
         var options = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
             url: '/api/products/',
             body: JSON.stringify(product)
         });
+        return this._http.request(new Request(options));
+    }
 
 
+    addCategory(category: Category) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        var options = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            url: '/api/products/category/',
+            body: JSON.stringify(category)
+        });
         return this._http.request(new Request(options));
     }
 }

@@ -1,0 +1,27 @@
+<style>
+    #new-product label {
+        width: 200px;
+    }
+</style>
+
+<div class="container">
+    <div [class.hidden]="!productAdded" class="row">
+        <div class="col-xs-6 alert-success">
+            Kategorie hinzugefügt.
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="new-product" class="col-xs-12">
+            <form [ngFormModel]="newCategoryForm" (ngSubmit)="onSubmit(newCategoryForm.value)">
+                <div>
+                    <label for="name">Name:</label>
+                    <input id="name" type="text"
+                           [ngFormControl]="newCategoryForm.controls['name']"
+                    />
+                </div>
+                <button type="submit" [disabled]="!newCategoryForm.valid">Kategorie speichern</button>
+            </form>
+        </div>
+    </div>
+</div>
