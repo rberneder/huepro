@@ -19,25 +19,32 @@ var ProductSchema = new Schema({
         type: String,
         required: true
     },
-    plantStart: {
-        month: Number,
-        day: Number
-    },
-    plantDays: Number,
-    harvestStart: {
-        month: {
-            type: Number,
-            required: true
-        },
-        day: Number
-    },
-    harvestDays: {
+    plantStartMonth: Number,
+    plantStartDay: Number,
+    plantEndMonth: Number,
+    plantEndDay: Number,
+    harvestStartMonth: {
         type: Number,
-        required: false
+        required: true
+    },
+    harvestStartDay: {
+        type: Number,
+        required: true
+    },
+    harvestEndMonth: {
+        type: Number,
+        required: true
+    },
+    harvestEndDay: {
+        type: Number,
+        required: true
     },
     storageDays: Number,
     shortDescription: String,
-    description: String
+    description: {
+        type: String,
+        required: true
+    }
 });
 
 

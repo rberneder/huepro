@@ -3,16 +3,14 @@ export interface Product {
     name: string,
     family: string,
     category: string,
-    plantStart: {
-        month: number,
-        day: number
-    },
-    plantDays: number,
-    harvestStart: {
-        month: number,
-        day: number
-    },
-    harvestDays: number,
+    plantStartMonth: number,
+    plantStartDay: number,
+    plantEndMonth: number,
+    plantEndDay: number,
+    harvestStartMonth: number,
+    harvestStartDay: number,
+    harvestEndMonth: number,
+    harvestEndDay: number,
     storageDays: number,
     shortDescription: string,
     description: string
