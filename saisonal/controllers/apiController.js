@@ -11,11 +11,8 @@ var apiUrl = 'http://127.0.0.1:25070';
  */
 exports.getProducts = function(req, res) {
     request.get(apiUrl + '/products', function(err, request, body) {
-        if (err) {
-            res.send('"Error": "Something went wrong!"');
-        } else {
-            res.send(JSON.parse(body));
-        }
+        if (err) return res.send('"Error": "Something went wrong!"');
+        res.send(JSON.parse(body));
     });
 };
 
@@ -26,7 +23,7 @@ exports.getProducts = function(req, res) {
  */
 exports.getProductsOfMonth = function(req, res) {
     request.get(apiUrl + '/products/month/' + req.params.month, function(err, request, body) {
-        // TODO error handling
+        if (err) return res.send('"Error": "Something went wrong!"');
         res.send(JSON.parse(body));
     });
 };
@@ -38,11 +35,8 @@ exports.getProductsOfMonth = function(req, res) {
  */
 exports.getProduct = function(req, res) {
     request.get(apiUrl + '/products/id/' + req.params.id, function(err, request, body) {
-        if (err) {
-            res.send('"Error": "Something went wrong!"');
-        } else {
-            res.send(JSON.parse(body));
-        }
+        if (err) return res.send('"Error": "Something went wrong!"');
+        res.send(JSON.parse(body));
     });
 };
 

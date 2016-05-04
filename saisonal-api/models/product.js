@@ -11,7 +11,11 @@ var ProductSchema = new Schema({
         required: true
     },
     image: String,
-    productFamily_id: {
+    family: {
+        type: String,
+        required: true
+    },
+    category: {
         type: String,
         required: true
     },

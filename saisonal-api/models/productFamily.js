@@ -10,7 +10,7 @@ var ProductFamilySchema = new Schema({
         type: String,
         required: true
     },
-    productCategory_id: {
+    category: {
         type: String,
         required: true
     }

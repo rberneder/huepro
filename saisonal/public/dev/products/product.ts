@@ -1,7 +1,8 @@
 export interface Product {
     _id: number,
     name: string,
-    family_id: string,
+    family: string,
+    category: string,
     plantStart: {
         month: number,
         day: number
