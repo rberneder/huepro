@@ -9,7 +9,7 @@ import {ProductsContainerComponent} from "./products/products-container.componen
     selector: 'app',
     templateUrl: '/templates/app.template.html',
     providers: [ProductService],
-    directives: [ProductsContainerComponent, RecipesComponent, NewProductComponent, ROUTER_DIRECTIVES],
+    directives: [ProductsContainerComponent, RecipesComponent, ROUTER_DIRECTIVES],
 })
 @RouteConfig([
     {path: '/produkte/...', name: 'Products', component: ProductsContainerComponent, useAsDefault: true},

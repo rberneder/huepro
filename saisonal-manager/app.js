@@ -54,6 +54,7 @@ app.post('/api/products', apiProductController.addProduct);
 
 app.get('/api/products/categories', apiProductCategoryController.getCategories);
 app.post('/api/products/category', apiProductCategoryController.addCategory);
+app.delete('/api/products/category/:id', apiProductCategoryController.deleteCategory);
 
 app.get('/api/products/families', apiProductFamilyController.getFamilies);
 app.post('/api/products/family', apiProductFamilyController.addFamily);

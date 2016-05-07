@@ -9,7 +9,7 @@ import {NewFamilyComponent} from "./family/new-family.component";
 	selector: "products",
 	templateUrl: '/templates/products/products-container.template.html',
 	providers: [ProductService],
-	directives: [ROUTER_DIRECTIVES, NewProductComponent]
+	directives: [ROUTER_DIRECTIVES]
 
 })
 @RouteConfig([

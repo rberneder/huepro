@@ -3,15 +3,15 @@
 * */
 var request = require('request');
 var apiUrl = require('./config').apiUrl;
-
+var util = require('./util');
 
 // GET /api/products  ->  List of all products.
 exports.getProducts = function(req, res) {
     request.get(apiUrl + '/products', function(err, request, body) {
-        if  (err) {
-            res.send('"Error": "Something went wrong!"');
+        if (err) {
+            res.send(util.jsonParseErr(err));
         } else {
-            res.send(JSON.parse(body));
+            res.send(util.jsonParse(body));
         }
     });
 };
@@ -20,8 +20,11 @@ exports.getProducts = function(req, res) {
 // GET /api/products/month/:month  ->  List of all products in passed month.
 exports.getProductsOfMonth = function(req, res) {
     request.get(apiUrl + '/products/month/' + req.params.month, function(err, request, body) {
-        // TODO error handling
-        res.send(JSON.parse(body));
+        if (err) {
+            res.send(util.jsonParseErr(err));
+        } else {
+            res.send(util.jsonParse(body));
+        }
     });
 };
 
@@ -29,10 +32,10 @@ exports.getProductsOfMonth = function(req, res) {
 // GET /api/products/id/:id  ->  Returns product matching passed id.
 exports.getProduct = function(req, res) {
     request.get(apiUrl + '/products/id/' + req.params.id, function(err, request, body) {
-        if  (err) {
-            res.send('"Error": "Something went wrong!"');
+        if (err) {
+            res.send(util.jsonParseErr(err));
         } else {
-            res.send(JSON.parse(body));
+            res.send(util.jsonParse(body));
         }
     });
 };
@@ -45,9 +48,9 @@ exports.searchProducts = function(req, res) {
     if (str) {
         request.get(apiUrl + '/products/search/' + str, function(err, request, body) {
             if (err) {
-                res.send(JSON.parse("[]"));
+                res.send(util.jsonParseErr(err));
             } else {
-                res.send(JSON.parse(body));
+                res.send(util.jsonParse(body));
             }
         });
     }
@@ -58,9 +61,9 @@ exports.searchProducts = function(req, res) {
 exports.addProduct = function(req, res) {
     request.post({url: apiUrl + '/products', form: req.body}, function(err, request, body) {
         if (err) {
-            res.send(JSON.parse("[]"));
+            res.send(util.jsonParseErr(err));
         } else {
-            res.send(JSON.parse(body));
+            res.send(util.jsonParse(body));
         }
     });
 }

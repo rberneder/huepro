@@ -3,16 +3,17 @@
 * */
 var request = require('request');
 var apiUrl = require('./config').apiUrl;
+var util = require('./util');
 
 
 
 // GET /api/products/families  ->  List of all families.
 exports.getFamilies = function(req, res) {
     request.get(apiUrl + '/products/families', function(err, request, body) {
-        if  (err) {
-            res.send('"Error": "Something went wrong!"');
+        if (err) {
+            res.send(util.jsonParseErr(err));
         } else {
-            res.send(JSON.parse(body));
+            res.send(util.jsonParse(body));
         }
     });
 };
@@ -22,9 +23,21 @@ exports.getFamilies = function(req, res) {
 exports.addFamily = function(req, res) {
     request.post({url: apiUrl + '/products/family', form: req.body}, function(err, request, body) {
         if (err) {
-            res.send(JSON.parse("[]"));
+            res.send(util.jsonParseErr(err));
         } else {
-            res.send(JSON.parse(body));
+            res.send(util.jsonParse(body));
         }
     });
+}
+
+
+// DELETE /api/products/family/a23df2f32fasc34  ->  Deletes the family with the corresponding ID
+exports.deleteFamily = function(req, res) {
+    request.delete(apiUrl + '/products/family/' + req.params.id, function(err, request, body) {
+        if (err) {
+            res.send(util.jsonParseErr(err));
+        } else {
+            res.send(util.jsonParse(body));
+        }
+    })
 }
