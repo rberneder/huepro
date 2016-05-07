@@ -23,7 +23,6 @@
 
                 <div>
                     <label for="category">Kategorie:</label>
-
                     <select name="category" id="category" [ngFormControl]="newFamilyForm.controls['category']">
                         <option value="" disabled checked>Bitte wählen</option>
                         <option *ngFor="#category of categories" value="{{category.name}}">{{category.name}}</option>

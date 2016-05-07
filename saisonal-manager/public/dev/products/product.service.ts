@@ -43,6 +43,12 @@ export class ProductService {
     }
 
 
+    getFamilies() {
+        return this._http.get('/api/products/families')
+            .map(response => response.json());
+    }
+
+
     addProduct(product: Product) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');

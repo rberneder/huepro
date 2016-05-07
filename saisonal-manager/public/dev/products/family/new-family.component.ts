@@ -11,7 +11,7 @@ import {Category} from "../category/category";
 })
 export class NewFamilyComponent implements OnInit {
     newFamilyForm: ControlGroup;
-    categories: Category;
+    categories: Category[];
     familyAdded = false;
 
     constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder){}

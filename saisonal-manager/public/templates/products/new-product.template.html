@@ -23,14 +23,11 @@
 
                 <div>
                     <label for="family">Familie:</label>
-                    <input id="family" type="text"
-                           [ngFormControl]="newProductForm.controls['family']"
-                    />
-                </div>
-
-                <div>
-                    <label for="category">Kategorie:</label>
-                    <input id="category" type="text"
+                    <select name="family" id="family" [ngFormControl]="newProductForm.controls['family']">
+                        <option value="" disabled checked>Bitte wählen</option>
+                        <option *ngFor="#family of families" value="{{family.name}}">{{family.name}}</option>
+                    </select>
+                    <input id="category" type="text" class="hidden" hidden
                            [ngFormControl]="newProductForm.controls['category']"
                     />
                 </div>
