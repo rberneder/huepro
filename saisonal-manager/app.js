@@ -15,7 +15,9 @@ var bodyParser = require('body-parser');
  * CONTROLLERS
  * */
 var homeController = require('./controllers/homeController');
-var apiController = require('./controllers/apiController');
+var apiProductController = require('./controllers/apiProductController');
+var apiProductCategoryController = require('./controllers/apiProductCategoryController');
+var apiProductFamilyController = require('./controllers/apiProductFamilyController');
 
 
 /*
@@ -43,15 +45,20 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
  * ROUTES
  * */
 app.get('/', homeController.index);
-app.get('/api/products', apiController.getProducts);
-app.get('/api/products/categories', apiController.getCategories);
-app.get('/api/products/families', apiController.getFamilies);
-app.get('/api/products/id/:id', apiController.getProduct);
-app.get('/api/products/search/:str', apiController.searchProducts);
-app.get('/api/products/month/:month', apiController.getProductsOfMonth);
-app.post('/api/products', apiController.addProduct);
-app.post('/api/products/category', apiController.addCategory);
-app.post('/api/products/family', apiController.addFamily);
+
+app.get('/api/products', apiProductController.getProducts);
+app.get('/api/products/id/:id', apiProductController.getProduct);
+app.get('/api/products/search/:str', apiProductController.searchProducts);
+app.get('/api/products/month/:month', apiProductController.getProductsOfMonth);
+app.post('/api/products', apiProductController.addProduct);
+
+app.get('/api/products/categories', apiProductCategoryController.getCategories);
+app.post('/api/products/category', apiProductCategoryController.addCategory);
+
+app.get('/api/products/families', apiProductFamilyController.getFamilies);
+app.post('/api/products/family', apiProductFamilyController.addFamily);
+app.delete('/api/products/family/:id', apiProductFamilyController.deleteFamily);
+
 app.get('/node_modules/*', function(req, res, next) {
 	res.sendFile(path.join(__dirname, req.url));
 });
