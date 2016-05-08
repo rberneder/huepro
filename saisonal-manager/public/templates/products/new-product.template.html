@@ -25,87 +25,44 @@
                     <label for="family-select">Familie:</label>
                     <select name="family-select" id="family-select" #familyIndex
                             (change)="updateCat(familyIndex.value)"
+                            [ngFormControl]="newProductForm.controls['family']"
                     >
                         <option value="" disabled checked>Bitte wählen</option>
                         <option *ngFor="#family of families; #i = index" value="{{i}}">{{family.name}} </option>
                     </select>
-                    <input id="family" type="family" hidden
-                           [ngFormControl]="newProductForm.controls['family']"
-                           value="{{newProductForm.value.family}}"
-                    />
-                    <input id="category" type="text" hidden
-                           [ngFormControl]="newProductForm.controls['category']"
-                           value="{{newProductForm.value.category}}"
-                    />
                 </div>
 
                 <div>
                     <label>Kategorie:</label>
-                    <span>{{newProductForm.value.category}}</span>
+                    <span>{{newProduct.category}}</span>
                 </div>
 
                 <div>
                     <label for="plantStart">Anbaubeginn</label>
                     <input type="date" id="plantStart" name="plantStart"
-                           #plantStart
-                           (change)="updateDateOf('plantStart', plantStart.value)"
+                           [ngFormControl]="newProductForm.controls['plantStart']"
                     >
-                    <input id="plantStartMonth" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['plantStartMonth']"
-                           value="{{getMonthOfDate(plantStart.value)}}"
-                    />
-                    <input id="plantStartDay" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['plantStartDay']"
-                           value="{{getDayOfDate(plantStart.value)}}"
-                    />
                 </div>
 
                 <div>
                     <label for="plantEnd">Anbauende</label>
                     <input type="date" id="plantEnd" name="plantEnd"
-                           #plantEnd
-                           (change)="updateDateOf('plantEnd', plantEnd.value)"
+                           [ngFormControl]="newProductForm.controls['plantEnd']"
                     >
-                    <input id="plantEndMonth" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['plantEndMonth']"
-                           value="{{getMonthOfDate(plantEnd.value)}}"
-                    />
-                    <input id="plantEndDay" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['plantEndDay']"
-                           value="{{getDayOfDate(plantEnd.value)}}"
-                    />
                 </div>
 
                 <div>
                     <label for="havestStart">Erntebeginn</label>
                     <input type="date" id="havestStart" name="havestStart"
-                           #harvestStart
-                           (change)="updateDateOf('harvestStart', harvestStart.value)"
+                           [ngFormControl]="newProductForm.controls['harvestStart']"
                     >
-                    <input id="harvestStartMonth" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['harvestStartMonth']"
-                           value="{{getMonthOfDate(harvestStart.value)}}"
-                    />
-                    <input id="harvestStartDay" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['harvestStartDay']"
-                           value="{{getDayOfDate(harvestStart.value)}}"
-                    />
                 </div>
 
                 <div>
                     <label for="havestEnd">Ernteende</label>
                     <input type="date" id="havestEnd" name="havestEnd"
-                           #harvestEnd
-                           (change)="updateDateOf('harvestEnd', harvestEnd.value)"
+                           [ngFormControl]="newProductForm.controls['harvestEnd']"
                     >
-                    <input id="harvestEndMonth" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['harvestEndMonth']"
-                           value="{{getMonthOfDate(harvestEnd.value)}}"
-                    />
-                    <input id="harvestEndDay" type="number" hidden
-                           [ngFormControl]="newProductForm.controls['harvestEndDay']"
-                           value="{{getDayOfDate(harvestEnd.value)}}"
-                    />
                 </div>
 
 

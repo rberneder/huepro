@@ -10,7 +10,6 @@ import {NewFamilyComponent} from "./family/new-family.component";
 	templateUrl: '/templates/products/products-container.template.html',
 	providers: [ProductService],
 	directives: [ROUTER_DIRECTIVES]
-
 })
 @RouteConfig([
 	{path: '/neu', name: 'NewProduct', component: NewProductComponent, useAsDefault: true},

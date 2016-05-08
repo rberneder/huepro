@@ -1,7 +1,6 @@
 import {Component, ElementRef} from "angular2/core";
 import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
 import {RecipesComponent} from "./recipes/recipes.component";
-import {NewProductComponent} from "./products/new-product.component";
 import {ProductService} from "./products/product.service";
 import {ProductsContainerComponent} from "./products/products-container.component";
 

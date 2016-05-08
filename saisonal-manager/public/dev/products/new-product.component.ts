@@ -3,6 +3,8 @@ import {ProductService} from "./product.service";
 import {Router} from "angular2/router";
 import {ControlGroup, FormBuilder, Validators} from "angular2/common";
 import {Family} from "./family/family";
+import {Product} from "./product";
+import {ProductCl} from "./product.class";
 
 @Component({
 	selector: "new-product",
@@ -12,31 +14,39 @@ import {Family} from "./family/family";
 export class NewProductComponent implements OnInit {
 
 	newProductForm: ControlGroup;
+	newProduct:Product;
 	families:Family[];
 	productAdded = false;
 
-	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder){}
+	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder) {
+		this.newProduct = new ProductCl();
+		this.newProduct.category = '-';
+	}
 
 	onSubmit(value) {
+		this.newProduct.name = value.name;
+		this.updateDateOf('plantStart', value.plantStart);
+		this.updateDateOf('plantEnd', value.plantEnd);
+		this.updateDateOf('harvestStart', value.harvestStart);
+		this.updateDateOf('harvestEnd', value.harvestEnd);
+		this.updateDateOf('storag', value.storag);
+		this.newProduct.storageDays = value.storageDays;
+		this.newProduct.shortDescription = value.shortDescription;
+		this.newProduct.description = value.description;
+
 		this._productService
-			.addProduct(value)
+			.addProduct(this.newProduct)
 			.subscribe(data => {
 				this.productAdded = true;
+				this.newProduct = new ProductCl();
+				this.newProduct.category = '-';
 			});
-	}
-
-	getMonthOfDate(dateStr) {
-		return new Date(dateStr).getMonth();
-	}
-
-	getDayOfDate(dateStr) {
-		return new Date(dateStr).getDate() - 1;
 	}
 
 	updateCat(famIndex) {
 		var family = this.families[famIndex];
-		this.newProductForm.value.family = family.name;
-		this.newProductForm.value.category = family.category;
+		this.newProduct.family = family.name;
+		this.newProduct.category = family.category;
 	}
 
 	updateDateOf(entry, rawDate) {
@@ -46,20 +56,20 @@ export class NewProductComponent implements OnInit {
 
 		switch (entry) {
 			case 'plantStart':
-				this.newProductForm.value.plantStartMonth = month;
-				this.newProductForm.value.plantStartDay = day;
+				this.newProduct.plantStartMonth = month;
+				this.newProduct.plantStartDay = day;
 				break;
 			case 'plantEnd':
-				this.newProductForm.value.plantEndMonth = month;
-				this.newProductForm.value.plantEndDay = day;
+				this.newProduct.plantEndMonth = month;
+				this.newProduct.plantEndDay = day;
 				break;
 			case 'harvestStart':
-				this.newProductForm.value.harvestStartMonth = month;
-				this.newProductForm.value.harvestStartDay = day;
+				this.newProduct.harvestStartMonth = month;
+				this.newProduct.harvestStartDay = day;
 				break;
 			case 'harvestEnd':
-				this.newProductForm.value.harvestEndMonth = month;
-				this.newProductForm.value.harvestEndDay = day;
+				this.newProduct.harvestEndMonth = month;
+				this.newProduct.harvestEndDay = day;
 				break;
 		}
 	}
@@ -69,22 +79,17 @@ export class NewProductComponent implements OnInit {
 			.subscribe(data => {
 				this.families = data;
 			});
-		
+
 		this.newProductForm = this._formBuilder.group({
 			'name': ['', Validators.required],
 			'family': ['', Validators.required],
-			'category': [''], // TODO if [''] is filled --> invisible default value
-			'plantStartMonth': [''],
-			'plantStartDay': [''],
-			'plantEndMonth': [''],
-			'plantEndDay': [''],
-			'harvestStartMonth': [''],
-			'harvestStartDay': [''],
-			'harvestEndMonth': [''],
-			'harvestEndDay': [''],
-			'storageDays': [''],
+			'plantStart': ['', Validators.required],
+			'plantEnd': ['', Validators.required],
+			'harvestStart': ['', Validators.required],
+			'harvestEnd': ['', Validators.required],
+			'storageDays': ['', Validators.required],
 			'shortDescription': [''],
-			'description': ['']
+			'description': ['', Validators.required]
 		});
 	}
 }
