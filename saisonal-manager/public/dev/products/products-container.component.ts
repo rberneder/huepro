@@ -4,6 +4,7 @@ import {ProductService} from "./product.service";
 import {NewProductComponent} from "./new-product.component";
 import {NewCategoryComponent} from "./category/new-category.component";
 import {NewFamilyComponent} from "./family/new-family.component";
+import {ChangeProductComponent} from "./change-product.component";
 
 @Component({
 	selector: "products",
@@ -13,6 +14,7 @@ import {NewFamilyComponent} from "./family/new-family.component";
 })
 @RouteConfig([
 	{path: '/neu', name: 'NewProduct', component: NewProductComponent, useAsDefault: true},
+	{path: '/bearbeiten', name: 'ChangeProduct', component: ChangeProductComponent},
 	{path: '/kategorie-neu', name: 'NewCategory', component: NewCategoryComponent},
 	{path: '/familie-neu', name: 'NewFamily', component: NewFamilyComponent},
 ])
