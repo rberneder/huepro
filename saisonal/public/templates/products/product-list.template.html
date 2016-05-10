@@ -1,34 +1,30 @@
-<section id="product-list">
-    <div class="container">
-        <div>
-
-            <div *ngFor="#group of productsSorted">
-
-                <h1 class="text-white text-center niconne">{{group.groupName}}</h1>
-
-                <article
-                        *ngFor="#product of group.products"
-                        [class.fruit]="product.category.name === 'Obst'"
-                        [class.vegetable]="product.category.name === 'Gemüse'"
-                        class="product-thumb">
-                    <div class="headline">
+<section id="product-list" class="row">
+    <div id="product-list__cont">
+        <article *ngFor="#product of products; #i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-lg-4">
+            <a [routerLink]="['ProductDetails', {id: product._id}]">
+                <figure>
+                    <img src="http://placehold.it/250x180" class="img-responsive">
+                    <figcaption>
                         <h3>{{product.name}}</h3>
-                    </div>
-                    <div class="family">
-                        {{product.family.name}}
-                    </div>
-                    <figure>
-                        <img src="http://placehold.it/250x180" class="img-responsive">
-                        <figcaption>
-                            {{product.shortDescription}}
-                        </figcaption>
-                    </figure>
+                    </figcaption>
+                </figure>
+            </a>
+        </article>
+    </div>
 
-                    <div>
-                        <a [routerLink]="['ProductDetails', {id: product._id}]" class="btn btn-sm bg-beige">mehr</a>
-                    </div>
-                </article>
-            </div>
+    <div id="product-list__index">
+        <div class="index-menu--top">
+            F
         </div>
+        <nav class="index-menu--main">
+            <a href="product-0" class="btn-index">A</a>
+            <a href="product-1" class="btn-index">B</a>
+            <a href="product-2" class="btn-index">D</a>
+            <a href="product-3" class="btn-index">H</a>
+            <a href="product-4" class="btn-index">I</a>
+            <a href="product-5" class="btn-index">L</a>
+            <a href="product-6" class="btn-index">O</a>
+            <a href="product-7" class="btn-index">R</a>
+        </nav>
     </div>
 </section>
