@@ -1,0 +1,11 @@
+#calendar-corner {
+  position: absolute;
+  top: 115px;
+  right: -1px;
+  bottom: 225px;
+  width: 180px;
+  background: url(/src/img/calendar-corner.png) no-repeat;
+  background-size: contain;
+  background-position: right center;
+  z-index: -1;
+}

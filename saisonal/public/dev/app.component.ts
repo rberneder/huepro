@@ -2,11 +2,10 @@ import {Component, OnInit, ElementRef} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
 import {SeasonCalendarComponent} from "./season-calendar/season-calendar.component";
 import {RecipesComponent} from "./recipes/recipes.component";
-import {PopularProductsComponent} from "./popular-products/popular-products.component";
-import {ProductDetailsComponent} from "./products/product-details.component";
-import {ProductListComponent} from "./products/product-list.component";
+import {FreshProductsComponent} from "./fresh-products/fresh-products.component";
 import {ProductService} from "./products/product.service";
 import {SearchComponent} from "./search/search.component";
+import {ProductContainerComponent} from "./products/product-container.component";
 
 
 
@@ -14,11 +13,11 @@ import {SearchComponent} from "./search/search.component";
     selector: 'app',
     templateUrl: '/templates/app.template.html',
     providers: [ProductService],
-    directives: [SeasonCalendarComponent, ROUTER_DIRECTIVES, PopularProductsComponent],
+    directives: [ROUTER_DIRECTIVES],
 })
 @RouteConfig([
-    {path: '/produkt/:productId', name: 'ProductDetails', component: ProductDetailsComponent},
-    {path: '/produkte', name: 'Products', component: ProductListComponent},
+    {path: '/', name: 'FreshProducts', component: FreshProductsComponent, useAsDefault: true},
+    {path: '/produkte/...', name: 'Products', component: ProductContainerComponent},
     {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
     {path: '/suche', name: 'Search', component: SearchComponent},

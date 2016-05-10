@@ -1,37 +1,35 @@
-<header>
-    <img src="/src/img/bg.jpg" id="header-bg">
-    <div id="header-box">
-        <h1 class="main-hl text-center">Saisonal</h1>
-
-        <div id="popular-products" style="min-height: 300px;">
-            <popular-products></popular-products>
-        </div>
+<section id="sidebar">
+    <div id="logo">
+        <a [routerLink]="['FreshProducts']">
+            <img sizes="(min-width: 1500px) 20vw,
+                            (min-width: 1000px) 25vw,
+                            (min-width: 600px) 60vw, 100vw"
+                 srcset="src/img/logo.png 400w,
+                             src/img/logo.png 600w,
+                             src/img/logo.png 800w"/>
+        </a>
     </div>
 
-    <nav id="menu--main">
-        <div class="container">
-            <div class="intentionally-no-row"><!-- TODO improve layout here -->
-                <div class="col-sm-3">
-                    <a [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
-                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
-                </div>
-                <div class="col-sm-3">
-                    <a [routerLink]="['SeasonCalendar', {month: month}]" class="btn btn-default btn-block">Saisonkalender</a>
-                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
-                </div>
-                <div class="col-sm-3">
-                    <a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
-                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
-                </div>
-                <div class="col-sm-3">
-                    <a [routerLink]="['Search']" class="btn btn-default btn-block"><span class="icon icon-search"></span></a>
-                    <a href="/" class="close-sub-site text-white text-center"><span class="icon icon-close-circle"></span></a>
-                </div>
-            </div>
-        </div>
+    <nav id="main-nav">
+        <a [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
+        <a [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
+        <a [routerLink]="['SeasonCalendar', {month: month}]" class="btn btn-default btn-block">Saisonkalender</a>
+        <a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
+        <a [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
     </nav>
-</header>
 
-<div id="content--main">
+    <footer>
+        <span>&copy; 2016, saisonal.at</span>
+        <nav id="footer-nav">
+            <a href="#">Kontakt</a>
+            <a href="#">Impressum</a>
+        </nav>
+    </footer>
+</section>
+
+
+<section id="main-content">
     <router-outlet></router-outlet>
-</div>
+</section>
+
+<aside id="calendar-corner" class="hidden-xs"></aside>

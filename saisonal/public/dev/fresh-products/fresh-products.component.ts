@@ -3,11 +3,11 @@ import { AnimationBuilder } from 'css-animator/builder';
 import { AnimationService } from 'css-animator/modules';
 
 @Component({
-    selector: "popular-products",
-    templateUrl: '/templates/popular-products/popular-products.template.html',
+    selector: "fresh-products",
+    templateUrl: '/templates/fresh-products/fresh-products.template.html',
     providers: [AnimationService],
 })
-export class PopularProductsComponent implements OnInit {
+export class FreshProductsComponent implements OnInit {
 
     private animator: AnimationBuilder;
 

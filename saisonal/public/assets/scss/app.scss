@@ -11,22 +11,13 @@
 @import "general/icons";
 @import "general/variables";
 @import "general/oocss";
+@import "general/layout";
 
 
 /*
  * COMPONENTS
  */
-// General
-@import "components/header";
-@import "components/main-content";
-// Search
-@import "components/search/general";
-// Season-Calendar
-@import "components/season-calendar/general";
-@import "components/season-calendar/menu";
-@import "components/season-calendar/product-list";
-@import "components/season-calendar/product-thumb";
-// Product-List
-@import "components/products/product-list";
-// Product-Details
-@import "components/products/product-details";
+// Sidebar
+@import "components/sidebar";
+// Calendar-corner
+@import "components/calendar-corner";

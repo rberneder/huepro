@@ -1,7 +1,5 @@
 import { Injectable } from "angular2/core";
 import { Http } from "angular2/http";
-import { PRODUCTS } from "./mock-products";
-import { Product } from "./product";
 import "rxjs/add/operator/map"; // TODO remove this import when implemented in angular2
 
 @Injectable()
