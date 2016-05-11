@@ -69,7 +69,7 @@ exports.put = function(req, res) {
 
 /** Deletes the product corresponding the passed ID. */
 exports.delete = function(req, res) {
-    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
+    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen, vorhandene Verknüfungen?
         Product.remove(function(err) {
             res.jsonp(product);
         });

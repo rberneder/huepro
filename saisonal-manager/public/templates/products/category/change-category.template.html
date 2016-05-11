@@ -14,9 +14,10 @@
         <li *ngFor="#category of categories" class="list-group-item">
             <h3 class="list-group-item-heading">{{category.name}}</h3>
             <div class="edit-group-buttons">
-                <a  type="button" class="btn btn-default">Edit</a>
+                <a  type="button" class="btn btn-default" (click)="edit()">Edit</a>
                 <a  type="button" class="btn btn-default" (click)="delete(category)">Delete</a>
             </div>
+            <category-edit-form [category]="category" [class.hidden]="!editing"></category-edit-form>
         </li>
     </ul>
 </div>

@@ -52,6 +52,10 @@ export class ProductService {
             .map(response => response.json());
     }
 
+    updateCategory(id){
+        return this._http.put("/api/products/category/" + id)
+            .map(response => response.json());
+    }
 
     getFamilies() {
         return this._http.get('/api/products/families')

@@ -44,7 +44,7 @@ exports.put = function(req, res) {
 
 // Deletes a product family
 exports.delete = function(req, res) {
-    Family.load(req.params.familyId, function(err, family) {  // TODO Werte überprüfen
+    Family.load(req.params.familyId, function(err, family) {  // TODO Werte überprüfen, vorhandene Verknüfungen?
         family.remove(function(err) {
             res.jsonp(family);
         });
