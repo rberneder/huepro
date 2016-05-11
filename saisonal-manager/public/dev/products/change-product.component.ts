@@ -23,12 +23,10 @@ export class ChangeProductComponent implements OnInit {
 	delete(product) {
 		this._productService
 			.deleteProduct(product._id)
-			.subscribe()
-		console.log(this.products);
+			.subscribe();
 
 		var index = this.products.indexOf(product);
 		this.products.splice(index, 1);
-
 	}
 
 	ngOnInit() {

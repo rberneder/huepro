@@ -47,9 +47,19 @@ export class ProductService {
             .map(response => response.json());
     }
 
+    deleteCategory(id) {
+        return this._http.delete("/api/products/category/" + id)
+            .map(response => response.json());
+    }
+
 
     getFamilies() {
         return this._http.get('/api/products/families')
+            .map(response => response.json());
+    }
+
+    deleteFamily(id) {
+        return this._http.delete("/api/products/family/" + id)
             .map(response => response.json());
     }
 

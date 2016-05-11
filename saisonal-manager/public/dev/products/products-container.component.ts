@@ -5,6 +5,8 @@ import {NewProductComponent} from "./new-product.component";
 import {NewCategoryComponent} from "./category/new-category.component";
 import {NewFamilyComponent} from "./family/new-family.component";
 import {ChangeProductComponent} from "./change-product.component";
+import {ChangeCategoryComponent} from "./category/change-category.component";
+import {ChangeFamilyComponent} from "./family/change-family.component";
 
 @Component({
 	selector: "products",
@@ -16,7 +18,9 @@ import {ChangeProductComponent} from "./change-product.component";
 	{path: '/neu', name: 'NewProduct', component: NewProductComponent, useAsDefault: true},
 	{path: '/bearbeiten', name: 'ChangeProduct', component: ChangeProductComponent},
 	{path: '/kategorie-neu', name: 'NewCategory', component: NewCategoryComponent},
+	{path: '/kategorie-bearbeiten', name: 'ChangeCategory', component: ChangeCategoryComponent},
 	{path: '/familie-neu', name: 'NewFamily', component: NewFamilyComponent},
+	{path: '/familie-bearbeiten', name: 'ChangeFamily', component: ChangeFamilyComponent},
 ])
 export class ProductsContainerComponent {
 }
