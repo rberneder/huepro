@@ -6,7 +6,7 @@ import {FreshProductsComponent} from "./fresh-products/fresh-products.component"
 import {ProductService} from "./products/product.service";
 import {SearchComponent} from "./search/search.component";
 import {ProductContainerComponent} from "./products/product-container.component";
-import {ScrollService} from "./util/scroll.service";
+import {ScrollService} from "./util/scroll/scroll.service";
 
 
 

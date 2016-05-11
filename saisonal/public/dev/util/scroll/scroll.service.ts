@@ -1,23 +1,21 @@
+import {ScrollListener} from "./scroll-listener";
+
 export class ScrollService {
     private scrollPos: number;
     private lastScrollTime: number;
     private scrollThresholdMs: number;
-    private callbacks: string[];
-    private objects: any[];
-    private callbackCount: number;
+    private subscribers: ScrollListener[];
 
     constructor() {
         this.scrollPos = 0;
         this.lastScrollTime = 0;
         this.scrollThresholdMs = 50;
-        this.callbacks = new Array();
-        this.objects = new Array();
-        this.callbackCount = 0;
+        this.subscribers = new Array<ScrollListener>();
     }
 
     triggerCallbacks(event) {
-        for (let i = 0; i < this.callbacks.length; i++) {
-            this.objects[i][this.callbacks[i]](event)
+        for (let subscriber of this.subscribers) {
+            subscriber.scroll(event);
         }
     }
 
@@ -29,8 +27,7 @@ export class ScrollService {
         }
     }
 
-    addScrollListener(func, obj) {
-        this.callbacks.push(func);
-        this.objects.push(obj);
+    subscribe(subscriber: ScrollListener) {
+        this.subscribers.push(subscriber);
     }
 }
