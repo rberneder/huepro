@@ -20,6 +20,17 @@ export class ChangeProductComponent implements OnInit {
 		this.months = MONTHS;
 	}
 
+	delete(product) {
+		this._productService
+			.deleteProduct(product._id)
+			.subscribe()
+		console.log(this.products);
+
+		var index = this.products.indexOf(product);
+		this.products.splice(index, 1);
+
+	}
+
 	ngOnInit() {
 		this._productService
 			.getProducts()

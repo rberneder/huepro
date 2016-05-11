@@ -33,8 +33,8 @@ router.post('/', products.post);
 // PUT /products/af243ec243c2c23423  --> body: Datenobjekt
 router.put('/:productId', products.put);
 
-// DELETE /products/asdf22asf2far32
-router.delete('/:productId', products.delete)
+// DELETE /id/products/asdf22asf2far32
+router.delete('/id/:productId', products.delete)
 
 
 

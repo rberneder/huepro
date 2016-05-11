@@ -12,6 +12,11 @@
     <ul class="list-group">
         <li *ngFor="#product of products" class="list-group-item">
             <h3 class="list-group-item-heading">{{product.name}} <small>{{product.family}} - {{product.category}}</small></h3>
+            <div class="edit-group-buttons">
+                <a  type="button" class="btn btn-default">Edit</a>
+                <a  type="button" class="btn btn-default" (click)="delete(product)">Delete</a>
+            </div>
+
             <ul>
                 <li>
                     <span class="label-temp">Anbau:</span>

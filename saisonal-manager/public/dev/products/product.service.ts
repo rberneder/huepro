@@ -23,6 +23,11 @@ export class ProductService {
             .map(response => response.json());
     }
 
+    deleteProduct(id) {
+        return this._http.delete("api/products/id/" + id)
+            .map(response => response.json());
+    }
+
 
     searchFor(str) {
         var strEsc = encodeURI(str);
