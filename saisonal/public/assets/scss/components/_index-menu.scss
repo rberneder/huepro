@@ -1,0 +1,58 @@
+#index-menu {
+  position: fixed;
+  top: 0;
+  right: 150px;
+  bottom: 0;
+  width: 30px;
+
+  #index-menu__top {
+    margin-top: 80px;
+  }
+
+  #index-menu__main {
+    position: absolute;
+    top: 110px;
+    bottom: 80px;
+  }
+
+  #indices {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  .btn-index {
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 3vh;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: $beige;
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+      z-index: -1;
+    }
+
+    &.active {
+      color: #fff;
+    }
+    &.active:before {
+      opacity: 1;
+    }
+  }
+
+}

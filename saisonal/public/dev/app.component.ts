@@ -6,6 +6,7 @@ import {FreshProductsComponent} from "./fresh-products/fresh-products.component"
 import {ProductService} from "./products/product.service";
 import {SearchComponent} from "./search/search.component";
 import {ProductContainerComponent} from "./products/product-container.component";
+import {ScrollService} from "./util/scroll.service";
 
 
 
@@ -26,9 +27,13 @@ export class AppComponent implements OnInit {
 
     private month;
 
-    constructor(private _productService:ProductService) {
+    constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.month = new Date().getMonth();
     };
 
     ngOnInit() {}
+
+    scrolled(event) {
+        this._scrollService.scrolled(event);
+    }
 }

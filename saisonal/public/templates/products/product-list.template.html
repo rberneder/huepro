@@ -1,4 +1,4 @@
-<section id="product-list" class="row">
+<div id="product-list" class="row">
     <div id="product-list__cont">
         <article *ngFor="#product of products; #i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-lg-4">
             <a [routerLink]="['ProductDetails', {id: product._id}]">
@@ -12,19 +12,15 @@
         </article>
     </div>
 
-    <div id="product-list__index">
-        <div class="index-menu--top">
+    <div id="index-menu">
+        <div id="index-menu__top">
             F
         </div>
-        <nav class="index-menu--main">
-            <a href="product-0" class="btn-index">A</a>
-            <a href="product-1" class="btn-index">B</a>
-            <a href="product-2" class="btn-index">D</a>
-            <a href="product-3" class="btn-index">H</a>
-            <a href="product-4" class="btn-index">I</a>
-            <a href="product-5" class="btn-index">L</a>
-            <a href="product-6" class="btn-index">O</a>
-            <a href="product-7" class="btn-index">R</a>
-        </nav>
+        <div id="index-menu__main">
+            <nav id="indices">
+                <a *ngFor="#index of indices"
+                    href="{{index.selector}}" [class.active]="index.active === true"  (click)="scrollTo($event)" class="btn-index">{{index.name}}</a>
+            </nav>
+        </div>
     </div>
-</section>
+</div>

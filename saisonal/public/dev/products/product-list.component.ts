@@ -1,7 +1,8 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, HostListener, Directive} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Product} from "./product";
 import {ProductService} from "./product.service";
+import {ScrollService} from "../util/scroll.service";
 
 @Component({
     selector: "product-list",
@@ -11,14 +12,17 @@ import {ProductService} from "./product.service";
 })
 export class ProductListComponent implements OnInit {
 
-    private products:Product[];
-    private productsSorted;
-    private sortCriteria:string;
+    private products: Product[];
+    private productsSorted: Product[];
+    private indices: any;
+    private $products: any;
+    private $mainContent: any;
 
-    constructor(private _productService: ProductService) {
+    constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.productsSorted = new Array();
+        this.indices = new Array();
+        this._scrollService.addScrollListener('updateIndices', this);
     }
-
 
     ngOnInit() {
         this._productService.getProducts()
@@ -26,8 +30,42 @@ export class ProductListComponent implements OnInit {
                 this.products = data;
                 this.sortProducts();
             });
+        this.$products= document.getElementById('product-list__cont').children;
+        this.$mainContent = document.getElementById('main-content');
     }
 
+    resetProductArrays() {
+        while (this.productsSorted.length) {
+            this.productsSorted.pop();
+        }
+        while (this.indices.length) {
+            this.indices.pop();
+        }
+    }
+
+    activateIndex(key) {
+        for (let i = 0; i < this.indices.length; i++) {
+            this.indices[i].active = (this.indices[i].name[0] === key);
+        }
+    }
+
+    updateIndices(event) {
+        if (!this.$products || !this.$mainContent) return;
+        let scanBorder = this.$products[0].offsetTop;
+        let scrolled = this.$mainContent.scrollTop;
+        let height = this.$products[0].offsetHeight;
+        for (let i = 0; i < this.$products.length; i++) {
+            if (this.$products[i].offsetTop - scanBorder >= scrolled - height) {
+                this.activateIndex(this.products[i].name[0]);
+                break;
+            }
+        }
+    }
+
+    scrollTo($event) {
+        $event.preventDefault();
+        console.log($event.target.getAttribute('href'));
+    }
 
     sortProducts(sortCriteria = 'name asc') {
         switch (sortCriteria) {
@@ -39,24 +77,17 @@ export class ProductListComponent implements OnInit {
                 });
 
                 let letter = '';
-                let count = -1;
-
-                while (this.productsSorted.length) {
-                    this.productsSorted.pop();
-                }
+                let count = 0;
+                this.resetProductArrays();
 
                 for (let product of this.products) {
                     let actLetter = product.name[0].toUpperCase();
                     if (actLetter !== letter) {
                         letter = actLetter;
-                        this.productsSorted.push({
-                            groupName: letter,
-                            products: [product]
-                        });
-                        count++;
-                    } else {
-                        this.productsSorted[count].products.push(product);
+                        this.indices.push({name: letter, selector: 'product-' + count, active: false});
                     }
+                    this.productsSorted.push(product);
+                    count++;
                 }
                 break;
 
