@@ -17,7 +17,6 @@ export class ProductListComponent implements OnInit, ScrollListener {
     private productsSorted: Product[];
     private indices: any;
     private $products: any;
-    private $mainContent: any;
 
     constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.productsSorted = new Array();
@@ -32,7 +31,6 @@ export class ProductListComponent implements OnInit, ScrollListener {
                 this.sortProducts();
             });
         this.$products= document.getElementById('product-list__cont').children;
-        this.$mainContent = document.getElementById('main-content');
     }
 
     resetProductArrays() {
@@ -46,14 +44,14 @@ export class ProductListComponent implements OnInit, ScrollListener {
 
     activateIndex(key) {
         for (let i = 0; i < this.indices.length; i++) {
-            this.indices[i].active = (this.indices[i].name[0] === key);
+            this.indices[i].active = (this.indices[i].name[0].toUpperCase() === key);
         }
     }
 
-    scroll(event):any {
-        if (!this.$products || !this.$mainContent) return;
+    scroll(event): any {
+        if (!this.$products) return;
         let scanBorder = this.$products[0].offsetTop;
-        let scrolled = this.$mainContent.scrollTop;
+        let scrolled = event.target.scrollTop;
         let height = this.$products[0].offsetHeight;
         for (let i = 0; i < this.$products.length; i++) {
             if (this.$products[i].offsetTop - scanBorder >= scrolled - height) {
@@ -65,7 +63,6 @@ export class ProductListComponent implements OnInit, ScrollListener {
 
     scrollTo($event) {
         $event.preventDefault();
-        console.log($event.target.getAttribute('href'));
     }
 
     sortProducts(sortCriteria = 'name asc') {
