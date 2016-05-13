@@ -3,6 +3,6 @@ import {bootstrap} from 'angular2/platform/browser';
 import {AppComponent} from "./app.component";
 import {ROUTER_PROVIDERS} from "angular2/router";
 import {HTTP_PROVIDERS} from "angular2/http";
-import {ScrollService} from "./util/scroll.service";
+import {ScrollService} from "./util/scroll/scroll.service";
 
 bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, ScrollService]);

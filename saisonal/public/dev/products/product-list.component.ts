@@ -2,7 +2,8 @@ import {Component, OnInit, HostListener, Directive} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Product} from "./product";
 import {ProductService} from "./product.service";
-import {ScrollService} from "../util/scroll.service";
+import {ScrollService} from "../util/scroll/scroll.service";
+import {ScrollListener} from "../util/scroll/scroll-listener";
 
 @Component({
     selector: "product-list",
@@ -10,18 +11,17 @@ import {ScrollService} from "../util/scroll.service";
     directives: [ROUTER_DIRECTIVES],
     providers: [ProductService]
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, ScrollListener {
 
     private products: Product[];
     private productsSorted: Product[];
     private indices: any;
     private $products: any;
-    private $mainContent: any;
 
     constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.productsSorted = new Array();
         this.indices = new Array();
-        this._scrollService.addScrollListener('updateIndices', this);
+        this._scrollService.subscribe(this);
     }
 
     ngOnInit() {
@@ -31,7 +31,6 @@ export class ProductListComponent implements OnInit {
                 this.sortProducts();
             });
         this.$products= document.getElementById('product-list__cont').children;
-        this.$mainContent = document.getElementById('main-content');
     }
 
     resetProductArrays() {
@@ -45,14 +44,14 @@ export class ProductListComponent implements OnInit {
 
     activateIndex(key) {
         for (let i = 0; i < this.indices.length; i++) {
-            this.indices[i].active = (this.indices[i].name[0] === key);
+            this.indices[i].active = (this.indices[i].name[0].toUpperCase() === key);
         }
     }
 
-    updateIndices(event) {
-        if (!this.$products || !this.$mainContent) return;
+    scroll(event): any {
+        if (!this.$products) return;
         let scanBorder = this.$products[0].offsetTop;
-        let scrolled = this.$mainContent.scrollTop;
+        let scrolled = event.target.scrollTop;
         let height = this.$products[0].offsetHeight;
         for (let i = 0; i < this.$products.length; i++) {
             if (this.$products[i].offsetTop - scanBorder >= scrolled - height) {
@@ -64,7 +63,6 @@ export class ProductListComponent implements OnInit {
 
     scrollTo($event) {
         $event.preventDefault();
-        console.log($event.target.getAttribute('href'));
     }
 
     sortProducts(sortCriteria = 'name asc') {
