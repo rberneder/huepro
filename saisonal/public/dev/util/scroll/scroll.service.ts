@@ -36,10 +36,12 @@ export class ScrollService {
     }
     
     subscribe(subscriber: ScrollListener) {
+        console.log('SUBSCRIBED')
         this.subscribers.push(subscriber);
     }
     
     unsubscribe(subscriber: ScrollListener) {
+        console.log('UNSUBSCRIBED')
         this.subscribers.splice(this.subscribers.indexOf(subscriber), 1);
     }
     

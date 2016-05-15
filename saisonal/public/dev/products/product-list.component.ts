@@ -21,16 +21,17 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
     constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.productsSorted = new Array();
         this.indices = new Array();
-        this._scrollService.subscribe(this);
     }
 
     ngOnInit() {
+        this._scrollService.subscribe(this);
         this._productService.getProducts()
             .subscribe((data: Product[]) => {
                 this.products = data;
                 this.sortProducts();
             });
-        this.$products= document.getElementById('product-list__cont').children;
+        this.$products = document.getElementById('product-list__cont').children;
+        setTimeout(() => this.scroll(null), 500);   // TODO find better implementation -> $products must be available
     }
 
     ngOnDestroy() {
@@ -53,7 +54,7 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
     }
 
     scroll(event): any {
-        if (!this.$products) return;
+        if (!this.$products || this.$products.length < 1) return;
         let scanBorder = window.scrollY + this.$products[0].offsetTop / 4;
         let height = 1.5 * this.$products[0].offsetHeight;
         let activeIndices = new Array();
