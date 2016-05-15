@@ -59,6 +59,16 @@
     .btn {
       font-size: 15px;
       color: #000;
+      border: 1px solid transparent;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent;
+        border: 1px solid $beige;
+        outline: none;
+        box-shadow: none;
+      }
 
       &.router-link-active {
         color: #fff;

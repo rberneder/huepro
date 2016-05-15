@@ -7,9 +7,9 @@ import { AnimationService } from 'css-animator/modules';
     templateUrl: '/templates/fresh-products/fresh-products.template.html',
     providers: [AnimationService],
 })
-export class FreshProductsComponent implements OnInit {
+export class FreshProductsComponent {
 
-    private animator: AnimationBuilder;
+    /*private animator: AnimationBuilder;
 
     constructor (_animationService: AnimationService, private _elementRef: ElementRef) {
         this.animator = _animationService.builder();
@@ -17,5 +17,5 @@ export class FreshProductsComponent implements OnInit {
 
     ngOnInit():any {
         this.animator.setType('fadeInUp').show(this._elementRef.nativeElement);
-    }
+    }*/
 }

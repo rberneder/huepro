@@ -1,4 +1,19 @@
 /*
+ * CORRECTING BOOTSTRAP
+ */
+button, .btn,
+button:focus, .btn:focus,
+button:active, .btn:active {
+  border: none;
+  outline: none;
+  background: none;
+  box-shadow: none;
+}
+button:focus, .btn:focus {
+  outline: 1px solid $beige;
+}
+
+/*
  * TYPO
  */
 .text-white { color: #fff; }
@@ -12,6 +27,31 @@
 .bg-beige   { background: $beige;  }
 .bg-pink    { background: $pink;   }
 .bg-purple  { background: $purple; }
+
+/*
+ * EFFECTS
+ */
+.fading {   // TODO delete this styling
+  position: relative;
+}
+.fading:before,
+.fading:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: 100;
+  opacity: 0.5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+}
+.fading:after {
+  top: auto;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+}
 
 /*
  * LAYOUT
