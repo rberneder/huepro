@@ -1,18 +1,52 @@
 #index-menu {
   position: fixed;
   top: 0;
-  right: 150px;
+  right: 7px;
   bottom: 0;
-  width: 30px;
+
+  @media (min-width: $screen-md-min) {
+    right: 180px;
+  }
 
   #index-menu__top {
+    position: relative;
     margin-top: 80px;
+
+    #filter-btn {
+      background: none;
+      outline: none;
+      color: $beige;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      padding: 0;
+      border: 1px solid transparent;
+
+      &.active {
+        color: #fff;
+        background: $beige;
+      }
+      &:hover {
+        border: 1px solid $beige;
+      }
+    }
+
+    #filter-menu {
+      position: absolute;
+      right: 30px;
+      min-width: 180px;
+      top: 0;
+    }
   }
 
   #index-menu__main {
     position: absolute;
     top: 110px;
+    right: 0;
     bottom: 80px;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 25px;
   }
 
   #indices {
@@ -23,15 +57,16 @@
   }
 
   .btn-index {
-    font-size: 18px;
+    font-size: 12px;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
     display: block;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
-    margin-bottom: 3vh;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid transparent;
+    margin-bottom: 3px;
     position: relative;
 
     &:before {
@@ -52,6 +87,12 @@
     }
     &.active:before {
       opacity: 1;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      &:hover {
+        border: 1px solid $beige;
+      }
     }
   }
 

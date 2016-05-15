@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef} from 'angular2/core';
+import {Component, ElementRef} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
 import {SeasonCalendarComponent} from "./season-calendar/season-calendar.component";
 import {RecipesComponent} from "./recipes/recipes.component";
@@ -23,13 +23,17 @@ import {ScrollService} from "./util/scroll/scroll.service";
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
     {path: '/suche', name: 'Search', component: SearchComponent},
 ])
-export class AppComponent implements OnInit {
+export class AppComponent {
 
     private month;
+    private mobileMenuActive: boolean;
 
     constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.month = new Date().getMonth();
+        this.mobileMenuActive = false;
     };
-
-    ngOnInit() {}
+    
+    toggleMobileNav() {
+        this.mobileMenuActive = !this.mobileMenuActive;
+    }
 }

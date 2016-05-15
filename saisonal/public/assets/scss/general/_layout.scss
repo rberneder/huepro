@@ -1,4 +1,17 @@
 #main-content {
-  padding-left: 475px;
-  padding-right: 150px;
+  @media (min-width: $screen-md-min) {
+    & {
+      padding-right: 150px;
+    }
+  }
+
+  @media (min-width: $screen-lg-min) {
+    & {
+      padding-left: 350px;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    padding-left: 475px;
+  }
 }

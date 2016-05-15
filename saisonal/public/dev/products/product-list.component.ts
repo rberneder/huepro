@@ -17,10 +17,12 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
     private productsSorted: Product[];
     private indices: any;
     private $products: any;
+    private filterMenuActive: boolean;
 
     constructor(private _productService: ProductService, private _scrollService: ScrollService) {
         this.productsSorted = new Array();
         this.indices = new Array();
+        this.filterMenuActive = false;
     }
 
     ngOnInit() {
@@ -36,6 +38,10 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
 
     ngOnDestroy() {
         this._scrollService.unsubscribe(this);
+    }
+
+    toggleFilterMenu() {
+        this.filterMenuActive = !this.filterMenuActive;
     }
 
     resetProductArrays() {

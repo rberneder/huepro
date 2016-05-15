@@ -1,5 +1,12 @@
 #product-list {
-  padding: 40vh 100px 40vh 0;
+  padding: 15px 30px 50px 15px;
+
+  @media (min-width: $screen-sm-min) {
+    margin-bottom: 80px;
+  }
+  @media (min-width: $screen-lg-min) {
+    padding: 40vh 100px 40vh 0;
+  }
 
   .product-thumb {
     text-align: center;
@@ -12,10 +19,6 @@
 
     img {
       margin: 0 auto;
-    }
-
-    @media (min-width: $screen-sm-min) {
-      margin-bottom: 80px;
     }
   }
 }
