@@ -1,17 +1,32 @@
 import {ScrollListener} from "./scroll-listener";
+import {Observable} from "rxjs/Observable";
 
 export class ScrollService {
-    private lastScrollEvent: any;
-    private scrollSpeed: number;
-    private scrollThresholdMs: number;
+    public scrollStream;
     private subscribers: ScrollListener[];
-    private wait: boolean;
+    private debounce: number = 100;
+    private wait: boolean = false;
+    private lastEvent: Event;
+
 
     constructor() {
-        this.scrollSpeed = 500;
-        this.scrollThresholdMs = 50;
         this.subscribers = new Array<ScrollListener>();
-        this.wait = false;
+        this.scrollStream = new Observable<Event>(observer =>
+            window.addEventListener('scroll', (event) => {
+                this.lastEvent = event;
+                if (!this.wait) {
+                    this.wait = true;
+                    setTimeout(() => {
+                        observer.next(this.lastEvent);
+                        this.wait = false;
+                    }, this.debounce);
+                }
+            })
+        );
+        this.scrollStream
+            .subscribe(
+                event => this.triggerCallbacks(event)
+        );
     }
 
     triggerCallbacks(event) {
@@ -19,39 +34,35 @@ export class ScrollService {
             subscriber.scroll(event);
         }
     }
-
-    scrolled(event) {
-        this.lastScrollEvent = event;
-        if (!this.wait) {
-            this.wait = true;
-            var self = this;
-            setTimeout(function() {
-                self.triggerCallbacks(self.lastScrollEvent);
-                self.wait = false;
-            }, this.scrollThresholdMs);
-        }
-    }
-
+    
     subscribe(subscriber: ScrollListener) {
         this.subscribers.push(subscriber);
     }
-
+    
+    unsubscribe(subscriber: ScrollListener) {
+        this.subscribers.splice(this.subscribers.indexOf(subscriber), 1);
+    }
+    
     scrollTo($element) {
-        const scrollHeight = window.scrollY,
-            scrollStep = Math.PI / ( this.scrollSpeed / 15 ),
-            cosParameter = scrollHeight / 2;
+        const offsetTop = 200,
+            targetPos = $element.offsetTop - offsetTop,
+            scrollHeight = window.scrollY,
+            scrollStep = Math.PI / (500 / 15),
+            cosParameter = (scrollHeight - targetPos) / 2,
+            scrollDown = targetPos > scrollHeight;
         var scrollCount = 0,
             scrollMargin;
         requestAnimationFrame(step);
-        function step () {
+        function step() {
             setTimeout(function() {
-                if ( window.scrollY != 0 ) {
+                if (scrollDown && window.scrollY <= targetPos - 5 ||
+                    !scrollDown && window.scrollY >= targetPos + 5) {
                     requestAnimationFrame(step);
                     scrollCount = scrollCount + 1;
-                    scrollMargin = cosParameter - cosParameter * Math.cos( scrollCount * scrollStep );
-                    window.scrollTo( 0, ( scrollHeight - scrollMargin ) );
+                    scrollMargin = cosParameter - cosParameter * Math.cos(scrollCount * scrollStep);
+                    window.scrollTo(0, (scrollHeight - scrollMargin));
                 }
-            }, 15 );
+            }, 15);
         }
     }
 }

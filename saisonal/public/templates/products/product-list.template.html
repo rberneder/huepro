@@ -1,6 +1,6 @@
 <div id="product-list" class="row">
     <div id="product-list__cont">
-        <article *ngFor="#product of products; #i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-lg-4">
+        <article *ngFor="let product of products; let i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-lg-4">
             <a [routerLink]="['ProductDetails', {id: product._id}]">
                 <figure>
                     <img src="http://placehold.it/250x180" class="img-responsive">
@@ -18,7 +18,7 @@
         </div>
         <div id="index-menu__main">
             <nav id="indices">
-                <a *ngFor="#index of indices"
+                <a *ngFor="let index of indices"
                     href="{{index.selector}}" [class.active]="index.active === true"  (click)="scrollTo($event)" class="btn-index">{{index.name}}</a>
             </nav>
         </div>

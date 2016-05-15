@@ -37,7 +37,7 @@
         <div class="container">
 
             <article
-                *ngFor="#product of products"
+                *ngFor="let product of products"
                 (click)="goToProduct(product._id)"
                 class="product-thumb fruit"
             ><!-- TODO load category dynamically -->

@@ -32,8 +32,4 @@ export class AppComponent implements OnInit {
     };
 
     ngOnInit() {}
-
-    scrolled(event) {
-        this._scrollService.scrolled(event);
-    }
 }
