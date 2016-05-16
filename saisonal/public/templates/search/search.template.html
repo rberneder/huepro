@@ -1,41 +1,60 @@
 <section id="search">
     <div class="container">
-        <div class="page-header">
-            <h1 class="niconne text-center text-white">Suche</h1>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-offset-3 col-sm-6">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input
-                                (keyup)="searchFor(searchInput.value)"
-                                #searchInput
-                                type="text" id="search--main" class="form-control" placeholder="Jonagold, Tomate, ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="icon icon-search"></span></button>
-                </span>
-                    </div>
+        <div id="search-top">
+            <div class="row">
+                <div class="col-xs-11">
+                    <input (keyup)="searchFor(searchInput.value)"
+                           #searchInput
+                           type="text" id="search-input" placeholder="Jonagold, Tomate, ...">
+                </div>
+                <div class="col-xs-1">
+                    <button class="btn btn-default pull-right" type="button"
+                            [class.hidden]="searchInput.value.length > 0"
+                            (click)="searchFor(searchInput.value)">
+                        <span class="icon icon-search"></span>
+                    </button>
+                    <button class="btn btn-default pull-right" type="button"
+                            [class.hidden]="searchInput.value.length < 1"
+                            (click)="resetSearch(); searchInput.value = ''">
+                        <span class="icon icon-close"></span>
+                    </button>
                 </div>
             </div>
         </div>
-
-        <div>
-            <h3 class="text-white">Ergebnisse</h3>
-            <div class="list-group">
-                <a class="list-group-item"
-                    *ngFor="let result of searchResults"
-                    [routerLink]="['Products']"
-                >
-                    <div class="row">
-                        <div class="col-xs-3"><img src="http://placehold.it/100x100" class="img-responsive"></div>
-                        <div class="col-xs-7">{{result.name}} <span class="badge bg-light-green">jetzt reif</span></div>
-                    </div>
-                </a>
+        <div id="search-bottom">
+            <div class="row">
+                <div class="col-xs-12">FILTER</div>
             </div>
-            <p [class.hidden]="!(searchInput.value.length > 1 && searchResults.length < 1)">
-                <em>Keine Ergebnisse gefunden.</em>
-            </p>
+        </div>
+
+        <div id="search-results">
+            <div *ngIf="searchResults.length > 0">
+                <div class="text-center">
+                    <h4 class="hl-bg">Produkte</h4>
+                </div>
+                <div class="list-group">
+                    <a class="list-group-item"
+                       *ngFor="let result of searchResults"
+                       [routerLink]="['/Products/ProductDetails', {id: result._id}]">
+                        <div class="row">
+                            <div class="col-xs-3"><img src="http://placehold.it/100x100" class="img-responsive"></div>
+                            <div class="col-xs-7">{{result.name}} <span class="badge bg-light-green">jetzt reif</span></div>
+                        </div>
+                    </a>
+                </div>
+                <p [class.hidden]="!(searchInput.value.length > 1 && searchResults.length < 1)">
+                    <em>Keine Ergebnisse gefunden.</em>
+                </p>
+            </div>
+
+            <div *ngIf="searchResults.length > 0">
+                <div class="text-center">
+                    <h4 class="hl-bg">Rezepte</h4>
+                </div>
+                <p>
+                    <em>Keine Ergebnisse gefunden.</em>
+                </p>
+            </div>
         </div>
     </div>
 </section>

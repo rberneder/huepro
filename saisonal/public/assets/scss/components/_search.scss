@@ -1,0 +1,57 @@
+#search {
+  padding-top: 40px;
+
+  @media (min-width: $screen-sm-min) {
+    padding-top: 80px;
+  }
+
+  #search-top {
+    border-bottom: 2px solid $beige;
+
+    .btn-default {
+      background: none;
+      outline: none;
+      padding: 0;
+      width: 60px;
+      height: 40px;
+
+      span {
+        font-size: 30px;
+
+        @media (min-width: $screen-sm-min) {
+          font-size: 60px;
+        }
+      }
+    }
+  }
+
+  #search-bottom {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+  #search-results {
+    padding-top: 40px;
+
+    @media (min-width: $screen-sm-min) {
+      padding-top: 80px;
+    }
+
+    & > div {
+      margin-bottom: 40px;
+    }
+  }
+
+  #search-input {
+    font-size: 20px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 5px 15px 5px 0;
+    width: 100%;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+    }
+  }
+}
