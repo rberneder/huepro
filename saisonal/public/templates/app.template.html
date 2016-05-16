@@ -13,7 +13,7 @@
     <nav id="main-nav">
         <a [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
         <a [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
-        <a [routerLink]="['SeasonCalendar', {month: month}]" class="btn btn-default btn-block">Saisonkalender</a>
+        <a [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a>
         <a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
         <a [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
     </nav>
@@ -30,18 +30,16 @@
 
 <section id="main-content">
     <header id="mobile-menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-2">
-                    <button (click)="toggleMobileNav()" [class.active]="mobileMenuActive == true" id="mobile-menu-btn">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </button>
-                </div>
-                <div class="col-xs-10 text-right">
-                    Saisonal.at
-                </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <button (click)="toggleMobileNav()" [class.active]="mobileMenuActive == true" id="mobile-menu-btn">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+            <div class="col-xs-10 text-right">
+                Saisonal.at
             </div>
         </div>
     </header>

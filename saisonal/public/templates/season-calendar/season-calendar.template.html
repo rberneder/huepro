@@ -1,62 +1,29 @@
 <div id="season-calendar">
     <section id="season-calendar__menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-offset-3 col-sm-6 text-white text-center month-selector">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <span (click)="goToPrevMonth()" class="month-switch icon icon-arrow-circle-left"></span>
-                        </div>
-                        <div class="col-xs-4">
-                            <h2 class="inline-block" id="season-calendar__month">{{monthNames[actMonth].name}}</h2>
-                        </div>
-                        <div class="col-xs-4">
-                            <span (click)="goToNextMonth()" class="month-switch icon icon-arrow-circle-right"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 text-right">
-                    <div [class.active]="filterMenuOpen === true">
-                        <span id="season-calendar__filter-box">
-                            <div>
-                                <a href="#" class="btn btn-default btn-sm bg-light-beige">Alle</a>
-                                <a href="#" class="btn btn-default btn-sm bg-light-green">Obst</a>
-                                <a href="#" class="btn btn-default btn-sm bg-orange">Gemüse</a>
-                            </div>
-                        </span>
-                        <span (click)="toggleFilterMenu()" class="season-calendar__filter-btn open text-white icon icon-filter"></span>
-                        <span (click)="toggleFilterMenu()" class="season-calendar__filter-btn close text-white icon icon-close-circle"></span>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-xs-2 col-sm-3 text-right">
+                <a (click)="goToPrevMonth()" class="link-arrow icon icon-arrow-left"></a>
+            </div>
+            <div class="col-xs-8 col-sm-6 text-center">
+                <h1 class="inline-block">{{monthNames[actMonth].name}}</h1>
+            </div>
+            <div class="col-xs-2 col-sm-3 text-left">
+                <a (click)="goToNextMonth()" class="link-arrow icon icon-arrow-right"></a>
             </div>
         </div>
     </section>
 
     <section id="season-calendar__product-list">
-        <div class="container">
-
-            <article
-                *ngFor="let product of products"
-                (click)="goToProduct(product._id)"
-                class="product-thumb fruit"
-            ><!-- TODO load category dynamically -->
-                <div class="headline">
-                    <h3>{{product.name}}</h3>
-                </div>
-                <div class="family">
-                    {{product.family_id}}
-                </div>
+        <div class="row">
+            <article *ngFor="let product of products"
+                    (click)="goToProduct(product)"
+                    class="col-xs-6 col-sm-4 text-center">
                 <figure>
-                    <img src="http://placehold.it/250x180" class="img-responsive">
+                    <img src="http://placehold.it/250x180" class="img-responsive inline-block">
                     <figcaption>
-                        {{product.shortDescription}}
+                        <h2>{{product.name}}</h2>
                     </figcaption>
                 </figure>
-
-                <div>
-                    <a [routerLink]="['Products']" class="btn btn-sm bg-beige">mehr</a>
-                </div>
             </article>
         </div>
     </section>

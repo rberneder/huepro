@@ -1,7 +1,11 @@
 <section id="product-details">
     <div class="row">
         <div class="col-sm-2">
-            <a onclick="window.history.back()" class="link-back"><span class="icon icon-arrow-left"></span></a>
+            <a onclick="window.history.back()"
+               (click)="_router.renavigate()"
+               class="link-arrow">
+                <span class="icon icon-arrow-left"></span>
+            </a>
         </div>
         <div class="col-sm-6">
             <div class="row">

@@ -1,8 +1,11 @@
 import {Component, ElementRef, OnInit} from "angular2/core";
+import {Router} from "angular2/router";
 import {AnimationBuilder} from 'css-animator/builder';
 import {AnimationService} from 'css-animator/modules';
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
+import {Month} from "../util/month";
+import {MONTHS} from "../util/month.seed";
 
 @Component({
     selector: "fresh-products",
@@ -16,16 +19,18 @@ export class FreshProductsComponent implements OnInit {
     private canSlideUp: boolean;
     private canSlideDown: boolean;
     private $animationPane;
+    private monthNames: Month[];
 
-    constructor(private _productService: ProductService) {
+    constructor(private _productService: ProductService, private _router: Router) {
         this.shownProd = -1;
         this.canSlideUp = false;
         this.canSlideDown = false;
+        this.monthNames = MONTHS;
     }
 
     ngOnInit(): any {
         this._productService
-            .getProducts()
+            .getProductsOfMonth(new Date().getMonth())
             .subscribe((products: Product[]) => {
                 if (products.length > 0) {
                     this.products = products;
@@ -36,6 +41,18 @@ export class FreshProductsComponent implements OnInit {
                 }
             });
         this.$animationPane = document.getElementById('animation-pane');
+    }
+
+    getHarvestInfo(product) {
+        let res = this.monthNames[product.harvestStartMonth].name;
+        if (product.harvestStartMonth != product.harvestEndMonth) {
+            res += ' - ' + this.monthNames[product.harvestEndMonth].name;
+        }
+        return res;
+    }
+
+    goToProduct(product) {
+        this._router.navigate(['Products/ProductDetails', {id: product._id}]);
     }
 
     updateAnimationPane() {

@@ -7,6 +7,7 @@ import {ProductService} from "./products/product.service";
 import {SearchComponent} from "./search/search.component";
 import {ProductContainerComponent} from "./products/product-container.component";
 import {ScrollService} from "./util/scroll/scroll.service";
+import {SeasonCalendarContainerComponent} from "./season-calendar/season-calendar-container.component";
 
 
 
@@ -19,7 +20,7 @@ import {ScrollService} from "./util/scroll/scroll.service";
 @RouteConfig([
     {path: '/', name: 'FreshProducts', component: FreshProductsComponent, useAsDefault: true},
     {path: '/produkte/...', name: 'Products', component: ProductContainerComponent},
-    {path: '/saisonkalender/:month', name: 'SeasonCalendar', component: SeasonCalendarComponent},
+    {path: '/saisonkalender/...', name: 'SeasonCalendar', component: SeasonCalendarContainerComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
     {path: '/suche', name: 'Search', component: SearchComponent},
 ])

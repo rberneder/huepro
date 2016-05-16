@@ -1,16 +1,14 @@
 import {Component, OnInit} from "angular2/core";
-import {ROUTER_DIRECTIVES, Router, RouteParams, RouteConfig} from "angular2/router";
+import {Router, RouteParams} from "angular2/router";
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
 import {MONTHS} from "../util/month.seed";
 import {Month} from "../util/month";
-import {ProductDetailsComponent} from "../products/product-details.component";
 
 @Component({
     selector: "season-calendar",
     templateUrl: '/templates/season-calendar/season-calendar.template.html',
-    providers: [ProductService],
-    directives: [ROUTER_DIRECTIVES]
+    providers: [ProductService]
 })
 export class SeasonCalendarComponent implements OnInit {
     private actMonth:number;
@@ -21,13 +19,17 @@ export class SeasonCalendarComponent implements OnInit {
     private filterMenuOpen:boolean;
 
     constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
-       // this.setMonth(_routeParams.get('month'));
         this.monthNames = MONTHS;
         this.filterMenuOpen = false;
     };
     
     ngOnInit():any {
-        this.setMonth(this._routeParams.get('month'));
+        var month: any = this._routeParams.get('month');
+        if (month == null) {
+            month = new Date().getMonth();
+            this._router.navigate(['SeasonCalendarMonth', {month: month}]);
+        }
+        this.setMonth(month);
         this.getProducts();
     }
     
@@ -37,35 +39,27 @@ export class SeasonCalendarComponent implements OnInit {
             this.actMonth = monthNr;
             this.prevMonth = (this.actMonth - 1 < 0) ? 11 : (this.actMonth - 1);
             this.nextMonth = (this.actMonth + 1) % 12;
-        } else {
-            let actMonth = new Date().getMonth();
-            console.warn('Invalid month param. Rerouting to month: ' + actMonth);
-            this._router.navigate(['SeasonCalendar', {month: actMonth}]);
         }
     }
 
     getProducts() {
         this._productService.getProductsOfMonth(this.actMonth)
-            .subscribe(
-                data => this.products = data,
-                error => console.warn('Error while products loaded.')
-            );
+            .subscribe(data => this.products = data);
     }
 
-    goToProduct(id) {
-        this._router.navigate(['ProductDetails', {productId: id}]);
+    goToProduct(product) {
+        this._router.navigate(['/Products/ProductDetails', {id: product._id}]);
     }
 
     goToPrevMonth() {
-        this._router.navigate(['SeasonCalendar', {month: this.prevMonth}]);
+        this._router.navigate(['/SeasonCalendar/SeasonCalendarMonth', {month: this.prevMonth}]);
     }
 
     goToNextMonth() {
-        this._router.navigate(['SeasonCalendar', {month: this.nextMonth}]);
+        this._router.navigate(['/SeasonCalendar/SeasonCalendarMonth', {month: this.nextMonth}]);
     }
 
     toggleFilterMenu() {
         this.filterMenuOpen = !this.filterMenuOpen;
-        console.log('CALL: ' + this.filterMenuOpen);
     }
 }

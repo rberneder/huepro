@@ -71,10 +71,32 @@ button:focus, .btn:focus {
 /*
  * ELEMENTS
  */
-.link-back {
+// Buttons
+a:hover {
+  cursor: pointer;
+}
+.btn {
   display: inline-block;
+  text-transform: uppercase;
+}
+.btn-primary {
+  color: #fff;
+  background: $beige;
+  padding: 8px 15px;
+  border: 1px solid transparent;
+}
+.btn-primary:hover {
   color: $beige;
+  background: transparent;
+  border: 1px solid $beige;
+}
+// Arrow-button
+.link-arrow {
+  display: inline-block;
+  color: $beige !important;
   font-size: 25px;
+  text-decoration: none !important;
+  cursor: pointer;
 
   @media (min-width: $screen-sm-min) {
     font-size: 40px;

@@ -71,6 +71,11 @@ $changeTime: 750ms;
       overflow: hidden;
     }
 
+    .hl-bg {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
     &.active {
       .details {
         max-height: 150px;
