@@ -76,5 +76,8 @@ $changeTime: 750ms;
         max-height: 150px;
       }
     }
+    &.inactive {
+      opacity: 0;
+    }
   }
 }

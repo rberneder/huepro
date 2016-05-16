@@ -16,7 +16,15 @@ button:focus, .btn:focus {
 /*
  * TYPO
  */
-.text-white { color: #fff; }
+.text-white { color: #fff;   }
+.text-beige { color: $beige; }
+.hl-bg {
+  display: inline-block;
+  color: #fff;
+  background: $beige;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}
 
 /*
  * COLORS
@@ -58,3 +66,17 @@ button:focus, .btn:focus {
  */
 .inline-block { display: inline-block; }
 .block        { display: block;        }
+
+
+/*
+ * ELEMENTS
+ */
+.link-back {
+  display: inline-block;
+  color: $beige;
+  font-size: 25px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 40px;
+  }
+}
