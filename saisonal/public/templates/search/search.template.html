@@ -24,7 +24,7 @@
             <h3 class="text-white">Ergebnisse</h3>
             <div class="list-group">
                 <a class="list-group-item"
-                    *ngFor="#result of searchResults"
+                    *ngFor="let result of searchResults"
                     [routerLink]="['Products']"
                 >
                     <div class="row">

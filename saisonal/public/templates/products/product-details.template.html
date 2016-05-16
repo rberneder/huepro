@@ -1,44 +1,58 @@
 <section id="product-details">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-1">
-                <!-- TODO change this link to angular native function -->
-                <a onclick="window.history.back()"><h1 class="text-center text-white"><span class="icon icon-arrow-left"></span></h1></a>
-            </div>
-            <div class="col-xs-10">
-                <h1 class="text-center text-white niconne">{{product?.name}}</h1>
-            </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <a onclick="window.history.back()" class="link-back"><span class="icon icon-arrow-left"></span></a>
         </div>
-
-        <div class="row">
-            <div class="col-sm-4">
-                <img src="http://placehold.it/400x400" class="img-responsive">
-                <h3 class="text-center text-white"><em>{{product?.shortDescription}}</em></h3>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-10 text-center">
+                    <div class="product-img">
+                        <img src="http://placehold.it/400x300" class="img-responsive inline-block">
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-8 bg-white">
-                <table class="table table-responsive table-striped">
-                    <tr>
-                        <td>Familie</td>
-                        <td>{{product?.productFamily_id}}</td>
-                    </tr>
-                    <tr>
-                        <td>Anbaubeginn</td>
-                        <td>{{monthNames[product?.plantStart?.month]?.name}}</td>
-                    </tr>
-                    <tr>
-                        <td>Erntebeginn</td>
-                        <td>{{monthNames[product?.harvestStart?.month]?.name}}</td>
-                    </tr>
-                    <tr>
-                        <td>Lagerfähigkeit</td>
-                        <td>ca. {{product?.storageDays}} Tage</td>
-                    </tr>
-                </table>
 
-                <p>
-                    <em>{{product?.description}}</em>
-                </p>
+            <h1 class="text-center">{{product?.name}}</h1>
+            <h2 class="text-center">Lateinische Bezeichnung</h2>
+
+            <div class="description">
+                {{product?.description}}
+            </div>
+
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-4 text-center">
+                    <h3>Erntezeit</h3>
+                    <p>
+                        {{monthNames[product?.harvestStartMonth]?.name}} - {{monthNames[product?.harvestEndMonth]?.name}}
+                    </p>
+                </div>
+                <div class="col-sm-offset-2 col-sm-4 text-center">
+                    <h3>Familie</h3>
+                    <p>
+                        {{product?.family}}
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="recipes">
+                <div class="text-center">
+                    <h3 class="hl-bg">Rezepte</h3>
+                </div>
+
+                <article class="recipe">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="http://placehold.it/150x100" class="img-responsive">
+                        </div>
+                        <div class="col-sm-8">
+                            <h3>Topfenbrot mit Radieschen</h3>
+                            <p>Dauer: 5min</p>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </div>
+
 </section>

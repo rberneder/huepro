@@ -1,26 +1,35 @@
-<div id="product-list" class="row">
-    <div id="product-list__cont">
-        <article *ngFor="#product of products; #i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-lg-4">
-            <a [routerLink]="['ProductDetails', {id: product._id}]">
-                <figure>
-                    <img src="http://placehold.it/250x180" class="img-responsive">
-                    <figcaption>
-                        <h3>{{product.name}}</h3>
-                    </figcaption>
-                </figure>
-            </a>
-        </article>
-    </div>
-
-    <div id="index-menu">
-        <div id="index-menu__top">
-            F
+<div id="product-list">
+    <div class="row">
+        <div id="product-list__cont">
+            <article *ngFor="let product of products; let i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-md-4">
+                <a [routerLink]="['ProductDetails', {id: product._id}]">
+                    <figure>
+                        <img src="http://placehold.it/250x180" class="img-responsive">
+                        <figcaption>
+                            <h3>{{product.name}}</h3>
+                        </figcaption>
+                    </figure>
+                </a>
+            </article>
         </div>
-        <div id="index-menu__main">
-            <nav id="indices">
-                <a *ngFor="#index of indices"
-                    href="{{index.selector}}" [class.active]="index.active === true"  (click)="scrollTo($event)" class="btn-index">{{index.name}}</a>
-            </nav>
+
+        <div id="index-menu">
+            <div id="index-menu__top">
+                <button id="filter-btn" (click)="toggleFilterMenu()" [class.active]="filterMenuActive == true"><span class="icon icon-filter"></span></button>
+                <div id="filter-menu" [class.hidden]="filterMenuActive == false">
+                    <ul class="list-group">
+                        <li class="list-group-item"><input type="checkbox" name="vegetables" id="vegetables"> <label for="vegetables">Gemüse</label></li>
+                        <li class="list-group-item"><input type="checkbox" name="fruits" id="fruits"> <label for="fruits">Obst</label></li>
+                        <li class="list-group-item"><input type="checkbox" name="actual" id="actual"> <label for="actual">Jetzt reif</label></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="index-menu__main">
+                <nav id="indices">
+                    <a *ngFor="let index of indices"
+                       href="{{index.selector}}" [class.active]="index.active === true"  (click)="scrollTo($event)" class="btn-index">{{index.name}}</a>
+                </nav>
+            </div>
         </div>
     </div>
 </div>

@@ -19,9 +19,19 @@
  */
 // Sidebar
 @import "components/sidebar";
+
+// Mobile menu
+@import "components/mobile-menu";
+
 // Calendar-corner
 @import "components/calendar-corner";
+
+// Fresh products
+@import "components/fresh-products";
+
 // Index-menu
 @import "components/index-menu";
-// Product-list
+
+// Products
 @import "components/products/product-list";
+@import "components/products/product-details";

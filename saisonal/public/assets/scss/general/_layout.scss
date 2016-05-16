@@ -1,18 +1,17 @@
-#wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
+#main-content {
+  @media (min-width: $screen-md-min) {
+    & {
+      padding-right: 150px;
+    }
+  }
 
-  #main-content {
-    position: absolute;
-    top: 0;
-    left: 475px;
-    right: 0;
-    bottom: 0;
-    padding-right: 150px;
-    overflow-y: auto;
+  @media (min-width: $screen-lg-min) {
+    & {
+      padding-left: 350px;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    padding-left: 475px;
   }
 }
