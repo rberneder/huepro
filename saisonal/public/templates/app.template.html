@@ -11,16 +11,16 @@
     </div>
 
     <nav id="main-nav">
-        <a [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
-        <a [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
-        <a [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a>
-        <a [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
-        <a [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
+        <a (click)="toggleMobileNav()" [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
+        <a (click)="toggleMobileNav()" [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
+        <a (click)="toggleMobileNav()" [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a>
+        <a (click)="toggleMobileNav()" [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
+        <a (click)="toggleMobileNav()" [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
     </nav>
 
     <footer>
-        <span>&copy; 2016, saisonal.at</span>
-        <nav id="footer-nav">
+        <div class="pull-left">&copy; 2016, saisonal.at</div>
+        <nav id="footer-nav" class="pull-right">
             <a href="#">Kontakt</a>
             <a href="#">Impressum</a>
         </nav>
@@ -29,22 +29,24 @@
 
 
 <section id="main-content">
-    <header id="mobile-menu">
-        <div class="row">
-            <div class="col-xs-2">
-                <button (click)="toggleMobileNav()" [class.active]="mobileMenuActive == true" id="mobile-menu-btn">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </div>
-            <div class="col-xs-10 text-right">
-                Saisonal.at
+    <header id="mobile-menu" [class.active]="mobileMenuActive == true">
+        <div id="mobile-menu__cont">
+            <div id="mobile-menu-overlay" (click)="toggleMobileNav()"></div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <button (click)="toggleMobileNav()" [class.active]="mobileMenuActive == true" id="mobile-menu-btn">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                </div>
+                <div class="col-xs-10 text-right">
+                    Saisonal.at
+                </div>
             </div>
         </div>
     </header>
 
-    <div scroll></div>
     <router-outlet></router-outlet>
 </section>
 

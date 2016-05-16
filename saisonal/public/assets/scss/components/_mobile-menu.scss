@@ -1,11 +1,36 @@
 #mobile-menu {
-  padding: 0 15px;
   max-height: 0;
   overflow: hidden;
+  z-index: 1000;
   transition: max-height 300ms ease-out;
 
   @media (max-width: $screen-md-max) {
     max-height: 100px;
+  }
+
+  #mobile-menu__cont {
+    padding: 10px 15px;
+  }
+
+  #mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    display: none;
+    pointer-events: none;
+    z-index: 999;
+  }
+  &.active #mobile-menu-overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    display: block;
+    pointer-events: all;
   }
 
   .container {

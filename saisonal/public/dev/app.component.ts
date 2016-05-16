@@ -33,8 +33,9 @@ export class AppComponent {
         this.month = new Date().getMonth();
         this.mobileMenuActive = false;
     };
-    
+
     toggleMobileNav() {
         this.mobileMenuActive = !this.mobileMenuActive;
+        document.body.style.overflow = (this.mobileMenuActive === true) ? 'hidden' : 'visible';
     }
 }
