@@ -18,10 +18,15 @@
                         <div class="col-sm-8">
                             <h2 class="text-center">{{product.name}}</h2>
                             <div class="details">
-                                <h4 class="text-center">{{product.harvestStartMonth}} - {{product.harvestEndMonth}}</h4>
+                                <h4 class="text-center">
+                                    {{getHarvestInfo(product)}}
+                                </h4>
                                 <div class="row">
                                     <div class="col-sm-offset-3 col-sm-6">
                                         <p>{{product.shortDescription}}</p>
+                                        <div class="pull-right">
+                                            <a (click)="goToProduct(product)" class="btn btn-primary">Mehr</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

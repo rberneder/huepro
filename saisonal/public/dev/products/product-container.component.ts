@@ -5,7 +5,9 @@ import {ProductDetailsComponent} from "./product-details.component";
 
 @Component({
     selector: "product-container",
-    templateUrl: '/templates/products/product-container.template.html',
+    template: `
+        <router-outlet></router-outlet>
+    `,
     directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([

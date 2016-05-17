@@ -1,0 +1,45 @@
+#season-calendar {
+  padding: 0 15px;
+
+  #season-calendar__menu {
+    padding: 40px 0 20px 0;
+    border-bottom: 1px solid #ddd;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 80px 0 40px 0;
+    }
+
+    h1 {
+      color: #000;
+      font-family: 'Quicksand-Light', 'Arial';
+      font-size: 30px;
+      line-height: 30px;
+      margin: 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 60px;
+        line-height: 60px;
+      }
+    }
+
+    a.link-arrow {
+      line-height: 30px;
+    }
+    @media (min-width: $screen-sm-min) {
+      a.link-arrow {
+        line-height: 60px;
+      }
+    }
+  }
+
+  #season-calendar__product-list {
+    article {
+      margin-top: 35px;
+      cursor: pointer;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: 70px;
+      }
+    }
+  }
+}

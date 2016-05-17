@@ -27,9 +27,12 @@ export class SearchComponent implements OnInit {
         );
     }
 
+    resetSearch() {
+        this.searchFor();
+    }
 
-    searchFor(str) {
-        this.searchResults = [];
+    searchFor(str = '') {
+        this.searchResults.splice(0);
         if (str.length > 1 && this.products.length) {
             for (var product of this.products) {
                 if (product.name.match(new RegExp('(' + str + ')', 'i'))) {

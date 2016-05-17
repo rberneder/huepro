@@ -4,6 +4,11 @@ $changeTime: 750ms;
   position: relative;
   height: 100vh;
   overflow: hidden;
+  margin-top: -100px;
+
+  @media (min-width: $screen-lg-min) {
+    margin-top: 0;
+  }
 
   #fresh-products-btn-up,
   #fresh-products-btn-down {
@@ -69,6 +74,11 @@ $changeTime: 750ms;
       transition: all $changeTime ease;
       max-height: 0;
       overflow: hidden;
+    }
+
+    .hl-bg {
+      text-decoration: none;
+      cursor: pointer;
     }
 
     &.active {
