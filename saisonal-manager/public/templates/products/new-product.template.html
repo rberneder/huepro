@@ -28,7 +28,7 @@
                             [ngFormControl]="newProductForm.controls['family']"
                     >
                         <option value="" disabled checked>Bitte wählen</option>
-                        <option *ngFor="#family of families; #i = index" value="{{i}}">{{family.name}} </option>
+                        <option *ngFor="let family of families; let i = index" value="{{i}}">{{family.name}} </option>
                     </select>
                 </div>
 

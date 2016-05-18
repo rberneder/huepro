@@ -52,16 +52,19 @@ app.get('/api/products/search/:str', apiProductController.searchProducts);
 app.get('/api/products/month/:month', apiProductController.getProductsOfMonth);
 app.post('/api/products', apiProductController.addProduct);
 app.delete('/api/products/id/:id', apiProductController.deleteProduct);
-app.put('/api/products/:id', apiProductController.updateProduct);
+app.put('/api/products/id/:id', apiProductController.updateProduct);
 
 
 app.get('/api/products/categories', apiProductCategoryController.getCategories);
 app.post('/api/products/category', apiProductCategoryController.addCategory);
 app.delete('/api/products/category/:id', apiProductCategoryController.deleteCategory);
+//app.put('/api/products/category/:id', apiProductController.updateCategory);
+
 
 app.get('/api/products/families', apiProductFamilyController.getFamilies);
 app.post('/api/products/family', apiProductFamilyController.addFamily);
 app.delete('/api/products/family/:id', apiProductFamilyController.deleteFamily);
+//app.put('/api/products/family/:id', apiProductFamilyController.updateFamily);
 
 app.get('/node_modules/*', function(req, res, next) {
 	res.sendFile(path.join(__dirname, req.url));

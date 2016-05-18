@@ -28,7 +28,7 @@ exports.addCategory = function(req, res) {
             res.send(util.jsonParse(body));
         }
     });
-}
+};
 
 
 // DELETE /api/products/category/a23df2f32fasc34  ->  Deletes the category with the corresponding ID
@@ -40,4 +40,17 @@ exports.deleteCategory = function(req, res) {
             res.send(util.jsonParse(body));
         }
     })
-}
+};
+
+
+
+// PUT /api/products/category/a23df2f32fasc34 ->  Updates the category and returns the created API-entry.
+exports.updateCategory = function(req, res) {
+    request.put({url: apiUrl + '/products/category/' + req.params.id, form: req.body}, function(err, request, body) {
+        if (err) {
+            res.send(util.jsonParseErr(err));
+        } else {
+            res.send(util.jsonParse(body));
+        }
+    });
+};
