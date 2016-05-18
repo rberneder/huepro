@@ -1,7 +1,8 @@
 import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {Product} from "../products/product";
 import {ProductService} from "../products/product.service";
+import {ModusService} from "../util/modus.service";
 
 @Component({
     selector: 'search',
@@ -15,9 +16,16 @@ export class SearchComponent implements OnInit {
     private searchResults;
 
 
-    constructor(private _productService: ProductService) {
+    constructor(private _productService: ProductService, private _router: Router, private _modus: ModusService) {
         this.searchResults = [];
         this.products = [];
+    }
+
+    goToProduct(product) {
+        if (product) {
+            this._modus.setModus('search');
+            this._router.navigate(['/Products/ProductDetails', {id: product._id}]);
+        }
     }
 
 

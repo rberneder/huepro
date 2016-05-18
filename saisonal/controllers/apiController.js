@@ -3,7 +3,10 @@
 * */
 var request = require('request');
 var apiUrl = 'http://127.0.0.1:25070';
-
+var trackPoint = {
+    simple: 1,
+    search: 3
+}
 
 /**
  * GET /api/products
@@ -11,7 +14,7 @@ var apiUrl = 'http://127.0.0.1:25070';
  */
 exports.getProducts = function(req, res) {
     request.get(apiUrl + '/products', function(err, request, body) {
-        if (err) return res.send('"Error": "Something went wrong!"');
+        if (err) return res.send('[]');
         res.send(JSON.parse(body));
     });
 };
@@ -23,7 +26,7 @@ exports.getProducts = function(req, res) {
  */
 exports.getProductsOfMonth = function(req, res) {
     request.get(apiUrl + '/products/month/' + req.params.month, function(err, request, body) {
-        if (err) return res.send('"Error": "Something went wrong!"');
+        if (err) return res.send('[]');
         res.send(JSON.parse(body));
     });
 };
@@ -31,11 +34,21 @@ exports.getProductsOfMonth = function(req, res) {
 
 /**
  * GET /api/products/id/:id
- * Returns product matching passed id.
+ * Returns product matching passed id and tracking simple display points
  */
 exports.getProduct = function(req, res) {
-    request.get(apiUrl + '/products/id/' + req.params.id, function(err, request, body) {
-        if (err) return res.send('"Error": "Something went wrong!"');
+    request.get(apiUrl + '/products/id/' + req.params.id + '?p=' + trackPoint.simple, function(err, request, body) {
+        if (err) return res.send('[]');
+        res.send(JSON.parse(body));
+    });
+};
+/**
+ * GET /api/products/id/search/:id
+ * Returns product matching passed id and tracking search tracking points
+ */
+exports.getProductAfterSearch = function(req, res) {
+    request.get(apiUrl + '/products/id/' + req.params.id + '?p=' + trackPoint.search, function(err, request, body) {
+        if (err) return res.send('[]');
         res.send(JSON.parse(body));
     });
 };

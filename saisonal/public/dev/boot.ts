@@ -4,5 +4,6 @@ import {AppComponent} from "./app.component";
 import {ROUTER_PROVIDERS} from "angular2/router";
 import {HTTP_PROVIDERS} from "angular2/http";
 import {ScrollService} from "./util/scroll/scroll.service";
+import {ModusService} from "./util/modus.service";
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, ScrollService]);
+bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, ScrollService, ModusService]);

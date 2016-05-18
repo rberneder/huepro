@@ -34,11 +34,11 @@
                 </div>
                 <div class="list-group">
                     <a class="list-group-item"
-                       *ngFor="let result of searchResults"
-                       [routerLink]="['/Products/ProductDetails', {id: result._id}]">
+                       *ngFor="let product of searchResults"
+                       (click)="goToProduct(product)">
                         <div class="row">
                             <div class="col-xs-3"><img src="http://placehold.it/100x100" class="img-responsive"></div>
-                            <div class="col-xs-7">{{result.name}} <span class="badge bg-light-green">jetzt reif</span></div>
+                            <div class="col-xs-7">{{product.name}} <span class="badge bg-light-green">jetzt reif</span></div>
                         </div>
                     </a>
                 </div>

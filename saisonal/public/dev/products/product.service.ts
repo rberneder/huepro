@@ -1,11 +1,12 @@
 import { Injectable } from "angular2/core";
 import { Http } from "angular2/http";
-import "rxjs/add/operator/map"; // TODO remove this import when implemented in angular2
+import "rxjs/add/operator/map";
+import {ModusService} from "../util/modus.service"; // TODO remove this import when implemented in angular2
 
 @Injectable()
 export class ProductService {
 
-    constructor(private _http: Http) {}
+    constructor(private _http: Http, private _modus: ModusService) {}
 
 
     getProducts() {
@@ -15,7 +16,10 @@ export class ProductService {
 
 
     getProduct(id) {
-        return this._http.get("/api/products/id/" + id)
+        let modus = this._modus.getModus();
+        this._modus.resetModus();
+        if (modus != '' && modus != 'search/') modus = '';
+        return this._http.get("/api/products/id/" + modus + id)
             .map(response => response.json());
     }
 
