@@ -15,6 +15,8 @@ export class ChangeProductComponent implements OnInit {
 
 	products:Product[];
 	months:Month[];
+	editNr = -1;
+
 
 	constructor (private _productService: ProductService) {
 		this.months = MONTHS;
@@ -27,6 +29,47 @@ export class ChangeProductComponent implements OnInit {
 
 		var index = this.products.indexOf(product);
 		this.products.splice(index, 1);
+	}
+
+	edit(i) {
+		this.editNr = i;
+	}
+
+	stopEdit() {
+		this.editNr = -1;
+	}
+
+	onSubmit(product: Product, value) {
+		console.log("product: ");
+		console.log(product);
+
+
+
+		product.name = value.name;
+		product.family = value.family;
+		product.category = value.category;
+		product.plantStartDay = value.plantStartDay;
+		product.plantEndDay = value.plantEndDay;
+		product.plantStartMonth = value.plantStartMonth - 1;
+		product.plantEndMonth = value.plantEndMonth - 1;
+		product.harvestStartDay = value.harvestStartDay;
+		product.harvestEndDay = value.harvestEndDay;
+		product.harvestStartMonth = value.harvestStartMonth - 1;
+		product.harvestEndMonth = value.harvestEndMonth - 1;
+		product.storageDays = value.storageDays;
+		product.shortDescription = value.shortDescription;
+		product.description = value.description;
+
+		console.log("value: ");
+		console.log(value);
+		console.log("product: ");
+		console.log(product);
+
+
+		this._productService
+			.updateProduct(product)
+			.subscribe();
+
 	}
 
 	ngOnInit() {

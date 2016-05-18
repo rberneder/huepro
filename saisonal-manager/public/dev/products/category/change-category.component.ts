@@ -1,20 +1,19 @@
 import {Component, OnInit} from "angular2/core";
 import {ProductService} from "../product.service";
 import {Router} from "angular2/router";
-import {ControlGroup, FormBuilder, Validators} from "angular2/common";
 import {Category} from "./category";
-import {CategoryEditFormComponent} from "./category-edit-form.component";
 
 @Component({
 	selector: "change-category",
 	templateUrl: '/templates/products/category/change-category.template.html',
 	providers: [ProductService],
-	directives: [CategoryEditFormComponent]
 })
 
 export class ChangeCategoryComponent implements OnInit {
 	categories:Category[];
-	editing = false;
+	editNr = -1;
+	category: Category;
+
 
 	constructor (private _productService: ProductService) {}
 
@@ -27,8 +26,20 @@ export class ChangeCategoryComponent implements OnInit {
 		this.categories.splice(index, 1);
 	}
 
-	edit() {
-		this.editing = true;
+	edit(i) {
+		this.editNr = i;
+	}
+
+	stopEdit() {
+		this.editNr = -1;
+	}
+
+	onSubmit(category: Category, value: string) {
+		console.log(value);
+		category.name = value;
+		this._productService
+			.updateCategory(category)
+			.subscribe();
 	}
 
 	ngOnInit() {

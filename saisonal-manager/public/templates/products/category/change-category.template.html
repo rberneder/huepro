@@ -11,13 +11,26 @@
 
 <div class="container">
     <ul class="list-group">
-        <li *ngFor="#category of categories" class="list-group-item">
+        <li *ngFor="let category of categories; let i = index" class="list-group-item">
             <h3 class="list-group-item-heading">{{category.name}}</h3>
+
             <div class="edit-group-buttons">
-                <a  type="button" class="btn btn-default" (click)="edit()">Edit</a>
+                <a  type="button" class="btn btn-default" (click)="edit(i)">Edit</a>
                 <a  type="button" class="btn btn-default" (click)="delete(category)">Delete</a>
             </div>
-            <category-edit-form [category]="category" [class.hidden]="!editing"></category-edit-form>
+
+            <div class="edit-form" [class.hidden]="editNr != i">
+                <button class="cancel-edit" (click)="stopEdit()">X cancel</button>
+
+                <form (ngSubmit)="onSubmit(category, categoryName.value)">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input #categoryName id="name" type="text" value="{{category.name}}"/>
+                    </div>
+                    <button type="submit">Kategorie ändern</button>
+
+                </form>
+            </div>
         </li>
     </ul>
 </div>

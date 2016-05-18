@@ -11,13 +11,8 @@
 
 <div class="container">
     <ul class="list-group">
-        <li *ngFor="#product of products" class="list-group-item">
+        <li *ngFor="let product of products; let i = index" class="list-group-item">
             <h3 class="list-group-item-heading">{{product.name}} <small>{{product.family}} - {{product.category}}</small></h3>
-            <div class="edit-group-buttons">
-                <a  type="button" class="btn btn-default">Edit</a>
-                <a  type="button" class="btn btn-default" (click)="delete(product)">Delete</a>
-            </div>
-
             <ul>
                 <li>
                     <span class="label-temp">Anbau:</span>
@@ -35,6 +30,105 @@
                 <li><span class="label-temp">Kurzbeschreibung: </span>{{product.shortDescription}}</li>
                 <li><span class="label-temp">Langtext: </span>{{product.description}}</li>
             </ul>
+
+            <div class="edit-group-buttons">
+                <a  type="button" class="btn btn-default" (click)="edit(i)">Edit</a>
+                <a  type="button" class="btn btn-default" (click)="delete(product)">Delete</a>
+            </div>
+
+            <div class="edit-form" [class.hidden]="editNr != i">
+                <button class="cancel-edit" (click)="stopEdit()">X cancel</button>
+
+                <form #form="ngForm" (ngSubmit)="onSubmit(product, form.value)">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input id="name" type="text"
+                               ngControl="name"
+                               [ngModel]="product.name"
+                        />
+
+                        <label for="family">Familie:</label>
+                        <input id="family" type="text"
+                               ngControl="family"
+                               [ngModel]="product.family"
+                        />
+
+                        <label for="category">Kategorie:</label>
+                        <input id="category" type="text"
+                                ngControl="category"
+                                [ngModel]="product.category"
+                        />
+
+                        <label for="plantStartDay">Anbau Start Tag:</label>
+                        <input id="plantStartDay" type="number"
+                                ngControl="plantStartDay"
+                                [ngModel]="product.plantStartDay"
+                        />
+
+                        <label for="plantStartMonth">Anbau Start Monat:</label>
+                        <input id="plantStartMonth" type="number"
+                                ngControl="plantStartMonth"
+                                [ngModel]="product.plantStartMonth+1"
+                        />
+
+                        <label for="plantEndDay">Anbau Ende Tag:</label>
+                        <input id="plantEndDay" type="number"
+                               ngControl="plantEndDay"
+                               [ngModel]="product.plantEndDay"
+                        />
+
+                        <label for="plantEndMonth">Anbau Ende Monat:</label>
+                        <input id="plantEndMonth" type="number"
+                                ngControl="plantEndMonth"
+                                [ngModel]="product.plantEndMonth+1"
+                        />
+
+                        <label for="harvestStartDay">Ernte Start Tag:</label>
+                        <input id="harvestStartDay" type="number"
+                                ngControl="harvestStartDay"
+                                [ngModel]="product.harvestStartDay"
+                        />
+
+                        <label for="harvestStartMonth">Ernte Start Monat:</label>
+                        <input id="harvestStartMonth" type="number"
+                               ngControl="harvestStartMonth"
+                               [ngModel]="product.harvestStartMonth+1"
+                        />
+
+                        <label for="harvestEndDay">Ernte Ende Tag:</label>
+                        <input id="harvestEndDay" type="number"
+                                ngControl="harvestEndDay"
+                                [ngModel]="product.harvestEndDay"
+                        />
+
+                        <label for="harvestEndMonth">Ernte Ende Monat:</label>
+                        <input id="harvestEndMonth" type="number"
+                                ngControl="harvestEndMonth"
+                                [ngModel]="product.harvestEndMonth+1"
+                        />
+
+                        <label for="storeageDays">Lagerdauer:</label>
+                        <input id="storeageDays" type="number"
+                                ngControl="storageDays"
+                                [ngModel]="product.storageDays"
+                        />
+
+                        <label for="shortDescription">Kurzbeschreibung:</label>
+                        <textarea id="shortDescription"
+                                ngControl="shortDescription"
+                                [ngModel]="product.shortDescription"
+                        ></textarea>
+
+                        <label for="description">Langtext:</label>
+                        <textarea id="description"
+                                ngControl="description"
+                                [ngModel]="product.description"
+                        ></textarea>
+                    </div>
+
+                    <button type="submit">Produkt ändern</button>
+                </form>
+            </div>
         </li>
     </ul>
 </div>

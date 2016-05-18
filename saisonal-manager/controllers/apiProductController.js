@@ -78,3 +78,15 @@ exports.addProduct = function(req, res) {
         }
     });
 }
+
+
+// PUT /api/products/a23df2f32fasc34 ->  Updates the product and returns the created API-entry.
+exports.updateProduct = function(req, res) {
+    request.put({url: apiUrl + '/products/' + req.params.id, form: req.body}, function(err, request, body) {
+        if (err) {
+            res.send(util.jsonParseErr(err));
+        } else {
+            res.send(util.jsonParse(body));
+        }
+    });
+}

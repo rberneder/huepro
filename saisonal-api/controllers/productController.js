@@ -1,11 +1,8 @@
 require('../models/product');
-require('../models/productFamily');
-require('../models/productCategory');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var Product = mongoose.model('Product');
-var Family = mongoose.model('ProductFamily');
-var Category = mongoose.model('ProductCategory');
+var ProductStat = require('./productStatController');
 
 /** Lists all products. */
 exports.getAllProducts = function(req, res) {
@@ -19,7 +16,12 @@ exports.getAllProducts = function(req, res) {
 
 /** Returns the product corresponding the passed ID. */
 exports.show = function(req, res) {
-    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
+    var id = req.params.productId;
+    console.log(req.query);
+    var trackPoints = req.query.p || 0;
+    console.log(trackPoints);
+    Product.load(req.params.productId, function(err, product) {
+        ProductStat.trackProductStatPoints(product, trackPoints);
         res.jsonp(product);
     });
 };
@@ -49,6 +51,7 @@ exports.searchProductNames = function (req, res) {
 exports.post = function(req, res) {
     var product = new Product(req.body);    // TODO Werte überprüfen
     product.save();
+    ProductStat.createProductStat(product);
     res.jsonp(product);
 };
 
@@ -57,9 +60,7 @@ exports.post = function(req, res) {
 /** Updates product. */
 exports.put = function(req, res) {
     Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
-
         product = _.extend(product, req.body);
-        
         product.save(function(err) {
             res.jsonp(product);
         });
@@ -69,8 +70,8 @@ exports.put = function(req, res) {
 
 /** Deletes the product corresponding the passed ID. */
 exports.delete = function(req, res) {
-    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen, vorhandene Verknüfungen?
-        Product.remove(function(err) {
+    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
+        product.remove(function(err) {
             res.jsonp(product);
         });
     });

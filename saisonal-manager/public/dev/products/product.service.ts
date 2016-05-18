@@ -28,6 +28,18 @@ export class ProductService {
             .map(response => response.json());
     }
 
+    updateProduct(product) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        var options = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            url: '/api/products/' + product._id,
+            body: JSON.stringify(product)
+        });
+        return this._http.request(new Request(options));
+    }
+
 
     searchFor(str) {
         var strEsc = encodeURI(str);
@@ -52,8 +64,8 @@ export class ProductService {
             .map(response => response.json());
     }
 
-    updateCategory(id){
-        return this._http.put("/api/products/category/" + id)
+    updateCategory(value){
+        return this._http.put("/api/products/category/" + value._id, JSON.stringify(value))
             .map(response => response.json());
     }
 

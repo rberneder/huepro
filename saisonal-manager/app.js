@@ -52,6 +52,7 @@ app.get('/api/products/search/:str', apiProductController.searchProducts);
 app.get('/api/products/month/:month', apiProductController.getProductsOfMonth);
 app.post('/api/products', apiProductController.addProduct);
 app.delete('/api/products/id/:id', apiProductController.deleteProduct);
+app.put('/api/products/:id', apiProductController.updateProduct);
 
 
 app.get('/api/products/categories', apiProductCategoryController.getCategories);

@@ -45,7 +45,7 @@ exports.put = function(req, res) {
 // Deletes a product category
 exports.delete = function(req, res) {
     Category.load(req.params.categoryId, function(err, category) {  // TODO Werte überprüfen, vorhandene Verknüfungen?
-        Category.remove(function(err) {
+        category.remove(function(err) {
             res.jsonp(category);
         });
     });
