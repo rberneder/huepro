@@ -34,7 +34,7 @@ export class ProductService {
         var options = new RequestOptions({
             method: RequestMethod.Put,
             headers: headers,
-            url: '/api/products/' + product._id,
+            url: '/api/products/id/' + product._id,
             body: JSON.stringify(product)
         });
         return this._http.request(new Request(options));

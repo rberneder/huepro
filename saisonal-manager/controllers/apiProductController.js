@@ -49,7 +49,7 @@ exports.deleteProduct = function(req, res) {
             res.send(util.jsonParse(body));
         }
     });
-}
+};
 
 
 // GET /api/products/search?str=test  -> Returns products that contain passed string in array.
@@ -65,7 +65,7 @@ exports.searchProducts = function(req, res) {
             }
         });
     }
-}
+};
 
 
 // POST /api/products ->  Adds the product and returns the created API-entry.
@@ -77,16 +77,16 @@ exports.addProduct = function(req, res) {
             res.send(util.jsonParse(body));
         }
     });
-}
+};
 
 
-// PUT /api/products/a23df2f32fasc34 ->  Updates the product and returns the created API-entry.
+// PUT /api/products/id/a23df2f32fasc34 ->  Updates the product and returns the created API-entry.
 exports.updateProduct = function(req, res) {
-    request.put({url: apiUrl + '/products/' + req.params.id, form: req.body}, function(err, request, body) {
+    request.put({url: apiUrl + '/products/id/' + req.params.id, form: req.body}, function(err, request, body) {
         if (err) {
             res.send(util.jsonParseErr(err));
         } else {
             res.send(util.jsonParse(body));
         }
     });
-}
+};

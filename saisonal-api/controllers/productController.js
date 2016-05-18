@@ -19,7 +19,6 @@ exports.show = function(req, res) {
     var id = req.params.productId;
     console.log(req.query);
     var trackPoints = req.query.p || 0;
-    console.log(trackPoints);
     Product.load(req.params.productId, function(err, product) {
         ProductStat.trackProductStatPoints(product, trackPoints);
         res.jsonp(product);

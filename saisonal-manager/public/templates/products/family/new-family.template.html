@@ -25,7 +25,7 @@
                     <label for="category">Kategorie:</label>
                     <select name="category" id="category" [ngFormControl]="newFamilyForm.controls['category']">
                         <option value="" disabled checked>Bitte wählen</option>
-                        <option *ngFor="#category of categories" value="{{category.name}}">{{category.name}}</option>
+                        <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
                     </select>
                 </div>
                 <button type="submit" [disabled]="!newFamilyForm.valid">Familie speichern</button>

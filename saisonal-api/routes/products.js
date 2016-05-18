@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var products = require('../controllers/productController');
+var productStat = require('../controllers/productStatController');
 var families = require('../controllers/productFamilyController');
 var categories = require('../controllers/productCategoryController');
 
@@ -18,6 +19,7 @@ router.get('/', products.getAllProducts);
 router.get('/month/:month', products.getProductsOfMonth);
 
 // GET /products/id/asdfj23k2of9f32
+// GET /products/id/asdfj23k2of9f32?p=3
 router.get('/id/:productId', products.show);
 
 // GET /products/search?str=jona
@@ -30,12 +32,22 @@ router.get('/search/:str', products.searchProductNames);
 // POST /products
 router.post('/', products.post);
 
-// PUT /products/af243ec243c2c23423  --> body: Datenobjekt
-router.put('/:productId', products.put);
+// PUT /products/id/af243ec243c2c23423  --> body: Datenobjekt
+router.put('/id/:productId', products.put);
 
-// DELETE /id/products/asdf22asf2far32
-router.delete('/id/:productId', products.delete)
+// DELETE /products/id/asdf22asf2far32
+router.delete('/id/:productId', products.delete);
 
+
+
+
+
+/* # # # # # # # # # # # # #  PRODUCT-STAT  # # # # # # # # # # # # # */
+/*
+ * GET
+ * */
+// GET /products/stat/23kjsdi24oijdw
+router.get('/stat/:productId', productStat.getProductStat);
 
 
 
