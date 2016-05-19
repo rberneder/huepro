@@ -21,7 +21,7 @@ exports.trackProductStatPoints = function(product, points) {
 }
 
 exports.getProductStat = function(req, res) {
-    ProductStat.find({'product_id': req.params.productId})
+    ProductStat.find({product_id: req.params.productId})
         .exec(function(err, productStat) {
             res.jsonp(productStat);
         });
@@ -32,6 +32,20 @@ exports.createProductStat = function(product) {
     var productStat = new ProductStat({product_id: product._id});
     productStat.save();
     return productStat;
+}
+
+
+exports.deleteProductStat = function(product) {
+    ProductStat.find({product_id: product._id})
+        .exec(function(err, productStat) {
+            if (err) {
+                res.jsonp('[]');    // TODO log error
+            } else {
+                productStat.remove(function(err) {
+                    res.jsonp(productStat);
+                });
+            }
+        });
 }
 
 

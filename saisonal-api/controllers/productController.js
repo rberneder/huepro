@@ -99,6 +99,7 @@ exports.delete = function(req, res) {
             res.jsonp('[]');
         } else {
             product.remove(function(err) {
+                ProductStat.deleteProductStat(product);
                 res.jsonp(product);
             });
         }
