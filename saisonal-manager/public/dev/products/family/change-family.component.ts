@@ -37,15 +37,10 @@ export class ChangeFamilyComponent implements OnInit {
 		this.editNr = -1;
 	}
 
-	onSubmit(family: Category, name: string, category: string) {
-
-		console.log(family);
+	onSubmit(family: Family, name: string, category: string) {
 
 		family.name = name;
 		family.category = category;
-
-		console.log(family);
-
 
 		this._productService
 			.updateFamily(family)
