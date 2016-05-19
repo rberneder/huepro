@@ -28,7 +28,7 @@ exports.addFamily = function(req, res) {
             res.send(util.jsonParse(body));
         }
     });
-}
+};
 
 
 // DELETE /api/products/family/a23df2f32fasc34  ->  Deletes the family with the corresponding ID
@@ -40,4 +40,15 @@ exports.deleteFamily = function(req, res) {
             res.send(util.jsonParse(body));
         }
     })
-}
+};
+
+// PUT /api/products/family/a23df2f32fasc34 ->  Updates the family and returns the created API-entry.
+exports.updateFamily = function(req, res) {
+    request.put({url: apiUrl + '/products/family/' + req.params.id, form: req.body}, function(err, request, body) {
+        if (err) {
+            res.send(util.jsonParseErr(err));
+        } else {
+            res.send(util.jsonParse(body));
+        }
+    });
+};

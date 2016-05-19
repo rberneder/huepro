@@ -1,9 +1,8 @@
 import {Component, OnInit} from "angular2/core";
 import {ProductService} from "../product.service";
 import {Router} from "angular2/router";
-import {ControlGroup, FormBuilder, Validators} from "angular2/common";
 import {Family} from "./family";
-
+import {Category} from "../category/category";
 
 @Component({
 	selector: "change-family",
@@ -13,7 +12,11 @@ import {Family} from "./family";
 
 export class ChangeFamilyComponent implements OnInit {
 
-	families:Family[];
+	families: Family[];
+	editNr = -1;
+	categories: Category[];
+	family: Family;
+	category: Category;
 
 	constructor (private _productService: ProductService) {}
 
@@ -26,7 +29,35 @@ export class ChangeFamilyComponent implements OnInit {
 		this.families.splice(index, 1);
 	}
 
+	edit(i) {
+		this.editNr = i;
+	}
+
+	stopEdit() {
+		this.editNr = -1;
+	}
+
+	onSubmit(family: Category, name: string, category: string) {
+
+		console.log(family);
+
+		family.name = name;
+		family.category = category;
+
+		console.log(family);
+
+
+		this._productService
+			.updateFamily(family)
+			.subscribe();
+	}
+
 	ngOnInit() {
+
+		this._productService
+			.getCategories()
+			.subscribe(categories => this.categories = categories);
+
 		this._productService
 			.getFamilies()
 			.subscribe(families => this.families = families);

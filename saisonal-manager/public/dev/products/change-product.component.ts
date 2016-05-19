@@ -1,7 +1,6 @@
 import {Component, OnInit} from "angular2/core";
 import {ProductService} from "./product.service";
 import {Router} from "angular2/router";
-import {ControlGroup, FormBuilder, Validators} from "angular2/common";
 import {Product} from "./product";
 import {MONTHS} from "../util/month.seed";
 import {Month} from "../util/month";
@@ -40,11 +39,6 @@ export class ChangeProductComponent implements OnInit {
 	}
 
 	onSubmit(product: Product, value) {
-		console.log("product: ");
-		console.log(product);
-
-
-
 		product.name = value.name;
 		product.family = value.family;
 		product.category = value.category;
@@ -60,16 +54,9 @@ export class ChangeProductComponent implements OnInit {
 		product.shortDescription = value.shortDescription;
 		product.description = value.description;
 
-		console.log("value: ");
-		console.log(value);
-		console.log("product: ");
-		console.log(product);
-
-
 		this._productService
 			.updateProduct(product)
 			.subscribe();
-
 	}
 
 	ngOnInit() {

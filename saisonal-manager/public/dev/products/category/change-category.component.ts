@@ -6,7 +6,7 @@ import {Category} from "./category";
 @Component({
 	selector: "change-category",
 	templateUrl: '/templates/products/category/change-category.template.html',
-	providers: [ProductService],
+	providers: [ProductService]
 })
 
 export class ChangeCategoryComponent implements OnInit {
@@ -35,8 +35,8 @@ export class ChangeCategoryComponent implements OnInit {
 	}
 
 	onSubmit(category: Category, value: string) {
-		console.log(value);
 		category.name = value;
+
 		this._productService
 			.updateCategory(category)
 			.subscribe();

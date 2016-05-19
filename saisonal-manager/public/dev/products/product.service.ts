@@ -64,9 +64,16 @@ export class ProductService {
             .map(response => response.json());
     }
 
-    updateCategory(value){
-        return this._http.put("/api/products/category/" + value._id, JSON.stringify(value))
-            .map(response => response.json());
+    updateCategory(category) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        var options = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            url: '/api/products/category/' + category._id,
+            body: JSON.stringify(category)
+        });
+        return this._http.request(new Request(options));
     }
 
     getFamilies() {
@@ -79,6 +86,17 @@ export class ProductService {
             .map(response => response.json());
     }
 
+    updateFamily(family) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        var options = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            url: '/api/products/family/' + family._id,
+            body: JSON.stringify(family)
+        });
+        return this._http.request(new Request(options));
+    }
 
     addProduct(product: Product) {
         var headers = new Headers();
