@@ -33,3 +33,19 @@ exports.createProductStat = function(product) {
     productStat.save();
     return productStat;
 }
+
+
+
+/*
+ * STATISTICS CALCULATIONS
+ */
+exports.updateStats = function() {
+    ProductStat.find().exec(function(err, stats) {
+        _.each(stats, function(productStat) {
+            try {
+                productStat.trend = productStat.overallPoints / productStat.views;
+                productStat.save();
+            } catch (e) {}
+        })
+    });
+}

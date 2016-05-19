@@ -33,9 +33,9 @@ app.set('port', 25080);
 // app.set('view engine', 'html');
 app.use(compress());
 app.use(logger('dev'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 }));
 
 
