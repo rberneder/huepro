@@ -9,7 +9,12 @@ exports.getAllProducts = function(req, res) {
     Product.find()
         .sort({'name': 'asc'})
         .exec(function(err, products) {
-            res.jsonp(products);
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(products);
+            }
         });
 };
 
@@ -19,8 +24,13 @@ exports.show = function(req, res) {
     var id = req.params.productId;
     var trackPoints = req.query.p || 0;
     Product.load(req.params.productId, function(err, product) {
-        ProductStat.trackProductStatPoints(product, trackPoints);
-        res.jsonp(product);
+        if (err) {
+            // TODO log error
+            res.jsonp('[]');
+        } else {
+            ProductStat.trackProductStatPoints(product, trackPoints);
+            res.jsonp(product);
+        }
     });
 };
 
@@ -30,7 +40,12 @@ exports.getProductsOfMonth = function(req, res) {
     Product.find({'harvestStartMonth': req.params.month})
         .sort({'name': 'asc'})
         .exec(function(err, products) {
-            res.jsonp(products);
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(products);
+            }
     });
 };
 
@@ -40,7 +55,12 @@ exports.searchProductNames = function (req, res) {
     Product.find({'name': new RegExp('(' + str + ')', 'i')})
         .sort({'name': 'asc'})
         .exec(function(err, products) {
-            res.jsonp(products)
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(products);
+            }
         });
 }
 
@@ -57,21 +77,31 @@ exports.post = function(req, res) {
 
 /** Updates product. */
 exports.put = function(req, res) {
-    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
-        product = _.extend(product, req.body);
-        product.save(function(err) {
-            res.jsonp(product);
-        });
+    Product.load(req.params.productId, function(err, product) {
+        if (err) {
+            // TODO log error
+            res.jsonp('[]');
+        } else {
+            product = _.extend(product, req.body);
+            product.save(function(err) {
+                res.jsonp(product);
+            });
+        }
     });
 };
 
 
 /** Deletes the product corresponding the passed ID. */
 exports.delete = function(req, res) {
-    Product.load(req.params.productId, function(err, product) {  // TODO Werte überprüfen
-        product.remove(function(err) {
-            res.jsonp(product);
-        });
+    Product.load(req.params.productId, function(err, product) {
+        if (err) {
+            // TODO log error
+            res.jsonp('[]');
+        } else {
+            product.remove(function(err) {
+                res.jsonp(product);
+            });
+        }
     });
 };
 

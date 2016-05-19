@@ -8,16 +8,26 @@ var Category = mongoose.model('ProductCategory');
 exports.getAllCategories = function(req, res) {
     Category.find()
         .sort({'name': 'asc'})
-        .exec(function(err, products) {
-            res.jsonp(products);
+        .exec(function(err, categories) {
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(categories);
+            }
     });
 };
 
 
 // 
 exports.show = function(req, res) {
-    Category.load(req.params.categoryId, function(err, category) {  // TODO Werte überprüfen
-        res.jsonp(category);
+    Category.load(req.params.categoryId, function(err, category) {
+        if (err) {
+            // TODO log error
+            res.jsonp('[]');
+        } else {
+            res.jsonp(category);
+        }
     });
 };
 
@@ -33,10 +43,15 @@ exports.post = function(req, res) {
 
 // Updates a product category
 exports.put = function(req, res) {
-    Category.load(req.params.categoryId, function(err, category) {  // TODO Werte überprüfen
+    Category.load(req.params.categoryId, function(err, category) {
         category = _.extend(category, req.body);
         category.save(function(err) {
-            res.jsonp(category);
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(category);
+            }
         });
     });
 };
@@ -44,9 +59,14 @@ exports.put = function(req, res) {
 
 // Deletes a product category
 exports.delete = function(req, res) {
-    Category.load(req.params.categoryId, function(err, category) {  // TODO Werte überprüfen, vorhandene Verknüfungen?
+    Category.load(req.params.categoryId, function(err, category) {
         category.remove(function(err) {
-            res.jsonp(category);
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(category);
+            }
         });
     });
 };

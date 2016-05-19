@@ -8,8 +8,13 @@ var Family = mongoose.model('ProductFamily');
 exports.getAllFamilies = function(req, res) {
     Family.find()
         .sort({'name': 'asc'})
-        .exec(function(err, products) {
-            res.jsonp(products);
+        .exec(function(err, families) {
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(families);
+            }
     });
 };
 
@@ -17,7 +22,12 @@ exports.getAllFamilies = function(req, res) {
 // 
 exports.show = function(req, res) {
     Family.load(req.params.familyId, function(err, family) {  // TODO Werte überprüfen
-        res.jsonp(family);
+        if (err) {
+            // TODO log error
+            res.jsonp('[]');
+        } else {
+            res.jsonp(family);
+        }
     });
 };
 
@@ -36,7 +46,12 @@ exports.put = function(req, res) {
     Family.load(req.params.familyId, function(err, family) {  // TODO Werte überprüfen
         family = _.extend(family, req.body);
         family.save(function(err) {
-            res.jsonp(family);
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(family);
+            }
         });
     });
 };
@@ -46,7 +61,12 @@ exports.put = function(req, res) {
 exports.delete = function(req, res) {
     Family.load(req.params.familyId, function(err, family) {  // TODO Werte überprüfen, vorhandene Verknüfungen?
         family.remove(function(err) {
-            res.jsonp(family);
+            if (err) {
+                // TODO log error
+                res.jsonp('[]');
+            } else {
+                res.jsonp(family);
+            }
         });
     });
 };
