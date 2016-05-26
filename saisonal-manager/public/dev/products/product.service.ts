@@ -3,7 +3,7 @@ import { Http, Headers, Request, RequestOptions, RequestMethod } from "angular2/
 import { Product } from "./product";
 import {Category} from "./category/category";
 import {Family} from "./family/family";
-import "rxjs/add/operator/map";     // TODO remove this import when implemented in angular2
+import "rxjs/add/operator/map";
 
 
 @Injectable()
@@ -99,6 +99,8 @@ export class ProductService {
     }
 
     addProduct(product: Product) {
+        console.log(product);
+        
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         var options = new RequestOptions({

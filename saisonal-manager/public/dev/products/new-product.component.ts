@@ -39,7 +39,6 @@ export class NewProductComponent implements OnInit {
 			.subscribe(data => {
 				this.productAdded = true;
 				this.newProduct = new ProductCl();
-				this.newProduct.category = '-';
 			});
 	}
 
@@ -81,6 +80,7 @@ export class NewProductComponent implements OnInit {
 			});
 
 		this.newProductForm = this._formBuilder.group({
+			'image': ['', Validators.required],
 			'name': ['', Validators.required],
 			'family': ['', Validators.required],
 			'plantStart': ['', Validators.required],

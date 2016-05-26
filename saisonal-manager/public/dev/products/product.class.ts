@@ -1,6 +1,7 @@
 import {Product} from "./product";
 export class ProductCl implements Product {
 	_id: number;
+	image: string;
 	name: string;
 	family: string;
 	category: string;
