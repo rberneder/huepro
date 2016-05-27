@@ -15,6 +15,7 @@ var bodyParser = require('body-parser');
  * CONTROLLERS
  * */
 var homeController = require('./controllers/homeController');
+var uploadController = require('./controllers/uploadController');
 var apiProductController = require('./controllers/apiProductController');
 var apiProductCategoryController = require('./controllers/apiProductCategoryController');
 var apiProductFamilyController = require('./controllers/apiProductFamilyController');
@@ -45,6 +46,7 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
  * ROUTES
  * */
 app.get('/', homeController.index);
+app.post('/upload/product-image', uploadController.uploadProductImage);
 
 app.get('/api/products', apiProductController.getProducts);
 app.get('/api/products/id/:id', apiProductController.getProduct);

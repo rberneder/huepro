@@ -6,6 +6,8 @@ import {Family} from "./family/family";
 import {Product} from "./product";
 import {ProductCl} from "./product.class";
 
+declare var Dropzone: any;
+
 @Component({
 	selector: "new-product",
 	templateUrl: '/templates/products/new-product.template.html',
@@ -13,14 +15,55 @@ import {ProductCl} from "./product.class";
 })
 export class NewProductComponent implements OnInit {
 
-	newProductForm: ControlGroup;
-	newProduct:Product;
-	families:Family[];
-	productAdded = false;
+	private newProductForm: ControlGroup;
+	private newProduct:Product;
+	private families:Family[];
+	private productAdded = false;
+	private productImageUploaded = false;
 
 	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder) {
 		this.newProduct = new ProductCl();
 		this.newProduct.category = '-';
+	}
+
+	ngOnInit():any {
+		this.prepareUpload();
+
+		this._productService.getFamilies()
+			.subscribe(data => {
+				this.families = data;
+			});
+
+		this.newProductForm = this._formBuilder.group({
+			'image': ['', Validators.required],
+			'name': ['', Validators.required],
+			'family': ['', Validators.required],
+			'plantStart': ['', Validators.required],
+			'plantEnd': ['', Validators.required],
+			'harvestStart': ['', Validators.required],
+			'harvestEnd': ['', Validators.required],
+			'storageDays': ['', Validators.required],
+			'shortDescription': [''],
+			'description': ['', Validators.required]
+		});
+	}
+
+	prepareUpload(): any {
+		var form = document.getElementsByClassName('dropzone')[0];
+
+		var dropZone = new Dropzone(form, {
+			maxFilesize: 3, // MB
+			addRemovalLinks: false,
+			acceptedFiles: 'image/*',
+			dictDefaultMessage: 'Produktbild',
+			init: function () {
+				this.on('success', function() {
+					fileUploaded();
+				})
+			}
+		});
+
+		var fileUploaded = () => this.productImageUploaded = true;
 	}
 
 	onSubmit(value) {
@@ -71,25 +114,5 @@ export class NewProductComponent implements OnInit {
 				this.newProduct.harvestEndDay = day;
 				break;
 		}
-	}
-
-	ngOnInit():any {
-		this._productService.getFamilies()
-			.subscribe(data => {
-				this.families = data;
-			});
-
-		this.newProductForm = this._formBuilder.group({
-			'image': ['', Validators.required],
-			'name': ['', Validators.required],
-			'family': ['', Validators.required],
-			'plantStart': ['', Validators.required],
-			'plantEnd': ['', Validators.required],
-			'harvestStart': ['', Validators.required],
-			'harvestEnd': ['', Validators.required],
-			'storageDays': ['', Validators.required],
-			'shortDescription': [''],
-			'description': ['', Validators.required]
-		});
 	}
 }
