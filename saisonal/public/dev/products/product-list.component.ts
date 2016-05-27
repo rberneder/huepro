@@ -31,9 +31,9 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
             .subscribe((data: Product[]) => {
                 this.products = data;
                 this.sortProducts();
+                setTimeout(() => this.scroll(null), 500);
             });
         this.$products = document.getElementById('product-list__cont').children;
-        setTimeout(() => this.scroll(null), 500);   // TODO find better implementation -> $products must be available
     }
 
     ngOnDestroy() {
