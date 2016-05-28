@@ -10,7 +10,7 @@ var ProductSchema = new Schema({
         type: String,
         required: true
     },
-    image: String,
+    image: String,  // TODO make required
     family: {
         type: String,
         required: true

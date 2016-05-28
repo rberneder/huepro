@@ -1,0 +1,37 @@
+.dz-message {
+  width: 200px;
+  height: 200px;
+  border: 3px dashed #eee;
+  text-align: center;
+  line-height: 200px;
+}
+.dz-drag-hover .dz-message {
+  background: rgba(202, 149, 178, 0.25);
+}
+.dz-started .dz-message {
+  display: none;
+}
+.dz-preview img {
+  width: 200px;
+}
+.dz-progress {
+  width: 150px;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+.dz-complete .dz-progress {
+  display: none;
+}
+.dz-upload {
+  height: 10px;
+  display: inline-block;
+  background: #cab394;
+}
+.dz-details {
+  display: none;
+}
+.dz-success-mark, .dz-error-mark {
+  display: none;
+}

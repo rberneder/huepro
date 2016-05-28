@@ -1,7 +1,7 @@
 import {Component, OnInit} from "angular2/core";
 import {ProductService} from "./product.service";
 import {Router} from "angular2/router";
-import {ControlGroup, FormBuilder, Validators} from "angular2/common";
+import {ControlGroup, FormBuilder, Validators, Control} from "angular2/common";
 import {Family} from "./family/family";
 import {Product} from "./product";
 import {ProductCl} from "./product.class";
@@ -19,7 +19,6 @@ export class NewProductComponent implements OnInit {
 	private newProduct:Product;
 	private families:Family[];
 	private productAdded = false;
-	private productImageUploaded = false;
 
 	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder) {
 		this.newProduct = new ProductCl();
@@ -57,22 +56,30 @@ export class NewProductComponent implements OnInit {
 			acceptedFiles: 'image/*',
 			dictDefaultMessage: 'Produktbild',
 			init: function () {
-				this.on('success', function() {
-					fileUploaded();
+				this.on('success', function(res) {
+                    try {
+                        let fileName = JSON.parse(res.xhr.response).file.name;
+                        fileUploaded(fileName);
+                    } catch(e) {
+                        console.error('Unexpected server-response.');
+                    }
 				})
 			}
 		});
 
-		var fileUploaded = () => this.productImageUploaded = true;
+		var fileUploaded = (fileName) => {
+            // Hack because this.newProductForm.controls.image.updateValue(...) doesn't exist anymore
+            (<Control> this.newProductForm.find('image')).updateValue(fileName, {onlySelf:true, emitEvent:true});
+        }
 	}
 
 	onSubmit(value) {
+        this.newProduct.image = value.image;
 		this.newProduct.name = value.name;
 		this.updateDateOf('plantStart', value.plantStart);
 		this.updateDateOf('plantEnd', value.plantEnd);
 		this.updateDateOf('harvestStart', value.harvestStart);
 		this.updateDateOf('harvestEnd', value.harvestEnd);
-		this.updateDateOf('storag', value.storag);
 		this.newProduct.storageDays = value.storageDays;
 		this.newProduct.shortDescription = value.shortDescription;
 		this.newProduct.description = value.description;

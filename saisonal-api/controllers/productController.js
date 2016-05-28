@@ -1,5 +1,6 @@
 require('../models/product');
 var mongoose = require('mongoose');
+var fs = require('fs');
 var _ = require('underscore');
 var Product = mongoose.model('Product');
 var ProductStat = require('./productStatController');
@@ -68,6 +69,16 @@ exports.searchProductNames = function (req, res) {
 /** Adds a new product. */
 exports.post = function(req, res) {
     var product = new Product(req.body);    // TODO Werte überprüfen
+    var img = product.image;
+
+    if (img) {
+        try {
+            fs.rename(__dirname + "/../../saisonal-manager/temp/" + img, __dirname + '/../' + img);
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     product.save();
     ProductStat.createProductStat(product);
     res.jsonp(product);

@@ -14,39 +14,10 @@
     <div class="row">
         <div id="new-product" class="col-xs-12">
 
-            <style>
-                .dz-default.dz-message {
-                    width: 400px;
-                    height: 400px;
-                    border: 3px dashed #eee;
-                    text-align: center;
-                    line-height: 400px;
-                }
-                .dz-drag-hover .dz-default {
-                    background: rgba(202, 149, 178, 0.25);
-                }
-                .dz-progress {
-                    width: 150px;
-                    height: 10px;
-                    overflow: hidden;
-                    border-radius: 10px;
-                    border: 1px solid #eee;
-                }
-                .dz-upload {
-                    height: 10px;
-                    display: inline-block;
-                    background: #cab394;
-                }
-                .dz-details {
-                    display: none;
-                }
-                .dz-success-mark, .dz-error-mark {
-                    display: none;
-                }
-            </style>
             <form enctype="multipart/form-data" action="/upload/product-image" method="post" class="dropzone"></form>
 
             <form [ngFormModel]="newProductForm" (ngSubmit)="onSubmit(newProductForm.value)">
+                <input type="hidden" [ngFormControl]="newProductForm.controls['image']">
                 <div>
                     <label for="name">Name:</label>
                     <input id="name" type="text"

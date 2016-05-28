@@ -28,33 +28,36 @@ function copyFile(source, target, cb) {
 }
 
 exports.uploadProductImage = function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+
     var form = new formidable.IncomingForm();
-    form.uploadDir = __dirname + "/../temp/images/";
+    form.uploadDir = __dirname + "/../temp/uploads/products/images/";
+    
     form.parse(req, function(err, fields, files) {
-        var newfile, path, versionName;
         var fileName = files.file.name.toLowerCase();
         var fileExt = (fileName.substr(-5) == '.jpeg') ? '.jpg' : fileName.substr(-4);
         var newFileName = uuid() + fileExt;
-        newfile = __dirname + "/../temp/images/" + newFileName;
+        
+        var newfile = __dirname + "/../temp/uploads/products/images/" + newFileName;
 
         if (files.file.size < 3145728 && files.file.type.match(/^(image)/gi)) {
             copyFile(files.file.path, newfile, function(err) {
                 if (err) {
                     console.log(err);
                     req.flash("error", "Oops, something went wrong! (reason: copy)");
-                    return res.redirect(req.url);
+                    return res.send('{"uploadSuccess": false}');
                 }
 
                 fs.unlink(files.file.path, function(err) {
                     if (err) {
                         req.flash("error", "Oops, something went wrong! (reason: deletion)");
-                        return res.jsonp('{"upload-success": false}');
+                        return res.send('{"uploadSuccess": false}');
                     }
-                    return res.jsonp('{upload-success: true, file: {name: ' + newFileName + '}}');
+                    return res.send('{"uploadSuccess": true, "file": {"name": "/uploads/products/images/' + newFileName + '"}}');
                 });
             });
         } else {
-            return res.jsonp('{upload-success: false, error: "Maximum file-size is 3MB. The file must be of type image."');
+            return res.send('{"uploadSuccess": false, "error": "Maximum file-size is 3MB. The file must be of type image."');
         }
     });
 }

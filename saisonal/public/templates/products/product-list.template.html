@@ -4,7 +4,12 @@
             <article *ngFor="let product of products; let i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-md-4">
                 <a [routerLink]="['ProductDetails', {id: product._id}]">
                     <figure>
-                        <img src="http://placehold.it/250x180" class="img-responsive">
+                        <div *ngIf="product.image">
+                            <img src="{{product.image}}" class="img-responsive">
+                        </div>
+                        <div *ngIf="!product.image">
+                            <img src="http://placehold.it/400x300" class="img-responsive">
+                        </div>
                         <figcaption>
                             <h3>{{product.name}}</h3>
                         </figcaption>
