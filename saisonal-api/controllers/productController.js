@@ -1,9 +1,11 @@
 require('../models/product');
+var path = require('path');
 var mongoose = require('mongoose');
 var fs = require('fs');
 var _ = require('underscore');
 var Product = mongoose.model('Product');
 var ProductStat = require('./productStatController');
+var imageGenerator = require('../util/imageGenerator');
 
 /** Lists all products. */
 exports.getAllProducts = function(req, res) {
@@ -70,10 +72,12 @@ exports.searchProductNames = function (req, res) {
 exports.post = function(req, res) {
     var product = new Product(req.body);    // TODO Werte überprüfen
     var img = product.image;
+    if (img.substr(-5) === '.jpeg') img = (img.substr(0, (img.length - 5)) + '.jpg');   // Change .jpeg to .jpg
 
     if (img) {
         try {
-            fs.rename(__dirname + "/../../saisonal-manager/temp/" + img, __dirname + '/../' + img);
+            fs.rename(path.join(__dirname, "/../../saisonal-manager/temp/", img), path.join(__dirname, '/../', img));
+            imageGenerator.createThumb(path.join(__dirname, '/../', img));
         } catch(e) {
             console.log(e);
         }
