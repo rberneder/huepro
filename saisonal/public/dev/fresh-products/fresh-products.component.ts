@@ -7,6 +7,8 @@ import {Product} from "../products/product";
 import {Month} from "../util/month";
 import {MONTHS} from "../util/month.seed";
 
+declare var Hammer: any;
+
 @Component({
     selector: "fresh-products",
     templateUrl: '/templates/fresh-products/fresh-products.template.html',
@@ -23,6 +25,7 @@ export class FreshProductsComponent implements OnInit {
     private canSlideDown: boolean;
     private $animationPane;
     private monthNames: Month[];
+    private swipeHandler: any;
 
 
 
@@ -49,6 +52,21 @@ export class FreshProductsComponent implements OnInit {
                 }
             });
         this.$animationPane = document.getElementById('animation-pane');
+        this.setUpTouchGestures();
+    }
+
+    setUpTouchGestures() {
+        this.swipeHandler = new Hammer(this.$animationPane);
+        this.swipeHandler.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+
+        this.swipeHandler.on('pan', (event) => {
+            if (!event.isFinal) return;
+            if (event.deltaY > 0) {
+                this.slide('up');
+            } else {
+                this.slide('down');
+            }
+        });
     }
 
 

@@ -9,6 +9,7 @@ var appProd = 'public/app/';
 /* Mixed */
 var ext_replace = require('gulp-ext-replace');
 var debug = require('gulp-debug');
+var concat = require('gulp-concat');
 
 /* CSS */
 var postcss = require('gulp-postcss');
@@ -21,7 +22,7 @@ var concatCSS = require('gulp-concat-css');
 var uglifyCSS = require('gulp-uglifycss');
 
 /* JS & TS */
-var jsuglify = require('gulp-uglify');
+var uglify = require('gulp-uglify');
 var typescript = require('gulp-typescript');
 var tsProject = typescript.createProject('tsconfig.json');
 
@@ -114,8 +115,17 @@ gulp.task('ts', function () {
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
         .pipe(sourcemaps.write())
-        //.pipe(jsuglify())
+        //.pipe(uglify())
         .pipe(gulp.dest(appProd));
+});
+
+gulp.task('js', function () {
+    return gulp.src([assetsDev + 'js/lib/*.js', assetsDev + 'js/scripts.js'])
+        .pipe(plumber())
+        .pipe(concat('script.min.js'))
+        .pipe(uglify({preserveComments: 'none'}))
+        .pipe(plumber.stop())
+        .pipe(gulp.dest(assetsProd + 'js/'));
 });
 
 gulp.task('img', function () {
