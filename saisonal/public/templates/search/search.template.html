@@ -1,5 +1,5 @@
 <section id="search">
-    <div class="container">
+    <div class="container position-relative">
         <div id="search-top">
             <div class="row">
                 <div class="col-xs-11">
@@ -21,40 +21,81 @@
                 </div>
             </div>
         </div>
-        <div id="search-bottom">
+        <div id="search-bottom" class="hidden">
             <div class="row">
                 <div class="col-xs-12">FILTER</div>
             </div>
         </div>
 
-        <div id="search-results">
-            <div *ngIf="searchResults.length > 0">
+        <div id="search-result-bg" [class.active]="searchInput.value.length < 1">
+            <img src="src/img/logo.png" width="300">
+        </div>
+
+        <div id="search-results" [class.active]="searchInput.value.length > 0">
+            <p [class.hidden]="!(searchInput.value.length > 1 && (searchResults.name.length < 1 && searchResults.family.length < 1))">
+                <em>Keine Ergebnisse gefunden.</em>
+            </p>
+
+
+            <div *ngIf="searchResults.name.length > 0">
                 <div class="text-center">
                     <h4 class="hl-bg">Produkte</h4>
                 </div>
-                <div class="list-group">
-                    <a class="list-group-item"
-                       *ngFor="let product of searchResults"
+                <div class="row">
+                    <a *ngFor="let product of searchResults.name"
                        (click)="goToProduct(product)">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div *ngIf="product.image">
-                                    <img src="{{product.image}}" class="img-responsive">
+                        <article class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div *ngIf="product.image">
+                                        <img src="{{product.image}}" class="img-responsive">
+                                    </div>
+                                    <div *ngIf="!product.image">
+                                        <img src="http://placehold.it/400x300" class="img-responsive">
+                                    </div>
                                 </div>
-                                <div *ngIf="!product.image">
-                                    <img src="http://placehold.it/400x300" class="img-responsive">
+                                <div class="col-xs-8">
+                                    <h3>{{product.name}}<span *ngIf="product.harvestStartMonth == actMonth" class="status status--ripe"></span></h3>
+                                    <p><em>{{product.family}}</em></p>
                                 </div>
                             </div>
-                            <div class="col-xs-7">{{product.name}} <span class="badge bg-light-green">jetzt reif</span></div>
-                        </div>
+                        </article>
                     </a>
                 </div>
-                <p [class.hidden]="!(searchInput.value.length > 1 && searchResults.length < 1)">
-                    <em>Keine Ergebnisse gefunden.</em>
-                </p>
             </div>
 
-            <div *ngIf="searchResults.length > 0">
+
+
+            <div *ngIf="searchResults.family.length > 0">
+                <div class="text-center">
+                    <h4 class="hl-bg">Produkt-Familien</h4>
+                </div>
+                <div class="row">
+                    <a *ngFor="let product of searchResults.family"
+                       (click)="goToProduct(product)">
+                        <article class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div *ngIf="product.image">
+                                        <img src="{{product.image}}" class="img-responsive">
+                                    </div>
+                                    <div *ngIf="!product.image">
+                                        <img src="http://placehold.it/400x300" class="img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <h3>{{product.name}}<span *ngIf="product.harvestStartMonth == actMonth" class="status status--ripe"></span></h3>
+                                    <p><em>{{product.family}}</em></p>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </div>
+
+
+
+            <div *ngIf="searchResults.name.length > 0" class="hidden">
                 <div class="text-center">
                     <h4 class="hl-bg">Rezepte</h4>
                 </div>

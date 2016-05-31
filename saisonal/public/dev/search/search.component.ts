@@ -12,41 +12,62 @@ import {ModusService} from "../util/modus.service";
 })
 export class SearchComponent implements OnInit {
 
+    /*
+     * ///////// ATTRIBUTES /////////
+     * */
     private products:Product[];
-    private searchResults;
+    private searchResults: any;
+    private actMonth: number;
 
 
+
+    /*
+     * ///////// INITIALIZATION /////////
+     * */
     constructor(private _productService: ProductService, private _router: Router, private _modus: ModusService) {
-        this.searchResults = [];
         this.products = [];
+        this.actMonth = new Date().getMonth();
+        this.searchResults = {
+            name: new Array<Product>(),
+            family: new Array<Product>()
+        };
     }
-
-    goToProduct(product) {
-        if (product) {
-            this._modus.setModus('search');
-            this._router.navigate(['/Products/ProductDetails', {id: product._id}]);
-        }
-    }
-
 
     ngOnInit() {
-        this._productService.getProducts().subscribe(
-            products => this.products = products
-        );
+        this._productService.getProducts()
+            .subscribe(products => this.products = products);
     }
 
+
+
+    /*
+     * ///////// SEARCH /////////
+     * */
     resetSearch() {
         this.searchFor();
     }
 
     searchFor(str = '') {
-        this.searchResults.splice(0);
+        this.searchResults.name.splice(0);
+        this.searchResults.family.splice(0);
         if (str.length > 1 && this.products.length) {
+            var searchPattern = new RegExp('(' + str + ')', 'i');
             for (var product of this.products) {
-                if (product.name.match(new RegExp('(' + str + ')', 'i'))) {
-                    this.searchResults.push(product);
-                }
+                if (product.name.match(searchPattern)) this.searchResults.name.push(product);
+                if (product.family.match(searchPattern)) this.searchResults.family.push(product);
             }
+        }
+    }
+
+
+
+    /*
+     * ///////// NAVIGATION /////////
+     * */
+    goToProduct(product) {
+        if (product) {
+            this._modus.setModus('search');
+            this._router.navigate(['/Products/ProductDetails', {id: product._id}]);
         }
     }
 }

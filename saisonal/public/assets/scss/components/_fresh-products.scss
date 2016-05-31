@@ -34,6 +34,11 @@ $changeTime: 750ms;
   #fresh-products-btn-up   { top: 120px; }
   #fresh-products-btn-down { bottom: 120px; }
 
+  #fresh-products-btn-up span,
+  #fresh-products-btn-down span { transition: all 150ms ease; }
+  #fresh-products-btn-up:hover span   { transform: translateY(-5px); }
+  #fresh-products-btn-down:hover span { transform: translateY( 5px); }
+
   #fresh-products__cont {
     position: absolute;
     top: 10vh;
