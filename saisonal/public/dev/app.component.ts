@@ -8,6 +8,8 @@ import {SearchComponent} from "./search/search.component";
 import {ProductContainerComponent} from "./products/product-container.component";
 import {ScrollService} from "./util/scroll/scroll.service";
 import {SeasonCalendarContainerComponent} from "./season-calendar/season-calendar-container.component";
+import {ContactComponent} from "./contact/contact.component";
+import {ImprintComponent} from "./imprint/imprint.component";
 
 
 
@@ -23,6 +25,8 @@ import {SeasonCalendarContainerComponent} from "./season-calendar/season-calenda
     {path: '/saisonkalender/...', name: 'SeasonCalendar', component: SeasonCalendarContainerComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
     {path: '/suche', name: 'Search', component: SearchComponent},
+    {path: '/kontakt', name: 'Contact', component: ContactComponent},
+    {path: '/impressum', name: 'Imprint', component: ImprintComponent},
 ])
 export class AppComponent {
 

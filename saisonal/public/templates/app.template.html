@@ -21,8 +21,8 @@
     <footer>
         <div class="pull-left">&copy; 2016, saisonal.at</div>
         <nav id="footer-nav" class="pull-right">
-            <a href="#">Kontakt</a>
-            <a href="#">Impressum</a>
+            <a (click)="closeMobileNav()" [routerLink]="['Contact']">Kontakt</a>
+            <a (click)="closeMobileNav()" [routerLink]="['Imprint']">Impressum</a>
         </nav>
     </footer>
 </section>
