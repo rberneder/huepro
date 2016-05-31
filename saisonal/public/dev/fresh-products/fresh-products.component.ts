@@ -14,6 +14,9 @@ import {MONTHS} from "../util/month.seed";
 })
 export class FreshProductsComponent implements OnInit {
 
+    /*
+     * ///////// ATTRIBUTES /////////
+     * */
     private products: Product[];
     private shownProd: number;
     private canSlideUp: boolean;
@@ -21,6 +24,11 @@ export class FreshProductsComponent implements OnInit {
     private $animationPane;
     private monthNames: Month[];
 
+
+
+    /*
+     * ///////// INITIALIZATION /////////
+     * */
     constructor(private _productService: ProductService, private _router: Router) {
         this.shownProd = -1;
         this.canSlideUp = false;
@@ -43,18 +51,20 @@ export class FreshProductsComponent implements OnInit {
         this.$animationPane = document.getElementById('animation-pane');
     }
 
-    getHarvestInfo(product) {
-        let res = this.monthNames[product.harvestStartMonth].name;
-        if (product.harvestStartMonth != product.harvestEndMonth) {
-            res += ' - ' + this.monthNames[product.harvestEndMonth].name;
-        }
-        return res;
-    }
 
+
+    /*
+     * ///////// NAVIGATION /////////
+     * */
     goToProduct(product) {
         this._router.navigate(['Products/ProductDetails', {id: product._id}]);
     }
 
+
+
+    /*
+     * ///////// ANIMATION /////////
+     * */
     updateAnimationPane() {
         const height = 10,
             translateY = this.shownProd * height;
@@ -84,11 +94,24 @@ export class FreshProductsComponent implements OnInit {
 
     /*private animator: AnimationBuilder;
 
-    constructor (_animationService: AnimationService, private _elementRef: ElementRef) {
-        this.animator = _animationService.builder();
-    }
+     constructor (_animationService: AnimationService, private _elementRef: ElementRef) {
+     this.animator = _animationService.builder();
+     }
 
-    ngOnInit():any {
-        this.animator.setType('fadeInUp').show(this._elementRef.nativeElement);
-    }*/
+     ngOnInit():any {
+     this.animator.setType('fadeInUp').show(this._elementRef.nativeElement);
+     }*/
+
+
+
+    /*
+     * ///////// HELPER FUNCTIONS /////////
+     * */
+    getHarvestInfo(product) {
+        let res = this.monthNames[product.harvestStartMonth].name;
+        if (product.harvestStartMonth != product.harvestEndMonth) {
+            res += ' - ' + this.monthNames[product.harvestEndMonth].name;
+        }
+        return res;
+    }
 }

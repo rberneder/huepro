@@ -5,7 +5,7 @@
                 <a (click)="goToPrevMonth()" class="link-arrow icon icon-arrow-left"></a>
             </div>
             <div class="col-xs-8 col-sm-6 text-center">
-                <h1 class="inline-block">{{monthNames[actMonth].name}}</h1>
+                <h1 class="inline-block"><span *ngIf="actMonth == selectedMonth" class="status status--ripe"></span>{{monthNames[selectedMonth].name}}</h1>
             </div>
             <div class="col-xs-2 col-sm-3 text-left">
                 <a (click)="goToNextMonth()" class="link-arrow icon icon-arrow-right"></a>

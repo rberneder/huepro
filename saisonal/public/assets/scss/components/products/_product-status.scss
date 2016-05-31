@@ -5,6 +5,12 @@
   border-radius: 10px;
   margin: 0 8px 5px 8px;
 }
+h1 .status {
+  width: 16px;
+  height: 16px;
+  margin: 0 16px 10px 16px;
+}
+
 .status--ripe {
   background: $green;
 }

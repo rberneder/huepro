@@ -11,6 +11,11 @@ import {Month} from "../util/month";
     providers: [ProductService]
 })
 export class SeasonCalendarComponent implements OnInit {
+
+    /*
+     * ///////// ATTRIBUTES /////////
+     * */
+    private selectedMonth:number;
     private actMonth:number;
     private prevMonth:number;
     private nextMonth:number;
@@ -18,7 +23,13 @@ export class SeasonCalendarComponent implements OnInit {
     private products:Product[];
     private filterMenuOpen:boolean;
 
+
+
+    /*
+     * ///////// INITIALIZATION /////////
+     * */
     constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
+        this.actMonth = new Date().getMonth();
         this.monthNames = MONTHS;
         this.filterMenuOpen = false;
     };
@@ -32,18 +43,23 @@ export class SeasonCalendarComponent implements OnInit {
         this.setMonth(month);
         this.getProducts();
     }
-    
+
+
+
+    /*
+     * ///////// HELPER FUNCTIONS /////////
+     * */
     setMonth(month) {
         let monthNr = parseInt(month);
         if (monthNr >= 0 && monthNr <= 11) {
-            this.actMonth = monthNr;
-            this.prevMonth = (this.actMonth - 1 < 0) ? 11 : (this.actMonth - 1);
-            this.nextMonth = (this.actMonth + 1) % 12;
+            this.selectedMonth = monthNr;
+            this.prevMonth = (this.selectedMonth - 1 < 0) ? 11 : (this.selectedMonth - 1);
+            this.nextMonth = (this.selectedMonth + 1) % 12;
         }
     }
 
     getProducts() {
-        this._productService.getProductsOfMonth(this.actMonth)
+        this._productService.getProductsOfMonth(this.selectedMonth)
             .subscribe(data => this.products = data);
     }
 
