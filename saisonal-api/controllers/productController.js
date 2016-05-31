@@ -58,7 +58,7 @@ exports.show = function(req, res) {
     var id = req.params.productId;
     var trackPoints = req.query.p || 0;
     Product.load(req.params.productId, function(err, product) {
-        if (err) {
+        if (err || !product) {
             // TODO log error
             res.jsonp('[]');
         } else {
@@ -144,6 +144,36 @@ exports.delete = function(req, res) {
             // TODO log error
             res.jsonp('[]');
         } else {
+            if (!product) return res.jsonp('[]');
+
+            var img = product.image;
+            if (img) {
+                var imgPath = path.join(__dirname, "/../", img);
+                var thumbPath = path.join(__dirname, '/../', img.substr(0, img.length - 4) + '_thumb' + img.substr(-4));
+
+
+                fs.access(imgPath, fs.F_OK, function(err) {
+                    if (!err) {
+                        try {
+                            fs.rename(imgPath, path.join(__dirname, '/../uploads/trash/', img));
+                        } catch (e) {
+                            // File does not exist
+                        }
+                    }
+                });
+
+                fs.access(thumbPath, fs.F_OK, function(err) {
+                    if (!err) {
+                        try {
+                            fs.unlink(thumbPath);
+                        } catch (e) {
+                            // File does not exist
+                        }
+                    }
+                });
+
+            }
+
             product.remove(function(err) {
                 productStat.deleteProductStat(product);
                 res.jsonp(product);

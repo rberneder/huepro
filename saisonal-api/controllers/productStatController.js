@@ -47,13 +47,13 @@ exports.createProductStat = function(product) {
 
 
 exports.deleteProductStat = function(product) {
-    ProductStat.find({product_id: product._id})
+    ProductStat.findOne({product_id: product._id})
         .exec(function(err, productStat) {
-            if (err) {
+            if (err || !productStat) {
                 res.jsonp('[]');    // TODO log error
             } else {
                 productStat.remove(function(err) {
-                    res.jsonp(productStat);
+                    // Removed
                 });
             }
         });
