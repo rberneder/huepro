@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {ROUTER_DIRECTIVES, Router, RouteParams} from "angular2/router";
+import {Router, RouteParams} from "angular2/router";
 import {OnInit} from "angular2/core";
 import {ProductService} from "./product.service";
 import {Product} from "./product";
@@ -30,8 +30,8 @@ export class ProductDetailsComponent implements OnInit {
                 (product:Product) => {
                     this.product = product;
 
-                    if (!this.product) {
-                        this._router.navigate(['Products', {month: new Date().getMonth()}]);
+                    if (!this.product._id) {
+                        this._router.navigate(['/Products/ProductList']);
                     }
                 }
             );
