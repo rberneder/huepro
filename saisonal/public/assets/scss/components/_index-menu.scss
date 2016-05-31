@@ -36,6 +36,19 @@
       right: 30px;
       min-width: 180px;
       top: 0;
+      z-index: 1000;
+
+      #filter-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+      }
+      #filter-menu-content {
+        z-index: 1010;
+      }
     }
   }
 

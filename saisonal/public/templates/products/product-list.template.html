@@ -1,7 +1,9 @@
 <div id="product-list">
     <div class="row">
         <div id="product-list__cont">
-            <article *ngFor="let product of products; let i = index" id="product-{{i}}" class="product-thumb col-xs-6 col-md-4">
+            <article id="product-{{i}}" class="product-thumb col-xs-6 col-md-4"
+                    *ngFor="let product of products; let i = index"
+                    [class.hidden]="(filteredCategories.length > 0 && filteredCategories.indexOf(product.category) < 0) || (filterRipe && product.harvestStartMonth != actMonth)">
                 <a [routerLink]="['ProductDetails', {id: product._id}]">
                     <figure>
                         <div *ngIf="product.image">
@@ -11,7 +13,7 @@
                             <img src="http://placehold.it/400x300" class="img-responsive">
                         </div>
                         <figcaption>
-                            <h3>{{product.name}}</h3>
+                            <h3><span *ngIf="product.harvestStartMonth == actMonth" class="status status--ripe"></span>{{product.name}}</h3>
                         </figcaption>
                     </figure>
                 </a>
@@ -22,10 +24,19 @@
             <div id="index-menu__top">
                 <button id="filter-btn" (click)="toggleFilterMenu()" [class.active]="filterMenuActive == true"><span class="icon icon-filter"></span></button>
                 <div id="filter-menu" [class.hidden]="filterMenuActive == false">
-                    <ul class="list-group">
-                        <li class="list-group-item"><input type="checkbox" name="vegetables" id="vegetables"> <label for="vegetables">Gemüse</label></li>
-                        <li class="list-group-item"><input type="checkbox" name="fruits" id="fruits"> <label for="fruits">Obst</label></li>
-                        <li class="list-group-item"><input type="checkbox" name="actual" id="actual"> <label for="actual">Jetzt reif</label></li>
+                    <div id="filter-menu-overlay" (click)="toggleFilterMenu()"></div>
+                    <ul class="list-group" id="filter-menu-content">
+                        <li class="list-group-item">
+                            <input type="checkbox" name="actual" id="actual" #ripe (change)="onlyShowRipe(ripe.checked)"> <label for="actual">Jetzt reif</label>
+                        </li>
+
+                        <li class="list-group-item"
+                            *ngFor="let category of categories; let i = index">
+                            <input #test type="checkbox" name="category-{{i}}" id="category-{{i}}"
+                                (change)="setFilter(category.name, test.checked)"
+                                [checked]="category.active">
+                            <label attr.for="category-{{i}}">{{category.name}}</label>
+                        </li>
                     </ul>
                 </div>
             </div>

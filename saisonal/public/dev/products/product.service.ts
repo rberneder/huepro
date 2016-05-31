@@ -9,11 +9,13 @@ export class ProductService {
     constructor(private _http: Http, private _modus: ModusService) {}
 
 
+    /*
+    * ////////// PRODUCTS //////////
+    * */
     getProducts() {
         return this._http.get("/api/products/")
             .map(response => response.json());
     }
-
 
     getProduct(id) {
         let modus = this._modus.getModus();
@@ -23,13 +25,11 @@ export class ProductService {
             .map(response => response.json());
     }
 
-
     searchFor(str) {
         var strEsc = encodeURI(str);
         return this._http.get("/api/products/search/" + strEsc)
             .map(response => response.json());
     }
-
 
     getProductsOfMonth(month) {
         return this._http.get("/api/products/month/" + month)
@@ -38,6 +38,16 @@ export class ProductService {
 
     getFreshProducts() {
         return this._http.get("/api/products/fresh")
+            .map(response => response.json());
+    }
+    
+    
+    
+    /*
+    * ////////// CATEGORIES //////////
+    * */
+    getCategories() {
+        return this._http.get('/api/products/categories')
             .map(response => response.json());
     }
 }
