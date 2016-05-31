@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var _ = require('underscore');
 var Product = mongoose.model('Product');
-var ProductStat = require('./productStatController');
+var productStat = require('./productStatController');
 var imageGenerator = require('../util/imageGenerator');
 
 /** Lists all products. */
@@ -22,6 +22,37 @@ exports.getAllProducts = function(req, res) {
 };
 
 
+exports.getFreshProducts = function (req, res) {
+    var limit = 10;     // To return a maximum of 10 products
+    var test = productStat.getAllProductStats()
+        .then(function (prodStats) {
+            if (!prodStats) return res.jsonp('[]');
+
+            var actMonth = new Date().getMonth();
+
+            Product.find()
+                .where('harvestStartMonth', actMonth)
+                .exec(function (err, products) {
+                    if (err) {
+                        console.log('Error: getFreshProducts. ', err);
+                        return res.jsonp('[]');
+                    } else {
+                        var freshProducts = [];
+                        for (var i = 0; i < prodStats.length && freshProducts.length < limit; i++) {
+                            for (var j = 0; j < products.length; j++) {
+                                if (products[j]._id == prodStats[i].product_id) {
+                                    freshProducts.push(products[j]);
+                                    break;
+                                }
+                            }
+                        }
+                        return res.jsonp(freshProducts);
+                    }
+                });
+        });
+}
+
+
 /** Returns the product corresponding the passed ID. */
 exports.show = function(req, res) {
     var id = req.params.productId;
@@ -31,7 +62,7 @@ exports.show = function(req, res) {
             // TODO log error
             res.jsonp('[]');
         } else {
-            ProductStat.trackProductStatPoints(product, trackPoints);
+            productStat.trackProductStatPoints(product, trackPoints);
             res.jsonp(product);
         }
     });
@@ -84,7 +115,7 @@ exports.post = function(req, res) {
     }
 
     product.save();
-    ProductStat.createProductStat(product);
+    productStat.createProductStat(product);
     res.jsonp(product);
 };
 
@@ -114,7 +145,7 @@ exports.delete = function(req, res) {
             res.jsonp('[]');
         } else {
             product.remove(function(err) {
-                ProductStat.deleteProductStat(product);
+                productStat.deleteProductStat(product);
                 res.jsonp(product);
             });
         }

@@ -33,6 +33,18 @@ exports.getProductsOfMonth = function(req, res) {
 
 
 /**
+ * GET /api/products/fresh
+ * List of x fresh products.
+ */
+exports.getFreshProducts = function(req, res) {
+    request.get(apiUrl + '/products/fresh', function(err, request, body) {
+        if (err) return res.send('[]');
+        res.send(JSON.parse(body));
+    });
+};
+
+
+/**
  * GET /api/products/id/:id
  * Returns product matching passed id and tracking simple display points
  */

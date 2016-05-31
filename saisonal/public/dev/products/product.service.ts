@@ -35,4 +35,9 @@ export class ProductService {
         return this._http.get("/api/products/month/" + month)
             .map(response => response.json());
     }
+
+    getFreshProducts() {
+        return this._http.get("/api/products/fresh")
+            .map(response => response.json());
+    }
 }

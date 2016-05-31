@@ -22,6 +22,9 @@ router.get('/month/:month', products.getProductsOfMonth);
 // GET /products/id/asdfj23k2of9f32?p=3
 router.get('/id/:productId', products.show);
 
+// GET /products/fresh
+router.get('/fresh', products.getFreshProducts);
+
 // GET /products/search?str=jona
 router.get('/search/:str', products.searchProductNames);
 
@@ -46,6 +49,9 @@ router.delete('/id/:productId', products.delete);
 /*
  * GET
  * */
+// GET /products/stat
+router.get('/stat', productStat.getAllProductStat);
+
 // GET /products/stat/23kjsdi24oijdw
 router.get('/stat/:productId', productStat.getProductStat);
 

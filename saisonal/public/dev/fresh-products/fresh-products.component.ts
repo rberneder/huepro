@@ -30,7 +30,7 @@ export class FreshProductsComponent implements OnInit {
 
     ngOnInit(): any {
         this._productService
-            .getProductsOfMonth(new Date().getMonth())
+            .getFreshProducts()
             .subscribe((products: Product[]) => {
                 if (products.length > 0) {
                     this.products = products;

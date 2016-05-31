@@ -20,11 +20,22 @@ exports.trackProductStatPoints = function(product, points) {
         });
 }
 
+exports.getAllProductStat = function(req, res) {
+    ProductStat.find()
+        .exec(function(err, productStat) {
+            res.jsonp(productStat);
+        });
+}
+
 exports.getProductStat = function(req, res) {
     ProductStat.find({product_id: req.params.productId})
         .exec(function(err, productStat) {
             res.jsonp(productStat);
         });
+}
+
+exports.getAllProductStats = function() {
+    return ProductStat.find().sort({trend: 'desc'}).select('product_id').exec();
 }
 
 exports.createProductStat = function(product) {
