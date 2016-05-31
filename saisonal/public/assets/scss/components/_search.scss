@@ -1,8 +1,13 @@
 #search {
+  padding: 0 15px;
   padding-top: 40px;
 
   @media (min-width: $screen-sm-min) {
     padding-top: 80px;
+  }
+
+  @media (min-width: $screen-md-min) {
+    padding-right: 50px;
   }
 
   #search-top {

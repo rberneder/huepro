@@ -13,11 +13,13 @@
                 <div class="article-cont">
                     <div class="row">
                         <div class="col-sm-4 text-center">
-                            <div *ngIf="product.image">
-                                <img src="{{product.image}}" class="img-responsive">
-                            </div>
-                            <div *ngIf="!product.image">
-                                <img src="http://placehold.it/400x300" class="img-responsive">
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <div *ngIf="product.image">
+                                    <img src="{{product.image}}" class="embed-responsive-item">
+                                </div>
+                                <div *ngIf="!product.image">
+                                    <img src="http://placehold.it/400x300" class="embed-responsive-item">
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-8">
