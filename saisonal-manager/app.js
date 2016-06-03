@@ -9,7 +9,33 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// var jwt = require('jwt-simple');
+// https://www.sitepoint.com/using-json-web-tokens-node-js/
 
+/*
+* MIDDLEWARE
+* */
+// var jwtauth = require('./lib/jwtauth.js');
+
+/*
+* MODEL
+* */
+// var UserMode= require('./models/user');
+
+/*
+* DATABASE
+* */
+
+/**
+ * RESTRICT ACCESS
+
+var requireAuth = function(req, res, next) {
+	if (!req.user) {
+		res.end('Not authorized', 401)
+	}	else {
+		next()
+	}
+}*/
 
 /*
  * CONTROLLERS
@@ -19,7 +45,6 @@ var uploadController = require('./controllers/uploadController');
 var apiProductController = require('./controllers/apiProductController');
 var apiProductCategoryController = require('./controllers/apiProductCategoryController');
 var apiProductFamilyController = require('./controllers/apiProductFamilyController');
-
 
 /*
  * EXPRESS SERVER
@@ -34,6 +59,7 @@ app.set('port', 25090);
 // app.set('views', path.join(__dirname, '/public'));
 // app.engine('html', require('ejs').renderFile);
 // app.set('view engine', 'html');
+//app.set('jwtTokenSecret', 'saugeheimerstring'); //OUR_SECRET_STRING
 app.use(compress());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -41,12 +67,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 }));
 
-
 /*
  * ROUTES
  * */
+
+// app.all('/*', [express.bodyParser(), jwtauth, requireAuth]);
+
 app.get('/', homeController.index);
 app.post('/upload/product-image', uploadController.uploadProductImage);
+app.get('/uploads/:element/:folder/:file', homeController.getFile);
+
 
 app.get('/api/products', apiProductController.getProducts);
 app.get('/api/products/id/:id', apiProductController.getProduct);
