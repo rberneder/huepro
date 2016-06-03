@@ -1,0 +1,57 @@
+#product-editor {
+  h2 {
+    margin-bottom: 60px;
+  }
+
+  label {
+    color: $beige;
+    display: block;
+  }
+
+  input,
+  select,
+  textarea {
+    margin: 0 0 30px 30px;
+
+    &:focus,
+    &:hover {
+      background: $light-gray;
+    }
+  }
+
+  input {
+    display: block;
+    position: relative;
+    border: 1px solid transparent;
+    font-size: 24px;
+    outline: none;
+    margin-bottom: 30px;
+
+    &.ng-valid {
+      border-bottom: 1px solid transparent;
+    }
+    &.ng-touched.ng-invalid {
+      border-bottom: 1px solid $purple;
+    }
+  }
+
+  select {
+    background: #fff;
+    border: none;
+    font-size: 18px;
+    width: 80%;
+    border-radius: 0;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-left: 1px solid $beige;
+  }
+
+  .form-area {
+    margin-bottom: 60px;
+  }
+}

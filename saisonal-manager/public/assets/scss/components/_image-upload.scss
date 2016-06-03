@@ -1,37 +1,93 @@
-.dz-message {
-  width: 200px;
-  height: 200px;
-  border: 3px dashed #eee;
-  text-align: center;
-  line-height: 200px;
+.dropzone {
+  display: block;
+  position: relative;
+  padding-bottom: 75%;  // 4:3
 }
-.dz-drag-hover .dz-message {
-  background: rgba(202, 149, 178, 0.25);
+
+.dz-default,
+.dz-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &.dz-message span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #bbb;
+    letter-spacing: 10px;
+    margin-left: 10px;
+  }
+}
+.dz-default {
+  border: 3px dashed #eee;
+}
+.dz-started .dz-default {
+  border: none;
+}
+
+.dz-drag-hover .dz-default {
+  background: $beige;
+  opacity: 0.25;
 }
 .dz-started .dz-message {
   display: none;
 }
 .dz-preview img {
-  width: 200px;
+  width: 100%;
+  opacity: 0.5;
 }
+.dz-complete .dz-preview img {
+  opacity: 1;
+}
+
+
 .dz-progress {
-  width: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
   height: 10px;
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid #eee;
 }
+.dz-upload {
+  height: 10px;
+  display: block;
+  background: $beige;
+}
 .dz-complete .dz-progress {
   display: none;
 }
-.dz-upload {
-  height: 10px;
-  display: inline-block;
-  background: #cab394;
+
+.dz-success-mark,
+.dz-error-mark {
+  visibility: hidden;
+  pointer-events: none;
 }
+.dz-success-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: opacity 500ms ease-in 1s;
+
+  path {
+    fill: $green;
+  }
+}
+.dz-complete .dz-success-mark {
+  visibility: visible;
+  opacity: 0;
+}
+
+
 .dz-details {
-  display: none;
-}
-.dz-success-mark, .dz-error-mark {
   display: none;
 }

@@ -15,11 +15,11 @@ $gray:                   lighten($gray-base, 33.5%) !default; // #555
 $gray-light:             lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
-$brand-primary:         darken(#7f6937, 6.5%) !default; // #337ab7
-$brand-success:         #5cb85c !default;
-$brand-info:            #ffd36f !default;
-$brand-warning:         #f7ac09 !default;
-$brand-danger:          #d9534f !default;
+$brand-primary:         darken(#cab394, 6.5%) !default; // #337ab7
+$brand-success:         #9cc793 !default;
+$brand-info:            #b0aa80 !default;
+$brand-warning:         #af91c7 !default;
+$brand-danger:          #b08083 !default;
 
 
 //== Scaffolding
@@ -107,9 +107,9 @@ $padding-xs-horizontal:     5px !default;
 $line-height-large:         1.3333333 !default; // extra decimals for Win 8.1 Chrome
 $line-height-small:         1.5 !default;
 
-$border-radius-base:        4px !default;
-$border-radius-large:       6px !default;
-$border-radius-small:       3px !default;
+$border-radius-base:        0px !default;
+$border-radius-large:       0px !default;
+$border-radius-small:       0px !default;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
@@ -149,7 +149,7 @@ $table-border-color:            #ddd !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              #7f6937 !default;
+$btn-default-color:              #cab394 !default;
 $btn-default-bg:                 #fff !default;
 $btn-default-border:             #fff !default;
 
@@ -205,7 +205,7 @@ $input-border-radius-large:      $border-radius-large !default;
 $input-border-radius-small:      $border-radius-small !default;
 
 //** Border color for inputs on focus
-$input-border-focus:             #5cb85c !default;
+$input-border-focus:             #cab394 !default;
 
 //** Placeholder text color
 $input-color-placeholder:        #999 !default;

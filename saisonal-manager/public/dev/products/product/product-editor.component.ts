@@ -1,27 +1,44 @@
 import {Component, OnInit} from "angular2/core";
-import {ProductService} from "./product.service";
 import {Router} from "angular2/router";
 import {ControlGroup, FormBuilder, Validators, Control} from "angular2/common";
-import {Family} from "./family/family";
-import {Product} from "./product";
-import {ProductCl} from "./product.class";
+import {ProductService} from "../product.service";
+import {Product} from "../product";
+import {Family} from "../family/family";
+import {ProductCl} from "../product.class";
+import {Month} from "../../util/month";
+import {MONTHS} from "../../util/month.seed";
 
 declare var Dropzone: any;
 
 @Component({
-	selector: "new-product",
-	templateUrl: '/templates/products/new-product.template.html',
-	providers: [ProductService]
+	selector: "product-editor",
+	templateUrl: '/templates/products/product/product-editor.template.html',
+	providers: [ProductService, MONTHS]
 })
-export class NewProductComponent implements OnInit {
+export class ProductEditorComponent implements OnInit {
 
+    /*
+     * ///////// ATTRIBUTES /////////
+     * */
 	private newProductForm: ControlGroup;
-	private newProduct:Product;
-	private families:Family[];
-	private productAdded = false;
+	private newProduct: Product;
+    private plant: number[];
+    private harvest: number[];
+    private families: Family[];
+	private productAdded: boolean;
+    private months: Month[];
 
+
+
+    /*
+     * ///////// INITIALIZATION /////////
+     * */
 	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder) {
+        this.productAdded = false;
+        this.plant = new Array<number>();
+        this.harvest = new Array<number>();
 		this.newProduct = new ProductCl();
+        this.months = MONTHS;
 		this.newProduct.category = '-';
 	}
 
@@ -55,6 +72,9 @@ export class NewProductComponent implements OnInit {
 			addRemovalLinks: false,
 			acceptedFiles: 'image/*',
 			dictDefaultMessage: 'Produktbild',
+            uploadMultiple: false,
+			thumbnailWidth: 400,
+			thumbnailHeight: 300,
 			init: function () {
 				this.on('success', function(res) {
                     try {
@@ -73,6 +93,12 @@ export class NewProductComponent implements OnInit {
         }
 	}
 
+
+
+
+    /*
+     * ///////// FORM /////////
+     * */
 	onSubmit(value) {
         this.newProduct.image = value.image;
 		this.newProduct.name = value.name;
@@ -91,6 +117,35 @@ export class NewProductComponent implements OnInit {
 				this.newProduct = new ProductCl();
 			});
 	}
+
+    calculatePlantRange() {
+        var start = this.newProduct.plantStartMonth;
+        var end = this.newProduct.plantEndMonth;
+        this.plant.splice(0);
+
+        if (start && end) {
+            if (start > end) {
+                for (let i = start; i < 12; i++) this.plant.push(i);
+                for (let i = 0; i <= end; i++) this.plant.push(i);
+            } else {
+                for (let i = start; i <= end; i++) this.plant.push(i);
+            }
+        }
+    }
+
+    updatePlantStart(day: number, month: number) {
+        this.newProduct.plantStartDay = day;
+        this.newProduct.plantStartMonth = (this.newProduct.plantStartMonth === month) ? null : month;
+        this.calculatePlantRange();
+    }
+
+    updatePlantEnd(day: number, month: number) {
+        this.newProduct.plantEndDay = day;
+        this.newProduct.plantEndMonth = (this.newProduct.plantEndMonth === month) ? null : month;
+        this.calculatePlantRange();
+    }
+
+
 
 	updateCat(famIndex) {
 		var family = this.families[famIndex];

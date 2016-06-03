@@ -1,22 +1,25 @@
-<header>
-    <div id="header-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <a href="/"><h1 class="main-hl">Saisonal-Manager</h1></a>
-                </div>
-            </div>
-        </div>
+<seciton id="sidebar">
+    <div id="logo">
+        <img src="http://placehold.it/600x500" class="img-responsive">
     </div>
 
-    <nav class="container">
-        <div class="btn-group" role="group">
-            <a [routerLink]="['Products']" type="button" class="btn btn-default">Produkte</a>
-            <a [routerLink]="['Recipes']" type="button" class="btn btn-default">Rezepte</a>
-        </div>
+    <nav id="main-nav">
+        <a href="#" class="nav-item"><h4>Übersicht</h4></a>
+        <a href="#" class="nav-item"><h4>Trends</h4></a>
+        <a [routerLink]="['Products']" class="nav-item"><h4>Produkte</h4></a>
+        <a [routerLink]="['Recipes']" class="nav-item"><h4>Rezepte</h4></a>
     </nav>
-</header>
 
-<div id="content--main">
+    <footer>
+        <nav id="footer-nav">
+            <sapn>&copy; by saisonal.at</sapn>
+        </nav>
+    </footer>
+</seciton>
+
+
+
+
+<div id="main-content">
     <router-outlet></router-outlet>
 </div>

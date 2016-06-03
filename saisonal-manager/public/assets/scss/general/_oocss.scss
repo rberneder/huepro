@@ -4,3 +4,10 @@
 input[type=file] {
   display: inline-block;
 }
+.hl-bg {
+  display: inline-block;
+  color: #fff;
+  background: $beige;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}

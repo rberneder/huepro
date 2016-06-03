@@ -1,0 +1,32 @@
+.month-select {
+  thead {
+    color: $beige;
+    text-align: center;
+
+    td {
+      width: 40px;
+    }
+  }
+
+  td.border {
+    border: 1px solid $light-gray;
+    border-width: 0 1px;
+    text-align: center;
+  }
+  td.selectable {
+    &:hover {
+      cursor: pointer;
+      background: $light-gray;
+    }
+    td.active {
+      background: $green;
+    }
+  }
+  td.active {
+    background: $green;
+  }
+
+  tr.selection-result td {
+    height: 40px;
+  }
+}

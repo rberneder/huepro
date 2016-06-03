@@ -1,0 +1,18 @@
+#sub-nav {
+  display: block;
+  border-bottom: 1px solid $gray;
+  margin: 10px 10px 50px 0;
+
+  .nav-item {
+    display: inline-block;
+    padding: 0 10px;
+    color: #000;
+    text-decoration: none;
+
+    &.router-link-active {
+      background: $gray;
+      color: #fff;
+      text-transform: uppercase;
+    }
+  }
+}

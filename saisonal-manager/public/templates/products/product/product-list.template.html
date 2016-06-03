@@ -1,0 +1,21 @@
+<div id="product-list">
+    <h4>Produkt editieren</h4>
+
+    <div id="filter">
+        <input type="text" placeholder="Suche">
+    </div>
+
+    <div id="list-content">
+        <article
+                *ngFor="let product of products; let i = index"
+                (click)="editProduct(product)">
+            <figure>
+                <img src="http://placehold.it/400x300">
+                <figcaption>
+                    <h4>{{product.name}}</h4>
+                    <p><em>{{product.family}} / {{product.category}}</em></p>
+                </figcaption>
+            </figure>
+        </article>
+    </div>
+</div>

@@ -1,9 +1,9 @@
 import {Component, OnInit} from "angular2/core";
-import {ProductService} from "./product.service";
 import {Router} from "angular2/router";
-import {Product} from "./product";
-import {MONTHS} from "../util/month.seed";
-import {Month} from "../util/month";
+import {ProductService} from "../product.service";
+import {Product} from "../product";
+import {Month} from "../../util/month";
+import {MONTHS} from "../../util/month.seed";
 
 @Component({
 	selector: "change-product",

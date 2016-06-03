@@ -36,6 +36,7 @@ export class ScrollService {
     }
     
     subscribe(subscriber: ScrollListener) {
+        // TODO return observer-instance
         this.subscribers.push(subscriber);
     }
     
