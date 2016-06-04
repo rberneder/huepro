@@ -6,6 +6,9 @@
     td {
       width: 40px;
     }
+    td:first-child {
+      width: 70px;
+    }
   }
 
   td.border {
@@ -22,11 +25,10 @@
       background: $green;
     }
   }
-  td.active {
+  tr.harvest td.active {
     background: $green;
   }
-
-  tr.selection-result td {
-    height: 40px;
+  tr.plant td.active {
+    background: $purple;
   }
 }

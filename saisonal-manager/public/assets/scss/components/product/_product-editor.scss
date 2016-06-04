@@ -11,8 +11,11 @@
   input,
   select,
   textarea {
-    margin: 0 0 30px 30px;
+    margin: 0 0 0 30px;
 
+    &.ng-pristine {
+      background: $light-gray;
+    }
     &:focus,
     &:hover {
       background: $light-gray;
@@ -25,13 +28,18 @@
     border: 1px solid transparent;
     font-size: 24px;
     outline: none;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 
     &.ng-valid {
       border-bottom: 1px solid transparent;
     }
     &.ng-touched.ng-invalid {
       border-bottom: 1px solid $purple;
+    }
+
+    &#storageDays {
+      width: 50px;
+      display: inline-block;
     }
   }
 
@@ -45,13 +53,27 @@
 
   textarea {
     display: block;
-    width: 100%;
+    width: 90%;
     outline: none;
     border: none;
-    border-left: 1px solid $beige;
+    padding: 15px;
+    border: 1px solid $beige;
   }
 
   .form-area {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+  }
+
+  .info-msg {
+    color: #fff;
+    padding: 5px 15px;
+    margin: 0 15px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 500ms ease;
+  }
+  .info-msg.active {
+    visibility: visible;
+    opacity: 1;
   }
 }

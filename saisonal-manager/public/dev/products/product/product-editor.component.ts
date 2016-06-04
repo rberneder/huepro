@@ -27,6 +27,7 @@ export class ProductEditorComponent implements OnInit {
     private families: Family[];
 	private productAdded: boolean;
     private months: Month[];
+    private dropZone: any;
 
 
 
@@ -54,10 +55,14 @@ export class ProductEditorComponent implements OnInit {
 			'image': ['', Validators.required],
 			'name': ['', Validators.required],
 			'family': ['', Validators.required],
-			'plantStart': ['', Validators.required],
-			'plantEnd': ['', Validators.required],
-			'harvestStart': ['', Validators.required],
-			'harvestEnd': ['', Validators.required],
+			'plantStartDay': ['', Validators.required],
+            'plantStartMonth': ['', Validators.required],
+			'plantEndDay': ['', Validators.required],
+            'plantEndMonth': ['', Validators.required],
+			'harvestStartDay': ['', Validators.required],
+            'harvestStartMonth': ['', Validators.required],
+			'harvestEndDay': ['', Validators.required],
+            'harvestEndMonth': ['', Validators.required],
 			'storageDays': ['', Validators.required],
 			'shortDescription': [''],
 			'description': ['', Validators.required]
@@ -67,7 +72,7 @@ export class ProductEditorComponent implements OnInit {
 	prepareUpload(): any {
 		var form = document.getElementsByClassName('dropzone')[0];
 
-		var dropZone = new Dropzone(form, {
+		this.dropZone = new Dropzone(form, {
 			maxFilesize: 3, // MB
 			addRemovalLinks: false,
 			acceptedFiles: 'image/*',
@@ -90,9 +95,9 @@ export class ProductEditorComponent implements OnInit {
 		var fileUploaded = (fileName) => {
             // Hack because this.newProductForm.controls.image.updateValue(...) doesn't exist anymore
             (<Control> this.newProductForm.find('image')).updateValue(fileName, {onlySelf:true, emitEvent:true});
+            this.newProduct.image = fileName;
         }
 	}
-
 
 
 
@@ -100,81 +105,102 @@ export class ProductEditorComponent implements OnInit {
      * ///////// FORM /////////
      * */
 	onSubmit(value) {
-        this.newProduct.image = value.image;
-		this.newProduct.name = value.name;
-		this.updateDateOf('plantStart', value.plantStart);
-		this.updateDateOf('plantEnd', value.plantEnd);
-		this.updateDateOf('harvestStart', value.harvestStart);
-		this.updateDateOf('harvestEnd', value.harvestEnd);
-		this.newProduct.storageDays = value.storageDays;
-		this.newProduct.shortDescription = value.shortDescription;
-		this.newProduct.description = value.description;
-
-		this._productService
+       this._productService
 			.addProduct(this.newProduct)
 			.subscribe(data => {
-				this.productAdded = true;
+				this.productAddSuccess();
 				this.newProduct = new ProductCl();
+                this.dropZone.removeAllFiles();
+                this.plant.splice(0);
+                this.harvest.splice(0);
+                this.newProductForm
 			});
 	}
 
-    calculatePlantRange() {
-        var start = this.newProduct.plantStartMonth;
-        var end = this.newProduct.plantEndMonth;
-        this.plant.splice(0);
+    calculateRange(type) {
+        var start, end, months;
+        switch (type) {
+            case 'plant':
+                start = this.newProduct.plantStartMonth;
+                end = this.newProduct.plantEndMonth;
+                months = this.plant;
+                break;
+            case 'harvest':
+                start = this.newProduct.harvestStartMonth;
+                end = this.newProduct.harvestEndMonth;
+                months = this.harvest;
+                break;
+        }
+        months.splice(0);
 
-        if (start && end) {
-            if (start > end) {
-                for (let i = start; i < 12; i++) this.plant.push(i);
-                for (let i = 0; i <= end; i++) this.plant.push(i);
-            } else {
-                for (let i = start; i <= end; i++) this.plant.push(i);
+        if (start !== null) {
+            months.push(start);
+
+            if (end !== null) {
+                if (start > end) {
+                    for (let i = start + 1; i < 12; i++) months.push(i);
+                    for (let i = 0; i <= end; i++) months.push(i);
+                } else {
+                    for (let i = start + 1; i <= end; i++) months.push(i);
+                }
             }
         }
     }
 
-    updatePlantStart(day: number, month: number) {
-        this.newProduct.plantStartDay = day;
-        this.newProduct.plantStartMonth = (this.newProduct.plantStartMonth === month) ? null : month;
-        this.calculatePlantRange();
+    updatePlant(day: number, month: number) {
+        if (this.newProduct.plantStartMonth === null) {
+            this.newProduct.plantStartDay = day;
+            this.newProduct.plantStartMonth = month;
+
+        } else if (this.newProduct.plantEndMonth === null) {
+            this.newProduct.plantEndDay = day;
+            this.newProduct.plantEndMonth = month;
+
+        } else {
+            this.newProduct.plantStartDay = day;
+            this.newProduct.plantStartMonth = month;
+            this.newProduct.plantEndDay = null;
+            this.newProduct.plantEndMonth = null;
+
+        }
+        this.calculateRange('plant');
     }
 
-    updatePlantEnd(day: number, month: number) {
-        this.newProduct.plantEndDay = day;
-        this.newProduct.plantEndMonth = (this.newProduct.plantEndMonth === month) ? null : month;
-        this.calculatePlantRange();
+    updateHarvest(day: number, month: number) {
+        if (this.newProduct.harvestStartMonth === null) {
+            this.newProduct.harvestStartDay = day;
+            this.newProduct.harvestStartMonth = month;
+
+        } else if (this.newProduct.harvestEndMonth === null) {
+            this.newProduct.harvestEndDay = day;
+            this.newProduct.harvestEndMonth = month;
+
+        } else {
+            this.newProduct.harvestStartDay = day;
+            this.newProduct.harvestStartMonth = month;
+            this.newProduct.harvestEndDay = null;
+            this.newProduct.harvestEndMonth = null;
+
+        }
+        this.calculateRange('harvest');
     }
 
 
 
-	updateCat(famIndex) {
-		var family = this.families[famIndex];
-		this.newProduct.family = family.name;
-		this.newProduct.category = family.category;
+	updateCat(newFamilyName) {
+        var foundFamily;
+        for (let family of this.families) {
+            if (family.name === newFamilyName) {
+                foundFamily = family;
+                break;
+            }
+        }
+		this.newProduct.category = foundFamily.category;
 	}
-
-	updateDateOf(entry, rawDate) {
-		var plantDate = new Date(rawDate),
-			month = plantDate.getMonth(),
-			day = plantDate.getDate();
-
-		switch (entry) {
-			case 'plantStart':
-				this.newProduct.plantStartMonth = month;
-				this.newProduct.plantStartDay = day;
-				break;
-			case 'plantEnd':
-				this.newProduct.plantEndMonth = month;
-				this.newProduct.plantEndDay = day;
-				break;
-			case 'harvestStart':
-				this.newProduct.harvestStartMonth = month;
-				this.newProduct.harvestStartDay = day;
-				break;
-			case 'harvestEnd':
-				this.newProduct.harvestEndMonth = month;
-				this.newProduct.harvestEndDay = day;
-				break;
-		}
-	}
+    
+    
+    productAddSuccess() {
+        this.productAdded = true;
+        setTimeout(() => this.productAdded = false, 3000);
+    }
 }

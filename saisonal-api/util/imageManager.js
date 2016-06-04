@@ -31,8 +31,10 @@ exports.deleteImage = function (imgPath) {
 
 exports.processUploadedImage = function (imgPath) {
     try {
-        fs.rename(path.join(__dirname, "/../../saisonal-manager/temp/", imgPath), path.join(__dirname, '/../', imgPath));
-        createThumb(imgPath);
+        var srcPath = path.join(__dirname, "/../../saisonal-manager/temp/", imgPath);
+        var targetPath = path.join(__dirname, '/../', imgPath);
+        fs.rename(srcPath, targetPath);
+        createThumb(targetPath);
     } catch (e) {
         console.log('Error: ImageManager cannot process image ' + imgPath, e);
     }
@@ -43,7 +45,7 @@ function createThumb (imgPath) {
     try {
         var imgThumb = imgPath.substr(0, (imgPath.length - 4)) + '_thumb' + imgPath.substr(-4);
         gm(imgPath).resize('400').write(imgThumb, function (err) {
-            if (err) console.log(err);
+            if (err) console.log('Error: ImageManager cannot create thumbnail.', err);
         });
     } catch (e) {
         console.log('Error: ImageManager cannot process image ' + imgPath, e);

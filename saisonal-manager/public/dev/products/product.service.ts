@@ -99,8 +99,6 @@ export class ProductService {
     }
 
     addProduct(product: Product) {
-        console.log(product);
-        
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         var options = new RequestOptions({
