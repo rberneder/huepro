@@ -2,13 +2,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 300px;
+  width: 200px;
+  background: $light-gray;
   bottom: 0;
   display: block;
   border-right: 1px solid $gray;
 
   #logo {
-    margin-bottom: 100px;
+    background: #fff;
+    margin-bottom: 1px;
   }
 
   #main-nav .nav-item {
@@ -44,6 +46,6 @@
   padding: 15px;
 
   @media (min-width: $screen-md-min) {
-    margin-left: 350px;
+    margin-left: 300px;
   }
 }

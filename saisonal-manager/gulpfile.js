@@ -147,6 +147,7 @@ gulp.task('watch', function () {
     gulp.watch(assetsDev + 'scss/**/*.scss', ['css']);
     gulp.watch(assetsDev + 'css/**/*.css', ['css']);
     gulp.watch(assetsDev + 'img/*', ['img']);
+    gulp.watch(assetsDev + 'fonts/iconfont/svg/*.svg', ['iconfont']);
 });
 
 gulp.task('default', ['watch', 'ts', 'js', 'iconfont', 'css']);

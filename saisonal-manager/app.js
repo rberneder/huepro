@@ -79,6 +79,7 @@ app.get('/uploads/:element/:folder/:file', homeController.getFile);
 
 
 app.get('/api/products', apiProductController.getProducts);
+app.get('/api/products/ranking', apiProductController.getProductRanking);
 app.get('/api/products/id/:id', apiProductController.getProduct);
 app.get('/api/products/search/:str', apiProductController.searchProducts);
 app.get('/api/products/month/:month', apiProductController.getProductsOfMonth);

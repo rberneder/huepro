@@ -1,22 +1,37 @@
 <div id="product-list">
-    <h4>Produkt editieren</h4>
+    <h4 class="hl-bg">Produkte verwalten</h4>
 
     <div id="filter">
         <input type="text" placeholder="Suche">
     </div>
 
     <div id="list-content">
-        <article
-                *ngFor="let product of products; let i = index"
-                (click)="editProduct(product)">
-            <figure>
-                <img *ngIf="product.image" src="{{product.image}}">
-                <img *ngIf="!product.image" src="/src/img/img-placeholder.png">
-                <figcaption>
-                    <h4>{{product.name}}</h4>
-                    <p><em>{{product.family}} / {{product.category}}</em></p>
-                </figcaption>
-            </figure>
+        <article *ngFor="let product of products; let i = index">
+            <div class="row">
+                <figure class="col-xs-8"
+                        (click)="editProduct(product)">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <img class="img-responsive"
+                                 *ngIf="product.image" src="{{product.image}}">
+                            <img class="img-responsive"
+                                 *ngIf="!product.image" src="/src/img/img-placeholder.png">
+                        </div>
+                        <div class="col-xs-9">
+                            <figcaption>
+                                <h4>{{product.name}}</h4>
+                                <p><em>{{product.family}} / {{product.category}}</em></p>
+                            </figcaption>
+                        </div>
+                    </div>
+                </figure>
+                <div class="btns col-xs-4">
+                    <button class="btn btn-danger"
+                            (click)="deleteProduct(product)"><span class="icon icon-close-circle"></span></button>
+                    <button class="btn btn-success"
+                            (click)="editProduct(product)"><span class="icon icon-edit"></span></button>
+                </div>
+            </div>
         </article>
     </div>
 </div>

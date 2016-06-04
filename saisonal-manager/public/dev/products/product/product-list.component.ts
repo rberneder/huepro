@@ -32,6 +32,16 @@ export class ProductListComponent implements OnInit {
     /*
      * ///////// HELPER METHODS /////////
      * */
+    deleteProduct(product: Product) {
+        if (confirm('Produkt löschen?')) {
+            this._productService
+                .deleteProduct(product._id)
+                .subscribe((data) => {
+                    this.products.splice(this.products.indexOf(product), 1);
+                });
+        }
+    }
+
     editProduct(product: Product) {
         console.log('EDITING PRODUCT: ', product);
     }

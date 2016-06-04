@@ -1,22 +1,39 @@
 #product-list {
+  #list-content {
+    padding: 15px 0;
+  }
+
   article {
-    margin-bottom: 15px;
-    cursor: pointer;
 
     figure {
-      float: left;
-      clear: both;
+      padding-top: 10px;
+      cursor: pointer;
       margin-bottom: 15px;
 
-      img {
-        float: left;
-        width: 20%;
+      p,
+      h4 {
+        margin: 0;
       }
+      p {
+        color: $gray;
+      }
+    }
 
-      figcaption {
-        float: left;
-        width: 60%;
-        padding-left: 15px;
+    .btns {
+      visibility: hidden;
+
+      .btn {
+        float: right;
+        padding: 0;
+        width: 30px;
+        height: 50px;
+        line-height: 50px;
+      }
+    }
+
+    &:hover {
+      .btns {
+        visibility: visible;
       }
     }
   }

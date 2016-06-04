@@ -1,8 +1,17 @@
 <h2 class="hl-bg">Rangliste</h2>
 
-<ol>
-    <li>Produkt 1</li>
-    <li>Produkt 2</li>
-    <li>Produkt 3</li>
-    <li>Produkt 4</li>
-</ol>
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Aktueller Trend</h3>
+        <ol>
+            <li *ngFor="let item of productsTrend"><h4>{{item.product.name}}</h4></li>
+        </ol>
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Gesamtstatistik</h3>
+        <ol>
+            <li *ngFor="let item of productsOverall"><h4>{{item.product.name}}</h4></li>
+        </ol>
+    </div>
+</div>

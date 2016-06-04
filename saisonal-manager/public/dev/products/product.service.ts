@@ -17,6 +17,10 @@ export class ProductService {
             .map(response => response.json());
     }
 
+    getProductRanking() {
+        return this._http.get('/api/products/ranking')
+            .map(response => response.json());
+    }
 
     getProduct(id) {
         return this._http.get("/api/products/id/" + id)

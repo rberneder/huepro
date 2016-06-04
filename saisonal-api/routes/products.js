@@ -55,6 +55,8 @@ router.get('/stat', productStat.getAllProductStat);
 // GET /products/stat/23kjsdi24oijdw
 router.get('/stat/:productId', productStat.getProductStat);
 
+// GET /products/stat
+router.get('/ranking', productStat.getProductRanking);
 
 
 

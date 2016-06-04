@@ -3,7 +3,7 @@ var fs = require('fs');
 var gm = require('gm').subClass({imageMagick: true});
 
 
-exports.deleteImage = function (imgPath) {
+exports.deleteImage = function (img) {
     var imgPath = path.join(__dirname, "/../", img);
     var thumbPath = path.join(__dirname, '/../', img.substr(0, img.length - 4) + '_thumb' + img.substr(-4));
     

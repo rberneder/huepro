@@ -1,6 +1,8 @@
 require('../models/productStat');
+require('../models/product');
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var Product = mongoose.model('Product');
 var ProductStat = mongoose.model('ProductStat');
 
 
@@ -10,6 +12,7 @@ exports.trackProductStatPoints = function(product, points) {
         .findOne(function(err, productStat) {
             if (productStat == null) {
                 console.log('Error: productStatController/12');
+
             } else {
                 productStat.views++;
                 productStat.overallPoints += 1. * points;
@@ -36,6 +39,40 @@ exports.getProductStat = function(req, res) {
 
 exports.getAllProductStats = function() {
     return ProductStat.find().sort({trend: 'desc'}).select('product_id').exec();
+}
+
+exports.getProductRanking = function(req, res) {
+    ProductStat.find().sort({trend: 'desc'}).select('product_id trend overallPoints').exec(function(err, stats) {
+        if (err) {
+            console.log('ERROR: Cannot get product-statistics from database.', err);
+
+        } else {
+            Product.find().exec(function(err, products) {
+                if (err) {
+                    console.log('ERROR: Cannot get products from database.', err);
+
+                } else {
+                    var result = new Array();
+
+                    for (var i = 0; i < stats.length; i++) {
+                        var searchId = stats[i].product_id;
+
+                        for (var j = 0; j < products.length; j++) {
+                            if (products[j]._id == searchId) {
+                                result.push({
+                                    product: products[j],
+                                    trend: stats[i].trend,
+                                    overallPoints: stats[i].overallPoints
+                                });
+                                break;
+                            }
+                        }
+                    }
+                    res.jsonp(result);
+                }
+            });
+        }
+    });
 }
 
 exports.createProductStat = function(product) {

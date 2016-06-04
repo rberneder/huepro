@@ -17,6 +17,18 @@ exports.getProducts = function(req, res) {
 };
 
 
+// GET /api/products/ranking  ->  Ranking-list of all products.
+exports.getProductRanking = function(req, res) {
+    request.get(apiUrl + '/products/ranking', function(err, request, body) {
+        if (err) {
+            res.send(util.jsonParseErr(err));
+        } else {
+            res.send(util.jsonParse(body));
+        }
+    });
+};
+
+
 // GET /api/products/month/:month  ->  List of all products in passed month.
 exports.getProductsOfMonth = function(req, res) {
     request.get(apiUrl + '/products/month/' + req.params.month, function(err, request, body) {
