@@ -10,7 +10,8 @@
                 *ngFor="let product of products; let i = index"
                 (click)="editProduct(product)">
             <figure>
-                <img src="{{product.image}}">
+                <img *ngIf="product.image" src="{{product.image}}">
+                <img *ngIf="!product.image" src="/src/img/img-placeholder.png">
                 <figcaption>
                     <h4>{{product.name}}</h4>
                     <p><em>{{product.family}} / {{product.category}}</em></p>
