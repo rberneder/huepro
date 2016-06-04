@@ -22,10 +22,10 @@
             </div>
 
             <h1 class="text-center">{{product?.name}}</h1>
-            <h2 class="text-center">Lateinische Bezeichnung</h2>
+            <h2 class="text-center">{{product?.family}} - {{product?.category}}</h2>
 
             <div class="description">
-                {{product?.description}}
+                {{product?.shortDescription}}
             </div>
 
             <div class="row">
@@ -43,6 +43,13 @@
                 </div>
             </div>
 
+
+            <div class="description">
+                <br>
+                <br>
+                <h4>Beschreibung</h4>
+                {{product?.description}}
+            </div>
 
             <div class="recipes">
                 <div class="text-center">
