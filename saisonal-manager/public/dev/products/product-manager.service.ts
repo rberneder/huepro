@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/share";
 import {Product} from "./product";
 import {Family} from "./family/family";
+import {Category} from "./category/category";
 
 export class ProductManagerService {
     
@@ -22,16 +23,20 @@ export class ProductManagerService {
     private _deleteProductObserver: Observer<Product>;
 
     // //// FAMILIES ////
-    // Edit-product -> product that shall be edited
     private editFamilyObservable: Observable<Family>;
     private _editFamilyObserver: Observer<Family>;
-    // Add-product -> product that shall be added
     private addFamilyObservable: Observable<Family>;
     private _addFamilyObserver: Observer<Family>;
-    // Delete-product -> product that shall be deleted
     private deleteFamilyObservable: Observable<Family>;
     private _deleteFamilyObserver: Observer<Family>;
 
+    // //// CATEGORIES ////
+    private editCategoryObservable: Observable<Category>;
+    private _editCategoryObserver: Observer<Category>;
+    private addCategoryObservable: Observable<Category>;
+    private _addCategoryObserver: Observer<Category>;
+    private deleteCategoryObservable: Observable<Category>;
+    private _deleteCategoryObserver: Observer<Category>;
 
 
 
@@ -47,6 +52,10 @@ export class ProductManagerService {
         this.editFamilyObservable = new Observable(observer => this._editFamilyObserver = observer).share();
         this.addFamilyObservable = new Observable(observer => this._addFamilyObserver = observer).share();
         this.deleteFamilyObservable = new Observable(observer => this._deleteFamilyObserver = observer).share();
+        // //// CATEGORIES ////
+        this.editCategoryObservable = new Observable(observer => this._editCategoryObserver = observer).share();
+        this.addCategoryObservable = new Observable(observer => this._addCategoryObserver = observer).share();
+        this.deleteCategoryObservable = new Observable(observer => this._deleteCategoryObserver = observer).share();
     }
 
 
@@ -103,5 +112,31 @@ export class ProductManagerService {
 
     setDeleteFamily(family: Family) {
         this._deleteFamilyObserver.next(family);
+    }
+
+
+    // //// CATEGORIES ////
+    getEditCategory() {
+        return this.editCategoryObservable;
+    }
+
+    setEditCategory(category: Category) {
+        this._editCategoryObserver.next(category);
+    }
+
+    getAddCategory() {
+        return this.addCategoryObservable;
+    }
+
+    setAddCategory(category: Category) {
+        this._addCategoryObserver.next(category);
+    }
+
+    getDeleteCategory() {
+        return this.deleteCategoryObservable;
+    }
+
+    setDeleteCategory(category: Category) {
+        this._deleteCategoryObserver.next(category);
     }
 }

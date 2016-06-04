@@ -1,0 +1,25 @@
+<div id="editor-list">
+    <h4 class="hl-bg">Produktkategorien verwalten</h4>
+
+    <div id="filter">
+        <input type="text" placeholder="Suche">
+    </div>
+
+    <div id="list-content">
+        <em *ngIf="!categories || categories.length < 1">Es wurden noch keine Kategorien gespeichert.</em>
+        <article *ngFor="let category of categories; let i = index">
+            <div class="row">
+                <div class="col-xs-8"
+                        (click)="editCategory(category)">
+                    <h4>{{category.name}}</h4>
+                </div>
+                <div class="btns col-xs-4">
+                    <button class="btn btn-danger"
+                            (click)="deleteCategory(category)"><span class="icon icon-close-circle"></span></button>
+                    <button class="btn btn-success"
+                            (click)="editCategory(category)"><span class="icon icon-edit"></span></button>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>

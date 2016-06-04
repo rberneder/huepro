@@ -1,0 +1,45 @@
+<div id="editor">
+    <div class="hl-bg-cont">
+        <h2 class="pull-left">Kategorie-Editor</h2>
+
+        <div *ngIf="!isNewCategory">
+            <button class="btn pull-right"
+                (click)="resetForm()">
+                <span class="icon icon-close-circle"></span>
+            </button>
+            <div class="hl-divider pull-right"></div>
+            <div class="text-item pull-right">Bearbeiten</div>
+        </div>
+
+        <div class="text-item pull-right" *ngIf="isNewCategory">Neu</div>
+
+        <div class="hl-divider pull-right"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-7">
+            <form [ngFormModel]="newCategoryForm" (ngSubmit)="onSubmit(newCategoryForm.value)">
+
+                <div class="form-area">
+                    <label for="name">Kategoriename</label>
+                    <input id="name" type="text"
+                           placeholder="Kategoriename"
+                           [(ngModel)]="editorCategory.name"
+                           [ngFormControl]="newCategoryForm.controls['name']"/>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" [disabled]="!newCategoryForm.valid">Kategorie speichern</button>
+
+                <button class="btn btn-danger"
+                        *ngIf="!isNewCategory"
+                        (click)="deleteCategory()">Kategorie löschen</button>
+
+                <div class="bg-green inline-block info-msg"
+                      [class.active]="categorySaved == true">
+                    <span *ngIf="isNewCategory">Kategorie gespeichert</span>
+                    <span *ngIf="!isNewCategory">Kategorie gespeichert</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

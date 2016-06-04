@@ -137,7 +137,7 @@ export class ProductEditorComponent implements OnInit {
 
         } else {
             this._productService
-                .addProduct(this.editorProduct)
+                .updateProduct(this.editorProduct)
                 .subscribe(data => {
                     this.productSaveSuccess();
                     this.resetForm();

@@ -113,19 +113,7 @@ export class ProductService {
         });
         return this._http.request(new Request(options));
     }
-
-
-    saveProduct(product: Product) {
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        var options = new RequestOptions({
-            method: RequestMethod.Put,
-            headers: headers,
-            url: '/api/products/',
-            body: JSON.stringify(product)
-        });
-        return this._http.request(new Request(options));
-    }
+    
 
 
     addFamily(family: Family) {

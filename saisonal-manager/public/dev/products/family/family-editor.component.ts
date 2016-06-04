@@ -77,7 +77,7 @@ export class FamilyEditorComponent implements OnInit {
 
         } else {
             this._productService
-                .addFamily(this.editorFamily)
+                .updateFamily(this.editorFamily)
                 .subscribe(data => {
                     this.saveSuccess();
                     this.resetForm();
@@ -85,7 +85,7 @@ export class FamilyEditorComponent implements OnInit {
         }
 	}
 
-    deleteProduct() {
+    deleteFamily() {
         if (confirm('Produktfamilie löschen?')) {
             this._productService
                 .deleteFamily(this.editorFamily._id)

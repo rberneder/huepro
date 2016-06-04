@@ -45,14 +45,18 @@ exports.post = function(req, res) {
 exports.put = function(req, res) {
     Category.load(req.params.categoryId, function(err, category) {
         category = _.extend(category, req.body);
-        category.save(function(err) {
-            if (err) {
-                // TODO log error
-                res.jsonp('[]');
-            } else {
-                res.jsonp(category);
-            }
-        });
+        if (!category) {
+            console.log('Error: Category cannot be loaded.');
+        } else {
+            category.save(function(err) {
+                if (err) {
+                    // TODO log error
+                    res.jsonp('[]');
+                } else {
+                    res.jsonp(category);
+                }
+            });
+        }
     });
 };
 
