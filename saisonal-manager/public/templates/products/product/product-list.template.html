@@ -6,6 +6,7 @@
     </div>
 
     <div id="list-content">
+        <em *ngIf="!products || products.length < 1">Es wurden noch keine Produkte gespeichert.</em>
         <article *ngFor="let product of products; let i = index">
             <div class="row">
                 <figure class="col-xs-8"

@@ -87,7 +87,7 @@ exports.deleteProductStat = function(product) {
     ProductStat.findOne({product_id: product._id})
         .exec(function(err, productStat) {
             if (err || !productStat) {
-                res.jsonp('[]');    // TODO log error
+                console.log('Error: Product not found.', product);
             } else {
                 productStat.remove(function(err) {
                     // Removed

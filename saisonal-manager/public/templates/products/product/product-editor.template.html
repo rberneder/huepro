@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="storageDays">Lagerfähigkeit</label>
-                            <input type="number" min="0" max="365" id="storageDays" name="storageDays"
+                            <input type="text" id="storageDays" name="storageDays"
                                    [(ngModel)]="editorProduct.storageDays"
                                    [ngFormControl]="newProductForm.controls['storageDays']">
                             Tage

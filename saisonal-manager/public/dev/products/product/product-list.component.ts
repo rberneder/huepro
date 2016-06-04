@@ -32,6 +32,10 @@ export class ProductListComponent implements OnInit {
         this._productManagerService
             .getDeleteProduct()
             .subscribe((product) => this.removeProductFromList(product));
+
+        this._productManagerService
+            .getAddProduct()
+            .subscribe((product) => this.addProductToList(product));
     }
 
 
@@ -49,7 +53,12 @@ export class ProductListComponent implements OnInit {
         }
     }
 
-    removeProductFromList(product) {
+    addProductToList(product) {
+        console.log(product);
+        this.products.push(product);
+    }
+
+    removeProductFromList(product: Product) {
         this.products.splice(this.products.indexOf(product), 1);
     }
 

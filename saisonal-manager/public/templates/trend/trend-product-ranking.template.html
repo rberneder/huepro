@@ -3,6 +3,7 @@
 <div class="row">
     <div class="col-sm-6">
         <h3>Aktueller Trend</h3>
+        <em *ngIf="productsTrend.length < 1">Es gibt derzeit keine Produkte.</em>
         <ol>
             <li *ngFor="let item of productsTrend">
                 <h4>
@@ -16,6 +17,7 @@
 
     <div class="col-sm-6">
         <h3>Gesamtstatistik</h3>
+        <em *ngIf="productsOverall.length < 1">Es gibt derzeit keine Produkte.</em>
         <ol>
             <li *ngFor="let item of productsOverall">
                 <h4>

@@ -130,10 +130,12 @@ export class ProductEditorComponent implements OnInit {
         if (this.isNewProduct) {
             this._productService
                 .addProduct(this.editorProduct)
-                .subscribe(data => {
+                .subscribe(response => {
+                    this._productManagerService.setAddProduct(this.editorProduct);
                     this.productSaveSuccess();
                     this.resetForm();
                 });
+
         } else {
             this._productService
                 .addProduct(this.editorProduct)
