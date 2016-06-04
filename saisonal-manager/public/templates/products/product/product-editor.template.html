@@ -1,18 +1,33 @@
 <div id="product-editor">
-    <h2 class="hl-bg">Produkt-Editor</h2>
+    <div class="hl-bg-cont">
+        <h2 class="pull-left">Produkt-Editor</h2>
+
+        <div *ngIf="!isNewProduct">
+            <button class="btn pull-right"
+                (click)="resetForm()">
+                <span class="icon icon-close-circle"></span>
+            </button>
+            <div class="hl-divider pull-right"></div>
+            <div class="text-item pull-right">Bearbeiten</div>
+        </div>
+
+        <div class="text-item pull-right" *ngIf="isNewProduct">Neu</div>
+
+        <div class="hl-divider pull-right"></div>
+    </div>
     <div class="row">
         <div class="col-sm-7">
             <form [ngFormModel]="newProductForm" (ngSubmit)="onSubmit(newProductForm.value)">
 
                 <input type="hidden"
-                       [(ngModel)]="newProduct.image"
+                       [(ngModel)]="editorProduct.image"
                        [ngFormControl]="newProductForm.controls['image']">
 
                 <div class="form-area">
                     <label for="name">Produktname</label>
                     <input id="name" type="text"
                            placeholder="Produktname"
-                           [(ngModel)]="newProduct.name"
+                           [(ngModel)]="editorProduct.name"
                            [ngFormControl]="newProductForm.controls['name']"/>
 
                     <div class="row">
@@ -20,7 +35,7 @@
                             <label for="family-select">Produktfamilie</label>
                             <select name="family-select" id="family-select" #family
                                     (change)="updateCat(family.value)"
-                                    [(ngModel)]="newProduct.family"
+                                    [(ngModel)]="editorProduct.family"
                                     [ngFormControl]="newProductForm.controls['family']">
                                 <option value="" disabled checked>Bitte wählen</option>
                                 <option *ngFor="let family of families; let i = index" value="{{family.name}}">{{family.name}}</option>
@@ -28,12 +43,12 @@
                         </div>
                         <div class="col-sm-3">
                             <label>Produktkategorie</label>
-                            <h4>{{newProduct.category}}</h4>
+                            <h4>{{editorProduct.category}}</h4>
                         </div>
                         <div class="col-sm-3">
                             <label for="storageDays">Lagerfähigkeit</label>
                             <input type="number" min="0" max="365" id="storageDays" name="storageDays"
-                                   [(ngModel)]="newProduct.storageDays"
+                                   [(ngModel)]="editorProduct.storageDays"
                                    [ngFormControl]="newProductForm.controls['storageDays']">
                             Tage
                         </div>
@@ -69,21 +84,21 @@
                         </tbody>
                     </table>
 
-                    <input type="hidden" [(ngModel)]="newProduct.plantStartDay" [ngFormControl]="newProductForm.controls['plantStartDay']">
-                    <input type="hidden" [(ngModel)]="newProduct.plantStartMonth" [ngFormControl]="newProductForm.controls['plantStartMonth']">
-                    <input type="hidden" [(ngModel)]="newProduct.plantEndDay" [ngFormControl]="newProductForm.controls['plantEndDay']">
-                    <input type="hidden" [(ngModel)]="newProduct.plantEndMonth" [ngFormControl]="newProductForm.controls['plantEndMonth']">
-                    <input type="hidden" [(ngModel)]="newProduct.harvestStartDay" [ngFormControl]="newProductForm.controls['harvestStartDay']">
-                    <input type="hidden" [(ngModel)]="newProduct.harvestStartMonth" [ngFormControl]="newProductForm.controls['harvestStartMonth']">
-                    <input type="hidden" [(ngModel)]="newProduct.harvestEndDay" [ngFormControl]="newProductForm.controls['harvestEndDay']">
-                    <input type="hidden" [(ngModel)]="newProduct.harvestEndMonth" [ngFormControl]="newProductForm.controls['harvestEndMonth']">
+                    <input type="hidden" [(ngModel)]="editorProduct.plantStartDay" [ngFormControl]="newProductForm.controls['plantStartDay']">
+                    <input type="hidden" [(ngModel)]="editorProduct.plantStartMonth" [ngFormControl]="newProductForm.controls['plantStartMonth']">
+                    <input type="hidden" [(ngModel)]="editorProduct.plantEndDay" [ngFormControl]="newProductForm.controls['plantEndDay']">
+                    <input type="hidden" [(ngModel)]="editorProduct.plantEndMonth" [ngFormControl]="newProductForm.controls['plantEndMonth']">
+                    <input type="hidden" [(ngModel)]="editorProduct.harvestStartDay" [ngFormControl]="newProductForm.controls['harvestStartDay']">
+                    <input type="hidden" [(ngModel)]="editorProduct.harvestStartMonth" [ngFormControl]="newProductForm.controls['harvestStartMonth']">
+                    <input type="hidden" [(ngModel)]="editorProduct.harvestEndDay" [ngFormControl]="newProductForm.controls['harvestEndDay']">
+                    <input type="hidden" [(ngModel)]="editorProduct.harvestEndMonth" [ngFormControl]="newProductForm.controls['harvestEndMonth']">
                 </div>
 
                 <div class="form-area">
                     <label for="shortDescription">Kurzbeschreibung</label>
                     <textarea id="shortDescription"
                           placeholder="Kurzbeschreibung"
-                          [(ngModel)]="newProduct.shortDescription"
+                          [(ngModel)]="editorProduct.shortDescription"
                           [ngFormControl]="newProductForm.controls['shortDescription']"></textarea>
                 </div>
 
@@ -91,16 +106,30 @@
                     <label for="description">Detailbeschreibung</label>
                     <textarea id="description"
                           placeholder="Detailbeschreibung"
-                          [(ngModel)]="newProduct.description"
+                          [(ngModel)]="editorProduct.description"
                           [ngFormControl]="newProductForm.controls['description']"></textarea>
                 </div>
+
                 <button type="submit" class="btn btn-primary" [disabled]="!newProductForm.valid">Produkt speichern</button>
-                <span class="bg-green info-msg"
-                    [class.active]="productAdded == true">Produkt hinzugefügt</span>
+
+                <button class="btn btn-danger"
+                        *ngIf="!isNewProduct"
+                        (click)="deleteProduct()">Produkt löschen</button>
+
+                <div class="bg-green inline-block info-msg"
+                      [class.active]="productSaved == true">
+                    <span *ngIf="isNewProduct">Produkt hinzugefügt</span>
+                    <span *ngIf="!isNewProduct">Produkt gespeichert</span>
+                </div>
             </form>
         </div>
 
         <div class="col-sm-offset-1 col-sm-3">
+            <div id="current-product-image"
+                 *ngIf="!isNewProduct && editorProduct.image">
+                <img src="{{editorProduct.image}}" class="img-responsive">
+                <label>Neues Produktbild</label>
+            </div>
             <form enctype="multipart/form-data" action="/upload/product-image" method="post" class="dropzone"></form>
         </div>
     </div>

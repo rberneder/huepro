@@ -1,7 +1,8 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit, Output, EventEmitter} from "angular2/core";
 import {Router} from "angular2/router";
 import {ProductService} from "../product.service";
 import {Product} from "../product";
+import {ProductManagerService} from "../product-manager.service";
 
 @Component({
     selector: "product-list",
@@ -20,11 +21,17 @@ export class ProductListComponent implements OnInit {
     /*
      * ///////// INITIALIZATION /////////
      * */
-    constructor (private _productService: ProductService) {}
+    constructor (
+        private _productService: ProductService,
+        private _productManagerService: ProductManagerService) {}
     
     ngOnInit():any {
         this._productService.getProducts()
             .subscribe((products: Product[]) => this.products = products);
+
+        this._productManagerService
+            .getDeleteProduct()
+            .subscribe((product) => this.removeProductFromList(product));
     }
 
 
@@ -37,12 +44,16 @@ export class ProductListComponent implements OnInit {
             this._productService
                 .deleteProduct(product._id)
                 .subscribe((data) => {
-                    this.products.splice(this.products.indexOf(product), 1);
+                    this.removeProductFromList(product)
                 });
         }
     }
 
+    removeProductFromList(product) {
+        this.products.splice(this.products.indexOf(product), 1);
+    }
+
     editProduct(product: Product) {
-        console.log('EDITING PRODUCT: ', product);
+        this._productManagerService.setEditProduct(product);
     }
 }

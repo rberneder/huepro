@@ -15,10 +15,52 @@ input[type=file] {
   color: #fff;
 }
 .hl-bg {
+  display: inline-block;
   color: #fff;
   background: $beige;
   text-transform: uppercase;
   padding: 10px 15px;
+}
+.hl-bg-cont {
+  display: block;
+  float: left;
+  width: 100%;
+  color: #fff;
+  background: $beige;
+  text-transform: uppercase;
+  padding: 0 0 0 15px;
+  height: 50px;
+  margin-bottom: 60px;
+
+  h1, h2, h3, h4 {
+    line-height: 50px;
+    margin: 0;
+  }
+  .hl-divider {
+    height: 50px;
+    width: 3px;
+    background: #fff;
+  }
+  .text-item {
+    display: block;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    text-transform: none;
+  }
+  .btn {
+    display: block;
+    color: #fff;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    text-align: center;
+    background: none;
+    background-color: transparent;
+  }
 }
 
 

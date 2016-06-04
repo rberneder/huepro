@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit, Input} from "angular2/core";
 import {Router} from "angular2/router";
 import {ControlGroup, FormBuilder, Validators, Control} from "angular2/common";
 import {ProductService} from "../product.service";
@@ -7,6 +7,7 @@ import {Family} from "../family/family";
 import {ProductCl} from "../product.class";
 import {Month} from "../../util/month";
 import {MONTHS} from "../../util/month.seed";
+import {ProductManagerService} from "../product-manager.service";
 
 declare var Dropzone: any;
 
@@ -21,30 +22,43 @@ export class ProductEditorComponent implements OnInit {
      * ///////// ATTRIBUTES /////////
      * */
 	private newProductForm: ControlGroup;
-	private newProduct: Product;
+	private editorProduct: Product;
     private plant: number[];
     private harvest: number[];
     private families: Family[];
-	private productAdded: boolean;
+	private productSaved: boolean;
     private months: Month[];
     private dropZone: any;
-
+    private isNewProduct: boolean;
 
 
     /*
      * ///////// INITIALIZATION /////////
      * */
-	constructor (private _productService: ProductService, private _router: Router, private _formBuilder: FormBuilder) {
-        this.productAdded = false;
+	constructor (
+        private _productService: ProductService, 
+        private _router: Router, 
+        private _formBuilder: FormBuilder,
+        private _productManagerService: ProductManagerService) {
+        this.productSaved = false;
+        this.isNewProduct = true;
         this.plant = new Array<number>();
         this.harvest = new Array<number>();
-		this.newProduct = new ProductCl();
+		this.editorProduct = new ProductCl();
         this.months = MONTHS;
-		this.newProduct.category = '-';
 	}
 
 	ngOnInit():any {
 		this.prepareUpload();
+
+        this._productManagerService
+            .getEditProduct()
+            .subscribe(product => {
+                this.isNewProduct = false;
+                this.editorProduct = product;
+                this.calculateRange('plant');
+                this.calculateRange('harvest');
+            });
 
 		this._productService.getFamilies()
 			.subscribe(data => {
@@ -95,7 +109,7 @@ export class ProductEditorComponent implements OnInit {
 		var fileUploaded = (fileName) => {
             // Hack because this.newProductForm.controls.image.updateValue(...) doesn't exist anymore
             (<Control> this.newProductForm.find('image')).updateValue(fileName, {onlySelf:true, emitEvent:true});
-            this.newProduct.image = fileName;
+            this.editorProduct.image = fileName;
         }
 	}
 
@@ -104,30 +118,54 @@ export class ProductEditorComponent implements OnInit {
     /*
      * ///////// FORM /////////
      * */
+    resetForm() {
+        this.editorProduct = new ProductCl();
+        this.dropZone.removeAllFiles();
+        this.plant.splice(0);
+        this.harvest.splice(0);
+        this.isNewProduct = true;
+    }
+
 	onSubmit(value) {
-       this._productService
-			.addProduct(this.newProduct)
-			.subscribe(data => {
-				this.productAddSuccess();
-				this.newProduct = new ProductCl();
-                this.dropZone.removeAllFiles();
-                this.plant.splice(0);
-                this.harvest.splice(0);
-                this.newProductForm
-			});
+        if (this.isNewProduct) {
+            this._productService
+                .addProduct(this.editorProduct)
+                .subscribe(data => {
+                    this.productSaveSuccess();
+                    this.resetForm();
+                });
+        } else {
+            this._productService
+                .addProduct(this.editorProduct)
+                .subscribe(data => {
+                    this.productSaveSuccess();
+                    this.resetForm();
+                });
+        }
 	}
+
+    deleteProduct() {
+        if (confirm('Produkt löschen?')) {
+            this._productService
+                .deleteProduct(this.editorProduct._id)
+                .subscribe(data => {
+                    this._productManagerService.setDeleteProduct(this.editorProduct);
+                    this.resetForm();
+                });
+        }
+    }
 
     calculateRange(type) {
         var start, end, months;
         switch (type) {
             case 'plant':
-                start = this.newProduct.plantStartMonth;
-                end = this.newProduct.plantEndMonth;
+                start = this.editorProduct.plantStartMonth;
+                end = this.editorProduct.plantEndMonth;
                 months = this.plant;
                 break;
             case 'harvest':
-                start = this.newProduct.harvestStartMonth;
-                end = this.newProduct.harvestEndMonth;
+                start = this.editorProduct.harvestStartMonth;
+                end = this.editorProduct.harvestEndMonth;
                 months = this.harvest;
                 break;
         }
@@ -148,38 +186,38 @@ export class ProductEditorComponent implements OnInit {
     }
 
     updatePlant(day: number, month: number) {
-        if (this.newProduct.plantStartMonth === null) {
-            this.newProduct.plantStartDay = day;
-            this.newProduct.plantStartMonth = month;
+        if (this.editorProduct.plantStartMonth === null) {
+            this.editorProduct.plantStartDay = day;
+            this.editorProduct.plantStartMonth = month;
 
-        } else if (this.newProduct.plantEndMonth === null) {
-            this.newProduct.plantEndDay = day;
-            this.newProduct.plantEndMonth = month;
+        } else if (this.editorProduct.plantEndMonth === null) {
+            this.editorProduct.plantEndDay = day;
+            this.editorProduct.plantEndMonth = month;
 
         } else {
-            this.newProduct.plantStartDay = day;
-            this.newProduct.plantStartMonth = month;
-            this.newProduct.plantEndDay = null;
-            this.newProduct.plantEndMonth = null;
+            this.editorProduct.plantStartDay = day;
+            this.editorProduct.plantStartMonth = month;
+            this.editorProduct.plantEndDay = null;
+            this.editorProduct.plantEndMonth = null;
 
         }
         this.calculateRange('plant');
     }
 
     updateHarvest(day: number, month: number) {
-        if (this.newProduct.harvestStartMonth === null) {
-            this.newProduct.harvestStartDay = day;
-            this.newProduct.harvestStartMonth = month;
+        if (this.editorProduct.harvestStartMonth === null) {
+            this.editorProduct.harvestStartDay = day;
+            this.editorProduct.harvestStartMonth = month;
 
-        } else if (this.newProduct.harvestEndMonth === null) {
-            this.newProduct.harvestEndDay = day;
-            this.newProduct.harvestEndMonth = month;
+        } else if (this.editorProduct.harvestEndMonth === null) {
+            this.editorProduct.harvestEndDay = day;
+            this.editorProduct.harvestEndMonth = month;
 
         } else {
-            this.newProduct.harvestStartDay = day;
-            this.newProduct.harvestStartMonth = month;
-            this.newProduct.harvestEndDay = null;
-            this.newProduct.harvestEndMonth = null;
+            this.editorProduct.harvestStartDay = day;
+            this.editorProduct.harvestStartMonth = month;
+            this.editorProduct.harvestEndDay = null;
+            this.editorProduct.harvestEndMonth = null;
 
         }
         this.calculateRange('harvest');
@@ -195,12 +233,12 @@ export class ProductEditorComponent implements OnInit {
                 break;
             }
         }
-		this.newProduct.category = foundFamily.category;
+		this.editorProduct.category = foundFamily.category;
 	}
     
     
-    productAddSuccess() {
-        this.productAdded = true;
-        setTimeout(() => this.productAdded = false, 3000);
+    productSaveSuccess() {
+        this.productSaved = true;
+        setTimeout(() => this.productSaved = false, 3000);
     }
 }
