@@ -4,6 +4,7 @@ import {RecipesComponent} from "./recipes/recipes.component";
 import {ProductService} from "./products/product.service";
 import {ProductContainerComponent} from "./products/product-container.component";
 import {DashboardContainerComponent} from "./dashboard/dashboard-container.component";
+import {TrendContainerComponent} from "./trend/trend-container.component";
 
 @Component({
     selector: 'app',
@@ -13,17 +14,10 @@ import {DashboardContainerComponent} from "./dashboard/dashboard-container.compo
 })
 @RouteConfig([
     {path: '/uebersicht/...', name: 'Dashboard', component: DashboardContainerComponent, useAsDefault: true},
+    {path: '/trend/...', name: 'Trend', component: TrendContainerComponent},
     {path: '/produkte/...', name: 'Products', component: ProductContainerComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
 ])
 export class AppComponent{
-    public smallMenu;
-
-    constructor(private  _productService: ProductService){
-        this.smallMenu = false;
-    }
-
-    menuActive() {
-        this.smallMenu = true;
-    }
+    constructor(private  _productService: ProductService){}
 }
