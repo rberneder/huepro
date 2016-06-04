@@ -4,14 +4,26 @@
     <div class="col-sm-6">
         <h3>Aktueller Trend</h3>
         <ol>
-            <li *ngFor="let item of productsTrend"><h4>{{item.product.name}}</h4></li>
+            <li *ngFor="let item of productsTrend">
+                <h4>
+                    <a href="http://www.saisonal.at:25080/produkte/produkt/{{item.product._id}}" target="_blank">
+                        {{item.product.name}}
+                    </a>
+                </h4>
+            </li>
         </ol>
     </div>
 
     <div class="col-sm-6">
         <h3>Gesamtstatistik</h3>
         <ol>
-            <li *ngFor="let item of productsOverall"><h4>{{item.product.name}}</h4></li>
+            <li *ngFor="let item of productsOverall">
+                <h4>
+                    <a href="http://www.saisonal.at:25080/produkte/produkt/{{item.product._id}}" target="_blank">
+                        {{item.product.name}}
+                    </a>
+                </h4>
+            </li>
         </ol>
     </div>
 </div>

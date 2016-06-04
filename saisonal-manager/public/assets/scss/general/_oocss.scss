@@ -1,16 +1,27 @@
-.text-white {
-  color: #fff;
-}
+/*
+* LAYOUT
+*/
 input[type=file] {
   display: inline-block;
 }
+.block        { display: block;        }
+.inline-block { display: inline-block; }
+
+
+/*
+* TYPO
+*/
+.text-white {
+  color: #fff;
+}
 .hl-bg {
-  display: inline-block;
   color: #fff;
   background: $beige;
   text-transform: uppercase;
   padding: 10px 15px;
 }
+
+
 /*
 * COLORS
 */

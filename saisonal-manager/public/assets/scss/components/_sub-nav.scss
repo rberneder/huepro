@@ -9,6 +9,9 @@
     color: #000;
     text-decoration: none;
 
+    &:hover {
+      background: $light-gray;
+    }
     &.router-link-active {
       background: $gray;
       color: #fff;
