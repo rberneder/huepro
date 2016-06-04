@@ -1,4 +1,4 @@
-import {Product} from "./product";
+import {Product} from "../product";
 export class ProductCl implements Product {
 	_id: number;
 	image: string;

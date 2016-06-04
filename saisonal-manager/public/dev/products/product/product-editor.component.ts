@@ -4,7 +4,7 @@ import {ControlGroup, FormBuilder, Validators, Control} from "angular2/common";
 import {ProductService} from "../product.service";
 import {Product} from "../product";
 import {Family} from "../family/family";
-import {ProductCl} from "../product.class";
+import {ProductCl} from "./product.class";
 import {Month} from "../../util/month";
 import {MONTHS} from "../../util/month.seed";
 import {ProductManagerService} from "../product-manager.service";
@@ -36,8 +36,7 @@ export class ProductEditorComponent implements OnInit {
      * ///////// INITIALIZATION /////////
      * */
 	constructor (
-        private _productService: ProductService, 
-        private _router: Router, 
+        private _productService: ProductService,
         private _formBuilder: FormBuilder,
         private _productManagerService: ProductManagerService) {
         this.productSaved = false;

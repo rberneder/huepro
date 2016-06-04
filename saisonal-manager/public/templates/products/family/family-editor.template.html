@@ -1,0 +1,57 @@
+<div id="editor">
+    <div class="hl-bg-cont">
+        <h2 class="pull-left">Familien-Editor</h2>
+
+        <div *ngIf="!isNewFamily">
+            <button class="btn pull-right"
+                (click)="resetForm()">
+                <span class="icon icon-close-circle"></span>
+            </button>
+            <div class="hl-divider pull-right"></div>
+            <div class="text-item pull-right">Bearbeiten</div>
+        </div>
+
+        <div class="text-item pull-right" *ngIf="isNewFamily">Neu</div>
+
+        <div class="hl-divider pull-right"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-7">
+            <form [ngFormModel]="newFamilyForm" (ngSubmit)="onSubmit(newFamilyForm.value)">
+
+                <div class="form-area">
+                    <label for="name">Familienname</label>
+                    <input id="name" type="text"
+                           placeholder="Familienname"
+                           [(ngModel)]="editorFamily.name"
+                           [ngFormControl]="newFamilyForm.controls['name']"/>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="category-select">Produktfamilie</label>
+                            <select name="category-select" id="category-select"
+                                    [(ngModel)]="editorFamily.category"
+                                    [ngFormControl]="newFamilyForm.controls['category']">
+                                <option value="" disabled selected>Bitte wählen</option>
+                                <option *ngFor="let category of categories; let i = index" value="{{category.name}}">{{category.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" [disabled]="!newFamilyForm.valid">Familie speichern</button>
+
+                <button class="btn btn-danger"
+                        *ngIf="!isNewFamily"
+                        (click)="deleteFamily()">Familie löschen</button>
+
+                <div class="bg-green inline-block info-msg"
+                      [class.active]="familySaved == true">
+                    <span *ngIf="isNewFamily">Familie hinzugefügt</span>
+                    <span *ngIf="!isNewFamily">Familie gespeichert</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

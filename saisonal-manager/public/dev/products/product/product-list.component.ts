@@ -48,13 +48,12 @@ export class ProductListComponent implements OnInit {
             this._productService
                 .deleteProduct(product._id)
                 .subscribe((data) => {
-                    this.removeProductFromList(product)
+                    this.removeProductFromList(product);
                 });
         }
     }
 
     addProductToList(product) {
-        console.log(product);
         this.products.push(product);
     }
 

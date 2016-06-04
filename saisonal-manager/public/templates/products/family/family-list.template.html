@@ -1,0 +1,26 @@
+<div id="list">
+    <h4 class="hl-bg">Produktfamilien verwalten</h4>
+
+    <div id="filter">
+        <input type="text" placeholder="Suche">
+    </div>
+
+    <div id="list-content">
+        <em *ngIf="!families || families.length < 1">Es wurden noch keine Familien gespeichert.</em>
+        <article *ngFor="let family of families; let i = index">
+            <div class="row">
+                <div class="col-xs-8"
+                        (click)="editFamily(family)">
+                    <h4>{{family.name}}</h4>
+                    <p><em>{{family.category}}</em></p>
+                </div>
+                <div class="btns col-xs-4">
+                    <button class="btn btn-danger"
+                            (click)="deleteFamily(family)"><span class="icon icon-close-circle"></span></button>
+                    <button class="btn btn-success"
+                            (click)="editFamily(family)"><span class="icon icon-edit"></span></button>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
