@@ -3,7 +3,7 @@
         <div id="product-list__cont">
             <article id="product-{{i}}" class="product-thumb col-xs-6 col-md-4"
                     *ngFor="let product of products; let i = index"
-                    [class.hidden]="(filteredCategories.length > 0 && filteredCategories.indexOf(product.category) < 0) || (filterRipe && product.harvestStartMonth != actMonth)">
+                    [class.hidden]="(filteredCategories.length > 0 && filteredCategories.indexOf(product.category) < 0) || (filterRipe && !(product.harvestStartMonth <= actMonth && product.harvestEndMonth >= actMonth))">
                 <a [routerLink]="['ProductDetails', {id: product._id}]">
                     <figure>
                         <div class="product-img">
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         <figcaption>
-                            <h3><span *ngIf="product.harvestStartMonth == actMonth" class="status status--ripe"></span>{{product.name}}</h3>
+                            <h3><span *ngIf="product.harvestStartMonth <= actMonth && product.harvestEndMonth >= actMonth" class="status status--ripe"></span>{{product.name}}</h3>
                         </figcaption>
                     </figure>
                 </a>

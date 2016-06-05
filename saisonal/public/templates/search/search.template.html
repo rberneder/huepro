@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h3>{{product.name}}<span *ngIf="product.harvestStartMonth == actMonth" class="status status--ripe"></span></h3>
+                                    <h3>{{product.name}}<span *ngIf="product.harvestStartMonth <= actMonth && product.harvestEndMonth >= actMonth" class="status status--ripe"></span></h3>
                                     <p><em>{{product.family}}</em></p>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h3>{{product.name}}<span *ngIf="product.harvestStartMonth == actMonth" class="status status--ripe"></span></h3>
+                                    <h3>{{product.name}}<span *ngIf="product.harvestStartMonth <= actMonth && product.harvestEndMonth >= actMonth" class="status status--ripe"></span></h3>
                                     <p><em>{{product.family}}</em></p>
                                 </div>
                             </div>

@@ -24,14 +24,15 @@ exports.getAllProducts = function(req, res) {
 
 exports.getFreshProducts = function (req, res) {
     var limit = 10;     // To return a maximum of 10 products
-    var test = productStat.getAllProductStats()
+    productStat.getAllProductStats()
         .then(function (prodStats) {
             if (!prodStats) return res.jsonp('[]');
 
             var actMonth = new Date().getMonth();
 
             Product.find()
-                .where('harvestStartMonth', actMonth)
+                .lte('harvestStartMonth', actMonth)
+                .gte('harvestEndMonth', actMonth)
                 .exec(function (err, products) {
                     if (err) {
                         console.log('Error: getFreshProducts. ', err);
@@ -71,7 +72,10 @@ exports.show = function(req, res) {
 
 /** Lists all products of month. */
 exports.getProductsOfMonth = function(req, res) {
-    Product.find({'harvestStartMonth': req.params.month})
+    Product
+        .find()
+        .lte('harvestStartMonth', req.params.month)
+        .gte('harvestEndMonth', req.params.month)
         .sort({'name': 'asc'})
         .exec(function(err, products) {
             if (err) {
