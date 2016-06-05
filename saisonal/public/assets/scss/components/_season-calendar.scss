@@ -58,6 +58,11 @@
 
       @media (max-width: $screen-xs-max) { &:nth-child(2n+1) { clear: left; } }
       @media (min-width: $screen-sm-min) { &:nth-child(3n+1) { clear: left; } }
+
+      .product-img {
+        width: 75%;
+        margin: 0 auto;
+      }
     }
   }
 }

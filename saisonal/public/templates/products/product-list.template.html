@@ -6,12 +6,14 @@
                     [class.hidden]="(filteredCategories.length > 0 && filteredCategories.indexOf(product.category) < 0) || (filterRipe && product.harvestStartMonth != actMonth)">
                 <a [routerLink]="['ProductDetails', {id: product._id}]">
                     <figure>
-                        <div class="embed-responsive embed-responsive-4by3">
-                            <div *ngIf="product.image">
-                                <img src="{{product.image}}" class="embed-responsive-item">
-                            </div>
-                            <div *ngIf="!product.image">
-                                <img src="src/img/img-placeholder.png" class="embed-responsive-item">
+                        <div class="product-img">
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <div *ngIf="product.image">
+                                    <img src="{{product.image}}" class="embed-responsive-item">
+                                </div>
+                                <div *ngIf="!product.image">
+                                    <img src="src/img/img-placeholder.png" class="embed-responsive-item">
+                                </div>
                             </div>
                         </div>
                         <figcaption>
