@@ -17,28 +17,14 @@
 /*
  * COMPONENTS
  */
-// Sidebar
+@import "components/detail-season-calendar";
 @import "components/sidebar";
-
-// Mobile menu
 @import "components/mobile-menu";
-
-// Calendar-corner
 @import "components/calendar-corner";
-
-// Fresh products
 @import "components/fresh-products";
-
-// Index-menu
 @import "components/index-menu";
-
-// Products
 @import "components/products/product-list";
 @import "components/products/product-details";
 @import "components/products/product-status";
-
-// Season-calendar
 @import "components/season-calendar";
-
-// Search
 @import "components/search";

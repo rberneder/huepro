@@ -53,6 +53,7 @@ export class FreshProductsComponent implements OnInit {
             });
         this.$animationPane = document.getElementById('animation-pane');
         this.setUpTouchGestures();
+        this.setUpMouseWheel();
     }
 
     setUpTouchGestures() {
@@ -65,6 +66,16 @@ export class FreshProductsComponent implements OnInit {
                 this.slide('up');
             } else {
                 this.slide('down');
+            }
+        });
+    }
+
+    setUpMouseWheel() {
+        window.addEventListener("mousewheel", (ev) => {
+            if (ev.deltaY > 0) {
+                this.slide('down');
+            } else if (ev.deltaY < 0) {
+                this.slide('up');
             }
         });
     }
@@ -102,7 +113,7 @@ export class FreshProductsComponent implements OnInit {
                 break;
 
             case 'down':
-                if (this.shownProd >= this.products.length) return;
+                if (this.shownProd >= this.products.length - 1) return;
                 this.shownProd++;
                 break;
         }

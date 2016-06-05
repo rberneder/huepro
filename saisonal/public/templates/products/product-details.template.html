@@ -1,21 +1,21 @@
 <section id="product-details">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-1">
             <a onclick="window.history.back()"
                (click)="_router.renavigate()"
                class="link-arrow">
                 <span class="icon icon-arrow-left"></span>
             </a>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <div class="row">
-                <div class="col-sm-offset-1 col-sm-10 text-center">
-                    <div class="product-img">
+                <div class="col-sm-offset-2 col-sm-8 text-center">
+                    <div class="embed-responsive embed-responsive-4by3">
                         <div *ngIf="product?.image">
-                            <img src="{{product?.image}}" class="img-responsive inline-block">
+                            <img src="{{product?.image}}" class="embed-responsive-item">
                         </div>
                         <div *ngIf="!product?.image">
-                            <img src="src/img/img-placeholder.png" class="img-responsive inline-block">
+                            <img src="src/img/img-placeholder.png" class="embed-responsive-item">
                         </div>
                     </div>
                 </div>
@@ -28,26 +28,40 @@
                 {{product?.shortDescription}}
             </div>
 
-            <div class="row">
-                <div class="col-sm-offset-1 col-sm-4 text-center">
-                    <h3>Erntezeit</h3>
-                    <p>
-                        {{monthNames[product?.harvestStartMonth]?.name}} - {{monthNames[product?.harvestEndMonth]?.name}}
-                    </p>
-                </div>
-                <div class="col-sm-offset-2 col-sm-4 text-center">
-                    <h3>Familie</h3>
-                    <p>
-                        {{product?.family}}
-                    </p>
-                </div>
+            <div class="detail-season-calendar hidden-xs">
+                <h3 class="text-center">Saison</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <td></td>
+                        <td *ngFor="let month of monthNames">{{month.name.substr(0,3)}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-purple">
+                            <td>Anbau</td>
+                            <td *ngFor="let month of monthNames; let i = index"
+                                [class.active]="product?.plantStartMonth <= i && product?.plantEndMonth >= i"></td>
+                        </tr>
+                        <tr class="row-green">
+                            <td>Ernte</td>
+                            <td *ngFor="let month of monthNames; let i = index"
+                                [class.active]="product?.harvestStartMonth <= i && product?.harvestEndMonth >= i"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="hidden-sm hidden-md hidden-lg">
+                <h3 class="text-center">Erntezeit</h3>
+                <p>
+                    {{monthNames[product?.harvestStartMonth]?.name}} - {{monthNames[product?.harvestEndMonth]?.name}}
+                </p>
             </div>
 
 
             <div class="description">
-                <br>
-                <br>
-                <h4>Beschreibung</h4>
+                <h3 class="text-center">Beschreibung</h3>
                 {{product?.description}}
             </div>
 

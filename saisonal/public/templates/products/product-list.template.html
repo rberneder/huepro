@@ -9,7 +9,7 @@
                         <div class="product-img">
                             <div class="embed-responsive embed-responsive-4by3">
                                 <div *ngIf="product.image">
-                                    <img src="{{product.image}}" class="embed-responsive-item">
+                                    <img src="{{product.image.substr(0, product.image.length - 4) + '_thumb' + product.image.substr(-4)}}" class="embed-responsive-item">
                                 </div>
                                 <div *ngIf="!product.image">
                                     <img src="src/img/img-placeholder.png" class="embed-responsive-item">

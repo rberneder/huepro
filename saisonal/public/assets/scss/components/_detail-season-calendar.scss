@@ -1,0 +1,27 @@
+.detail-season-calendar {
+  margin-bottom: 60px;
+
+  table {
+    margin: 0 auto;
+  }
+
+  thead,
+  tbody td:first-child {
+    color: $beige;
+  }
+
+  td {
+    text-align: center;
+    min-width: 40px;
+    border-left: 1px solid $light-gray;
+
+    &:first-child {
+      text-align: left;
+      min-width: 80px;
+      border-left: none;
+    }
+  }
+
+  .row-purple td.active { background: $purple; }
+  .row-green td.active  { background: $green;  }
+}

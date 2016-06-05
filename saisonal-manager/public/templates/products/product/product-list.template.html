@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-xs-3">
                             <img class="img-responsive"
-                                 *ngIf="product.image" src="{{product.image}}">
+                                 *ngIf="product.image" src="{{product.image.substr(0, product.image.length - 4) + '_thumb' + product.image.substr(-4)}}">
                             <img class="img-responsive"
                                  *ngIf="!product.image" src="/src/img/img-placeholder.png">
                         </div>
