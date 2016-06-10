@@ -27,7 +27,7 @@ var app = express();
 /*
 * EXPRESS CONFIGURATION
 * */
-app.set('port', 25080);
+// app.set('port', 25080);
 // app.set('views', path.join(__dirname, '/public'));
 // app.engine('html', require('ejs').renderFile);
 // app.set('view engine', 'html');
@@ -42,6 +42,9 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 /*
 * ROUTES
 * */
+app.get('*', homeController.siteUnderConstruction);
+app.post('*', homeController.siteUnderConstructionPost);
+
 app.get('/', homeController.index);
 app.get('/uploads/:element/:folder/:file', homeController.getFile);
 app.get('/api/products', apiController.getProducts);
