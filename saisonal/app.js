@@ -1,7 +1,28 @@
+'use strict';
+
 /*
-* MODULE DEPENDENCIES
-* */
+ * ///////// HTTPS /////////
+ * */
+var LEX = require('letsencrypt-express');
+
+var lex = LEX.create({
+    configDir: '/etc/letsencrypt',
+    privkeyPath: ':config/live/:hostname/privkey.pem',
+    fullchainPath: ':config/live/:hostname/fullchain.pem',
+    certPath: ':config/live/:hostname/cert.pem',
+    chainPath: ':config/live/:hostname/chain.pem',
+    approveRegistration: null
+});
+
+
+
+/*
+ * ///////// MODULE DEPENDENCIES /////////
+ * */
 var express = require('express');
+var fs = require('fs');
+var http = require('http');
+var https = require('spdy');
 var session = require('express-session');
 var errorHandler = require('errorhandler');
 var compress = require('compression');
@@ -11,22 +32,34 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
+
 /*
-* CONTROLLERS
-* */
+ * ///////// REDIRECT FROM HTTP TO HTTPS /////////
+ * */
+function redirectHttp() {
+    var httpServer = express();
+    httpServer.get('*',function(req,res){
+        res.redirect('https://www.saisonal.at' + req.url)
+    });
+    httpServer.listen(80);
+}
+
+
+/*
+ * ///////// CONTROLLERS /////////
+ * */
 var homeController = require('./controllers/homeController');
 var apiController = require('./controllers/apiController');
 
 
 /*
-* EXPRESS SERVER
-* */
+ * ///////// EXPRESS SERVER /////////
+ * */
 var app = express();
 
-
 /*
-* EXPRESS CONFIGURATION
-* */
+ * EXPRESS CONFIGURATION
+ * */
 // app.set('port', 25080);
 // app.set('views', path.join(__dirname, '/public'));
 // app.engine('html', require('ejs').renderFile);
@@ -40,8 +73,8 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 
 
 /*
-* ROUTES
-* */
+ * ///////// ROUTES /////////
+ * */
 app.get('*', homeController.siteUnderConstruction);
 app.post('*', homeController.siteUnderConstructionPost);
 
@@ -65,8 +98,8 @@ app.get('*', function(req, res, next) {
 
 
 /*
-* ERROR HANDLER
-* */
+ * ///////// ERROR HANDLER /////////
+ * */
 if (app.get('env') === 'development') {
     //app.use(errorHandler());
 }
@@ -83,10 +116,9 @@ app.use(function(err, req, res, next) {
 
 
 /*
-* START SERVER
-* */
-app.listen(app.get('port'), function() {
-    console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
-});
+ * ///////// START SERVER /////////
+ * */
+redirectHttp();
+https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(443);
 
 module.exports = app;

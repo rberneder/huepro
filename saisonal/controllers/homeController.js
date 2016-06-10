@@ -2,14 +2,12 @@ var path = require('path');
 
 //GET /  ->  Home page.
 exports.index = function(req, res) {
-    console.log('CHECK 2');
     res.sendFile(path.join(__dirname, '../public/app.html'));
 };
 
 exports.siteUnderConstruction = function(req, res, next) {
     if (req.method == 'GET') {
         if (req.cookies.hasAccess && req.cookies.hasAccess == 1) {
-            console.log('CHECK 1');
             next();
         } else {
             res.sendFile(path.join(__dirname, '../public/site-under-construction.html'));
