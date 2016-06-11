@@ -1,22 +1,6 @@
 'use strict';
 
 /*
- * ///////// HTTPS /////////
- * */
-var LEX = require('letsencrypt-express');
-
-var lex = LEX.create({
-    configDir: '/etc/letsencrypt',
-    privkeyPath: ':config/live/:hostname/privkey.pem',
-    fullchainPath: ':config/live/:hostname/fullchain.pem',
-    certPath: ':config/live/:hostname/cert.pem',
-    chainPath: ':config/live/:hostname/chain.pem',
-    approveRegistration: null
-});
-
-
-
-/*
  * ///////// MODULE DEPENDENCIES /////////
  * */
 var express = require('express');
@@ -30,19 +14,6 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
-
-/*
- * ///////// REDIRECT FROM HTTP TO HTTPS /////////
- * */
-function redirectHttp() {
-    var httpServer = express();
-    httpServer.get('*',function(req,res){
-        res.redirect('https://www.saisonal.at' + req.url)
-    });
-    httpServer.listen(80);
-}
 
 
 /*
@@ -114,11 +85,30 @@ app.use(function(err, req, res, next) {
 
 
 
-
 /*
- * ///////// START SERVER /////////
+ * ///////// START HTTPS-SERVER /////////
  * */
-redirectHttp();
+var redirectHttp = (function () {
+    var httpServer = express();
+    httpServer.get('*',function(req,res){
+        res.redirect('https://www.saisonal.at' + req.url)
+    });
+    httpServer.listen(80);
+})();
+
+var LEX = require('letsencrypt-express');
+
+var lex = LEX.create({
+    configDir: '/etc/letsencrypt',
+    approveRegistration: function (hostname, cb) {
+        cb(null, {
+            domains: [hostname],
+            email: 'andererblonder@gmail.com',
+            agreeTos: true
+        });
+    }
+});
+
 https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(443);
 
 module.exports = app;
