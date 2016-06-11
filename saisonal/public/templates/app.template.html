@@ -1,53 +1,55 @@
-<section id="sidebar" [class.active]="mobileMenuActive == true">
-    <div id="logo">
-        <a [routerLink]="['FreshProducts']">
-            <img sizes="(min-width: 1500px) 20vw,
+<div id="wrapper" [class.freeze]="mobileMenuActive == true">
+    <section id="sidebar" [class.active]="mobileMenuActive == true">
+        <div id="logo">
+            <a [routerLink]="['FreshProducts']">
+                <img sizes="(min-width: 1500px) 20vw,
                             (min-width: 1000px) 25vw,
                             (min-width: 600px) 60vw, 100vw"
-                 srcset="src/img/logo.png 400w,
+                     srcset="src/img/logo.png 400w,
                              src/img/logo.png 600w,
                              src/img/logo.png 800w"/>
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <nav id="main-nav">
-        <a (click)="closeMobileNav()" [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
-        <a (click)="closeMobileNav()" [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
-        <a (click)="closeMobileNav()" [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a>
-        <a (click)="closeMobileNav()" [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
-        <a (click)="closeMobileNav()" [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
-    </nav>
-
-    <footer>
-        <div class="pull-left">&copy; 2016, saisonal.at</div>
-        <nav id="footer-nav" class="pull-right">
-            <a (click)="closeMobileNav()" [routerLink]="['Contact']">Kontakt</a>
-            <a (click)="closeMobileNav()" [routerLink]="['Imprint']">Impressum</a>
+        <nav id="main-nav">
+            <a (click)="closeMobileNav()" [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
+            <a (click)="closeMobileNav()" [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
+            <a (click)="closeMobileNav()" [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a>
+            <a (click)="closeMobileNav()" [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
+            <a (click)="closeMobileNav()" [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
         </nav>
-    </footer>
-</section>
+
+        <footer>
+            <div class="pull-left">&copy; 2016, saisonal.at</div>
+            <nav id="footer-nav" class="pull-right">
+                <a (click)="closeMobileNav()" [routerLink]="['Contact']">Kontakt</a>
+                <a (click)="closeMobileNav()" [routerLink]="['Imprint']">Impressum</a>
+            </nav>
+        </footer>
+    </section>
 
 
-<section id="main-content">
-    <header id="mobile-menu" [class.active]="mobileMenuActive == true">
-        <div id="mobile-menu__cont">
-            <div id="mobile-menu-overlay" (click)="closeMobileNav()"></div>
-            <div class="row">
-                <div class="col-xs-2">
-                    <button (click)="toggleMobileNav()" [class.active]="mobileMenuActive == true" id="mobile-menu-btn">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </button>
-                </div>
-                <div class="col-xs-10 text-right">
-                    Saisonal.at
+    <section id="main-content">
+        <header id="mobile-menu" [class.active]="mobileMenuActive == true">
+            <div id="mobile-menu__cont">
+                <div id="mobile-menu-overlay" (click)="closeMobileNav()"></div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        <button (click)="toggleMobileNav()" [class.active]="mobileMenuActive == true" id="mobile-menu-btn">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </button>
+                    </div>
+                    <div class="col-xs-10 text-right">
+                        Saisonal.at
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <router-outlet></router-outlet>
-</section>
+        <router-outlet></router-outlet>
+    </section>
 
-<aside id="calendar-corner" class="hidden-xs hidden-sm hidden-md"></aside>
+    <aside id="calendar-corner" class="hidden-xs hidden-sm hidden-md"></aside>
+</div>

@@ -46,6 +46,5 @@ export class AppComponent {
     
     toggleMobileNav() {
         this.mobileMenuActive = !this.mobileMenuActive;
-        document.body.style.overflow = (this.mobileMenuActive === true) ? 'hidden' : 'visible';
     }
 }

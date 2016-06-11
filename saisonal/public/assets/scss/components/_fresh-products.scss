@@ -2,9 +2,7 @@ $changeTime: 750ms;
 
 #fresh-products {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
-  margin-top: -100px;
+  padding: 0 15px;
 
   @media (min-width: $screen-lg-min) {
     margin-top: 0;
@@ -12,7 +10,7 @@ $changeTime: 750ms;
 
   #fresh-products-btn-up,
   #fresh-products-btn-down {
-    position: absolute;
+    position: fixed;
     font-size: 40px;
     color: $beige;
     width: 150px;
@@ -39,59 +37,26 @@ $changeTime: 750ms;
   #fresh-products-btn-up:hover span   { transform: translateY(-5px); }
   #fresh-products-btn-down:hover span { transform: translateY( 5px); }
 
-  #fresh-products__cont {
-    position: absolute;
-    top: 10vh;
-    width: 100%;
-    padding: 0 15px;
-
-    #animation-pane {
-      transform: translateY(0);
-      transition: all $changeTime ease;
-    }
-  }
-
 
   article {
     position: relative;
-    height: 10vh;
-    opacity: 0.2;
     transition: all $changeTime ease;
+    padding: 15px 0;
 
-    &.active {
-      height: 80vh;
-      opacity: 1;
+    @media (min-width: $screen-sm-min) {
+      opacity: 0.2;
 
-      @media (max-width: $screen-xs-max) {
-        z-index: 50;
+      &:first-child { padding-top:    30vh; }
+      &:last-child  { padding-bottom: 30vh; }
+
+      &.active {
+        opacity: 1;
       }
-    }
-
-    .article-cont {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      transform: translateY(-50%);
-    }
-
-    .details {
-      transition: all $changeTime ease;
-      max-height: 0;
-      overflow: hidden;
     }
 
     .hl-bg {
       text-decoration: none;
       cursor: pointer;
-    }
-
-    &.active {
-      .details {
-        max-height: 200px;
-      }
-    }
-    &.inactive {
-      opacity: 0;
     }
   }
 }

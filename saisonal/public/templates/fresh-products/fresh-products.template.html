@@ -8,8 +8,7 @@
             <article
                     *ngFor="let product of products; let i = index"
                     [class.active]="shownProd === i"
-                    [class.inactive]="shownProd < (i - 1) || shownProd > (i + 1)"
-                    [class.invisible]="shownProd < (i - 2) || shownProd > (i + 2)">
+                    [class.inactive]="shownProd < (i - 1) || shownProd > (i + 1)">
                 <div class="article-cont">
                     <div class="row">
                         <div class="col-sm-4 text-center">

@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from "angular2/core";
 import {Router} from "angular2/router";
 import {AnimationBuilder} from 'css-animator/builder';
 import {AnimationService} from 'css-animator/modules';
+import {ScrollService} from "../util/scroll/scroll.service";
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
 import {Month} from "../util/month";
@@ -20,19 +21,18 @@ export class FreshProductsComponent implements OnInit {
      * ///////// ATTRIBUTES /////////
      * */
     private products: Product[];
+    private $products: any;
     private shownProd: number;
     private canSlideUp: boolean;
     private canSlideDown: boolean;
-    private $animationPane;
     private monthNames: Month[];
-    private swipeHandler: any;
 
 
 
     /*
      * ///////// INITIALIZATION /////////
      * */
-    constructor(private _productService: ProductService, private _router: Router) {
+    constructor(private _productService: ProductService, private _router: Router, private _scrollService: ScrollService) {
         this.shownProd = -1;
         this.canSlideUp = false;
         this.canSlideDown = false;
@@ -51,32 +51,24 @@ export class FreshProductsComponent implements OnInit {
                     }
                 }
             });
-        this.$animationPane = document.getElementById('animation-pane');
-        this.setUpTouchGestures();
-        this.setUpMouseWheel();
+
+        this.setUpScrollListener();
     }
 
-    setUpTouchGestures() {
-        this.swipeHandler = new Hammer(this.$animationPane);
-        this.swipeHandler.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+    setUpScrollListener() {
+        this.$products = document.getElementsByTagName('article');
 
-        this.swipeHandler.on('pan', (event) => {
-            if (!event.isFinal) return;
-            if (event.deltaY > 0) {
-                this.slide('up');
-            } else {
-                this.slide('down');
-            }
-        });
-    }
+        this._scrollService.subscribe((event) => {
+            this.shownProd = 0;
 
-    setUpMouseWheel() {
-        window.addEventListener("mousewheel", (ev) => {
-            if (ev.deltaY > 0) {
-                this.slide('down');
-            } else if (ev.deltaY < 0) {
-                this.slide('up');
+            if (window.scrollY > 0) {
+                for (let $product of this.$products) {
+                    if ($product.offsetTop < (window.scrollY)) {
+                        this.shownProd++;
+                    }
+                }
             }
+            this.updateSliderBtns();
         });
     }
 
@@ -94,12 +86,6 @@ export class FreshProductsComponent implements OnInit {
     /*
      * ///////// ANIMATION /////////
      * */
-    updateAnimationPane() {
-        const height = 10,
-            translateY = this.shownProd * height;
-        this.$animationPane.style.transform= 'translateY(-' + translateY + 'vh)';
-    }
-
     updateSliderBtns() {
         this.canSlideUp = (this.shownProd > 0);
         this.canSlideDown = (this.shownProd < (this.products.length - 1));
@@ -110,15 +96,16 @@ export class FreshProductsComponent implements OnInit {
             case 'up':
                 if (this.shownProd < 1) return;
                 this.shownProd--;
+                this._scrollService.scrollTo(this.$products[this.shownProd]);
                 break;
 
             case 'down':
                 if (this.shownProd >= this.products.length - 1) return;
                 this.shownProd++;
+                this._scrollService.scrollTo(this.$products[this.shownProd]);
                 break;
         }
         this.updateSliderBtns();
-        this.updateAnimationPane();
     }
 
     /*private animator: AnimationBuilder;
