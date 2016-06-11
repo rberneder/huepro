@@ -18,7 +18,7 @@ exports.siteUnderConstruction = function(req, res, next) {
 exports.siteUnderConstructionPost = function(req, res) {
     if (req.body.password && req.body.password === 'B33nS4isonal') {
         if (!req.cookies.hasAccess) {
-            res.cookie('hasAccess', 1, { maxAge: 900000 });
+            res.cookie('hasAccess', 1, { maxAge: 86400000 });   // 24h
         }
     }
     res.redirect('/');

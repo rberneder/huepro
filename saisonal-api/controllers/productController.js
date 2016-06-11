@@ -7,6 +7,7 @@ var Product = mongoose.model('Product');
 var productStat = require('./productStatController');
 var imageManager = require('../util/imageManager');
 
+
 /** Lists all products. */
 exports.getAllProducts = function(req, res) {
     Product.find()
@@ -22,6 +23,7 @@ exports.getAllProducts = function(req, res) {
 };
 
 
+/** Lists all fresh products (ordered by trend). */
 exports.getFreshProducts = function (req, res) {
     var limit = 10;     // To return a maximum of 10 products
     productStat.getAllProductStats()
@@ -115,7 +117,6 @@ exports.post = function(req, res) {
     productStat.createProductStat(product);
     res.jsonp(product);
 };
-
 
 
 /** Updates product. */

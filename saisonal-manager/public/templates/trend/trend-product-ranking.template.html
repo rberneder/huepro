@@ -7,7 +7,7 @@
         <ol>
             <li *ngFor="let item of productsTrend">
                 <h4>
-                    <a href="http://www.saisonal.at:25080/produkte/produkt/{{item.product._id}}" target="_blank">
+                    <a href="http://www.saisonal.at/produkte/produkt/{{item.product._id}}" target="_blank">
                         {{item.product.name}} <small><em>{{item.trend.toString().substr(0, 4)}}</em></small>
                     </a>
                 </h4>
@@ -21,7 +21,7 @@
         <ol>
             <li *ngFor="let item of productsOverall">
                 <h4>
-                    <a href="http://www.saisonal.at:25080/produkte/produkt/{{item.product._id}}" target="_blank">
+                    <a href="http://www.saisonal.at/produkte/produkt/{{item.product._id}}" target="_blank">
                         {{item.product.name}} <small><em>{{item.overallPoints}}</em></small>
                     </a>
                 </h4>

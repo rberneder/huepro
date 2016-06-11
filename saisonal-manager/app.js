@@ -1,8 +1,12 @@
+'use strict';
+
 /*
  * MODULE DEPENDENCIES
  * */
 var express = require('express');
 var session = require('express-session');
+var fs = require('fs');
+var https = require('spdy');
 var errorHandler = require('errorhandler');
 var compress = require('compression');
 var path = require('path');
@@ -55,7 +59,6 @@ var app = express();
 /*
  * EXPRESS CONFIGURATION
  * */
-app.set('port', 25090);
 // app.set('views', path.join(__dirname, '/public'));
 // app.engine('html', require('ejs').renderFile);
 // app.set('view engine', 'html');
@@ -129,8 +132,22 @@ app.use(function(err, req, res, next) {
 /*
  * START SERVER
  * */
-app.listen(app.get('port'), function() {
-	console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
+/*
+ * ///////// START HTTPS-SERVER /////////
+ * */
+var LEX = require('letsencrypt-express');
+
+var lex = LEX.create({
+    configDir: '/etc/letsencrypt',
+    approveRegistration: function (hostname, cb) {
+        cb(null, {
+            domains: [hostname],
+            email: 'andererblonder@gmail.com',
+            agreeTos: true
+        });
+    }
 });
+
+https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(25090);
 
 module.exports = app;

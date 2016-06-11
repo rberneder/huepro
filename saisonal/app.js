@@ -79,7 +79,7 @@ app.use(function(err, req, res, next) {
         res.status(404).send({ error: 'Something went wrong!' });
     } else {
         res.status(200);
-        res.sendFile(path.join(__dirname, '/public/index.html'));
+        res.sendFile(path.join(__dirname, '/public/app.html'));
     }
 });
 

@@ -42,7 +42,7 @@ exports.getAllProductStats = function() {
 }
 
 exports.getProductRanking = function(req, res) {
-    ProductStat.find().sort({trend: 'desc'}).select('product_id trend overallPoints').exec(function(err, stats) {
+    ProductStat.find().sort({trend: 'desc'}).select('product_id trend overallPoints views').exec(function(err, stats) {
         if (err) {
             console.log('ERROR: Cannot get product-statistics from database.', err);
 
@@ -82,7 +82,6 @@ exports.createProductStat = function(product) {
     return productStat;
 }
 
-
 exports.deleteProductStat = function(product) {
     ProductStat.findOne({product_id: product._id})
         .exec(function(err, productStat) {
@@ -99,7 +98,7 @@ exports.deleteProductStat = function(product) {
 
 
 /*
- * STATISTICS CALCULATIONS
+ * ///////// STATISTICS CALCULATIONS /////////
  */
 exports.updateStats = function() {
     ProductStat.find().exec(function(err, stats) {
