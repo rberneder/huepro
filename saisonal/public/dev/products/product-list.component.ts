@@ -1,9 +1,8 @@
-import {Component, OnInit, OnDestroy, HostListener, Directive} from 'angular2/core';
+import {Component, OnInit, HostListener, Directive} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Product} from "./product";
 import {ProductService} from "./product.service";
 import {ScrollService} from "../util/scroll/scroll.service";
-import {ScrollListener} from "../util/scroll/scroll-listener";
 import {Category} from "./category";
 
 @Component({
@@ -12,7 +11,7 @@ import {Category} from "./category";
     directives: [ROUTER_DIRECTIVES],
     providers: [ProductService]
 })
-export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
+export class ProductListComponent implements OnInit  {
 
 
     /*
@@ -44,7 +43,7 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
     }
 
     ngOnInit() {
-        this._scrollService.subscribe(this);
+        this._scrollService.subscribe(this.scroll);
         this._productService.getProducts()
             .subscribe((data: Product[]) => {
                 this.products = data;
@@ -53,10 +52,6 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
                 setTimeout(() => this.scroll(null), 500);
             });
         this.$products = document.getElementById('product-list__cont').children;
-    }
-
-    ngOnDestroy() {
-        this._scrollService.unsubscribe(this);
     }
 
     initializeCategories() {
@@ -155,7 +150,7 @@ export class ProductListComponent implements OnInit, OnDestroy, ScrollListener {
         }
     }
 
-    scroll(event): any {
+    scroll = (event) => {
         if (!this.$products || this.$products.length < 1) return;
         let scanBorder = window.scrollY + this.$products[0].offsetTop / 4;
         let height = 1.5 * this.$products[0].offsetHeight;
