@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var crontab = require('node-crontab');
 
 var productStat = require('./controllers/productStatController');
-var updateStatJob = crontab.scheduleJob("*/1 * * * *", productStat.updateStats);
+var updateStatJob = crontab.scheduleJob("*/5 * * * *", productStat.updateStats);
 
 
 var products = require('./routes/products');

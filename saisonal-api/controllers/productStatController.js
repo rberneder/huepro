@@ -63,10 +63,12 @@ exports.getProductRanking = function(req, res) {
                                     product: products[j],
                                     trend: stats[i].trend,
                                     points: stats[i].points,
+                                    pointsTime: stats[i].pointsTime,
                                     pointsTotal: stats[i].pointsTotal,
                                     views: stats[i].views,
                                     trendSnapshot: stats[i].trendSnapshot,
-                                    pointSnapshots: stats[i].pointSnapshots
+                                    pointSnapshots: stats[i].pointSnapshots,
+                                    pointSnapshotsTime: stats[i].pointSnapshotsTime,
                                 });
                                 break;
                             }
@@ -124,23 +126,21 @@ function updateTrendSnapshot() {
             console.error('ERROR: Scheduled updateTrendSnapshot cannot be performed.', err);
 
         } else {
-            for (var i = 0; i < stats.length; i++) {
-                var pointsLength = stats[i].pointSnapshots.length;
+            _.each(stats, function(stat) {
+                var pointsLength = stat.pointSnapshots.length;
 
                 if (pointsLength >= maxSize) {
-                    stats[i].pointSnapshots.splice(0, 1);
+                    stat.pointSnapshots.splice(0, 1);
+                    stat.pointSnapshotsTime.splice(0, 1);
                 }
 
-                stats[i].pointSnapshots.push({
-                    points: stats[i].pointsTotal,
-                    timestamp: now
-                });
+                stat.pointSnapshots.push(stat.pointsTotal);
+                stat.pointSnapshotsTime.push(now);
 
-                stats[i].trend = stats[i].pointsTotal - ((pointsLength > 1) ? stats[i].pointSnapshots[pointsLength - 2] : 0);
+                stat.trend = stat.pointsTotal - ((pointsLength > 1) ? stat.pointSnapshots[pointsLength - 2] : 0);
 
-                stats[i].save();
-            }
-        }
+                stat.save();
+            });}
     });
 }
 
@@ -151,13 +151,13 @@ function getMinutes(date) {
 var updateSchedule = [
     {
         cb: updateTrendSnapshot,
-        rate: 1,            // 5min
-        lastUpdate: null    // in min
+        rate: 3 * 60,       // 3h
+        lastUpdate: null
     },
     {
         cb: updateTrend,
         rate: 24 * 60,      // 24h
-        lastUpdate: null    // in min
+        lastUpdate: null
     }
 ]
 
