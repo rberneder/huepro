@@ -15,7 +15,7 @@ exports.trackProductStatPoints = function(product, points) {
 
             } else {
                 productStat.views++;
-                productStat.overallPoints += 1. * points;
+                productStat.pointsTotal += 1. * points;
                 productStat.save(function(err) {
                     return productStat;
                 });
@@ -42,7 +42,7 @@ exports.getAllProductStats = function() {
 }
 
 exports.getProductRanking = function(req, res) {
-    ProductStat.find().sort({trend: 'desc'}).select('product_id trend overallPoints views').exec(function(err, stats) {
+    ProductStat.find().sort({trend: 'desc'}).select('product_id trend pointsTotal views').exec(function(err, stats) {
         if (err) {
             console.log('ERROR: Cannot get product-statistics from database.', err);
 
@@ -62,7 +62,8 @@ exports.getProductRanking = function(req, res) {
                                 result.push({
                                     product: products[j],
                                     trend: stats[i].trend,
-                                    overallPoints: stats[i].overallPoints
+                                    pointsTotal: stats[i].pointsTotal,
+                                    views: stats[i].views
                                 });
                                 break;
                             }
@@ -104,7 +105,7 @@ exports.updateStats = function() {
     ProductStat.find().exec(function(err, stats) {
         _.each(stats, function(productStat) {
             try {
-                productStat.trend = productStat.overallPoints / productStat.views;
+                productStat.trend = productStat.pointsTotal / productStat.views;
                 productStat.save();
             } catch (e) {}
         })

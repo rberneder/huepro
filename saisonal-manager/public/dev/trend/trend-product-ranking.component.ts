@@ -39,8 +39,8 @@ export class TrendProductRankingComponent implements OnInit {
         }
 
         this.productsOverall.sort(function(a, b){
-            if(a.overallPoints > b.overallPoints) return -1;
-            if(a.overallPoints < b.overallPoints) return 1;
+            if(a.pointsTotal > b.pointsTotal) return -1;
+            if(a.pointsTotal < b.pointsTotal) return 1;
             return 0;
         });
     }

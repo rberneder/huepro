@@ -10,21 +10,42 @@ var ProductStatSchema = new Schema({
         type: Number,
         default: 0
     },
-    overallPoints: {
-        type: Number,
-        default: 0
-    },
-    trendPointsArr: {
-        type: [Number]
-    },
     trend: {
         type: Number,
         default: 0
     },
-    lastTrendIndexing: {
-        type: Date,
-        default: new Date()
-    }
+    pointsTotal: {
+        type: Number,
+        default: 0
+    },
+    points: [
+        {
+            points: {
+                type: Number,
+                default: 0
+            },
+            timestamp: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
+    trendSnapshot: {
+        type: Number,
+        default: 0
+    },
+    pointSnapshots: [
+        {
+            points: {
+                type: Number,
+                default: 0
+            },
+            timestamp: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ]
 });
 
 
