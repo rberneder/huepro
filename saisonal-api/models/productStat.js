@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ProductStatSchema = new Schema({
+    created: {
+        type: Date,
+        default: Date.now
+    },
     product_id: {
         type: String,
         required: true

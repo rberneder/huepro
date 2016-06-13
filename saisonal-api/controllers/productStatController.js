@@ -42,7 +42,7 @@ exports.getAllProductStats = function() {
 }
 
 exports.getProductRanking = function(req, res) {
-    ProductStat.find().sort({trend: 'desc'}).select('product_id trend pointsTotal views').exec(function(err, stats) {
+    ProductStat.find().sort({trend: 'desc'}).exec(function(err, stats) {
         if (err) {
             console.log('ERROR: Cannot get product-statistics from database.', err);
 
@@ -62,8 +62,11 @@ exports.getProductRanking = function(req, res) {
                                 result.push({
                                     product: products[j],
                                     trend: stats[i].trend,
+                                    points: stats[i].points,
                                     pointsTotal: stats[i].pointsTotal,
-                                    views: stats[i].views
+                                    views: stats[i].views,
+                                    trendSnapshot: stats[i].trendSnapshot,
+                                    pointSnapshots: stats[i].pointSnapshots
                                 });
                                 break;
                             }
@@ -101,7 +104,7 @@ exports.deleteProductStat = function(product) {
 /*
  * ///////// STATISTICS CALCULATIONS /////////
  */
-exports.updateStats = function() {
+function updateTrend() {
     ProductStat.find().exec(function(err, stats) {
         _.each(stats, function(productStat) {
             try {
@@ -110,4 +113,63 @@ exports.updateStats = function() {
             } catch (e) {}
         })
     });
+}
+
+function updateTrendSnapshot() {
+    var maxSize = 8 * 7;   // every 3h for 7 days
+    var now = new Date();
+
+    ProductStat.find().exec(function(err, stats) {
+        if (err) {
+            console.error('ERROR: Scheduled updateTrendSnapshot cannot be performed.', err);
+
+        } else {
+            for (var i = 0; i < stats.length; i++) {
+                var pointsLength = stats[i].pointSnapshots.length;
+
+                if (pointsLength >= maxSize) {
+                    stats[i].pointSnapshots.splice(0, 1);
+                }
+
+                stats[i].pointSnapshots.push({
+                    points: stats[i].pointsTotal,
+                    timestamp: now
+                });
+
+                stats[i].trend = stats[i].pointsTotal - ((pointsLength > 1) ? stats[i].pointSnapshots[pointsLength - 2] : 0);
+
+                stats[i].save();
+            }
+        }
+    });
+}
+
+function getMinutes(date) {
+    return (date.getTime() / 1000 / 60);
+}
+
+var updateSchedule = [
+    {
+        cb: updateTrendSnapshot,
+        rate: 1,            // 5min
+        lastUpdate: null    // in min
+    },
+    {
+        cb: updateTrend,
+        rate: 24 * 60,      // 24h
+        lastUpdate: null    // in min
+    }
+]
+
+exports.updateStats = function() {
+    for (var i = 0; i < updateSchedule.length; i++) {
+        var now = new Date();
+        var lastUpdate = updateSchedule[i].lastUpdate;
+        var rate = updateSchedule[i].rate;
+
+        if (lastUpdate === null || (Math.floor(getMinutes(now) / rate) - Math.floor(getMinutes(lastUpdate) / rate)) != 0) {
+            updateSchedule[i].cb();
+            updateSchedule[i].lastUpdate = now;
+        }
+    }
 }
