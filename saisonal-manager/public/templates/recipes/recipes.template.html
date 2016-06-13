@@ -1,3 +1,126 @@
-<div class="bg-primary text-center">
-    <strong>REZEPTE</strong>
+<div class="row">
+    <div class="col-sm-8">
+        <div id="editor">
+            <div class="hl-bg-cont">
+                <h2 class="pull-left">Rezept-Editor</h2>
+
+                <div *ngIf="!isNewRecipe">
+                    <button class="btn pull-right"
+                            (click)="resetForm()">
+                        <span class="icon icon-close-circle"></span>
+                    </button>
+                    <div class="hl-divider pull-right"></div>
+                    <div class="text-item pull-right">Bearbeiten</div>
+                </div>
+
+                <div class="text-item pull-right" *ngIf="isNewRecipe">Neu</div>
+
+                <div class="hl-divider pull-right"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <form [ngFormModel]="newRecipeForm" (ngSubmit)="onSubmit(newRecipeForm.value)">
+
+                        <input type="hidden"
+                               [(ngModel)]="editorRecipe.image"
+                               [ngFormControl]="newRecipeForm.controls['image']">
+
+                        <div class="form-area">
+                            <label for="name">Rezept Name</label>
+                            <input id="name" type="text"
+                                   placeholder="Name des Rezeptes"
+                                   [(ngModel)]="editorRecipe.name"
+                                   [ngFormControl]="newRecipeForm.controls['name']"/>
+
+                            <label for="ingredients">Zutaten</label>
+                            <input id="ingredients" type="text"
+                                   placeholder="3 Stk. Eier,..."
+                                   [(ngModel)]="editorRecipe.ingredients"
+                                   [ngFormControl]="newRecipeForm.controls['ingredients']"/>
+
+
+                            <label for="decription">Beschreibung</label>
+                            <input id="decription" type="text"
+                                   placeholder="Beschreibung des Rezeptes"
+                                   [(ngModel)]="editorRecipe.decription"
+                                   [ngFormControl]="newRecipeForm.controls['description']"/>
+
+
+                            <label for="productFamilies">Produktfamilien</label>
+                            <input id="productFamilies" type="text"
+                                   placeholder="Produktfamilien"
+                                   [(ngModel)]="editorRecipe.productFamilies"
+                                   [ngFormControl]="newRecipeForm.controls['productFamilies']"/>
+
+
+                            <label for="products">Produkte</label>
+                            <input id="products" type="text"
+                                   placeholder="Produkte"
+                                   [(ngModel)]="editorRecipe.products"
+                                   [ngFormControl]="newRecipeForm.controls['products']"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" [disabled]="!newRecipeForm.valid">Rezept speichern</button>
+
+                        <button class="btn btn-danger"
+                                *ngIf="!isNewRecipe"
+                                (click)="deleteRecipe()">Rezept löschen</button>
+
+                        <div class="bg-green inline-block info-msg"
+                             [class.active]="recipeSaved == true">
+                            <span *ngIf="isNewRecipe">Rezept gespeichert</span>
+                            <span *ngIf="!isNewRecipe">Rezept gespeichert</span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12">
+                    <div id="current-recipe-image"
+                         *ngIf="!isNewRecipe && editorRecipe.image">
+                        <img src="{{editorRecipe.image}}" class="img-responsive">
+                        <label>Neues Rezeptbild</label>
+                    </div>
+                    <form enctype="multipart/form-data" action="/upload/recipe-image" method="post" class="dropzone"></form>
+                </div>
+            </div>
+        </div>    </div>
+    <div class="col-sm-offset-1 col-sm-3">
+        <div id="editor-list">
+            <h4 class="hl-bg">Rezepte verwalten</h4>
+
+            <div id="filter">
+                <input type="text" placeholder="Suche">
+            </div>
+
+            <div id="list-content">
+                <em *ngIf="!recipes || recipes.length < 1">Es wurden noch keine Rezepte gespeichert.</em>
+                <article *ngFor="let recipe of recipes; let i = index">
+                    <div class="row">
+                        <figure class="col-xs-8"
+                                (click)="editRecipe(recipe)">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <img class="img-responsive"
+                                         *ngIf="recipe.image" src="{{recipe.image.substr(0, recipe.image.length - 4) + '_thumb' + recipe.image.substr(-4)}}">
+                                    <img class="img-responsive"
+                                         *ngIf="!recipe.image" src="/src/img/img-placeholder.png">
+                                </div>
+                                <div class="col-xs-9">
+                                    <figcaption>
+                                        <h4>{{recipe.name}}</h4>
+                                    </figcaption>
+                                </div>
+                            </div>
+                        </figure>
+                        <div class="btns col-xs-4">
+                            <button class="btn btn-danger"
+                                    (click)="deleteRecipe(recipe)"><span class="icon icon-close-circle"></span></button>
+                            <button class="btn btn-success"
+                                    (click)="editRecipe(recipe)"><span class="icon icon-edit"></span></button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
 </div>

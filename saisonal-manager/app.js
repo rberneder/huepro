@@ -47,6 +47,7 @@ var requireAuth = function(req, res, next) {
 var homeController = require('./controllers/homeController');
 var uploadController = require('./controllers/uploadController');
 var apiProductController = require('./controllers/apiProductController');
+var apiRecipeController = require('./controllers/apiRecipeController');
 var apiProductCategoryController = require('./controllers/apiProductCategoryController');
 var apiProductFamilyController = require('./controllers/apiProductFamilyController');
 
@@ -101,6 +102,15 @@ app.get('/api/products/families', apiProductFamilyController.getFamilies);
 app.post('/api/products/family', apiProductFamilyController.addFamily);
 app.delete('/api/products/family/:id', apiProductFamilyController.deleteFamily);
 app.put('/api/products/family/:id', apiProductFamilyController.updateFamily);
+
+
+app.get('/api/recipes', apiRecipeController.getRecipes);
+app.get('/api/recipes/id/:id', apiRecipeController.getRecipe);
+app.get('/api/recipes/search/:str', apiRecipeController.searchRecipes);
+app.post('/api/recipes', apiRecipeController.addRecipe);
+app.delete('/api/recipes/id/:id', apiRecipeController.deleteRecipe);
+app.put('/api/recipes/id/:id', apiRecipeController.updateRecipe);
+
 
 app.get('/node_modules/*', function(req, res, next) {
 	res.sendFile(path.join(__dirname, req.url));

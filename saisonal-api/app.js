@@ -10,6 +10,7 @@ var updateStatJob = crontab.scheduleJob("*/5 * * * *", productStat.updateStats);
 
 
 var products = require('./routes/products');
+var recipes = require('./routes/recipes');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/products', products);
+app.use('/recipes', recipes);
 app.use('*', function(req, res) { res.jsonp('[]')});
 
 // catch 404 and forward to error handler

@@ -18,6 +18,7 @@ import {TrendContainerComponent} from "./trend/trend-container.component";
     {path: '/produkte/...', name: 'Products', component: ProductContainerComponent},
     {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
 ])
+
 export class AppComponent{
     constructor(private  _productService: ProductService){}
 }
