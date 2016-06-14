@@ -8,10 +8,11 @@ var trackPoint = {
     search: 3
 }
 
-/**
- * GET /api/products
- * List of all products.
- */
+
+/*
+* ///////// PRODUCTS /////////
+* */
+//GET /api/products        --> List of all products.
 exports.getProducts = function(req, res) {
     request.get(apiUrl + '/products', function(err, request, body) {
         if (err) return res.send('[]');
@@ -20,10 +21,7 @@ exports.getProducts = function(req, res) {
 };
 
 
-/**
- * GET /api/products/month/:month
- * List of all products in passed month.
- */
+//GET /api/products/month/:month       --> List of all products in passed month.
 exports.getProductsOfMonth = function(req, res) {
     request.get(apiUrl + '/products/month/' + req.params.month, function(err, request, body) {
         if (err) return res.send('[]');
@@ -32,10 +30,7 @@ exports.getProductsOfMonth = function(req, res) {
 };
 
 
-/**
- * GET /api/products/fresh
- * List of x fresh products.
- */
+//GET /api/products/fresh      --> List of x fresh products.
 exports.getFreshProducts = function(req, res) {
     request.get(apiUrl + '/products/fresh', function(err, request, body) {
         if (err) return res.send('[]');
@@ -44,20 +39,16 @@ exports.getFreshProducts = function(req, res) {
 };
 
 
-/**
- * GET /api/products/id/:id
- * Returns product matching passed id and tracking simple display points
- */
+//GET /api/products/id/:id     --> Returns product matching passed id and tracking simple display points
 exports.getProduct = function(req, res) {
     request.get(apiUrl + '/products/id/' + req.params.id + '?p=' + trackPoint.simple, function(err, request, body) {
         if (err) return res.send('[]');
         res.send(JSON.parse(body));
     });
 };
-/**
- * GET /api/products/id/search/:id
- * Returns product matching passed id and tracking search tracking points
- */
+
+
+//GET /api/products/id/search/:id      --> Returns product matching passed id and tracking search tracking points
 exports.getProductAfterSearch = function(req, res) {
     request.get(apiUrl + '/products/id/' + req.params.id + '?p=' + trackPoint.search, function(err, request, body) {
         if (err) return res.send('[]');
@@ -66,10 +57,7 @@ exports.getProductAfterSearch = function(req, res) {
 };
 
 
-/*
-* GET /api/products/search?str=test
-* Returns products that contain passed string in array.
-* */
+//GET /api/products/search?str=test     -> Returns products that contain passed string in array.
 exports.searchProducts = function(req, res) {
     var str = req.params.str;
 
@@ -83,3 +71,15 @@ exports.searchProducts = function(req, res) {
         });
     }
 }
+
+
+/*
+ * ///////// RECIPES /////////
+ * */
+//GET /api/recipes        --> List of all recipes.
+exports.getRecipes = function(req, res) {
+    request.get(apiUrl + '/recipes', function(err, request, body) {
+        if (err) return res.send('[]');
+        res.send(JSON.parse(body));
+    });
+};

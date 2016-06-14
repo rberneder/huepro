@@ -46,17 +46,21 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 /*
  * ///////// ROUTES /////////
  * */
-app.get('*', homeController.siteUnderConstruction);
+app.get('*', homeController.siteUnderConstruction);         // TODO remove this
 app.post('*', homeController.siteUnderConstructionPost);
 
 app.get('/', homeController.index);
 app.get('/uploads/:element/:folder/:file', homeController.getFile);
+
 app.get('/api/products', apiController.getProducts);
 app.get('/api/products/fresh', apiController.getFreshProducts);
 app.get('/api/products/id/:id', apiController.getProduct);
 app.get('/api/products/id/search/:id', apiController.getProductAfterSearch);
 app.get('/api/products/search/:str', apiController.searchProducts);
 app.get('/api/products/month/:month', apiController.getProductsOfMonth);
+
+app.get('/api/recipes/', apiController.getRecipes);
+
 app.get('/node_modules/*', function(req, res, next) {
     res.sendFile(path.join(__dirname, req.url));
 });
