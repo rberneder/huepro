@@ -6,11 +6,30 @@
         <em *ngIf="productsTrend.length < 1">Es gibt derzeit keine Produkte.</em>
         <ol>
             <li *ngFor="let item of productsTrend">
-                <h4>
-                    <a href="http://www.saisonal.at/produkte/produkt/{{item.product._id}}" target="_blank">
-                        {{item.product.name}} <small><em>{{item.trend.toString().substr(0, 4)}}</em></small>
-                    </a>
-                </h4>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="embed-responsive embed-responsive-1by1">
+                            <img src="{{item.product.image.substr(0, item.product.image.length - 4) + '_thumb' + item.product.image.substr(-4)}}"
+                                 style="opacity: 0.15; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%;">
+
+                            <svg height="100" width="100" viewBox="-10 -10 120 120" preserveAspectRatio="none" class="embed-responsive-item">
+                                <polyline [attr.points]="productsTrendGraphData[item.product._id]"
+                                          style="fill:none;stroke:#9cc792;stroke-width:1" />
+
+                                <polyline [attr.points]="'0,100 ' + productsTrendGraphData[item.product._id] + '100,100'"
+                                          style="fill:rgba(156,199,146,0.25);stroke:none;stroke-width:1" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-8">
+                        <h4>
+                            <a href="http://www.saisonal.at/produkte/produkt/{{item.product._id}}" target="_blank">
+                                {{item.product.name}} <small><em>{{item.trendSnapshot.toString().substr(0, 4)}}</em></small>
+                            </a>
+                        </h4>
+                    </div>
+                </div>
             </li>
         </ol>
     </div>

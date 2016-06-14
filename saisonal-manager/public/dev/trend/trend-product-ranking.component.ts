@@ -13,7 +13,7 @@ export class TrendProductRankingComponent implements OnInit {
      * */
     private productsTrend: any;
     private productsOverall: any;
-
+    private productsTrendGraphData: any;    // Holds x- and y-coordinates [percent]
 
 
     /*
@@ -22,6 +22,7 @@ export class TrendProductRankingComponent implements OnInit {
     constructor(private _productService: ProductService) {
         this.productsTrend = new Array();
         this.productsOverall = new Array();
+        this.productsTrendGraphData = {};
     }
 
     ngOnInit():any {
@@ -30,6 +31,7 @@ export class TrendProductRankingComponent implements OnInit {
             .subscribe((ranking) => {
                 this.productsTrend = ranking;
                 this.setUpProductsOverall();
+                this.setUpTrendGraphData();
             });
     }
 
@@ -43,5 +45,40 @@ export class TrendProductRankingComponent implements OnInit {
             if(a.pointsTotal < b.pointsTotal) return 1;
             return 0;
         });
+    }
+
+    setUpTrendGraphData() {
+        
+        // Aiding function to evaluate unit for x-axis
+        function getMinutesOfDateStr(dateStr) {
+            return (typeof dateStr === 'undefined') ?
+                typeof dateStr : (new Date(dateStr).getTime() / 1000 / 60);
+        }
+        
+        // Getting global-range for axes
+        var xMin, xMax, yMin, yMax;
+        for (var trend of this.productsTrend) {
+            var entries = trend.pointSnapshots.length;
+            if (typeof xMin === 'undefined' || getMinutesOfDateStr(trend.pointSnapshotsTime[0]) < xMin) xMin = getMinutesOfDateStr(trend.pointSnapshotsTime[0]);
+            if (typeof xMax === 'undefined' || getMinutesOfDateStr(trend.pointSnapshotsTime[entries - 1]) > xMax) xMax = getMinutesOfDateStr(trend.pointSnapshotsTime[entries - 1]);
+
+            for (var point of trend.pointSnapshots) {
+                if (typeof yMin === 'undefined' || point < yMin) yMin = point;
+                if (typeof yMax === 'undefined' || point > yMax) yMax = point;
+            }
+        }
+
+        // Generating point-coordinates
+        for (let trend of this.productsTrend) {
+            var points = '';
+
+            for (var i = 0; i < trend.pointSnapshots.length; i++) {
+                var xCoord = 100 * (getMinutesOfDateStr(trend.pointSnapshotsTime[i]) - xMin) / (xMax - xMin);
+                var yCoord = 100 - 100 * (trend.pointSnapshots[i] - yMin) / (yMax - yMin);  // SVG has y on bottom
+                points += xCoord + ',' + yCoord + ' ';
+            }
+
+            this.productsTrendGraphData[trend.product._id] = points;
+        }
     }
 }

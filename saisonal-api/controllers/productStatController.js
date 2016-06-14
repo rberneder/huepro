@@ -42,7 +42,7 @@ exports.getAllProductStats = function() {
 }
 
 exports.getProductRanking = function(req, res) {
-    ProductStat.find().sort({trend: 'desc'}).exec(function(err, stats) {
+    ProductStat.find().sort({trendSnapshot: 'desc'}).exec(function(err, stats) {
         if (err) {
             console.log('ERROR: Cannot get product-statistics from database.', err);
 
