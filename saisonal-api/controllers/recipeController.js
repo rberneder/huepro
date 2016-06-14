@@ -23,8 +23,6 @@ exports.getAllRecipes = function(req, res) {
 
 /** Returns the recipe corresponding the passed ID. */
 exports.show = function(req, res) {
-	var id = req.params.recipeId;
-	var trackPoints = req.query.p || 0;
 	Recipe.load(req.params.recipeId, function(err, recipe) {
 		if (err || !recipe) {
 			// TODO log error

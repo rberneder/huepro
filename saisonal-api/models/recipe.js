@@ -23,4 +23,10 @@ var RecipeSchema = new Schema({
 	products: [String]
 });
 
+RecipeSchema.statics = {
+	load: function(id, cb) {
+		this.findOne({_id : id}).exec(cb);
+	}
+};
+
 mongoose.model('Recipe', RecipeSchema);

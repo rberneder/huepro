@@ -26,9 +26,9 @@ router.get('/search/:str', recipes.searchRecipeNames);
 router.post('/', recipes.post);
 
 // PUT /recipes/id/af243ec243c2c23423  --> body: Datenobjekt
-router.put('/id/:recipesId', recipes.put);
+router.put('/id/:recipeId', recipes.put);
 
 // DELETE /recipes/id/asdf22asf2far32
-router.delete('/id/:recipesId', recipes.delete);
+router.delete('/id/:recipeId', recipes.delete);
 
 module.exports = router;

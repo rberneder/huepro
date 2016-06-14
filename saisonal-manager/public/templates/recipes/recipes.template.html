@@ -33,17 +33,18 @@
                                    [ngFormControl]="newRecipeForm.controls['name']"/>
 
                             <label for="ingredients">Zutaten</label>
-                            <input id="ingredients" type="text"
-                                   placeholder="3 Stk. Eier,..."
-                                   [(ngModel)]="editorRecipe.ingredients"
-                                   [ngFormControl]="newRecipeForm.controls['ingredients']"/>
+                            <textarea id="ingredients" placeholder="3 Stk Eier
+20 g Zucker"
+                                      [(ngModel)]="editorRecipe.ingredients"
+                                      [ngFormControl]="newRecipeForm.controls['ingredients']">
+                            </textarea>
 
 
-                            <label for="decription">Beschreibung</label>
-                            <input id="decription" type="text"
-                                   placeholder="Beschreibung des Rezeptes"
-                                   [(ngModel)]="editorRecipe.decription"
-                                   [ngFormControl]="newRecipeForm.controls['description']"/>
+                            <label for="description">Beschreibung</label>
+                            <textarea id="description" placeholder="Beschreibung des Rezeptes"
+                                      [(ngModel)]="editorRecipe.description"
+                                      [ngFormControl]="newRecipeForm.controls['description']">
+                            </textarea>
 
 
                             <label for="productFamilies">Produktfamilien</label>
@@ -58,13 +59,34 @@
                                    placeholder="Produkte"
                                    [(ngModel)]="editorRecipe.products"
                                    [ngFormControl]="newRecipeForm.controls['products']"/>
+
+                            <!--<label>Produkte</label>
+
+                            <ul>
+                                <li *ngFor="let family of families">
+                                    <span><input type="checkbox" [checked]="family.checked" (click)="family.check()"    /></span>
+                                    <span (click)="family.toggle()">{{ family.name }}</span>
+
+                                    <ul>
+                                        <li *ngFor="let product of products">
+                                            <span *ngIf="product.family == family.name">
+                                                <span><input type="checkbox" [checked]="product.checked" (click)="product.check()"    /></span>
+                                                <span (click)="product.toggle()">{{ product.name }}</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>-->
+
+
+
                         </div>
 
                         <button type="submit" class="btn btn-primary" [disabled]="!newRecipeForm.valid">Rezept speichern</button>
 
                         <button class="btn btn-danger"
                                 *ngIf="!isNewRecipe"
-                                (click)="deleteRecipe()">Rezept löschen</button>
+                                (click)="deleteEditRecipe()">Rezept löschen</button>
 
                         <div class="bg-green inline-block info-msg"
                              [class.active]="recipeSaved == true">
