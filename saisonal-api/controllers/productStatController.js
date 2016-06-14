@@ -128,16 +128,21 @@ function updateTrendSnapshot() {
         } else {
             _.each(stats, function(stat) {
                 var pointsLength = stat.pointSnapshots.length;
-
+                var pointSnapshot = stat.pointsTotal - ((pointsLength > 1) ? stat.pointSnapshots[pointsLength - 2] : 0);
+                
                 if (pointsLength >= maxSize) {
                     stat.pointSnapshots.splice(0, 1);
                     stat.pointSnapshotsTime.splice(0, 1);
                 }
-
-                stat.pointSnapshots.push(stat.pointsTotal);
+                
+                stat.pointSnapshots.push(pointSnapshot);
                 stat.pointSnapshotsTime.push(now);
 
-                stat.trend = stat.pointsTotal - ((pointsLength > 1) ? stat.pointSnapshots[pointsLength - 2] : 0);
+                stat.trendSnapshot = 0;
+                for (var i = 0; i < stat.pointSnapshots.length; i++) {
+                    var factor = 1 + (1 / (i + 1));
+                    stat.trendSnapshot += factor * stat.pointSnapshots[i];
+                }
 
                 stat.save();
             });}
