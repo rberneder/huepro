@@ -60,6 +60,7 @@ app.get('/api/products/search/:str', apiController.searchProducts);
 app.get('/api/products/month/:month', apiController.getProductsOfMonth);
 
 app.get('/api/recipes/', apiController.getRecipes);
+app.get('/api/recipes/id/:id', apiController.getRecipe);
 
 app.get('/node_modules/*', function(req, res, next) {
     res.sendFile(path.join(__dirname, req.url));

@@ -1,0 +1,37 @@
+<!-- TODO unify this with product-list-template -->
+<div id="product-list">
+    <div class="row">
+        <!-- TODO unify this with product-list-template -->
+        <div id="product-list__cont">
+            <article id="recipe-{{i}}" class="product-thumb col-xs-6 col-md-4"
+                    *ngFor="let recipe of recipes; let i = index">
+                <a [routerLink]="['RecipeDetails', {id: recipe._id}]">
+                    <figure>
+                        <div class="product-img">
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <div *ngIf="recipe.image">
+                                    <img src="{{recipe.image.substr(0, recipe.image.length - 4) + '_thumb' + recipe.image.substr(-4)}}" class="embed-responsive-item">
+                                </div>
+                                <div *ngIf="!recipe.image">
+                                    <img src="src/img/img-placeholder.png" class="embed-responsive-item">
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption>
+                            <h3>{{recipe.name}}</h3>
+                        </figcaption>
+                    </figure>
+                </a>
+            </article>
+        </div>
+
+        <div id="index-menu">
+            <div id="index-menu__main">
+                <nav id="indices">
+                    <a *ngFor="let index of indices"
+                       href="{{index.selector}}" [class.active]="index.active === true"  (click)="scrollTo($event)" class="btn-index">{{index.name}}</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

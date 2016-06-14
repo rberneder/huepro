@@ -83,3 +83,11 @@ exports.getRecipes = function(req, res) {
         res.send(JSON.parse(body));
     });
 };
+
+//GET /api/recipes/id/:id     --> Returns recipe matching passed id
+exports.getRecipe = function(req, res) {
+    request.get(apiUrl + '/recipes/id/' + req.params.id, function(err, request, body) {
+        if (err) return res.send('[]');
+        res.send(JSON.parse(body));
+    });
+};

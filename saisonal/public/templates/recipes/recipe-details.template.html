@@ -1,0 +1,38 @@
+<!-- TODO unify this with product-list-template -->
+<section id="product-details">
+    <div class="row">
+        <div class="col-sm-1">
+            <a onclick="window.history.back()"
+               (click)="_router.renavigate()"
+               class="link-arrow">
+                <span class="icon icon-arrow-left"></span>
+            </a>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8 text-center">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <div *ngIf="recipe?.image">
+                            <img src="{{recipe?.image}}" class="embed-responsive-item">
+                        </div>
+                        <div *ngIf="!recipe?.image">
+                            <img src="src/img/img-placeholder.png" class="embed-responsive-item">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="text-center">{{recipe?.name}}</h1>
+
+            <div class="description">
+                {{recipe?.description}}
+            </div>
+
+            <div class="ingredients">
+                {{recipe?.ingredients}}
+            </div>
+
+        </div>
+    </div>
+
+</section>

@@ -1,7 +1,5 @@
 import {Component, ElementRef} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router, RouteConfig} from "angular2/router";
-import {SeasonCalendarComponent} from "./season-calendar/season-calendar.component";
-import {RecipesComponent} from "./recipes/recipes.component";
 import {FreshProductsComponent} from "./fresh-products/fresh-products.component";
 import {ProductService} from "./products/product.service";
 import {SearchComponent} from "./search/search.component";
@@ -10,6 +8,7 @@ import {ScrollService} from "./util/scroll/scroll.service";
 import {SeasonCalendarContainerComponent} from "./season-calendar/season-calendar-container.component";
 import {ContactComponent} from "./contact/contact.component";
 import {ImprintComponent} from "./imprint/imprint.component";
+import {RecipeContainerComponent} from "./recipes/recipe-container.component";
 
 
 
@@ -23,7 +22,7 @@ import {ImprintComponent} from "./imprint/imprint.component";
     {path: '/', name: 'FreshProducts', component: FreshProductsComponent, useAsDefault: true},
     {path: '/produkte/...', name: 'Products', component: ProductContainerComponent},
     {path: '/saisonkalender/...', name: 'SeasonCalendar', component: SeasonCalendarContainerComponent},
-    {path: '/rezepte', name: 'Recipes', component: RecipesComponent},
+    {path: '/rezepte/...', name: 'Recipes', component: RecipeContainerComponent},
     {path: '/suche', name: 'Search', component: SearchComponent},
     {path: '/kontakt', name: 'Contact', component: ContactComponent},
     {path: '/impressum', name: 'Imprint', component: ImprintComponent},
