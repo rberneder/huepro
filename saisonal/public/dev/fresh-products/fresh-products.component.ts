@@ -95,14 +95,12 @@ export class FreshProductsComponent implements OnInit {
         switch (direction) {
             case 'up':
                 if (this.shownProd < 1) return;
-                this.shownProd--;
-                this._scrollService.scrollTo(this.$products[this.shownProd]);
+                this._scrollService.scrollTo(this.$products[this.shownProd - 1]);
                 break;
 
             case 'down':
                 if (this.shownProd >= this.products.length - 1) return;
-                this.shownProd++;
-                this._scrollService.scrollTo(this.$products[this.shownProd]);
+                this._scrollService.scrollTo(this.$products[this.shownProd + 1]);
                 break;
         }
         this.updateSliderBtns();
