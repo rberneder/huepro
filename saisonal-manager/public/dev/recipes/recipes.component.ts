@@ -42,7 +42,7 @@ export class RecipesComponent implements OnInit {
         private _formBuilder: FormBuilder){
         
         this.recipeSaved=false;
-        this.isNewProduct=true;
+        this.isNewRecipe=true;
         this.editorRecipe = new RecipeCl();
 
 		this._recipeService.getRecipes()
@@ -51,6 +51,8 @@ export class RecipesComponent implements OnInit {
     };
 	
     ngOnInit():any {
+
+		this.prepareUpload();
 
 		this._productService.getFamilies()
 			.subscribe(data => {
@@ -79,7 +81,7 @@ export class RecipesComponent implements OnInit {
 			maxFilesize: 3, // MB
 			addRemovalLinks: false,
 			acceptedFiles: 'image/*',
-			dictDefaultMessage: 'Produktbild',
+			dictDefaultMessage: 'Rezeptbild',
 			uploadMultiple: false,
 			thumbnailWidth: 400,
 			thumbnailHeight: 300,
@@ -146,4 +148,6 @@ export class RecipesComponent implements OnInit {
 		this.recipeSaved = true;
 		setTimeout(() => this.recipeSaved = false, 3000);
 	}
+
+
 }

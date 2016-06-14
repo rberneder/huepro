@@ -18,7 +18,7 @@
                 <div class="hl-divider pull-right"></div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-8">
                     <form [ngFormModel]="newRecipeForm" (ngSubmit)="onSubmit(newRecipeForm.value)">
 
                         <input type="hidden"
@@ -74,13 +74,13 @@
                     </form>
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-4">
                     <div id="current-recipe-image"
                          *ngIf="!isNewRecipe && editorRecipe.image">
                         <img src="{{editorRecipe.image}}" class="img-responsive">
                         <label>Neues Rezeptbild</label>
                     </div>
-                    <form enctype="multipart/form-data" action="/upload/recipe-image" method="post" class="dropzone"></form>
+                    <form enctype="multipart/form-data" action="/upload/image/recipe" method="post" class="dropzone"></form>
                 </div>
             </div>
         </div>    </div>

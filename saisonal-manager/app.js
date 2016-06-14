@@ -78,7 +78,7 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 // app.all('/*', [express.bodyParser(), jwtauth, requireAuth]);
 
 app.get('/', homeController.index);
-app.post('/upload/product-image', uploadController.uploadProductImage);
+app.post('/upload/image/:type', uploadController.uploadImage);
 app.get('/uploads/:element/:folder/:file', homeController.getFile);
 
 
