@@ -70,7 +70,7 @@
                     <h3 class="hl-bg">Rezepte</h3>
                 </div>
 
-                <h3 *ngIf="recipes.length < 1"><em>Zu diesem Produkt gibt es leider keine Rezepte.</em></h3>
+                <h3 *ngIf="recipes?.length < 1"><em>Zu diesem Produkt gibt es leider keine Rezepte.</em></h3>
 
                 <article class="recipe"
                          *ngFor="let recipe of recipes">
