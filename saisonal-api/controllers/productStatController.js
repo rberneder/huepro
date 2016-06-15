@@ -111,6 +111,12 @@ function updateTrend() {
         _.each(stats, function(productStat) {
             try {
                 productStat.trend = productStat.pointsTotal / productStat.views;
+                productStat.points.push(
+                    (productStat.points.length < 1) ?
+                    productStat.pointsTotal :
+                    productStat.pointsTotal - productStat.points[productStat.points.length - 1]
+                );
+                productStat.pointsTime.push(new Date());
                 productStat.save();
             } catch (e) {}
         })
@@ -164,7 +170,7 @@ var updateSchedule = [
         rate: 24 * 60,      // 24h
         lastUpdate: null
     }
-]
+];
 
 exports.updateStats = function() {
     for (var i = 0; i < updateSchedule.length; i++) {
