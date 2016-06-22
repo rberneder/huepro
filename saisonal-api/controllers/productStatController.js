@@ -134,7 +134,7 @@ function updateTrendSnapshot() {
         } else {
             _.each(stats, function(stat) {
                 var pointsLength = stat.pointSnapshots.length;
-                var pointSnapshot = stat.pointsTotal - ((pointsLength > 0) ? stat.pointSnapshots[pointsLength - 1] : 0);
+                var pointSnapshot = stat.pointsTotal - ((stat.points.length > 0) ? stat.points[stat.points.length - 1] : 0);
                 
                 if (pointsLength >= maxSize) {
                     stat.pointSnapshots.splice(0, 1);

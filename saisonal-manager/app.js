@@ -77,6 +77,26 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 
 // app.all('/*', [express.bodyParser(), jwtauth, requireAuth]);
 
+// TODO ///////////// REMOVE THIS - START ///////////////
+app.get('*', function(req, res, next) {
+    if (req.method == 'GET') {
+        if (req.cookies.hasManagerAccess && req.cookies.hasManagerAccess == 1) {
+            next();
+        } else {
+            res.sendFile(path.join(__dirname, '/public/login.html'));
+        }
+    }
+});
+app.post('*', function(req, res) {
+    if (req.body.password && req.body.password === 'B33nS4isonal') {
+        if (!req.cookies.hasManagerAccess) {
+            res.cookie('hasManagerAccess', 1, { maxAge: 86400000 });   // 24h
+        }
+    }
+    res.redirect('/');
+});
+// TODO ///////////// REMOVE THIS - END ///////////////
+
 app.get('/', homeController.index);
 app.post('/upload/image/:type', uploadController.uploadImage);
 app.get('/uploads/:element/:folder/:file', homeController.getFile);
@@ -134,7 +154,7 @@ app.use(function(err, req, res, next) {
 		res.status(404).send({ error: 'Something went wrong!' });
 	} else {
 		res.status(200);
-		res.sendFile(path.join(__dirname, '/public/index.html'));
+		res.sendFile(path.join(__dirname, '/public/app.html'));
 	}
 });
 

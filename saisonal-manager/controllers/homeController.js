@@ -5,7 +5,7 @@ var path = require('path');
  * Home page.
  */
 exports.index = function(req, res) {
-    res.sendFile(path.join(__dirname, '../index.html'));
+    res.sendFile(path.join(__dirname, '../app.html'));
 };
 
 // GET /uploads/products/images/file
