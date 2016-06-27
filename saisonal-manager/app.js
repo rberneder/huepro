@@ -79,6 +79,8 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 
 // TODO ///////////// REMOVE THIS - START ///////////////
 app.get('*', function(req, res, next) {
+    if (req.xhr) return next();
+
     if (req.method == 'GET') {
         if (req.cookies.hasManagerAccess && req.cookies.hasManagerAccess == 1) {
             next();
@@ -87,13 +89,17 @@ app.get('*', function(req, res, next) {
         }
     }
 });
-app.post('*', function(req, res) {
+app.post('*', function(req, res, next) {
+    if (req.xhr) return next();
+
     if (req.body.password && req.body.password === 'B33nS4isonal') {
-        if (!req.cookies.hasManagerAccess) {
-            res.cookie('hasManagerAccess', 1, { maxAge: 86400000 });   // 24h
-        }
+        res.cookie('hasManagerAccess', 1, { maxAge: 86400000 });   // 24h
+        res.redirect('/');
+    } else if (req.cookies.hasManagerAccess && req.cookies.hasManagerAccess == 1) {
+        return next();
+    } else {
+        res.redirect('/');
     }
-    res.redirect('/');
 });
 // TODO ///////////// REMOVE THIS - END ///////////////
 
