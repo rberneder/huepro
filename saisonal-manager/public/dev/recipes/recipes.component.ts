@@ -50,7 +50,6 @@ export class RecipesComponent implements OnInit {
 		this._recipeService.getRecipes()
 			.subscribe((recipes: Recipe[]) => this.recipes = recipes);
 
-
     };
 	
     ngOnInit():any {
@@ -76,23 +75,46 @@ export class RecipesComponent implements OnInit {
 			'name': ['', Validators.required],
 			'ingredients': ['', Validators.required],
 			'description': ['', Validators.required],
-			'productFamilies': ['', Validators.required],
-			'products': ['', Validators.required]
+			'families': [''],
+			'products': ['']
 		});
     }
 
 	getFamiliesProducts(){
-		for(let i = 0; i < this.families.length; i++) {
-			this.familiesProducts[i] = this.families[i];
-			for (let j = 0, k = 0; j < this.products.length; j++) {
-				if(this.families[i].name == this.products[j].family) {
-					this.familiesProducts[i][k] = this.products[j];
-					k++;
+		for(let family of this.families) {
+			let familyProduct = {
+				family: null,
+				products: new Array()
+			};
+			
+			familyProduct.family = family;
+			
+			for (let product of this.products) {
+				if(family.name == product.family) {
+					familyProduct.products.push(product);
 				}
 			}
-		}
-		console.log(this.familiesProducts);
 
+			this.familiesProducts.push(familyProduct);
+		}
+	}
+
+	toggle(familyProduct){
+		familyProduct.expanded = !familyProduct.expanded;
+	}
+
+	check(product){
+		product.checked = !product.checked;
+	}
+
+	checkProducts(familyProduct){
+		let newState = !familyProduct.family.checked;
+
+		familyProduct.family.checked = newState;
+
+		for(let product of familyProduct.products) {
+			product.checked = newState;
+		}
 	}
 
 	prepareUpload(): any {
@@ -140,6 +162,8 @@ export class RecipesComponent implements OnInit {
 	}
 
 	onSubmit(value) {
+		//console.log(value);
+
 		if (this.isNewRecipe) {
 			this._recipeService
 				.addRecipe(this.editorRecipe)
@@ -186,6 +210,4 @@ export class RecipesComponent implements OnInit {
 		this.recipeSaved = true;
 		setTimeout(() => this.recipeSaved = false, 3000);
 	}
-
-
 }

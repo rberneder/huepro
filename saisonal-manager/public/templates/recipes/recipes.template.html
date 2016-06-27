@@ -46,39 +46,28 @@
                                       [ngFormControl]="newRecipeForm.controls['description']">
                             </textarea>
 
+                            <label>Enthaltene Produkte</label>
 
-                            <label for="productFamilies">Produktfamilien</label>
-                            <input id="productFamilies" type="text"
-                                   placeholder="Produktfamilien"
-                                   [(ngModel)]="editorRecipe.productFamilies"
-                                   [ngFormControl]="newRecipeForm.controls['productFamilies']"/>
+                            <ul class="tree-view">
+                                <fieldset >
+                                    <li *ngFor="let familyProduct of familiesProducts; let i = index">
 
+                                        <span class="icon icon-arrow-right" *ngIf="!familyProduct.expanded" (click)="toggle(familyProduct)"></span>
+                                        <span class="icon icon-arrow-down" *ngIf="familyProduct.expanded" (click)="toggle(familyProduct)"></span>
 
-                            <label for="products">Produkte</label>
-                            <input id="products" type="text"
-                                   placeholder="Produkte"
-                                   [(ngModel)]="editorRecipe.products"
-                                   [ngFormControl]="newRecipeForm.controls['products']"/>
+                                        <span><input type="checkbox" name="families" value="{{familyProduct.family._id}}" (click)="checkProducts(familyProduct)" [(ngModel)]="editorRecipe.families" [ngFormControl]="newRecipeForm.controls['families']" /></span>
 
-                            <!--<label>Produkte</label>
+                                        <span (click)="toggle(familyProduct)">{{ familyProduct.family.name }}</span>
 
-                            <ul>
-                                <li *ngFor="let family of families">
-                                    <span><input type="checkbox" [checked]="family.checked" (click)="family.check()"    /></span>
-                                    <span (click)="family.toggle()">{{ family.name }}</span>
-
-                                    <ul>
-                                        <li *ngFor="let product of products">
-                                            <span *ngIf="product.family == family.name">
-                                                <span><input type="checkbox" [checked]="product.checked" (click)="product.check()"    /></span>
-                                                <span (click)="product.toggle()">{{ product.name }}</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>-->
-
-
+                                        <ul *ngIf="familyProduct.expanded">
+                                            <li *ngFor="let product of familyProduct.products">
+                                                <span><input type="checkbox" name="products" value="{{product._id}}" [checked]="product.checked" (click)="check(product)" [(ngModel)]="editorRecipe.products" [ngFormControl]="newRecipeForm.controls['products']" /></span>
+                                                <span>{{ product.name }}</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </fieldset>
+                            </ul>
 
                         </div>
 
