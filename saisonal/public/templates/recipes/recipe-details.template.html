@@ -24,12 +24,26 @@
 
             <h1 class="text-center">{{recipe?.name}}</h1>
 
-            <div class="description">
-                {{recipe?.description}}
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <p>&nbsp;</p>
+                    <div class="text-center">
+                        <h3 class="hl-bg">Zutaten</h3>
+                    </div>
+                    <p>&nbsp;</p>
+                    <div class="ingredients" [innerHtml]="recipe?.ingredients"></div>
+                </div>
             </div>
 
-            <div class="ingredients">
-                {{recipe?.ingredients}}
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <p>&nbsp;</p>
+                    <div class="text-center">
+                        <h3 class="hl-bg">Zubereitung</h3>
+                    </div>
+                    <p>&nbsp;</p>
+                    <div class="description" [innerHtml]="recipe?.description"></div>
+                </div>
             </div>
 
         </div>
