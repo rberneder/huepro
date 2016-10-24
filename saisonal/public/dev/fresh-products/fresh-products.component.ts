@@ -75,7 +75,7 @@ export class FreshProductsComponent implements OnInit {
      * ///////// NAVIGATION /////////
      * */
     goToProduct(product) {
-        this._router.navigate(['Products/ProductDetails', {id: product._id}]);
+        this._router.navigate(['produkte/produkt', product._id]);
     }
 
 
