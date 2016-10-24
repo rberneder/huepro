@@ -5,7 +5,7 @@
         <div id="product-list__cont">
             <article id="recipe-{{i}}" class="product-thumb col-xs-6 col-md-4"
                     *ngFor="let recipe of recipes; let i = index">
-                <a [routerLink]="['RecipeDetails', {id: recipe._id}]">
+                <a [routerLink]="['rezept', recipe._id]">
                     <figure>
                         <div class="product-img">
                             <div class="embed-responsive embed-responsive-4by3">

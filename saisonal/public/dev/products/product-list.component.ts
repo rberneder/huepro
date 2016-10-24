@@ -1,5 +1,4 @@
-import {Component, OnInit, HostListener, Directive} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, OnInit, HostListener, Directive} from '@angular/core';
 import {Product} from "./product";
 import {ProductService} from "./product.service";
 import {ScrollService} from "../util/scroll/scroll.service";
@@ -8,7 +7,6 @@ import {Category} from "./category";
 @Component({
     selector: "product-list",
     templateUrl: '/templates/products/product-list.template.html',
-    directives: [ROUTER_DIRECTIVES],
     providers: [ProductService]
 })
 export class ProductListComponent implements OnInit  {

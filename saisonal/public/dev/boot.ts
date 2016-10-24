@@ -1,9 +1,11 @@
 /// <reference path="../typings/browser.d.ts" />
-import {bootstrap} from 'angular2/platform/browser';
-import {AppComponent} from "./app.component";
-import {ROUTER_PROVIDERS} from "angular2/router";
-import {HTTP_PROVIDERS} from "angular2/http";
-import {ScrollService} from "./util/scroll/scroll.service";
-import {ModusService} from "./util/modus.service";
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS, ScrollService, ModusService]);
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app.module';
+import { enableProdMode } from '@angular/core';
+
+// enableProdMode();
+
+const platform = platformBrowserDynamic();
+
+platform.bootstrapModule(AppModule);
