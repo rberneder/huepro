@@ -1,5 +1,4 @@
-import {Component, OnInit, HostListener, Directive} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
 import {ScrollService} from "../util/scroll/scroll.service";
 import {RecipeService} from "./recipe.service";
 import {Recipe} from "./recipe";
@@ -7,7 +6,6 @@ import {Recipe} from "./recipe";
 @Component({
     selector: "recipe-list",
     templateUrl: '/templates/recipes/recipe-list.template.html',
-    directives: [ROUTER_DIRECTIVES],
     providers: [RecipeService]
 })
 export class RecipeListComponent implements OnInit  {

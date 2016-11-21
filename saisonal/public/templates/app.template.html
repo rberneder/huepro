@@ -1,7 +1,7 @@
 <div id="wrapper" [class.freeze]="mobileMenuActive == true">
     <section id="sidebar" [class.active]="mobileMenuActive == true">
         <div id="logo">
-            <a [routerLink]="['FreshProducts']">
+            <a routerLink="/">
                 <img sizes="(min-width: 1500px) 20vw,
                             (min-width: 1000px) 25vw,
                             (min-width: 600px) 60vw, 100vw"
@@ -12,18 +12,18 @@
         </div>
 
         <nav id="main-nav">
-            <a (click)="closeMobileNav()" [routerLink]="['FreshProducts']" class="btn btn-default btn-block">Frisch vom Feld</a>
-            <a (click)="closeMobileNav()" [routerLink]="['Products']" class="btn btn-default btn-block">Produkte</a>
-            <a (click)="closeMobileNav()" [routerLink]="['SeasonCalendar']" class="btn btn-default btn-block">Saisonkalender</a>
-            <a (click)="closeMobileNav()" [routerLink]="['Recipes']" class="btn btn-default btn-block">Rezepte</a>
-            <a (click)="closeMobileNav()" [routerLink]="['Search']" class="btn btn-default btn-block">Suche</a>
+            <a (click)="closeMobileNav()" routerLinkActive="router-link-active" routerLink="/" [routerLinkActiveOptions]="{ exact: true }" class="btn btn-default btn-block">Frisch vom Feld</a>
+            <a (click)="closeMobileNav()" routerLinkActive="router-link-active" routerLink="/produkte" class="btn btn-default btn-block">Produkte</a>
+            <a (click)="closeMobileNav()" routerLinkActive="router-link-active" routerLink="/saisonkalender" class="btn btn-default btn-block">Saisonkalender</a>
+            <a (click)="closeMobileNav()" routerLinkActive="router-link-active" routerLink="/rezepte" class="btn btn-default btn-block">Rezepte</a>
+            <a (click)="closeMobileNav()" routerLinkActive="router-link-active" routerLink="/suche" class="btn btn-default btn-block">Suche</a>
         </nav>
 
         <footer>
             <div class="pull-left">&copy; 2016, saisonal.at</div>
             <nav id="footer-nav" class="pull-right">
-                <a (click)="closeMobileNav()" [routerLink]="['Contact']">Kontakt</a>
-                <a (click)="closeMobileNav()" [routerLink]="['Imprint']">Impressum</a>
+                <a (click)="closeMobileNav()" routerLink="/kontakt">Kontakt</a>
+                <a (click)="closeMobileNav()" routerLink="/impressum">Impressum</a>
             </nav>
         </footer>
     </section>

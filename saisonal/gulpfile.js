@@ -131,26 +131,6 @@ gulp.task('js', function () {
         .pipe(gulp.dest(assetsProd + 'js/'));
 });
 
-gulp.task('js-polyfills', function () {
-    return gulp.src([
-        'node_modules/es6-shim/es6-shim.min.js',
-        'node_modules/systemjs/dist/system-polyfills.js',
-        'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js',
-        'node_modules/angular2/bundles/angular2-polyfills.js',
-        'node_modules/systemjs/dist/system.src.js',
-        'node_modules/rxjs/bundles/Rx.js',
-        'node_modules/angular2/bundles/angular2.dev.js',
-        'node_modules/angular2/bundles/router.dev.js',
-        'node_modules/angular2/bundles/http.js',
-        'node_modules/css-animator/bundles/css-animator.min.js'
-    ])
-        .pipe(plumber())
-        .pipe(concat('polyfills.min.js'))
-        .pipe(uglify({preserveComments: 'none'}))
-        .pipe(plumber.stop())
-        .pipe(gulp.dest(assetsProd + 'js/'));
-});
-
 gulp.task('img', function () {
     return gulp.src(assetsDev + 'img/**/*')
         .pipe(imagemin({
@@ -171,4 +151,8 @@ gulp.task('watch', function () {
     gulp.watch(assetsDev + 'img/*', ['img']);
 });
 
-gulp.task('default', ['watch', 'js-polyfills','ts', 'iconfont', 'css']);
+gulp.task('ts-watch', function() {
+    gulp.watch(appDev + '**/*.ts', ['ts']);
+});
+
+gulp.task('default', ['watch', 'ts', 'iconfont', 'css']);

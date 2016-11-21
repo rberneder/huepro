@@ -1,7 +1,5 @@
-import {Component, ElementRef, OnInit} from "angular2/core";
-import {Router} from "angular2/router";
-import {AnimationBuilder} from 'css-animator/builder';
-import {AnimationService} from 'css-animator/modules';
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 import {ScrollService} from "../util/scroll/scroll.service";
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
@@ -12,8 +10,7 @@ declare var Hammer: any;
 
 @Component({
     selector: "fresh-products",
-    templateUrl: '/templates/fresh-products/fresh-products.template.html',
-    providers: [AnimationService],
+    templateUrl: '/templates/fresh-products/fresh-products.template.html'
 })
 export class FreshProductsComponent implements OnInit {
 
@@ -78,7 +75,7 @@ export class FreshProductsComponent implements OnInit {
      * ///////// NAVIGATION /////////
      * */
     goToProduct(product) {
-        this._router.navigate(['Products/ProductDetails', {id: product._id}]);
+        this._router.navigate(['produkte/produkt', product._id]);
     }
 
 

@@ -4,7 +4,7 @@
             <article id="product-{{i}}" class="product-thumb col-xs-6 col-md-4"
                     *ngFor="let product of products; let i = index"
                     [class.hidden]="(filteredCategories.length > 0 && filteredCategories.indexOf(product.category) < 0) || (filterRipe && !(product.harvestStartMonth <= actMonth && product.harvestEndMonth >= actMonth))">
-                <a [routerLink]="['ProductDetails', {id: product._id}]">
+                <a [routerLink]="['produkt', product._id]">
                     <figure>
                         <div class="product-img">
                             <div class="embed-responsive embed-responsive-4by3">

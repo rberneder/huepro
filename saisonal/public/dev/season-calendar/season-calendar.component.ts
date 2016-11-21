@@ -1,5 +1,5 @@
-import {Component, OnInit} from "angular2/core";
-import {Router, RouteParams} from "angular2/router";
+import {Component, OnInit} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
 import {ProductService} from "../products/product.service";
 import {Product} from "../products/product";
 import {MONTHS} from "../util/month.seed";
@@ -28,20 +28,22 @@ export class SeasonCalendarComponent implements OnInit {
     /*
      * ///////// INITIALIZATION /////////
      * */
-    constructor(private _productService: ProductService, private _router: Router, private _routeParams: RouteParams) {
+    constructor(private _productService: ProductService, private _router: Router, private _route: ActivatedRoute) {
         this.actMonth = new Date().getMonth();
         this.monthNames = MONTHS;
         this.filterMenuOpen = false;
     };
     
     ngOnInit():any {
-        var month: any = this._routeParams.get('month');
-        if (month == null) {
-            month = new Date().getMonth();
-            this._router.navigate(['SeasonCalendarMonth', {month: month}]);
-        }
-        this.setMonth(month);
-        this.getProducts();
+        this._route.params.subscribe(params => {
+            var month: any = params['month'];
+            if (month == null) {
+                month = new Date().getMonth();
+                this._router.navigate(['/saisonkalender', month]);
+            }
+            this.setMonth(month);
+            this.getProducts();
+        });
     }
 
 
@@ -64,15 +66,15 @@ export class SeasonCalendarComponent implements OnInit {
     }
 
     goToProduct(product) {
-        this._router.navigate(['/Products/ProductDetails', {id: product._id}]);
+        this._router.navigate(['/produkte/produkt', product._id]);
     }
 
     goToPrevMonth() {
-        this._router.navigate(['/SeasonCalendar/SeasonCalendarMonth', {month: this.prevMonth}]);
+        this._router.navigate(['/saisonkalender', this.prevMonth]);
     }
 
     goToNextMonth() {
-        this._router.navigate(['/SeasonCalendar/SeasonCalendarMonth', {month: this.nextMonth}]);
+        this._router.navigate(['/saisonkalender', this.nextMonth]);
     }
 
     toggleFilterMenu() {

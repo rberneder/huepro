@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Product} from "../products/product";
 import {ProductService} from "../products/product.service";
 import {ModusService} from "../util/modus.service";
@@ -7,8 +7,7 @@ import {ModusService} from "../util/modus.service";
 @Component({
     selector: 'search',
     templateUrl: '/templates/search/search.template.html',
-    providers: [ProductService],
-    directives: [ROUTER_DIRECTIVES]
+    providers: [ProductService]
 })
 export class SearchComponent implements OnInit {
 
@@ -67,7 +66,7 @@ export class SearchComponent implements OnInit {
     goToProduct(product) {
         if (product) {
             this._modus.setModus('search');
-            this._router.navigate(['/Products/ProductDetails', {id: product._id}]);
+            this._router.navigate(['/produkte/produkt', product._id]);
         }
     }
 }

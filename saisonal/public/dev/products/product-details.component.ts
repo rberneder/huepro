@@ -1,6 +1,5 @@
-import {Component} from "angular2/core";
-import {Router, RouteParams} from "angular2/router";
-import {OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
 import {ProductService} from "./product.service";
 import {Product} from "./product";
 import {Month} from "../util/month";
@@ -28,30 +27,34 @@ export class ProductDetailsComponent implements OnInit {
      * */
     constructor(
         private _router: Router, 
-        private _routerParams: RouteParams, 
+        private _route: ActivatedRoute,
         private _productService: ProductService,
         private _recipeService: RecipeService) {
         this.monthNames = MONTHS;
     }
 
     ngOnInit():any {
-        let productId = this._routerParams.get('id');
-        
-        if (productId == null) {
-            this._router.navigate(['Products', {month: new Date().getMonth()}]);
-            return;
-        }
-        
-        this._productService.getProduct(productId)
-            .subscribe(
-                (product:Product) => {
-                    this.product = product;
+        this._route.params.subscribe(params => {
+            let productId = params['id'];
 
-                    if (!this.product._id) this._router.navigate(['/Products/ProductList']);
+            if (productId == null) {
+                this._router.navigate(['Products', {month: new Date().getMonth()}]);
+                return;
+            }
 
-                    this._recipeService.getRecipesWithProduct(product)
-                        .subscribe((recipes) => this.recipes = recipes);
-                }
-            );
+            this._productService.getProduct(productId)
+                .subscribe(
+                    (product:Product) => {
+                        this.product = product;
+
+                        if (!this.product._id) this._router.navigate(['/Products/ProductList']);
+
+                        this._recipeService.getRecipesWithProduct(product)
+                            .subscribe((recipes) => this.recipes = recipes);
+                    }
+                );
+        });
+        
+
     }
 }
