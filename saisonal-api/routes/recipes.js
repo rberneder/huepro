@@ -15,6 +15,9 @@ router.get('/', recipes.getAllRecipes);
 // GET /recipes/id/asdfj23k2of9f32?p=3
 router.get('/id/:recipeId', recipes.show);
 
+// GET /recipes/product/587f18b8c99598a65561c3e0
+router.get('/product/:productId', recipes.getRecipesByProduct);
+
 // GET /recipes/search?str=jona
 router.get('/search/:str', recipes.searchRecipeNames);
 

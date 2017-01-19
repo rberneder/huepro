@@ -33,6 +33,23 @@ exports.show = function(req, res) {
 	});
 };
 
+
+/** Returns the recipes which includes the given product */
+
+exports.getRecipesByProduct = function (req, res) {
+	var incredient = decodeURI(req.params.productId);
+	Recipe.find({'products':  incredient})
+		.exec(function (err, recipes) {
+			if(err){
+                // TODO log error
+                res.jsonp('[]');
+			} else {
+				res.jsonp(recipes);
+			}
+        });
+}
+
+
 exports.searchRecipeNames = function (req, res) {
 	var str = decodeURI(req.params.str);
 	Recipe.find({'name': new RegExp('(' + str + ')', 'i')})
