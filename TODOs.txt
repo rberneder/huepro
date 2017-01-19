@@ -1,0 +1,2 @@
+- Websocket zwischen NodeServer und Client --> eindeutige ID --> bei Beenden der Session kann man Log ggf. speichern
+- Logik in Services auslagern

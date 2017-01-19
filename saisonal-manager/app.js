@@ -171,7 +171,7 @@ app.use(function(err, req, res, next) {
 /*
  * ///////// START HTTPS-SERVER /////////
  * */
-var LEX = require('letsencrypt-express');
+/*var LEX = require('letsencrypt-express');
 
 var lex = LEX.create({
     configDir: '/etc/letsencrypt',
@@ -184,6 +184,8 @@ var lex = LEX.create({
     }
 });
 
-https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(25090);
+https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(25090);*/
 
+
+app.listen(25090);
 module.exports = app;

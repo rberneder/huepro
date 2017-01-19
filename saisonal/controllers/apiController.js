@@ -12,7 +12,7 @@ var trackPoint = {
 /*
 * ///////// PRODUCTS /////////
 * */
-//GET /api/products        --> List of all products.
+// GET /api/products        --> List of all products.
 exports.getProducts = function(req, res) {
     request.get(apiUrl + '/products', function(err, request, body) {
         if (err) return res.send('[]');
@@ -91,3 +91,89 @@ exports.getRecipe = function(req, res) {
         res.send(JSON.parse(body));
     });
 };
+
+
+exports.processSpeechCommand = function(command, res) {
+    var payload;
+
+    if (command.result.action == 'products.show') {
+        request.get(apiUrl + '/products', function(err, request, body) {
+            if (err) return res.send('[]');
+
+            var products = JSON.parse(body),
+                productsHTML = new Array();
+
+
+            for (var i = 0; i < products.length; i++) {
+                var productHTML = '<article class="col-xs-4">';
+                productHTML += '<img class="img-responsive" src="' + products[i].image + '"/>';
+                productHTML += '<h2>' + products[i].name + '</h2>';
+                productHTML += '</article>';
+
+                productsHTML.push(productHTML);
+            }
+
+            sendResponse(err, request, productsHTML);
+        });
+    }
+
+    if (command.result.action == 'products.showByName') {
+        try {
+            var name = command.result.parameters.productName;
+
+            if (name) {
+                request.get(apiUrl + '/products/search/' + name, function(err, request, body) {
+                    if (err) return sendResponse(err, request, '');
+
+                    var product = JSON.parse(body);
+                    var htmlStr = '<article class="col-xs-6 col-xs-offset-3">';
+                    htmlStr += '<img class="img-responsive" src="' + product[0].image + '"/>';
+                    htmlStr += '<h2>' + product[0].name + '</h2>'
+                    htmlStr += '</article>';
+
+                    sendResponse(err, request, htmlStr);
+
+                });
+            } else {
+                sendResponse(null, request, '');
+            }
+        } catch (e) {
+            console.log(e);
+            sendResponse(null, request, '');
+        }
+    }
+
+    if (command.result.action == 'products.showRipe') {
+        request.get(apiUrl + '/products/fresh', function(err, request, body) {
+            if (err) return res.send('[]');
+
+            var products = JSON.parse(body),
+                productsHTML = new Array();
+
+
+            for (var i = 0; i < products.length; i++) {
+                var productHTML = '<article class="col-xs-4">';
+                productHTML += '<img class="img-responsive" src="' + products[i].image + '"/>'
+                productHTML += '<h2>' + products[i].name + '</h2>';
+                productHTML += '</article>';
+
+                productsHTML.push(productHTML);
+            }
+
+            sendResponse(err, request, productsHTML);
+        });
+    }
+
+
+    function sendResponse(err, request, body) {
+        if (err) return res.send('[]');
+
+        payload = body;
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({
+            response: command,
+            data: payload
+        }));
+    }
+}

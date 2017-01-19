@@ -21,6 +21,7 @@ var bodyParser = require('body-parser');
  * */
 var homeController = require('./controllers/homeController');
 var apiController = require('./controllers/apiController');
+var speechController = require('./controllers/speechController');
 
 
 /*
@@ -46,8 +47,8 @@ app.use(express.static(path.join(__dirname, '/public'), { maxAge: 31557600000 })
 /*
  * ///////// ROUTES /////////
  * */
-app.get('*', homeController.siteUnderConstruction);         // TODO remove this
-app.post('*', homeController.siteUnderConstructionPost);
+/*app.get('*', homeController.siteUnderConstruction);         // TODO remove this
+app.post('*', homeController.siteUnderConstructionPost);*/
 
 app.get('/', homeController.index);
 app.get('/uploads/:element/:folder/:file', homeController.getFile);
@@ -61,6 +62,9 @@ app.get('/api/products/month/:month', apiController.getProductsOfMonth);
 
 app.get('/api/recipes/', apiController.getRecipes);
 app.get('/api/recipes/id/:id', apiController.getRecipe);
+
+app.get('/speech-portal', speechController.sendIndex);
+app.post('/speech-portal/query', speechController.processQuery);
 
 app.get('/node_modules/*', function(req, res, next) {
     res.sendFile(path.join(__dirname, req.url));
@@ -89,17 +93,18 @@ app.use(function(err, req, res, next) {
 });
 
 
-
 /*
  * ///////// START HTTPS-SERVER /////////
  * */
-var redirectHttp = (function () {
+/*var redirectHttp = (function () {
     var httpServer = express();
     httpServer.get('*',function(req,res){
         res.redirect('https://www.saisonal.at' + req.url)
     });
     httpServer.listen(80);
 })();
+
+
 
 var LEX = require('letsencrypt-express');
 
@@ -115,5 +120,22 @@ var lex = LEX.create({
 });
 
 https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(443);
+*/
+require('letsencrypt-express').create({
+
+  server: 'https://acme-v01.api.letsencrypt.org/directory'
+
+, email: 'andererblonder@gmail.com'
+
+, agreeTos: true
+
+, approveDomains: [ 'saisonal.at' ]
+
+, app: app
+
+}).listen(443);
+
+//app.listen(80);
 
 module.exports = app;
+

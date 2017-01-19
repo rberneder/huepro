@@ -1,0 +1,64 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- TITLE -->
+    <title>Saisonal - speech-portal</title>
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="../src/css/app.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+<body class="speech-portal">
+
+<div class="container">
+    <div id="src" class="hidden">
+        <article class="msg command col-xs-offset-4 col-xs-8"></article>
+        <article class="msg response col-xs-8"></article>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div id="chat"></div>
+        </div>
+    </div>
+    <hr>
+
+
+    <form action="/speech-portal/query" id="text-form">
+        <input type="text" id="text-command" placeholder="Type your request here">
+        <button type="submit" id="text-command-submit"><span class="icon icon-search"></span></button>
+    </form>
+</div>
+
+<div class="container-fluid">
+    <hr>
+
+    <div class="divider"></div>
+    <div class="row">
+        <div class="col-xs-8">
+            <h4 class="hl-bg">Saisonal Response</h4>
+            <div id="saisonal-response"></div>
+        </div>
+
+        <div class="col-xs-4">
+            <h4 class="hl-bg">API AI Response</h4>
+            <div id="api-response"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- SCRIPTS -->
+<script src="js/lib/jquery-3.1.1.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>
