@@ -17,8 +17,6 @@ exports.sendIndex = function(req, res) {
 
 // POST /speech-portal/query
 exports.processQuery = function(req, res, next) {
-    console.log(req.body.query);
-
     var speech = apiai("fe0fb27e266641ada46b0f9b877368dc");
     var request = speech.textRequest(req.body.query, {
         sessionId: 1    // Unique session-id

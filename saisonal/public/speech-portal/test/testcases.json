@@ -1,0 +1,78 @@
+[
+  {
+    "text": "Show me ripe products.",
+    "action": "products.showRipe",
+    "parameters": [
+      {
+        "name": "product",
+        "value": "product"
+      },
+      {
+        "name": "ripe",
+        "value": "ripe"
+      }
+    ]
+  },
+  {
+    "text": "I want to see ripe products.",
+    "action": "products.showRipe",
+    "parameters": [
+      {
+        "name": "product",
+        "value": "product"
+      },
+      {
+        "name": "ripe",
+        "value": "ripe"
+      }
+    ]
+  },
+  {
+    "text": "Show me products that are ripe next week.",
+    "action": "products.showRipe",
+    "parameters": [
+      {
+        "name": "product",
+        "value": "product"
+      },
+      {
+        "name": "ripe",
+        "value": "ripe"
+      },
+      {
+        "name": "date-period",
+        "value": "2017-02-05/2017-02-11"
+      }
+    ]
+  },
+  {
+    "text": "Show me products.",
+    "action": "products.show",
+    "parameters": [
+      {
+        "name": "product",
+        "value": "product"
+      }
+    ]
+  },
+  {
+    "text": "What apples do you have?",
+    "action": "products.showByName",
+    "parameters": [
+      {
+        "name": "productName",
+        "value": "Jonagold"
+      }
+    ]
+  },
+  {
+    "text": "When can I buy apples?",
+    "action": "products.ripeByName",
+    "parameters": [
+      {
+        "name": "productName",
+        "value": "apples"
+      }
+    ]
+  }
+]

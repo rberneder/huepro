@@ -1,4 +1,5 @@
 require('../models/product');
+var apiAi = require('./apiAiController');
 var path = require('path');
 var mongoose = require('mongoose');
 var fs = require('fs');
@@ -113,6 +114,7 @@ exports.post = function(req, res) {
 
     if (img) imageManager.processUploadedImage(img);
 
+    apiAi.addProduct(product);
     product.save();
     productStat.createProductStat(product);
     res.jsonp(product);

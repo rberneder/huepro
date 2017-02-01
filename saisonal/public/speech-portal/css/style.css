@@ -1,31 +1,74 @@
+/* /////////////////////////////////   BOOTSTRAP
+ */
+@media (min-width: 1200px) {
+    .container {
+        width: 1600px;
+    }
+}
+[data-toggle] .glyphicon-menu-down {  display: none;  }
+[data-toggle].collapsed .glyphicon-menu-down {  display: block;  }
+[data-toggle].collapsed .glyphicon-menu-up   {  display: none;  }
+a h5 { transform: translateY(2px) }
+
+.label { margin-left: 5px; }
+.label-default { background-color: #eee; }
+.btn-default {
+    margin-bottom: 10px;
+    background: #c9b594;
+    color: #fff;
+}
+.btn-default:disabled {
+    background: #eee;
+}
+.btn:focus, button:focus {
+    background: #c9b594;
+    color: #fff;
+}
+
+
 /* /////////////////////////////////   GENERAL
  */
 .speech-portal hr {
     margin-top: 0;
 }
 .divider {
-    height: 50px;
+    height: 30px;
+}
+small.hl-bg {
+    padding: 5px 10px;
+}
+
+
+/* /////////////////////////////////   SERVICE-BOX
+ */
+.service-box .content {
+    opacity: 0.2;
+}
+.service-box.active .content {
+    opacity: 1;
 }
 
 
 /* /////////////////////////////////   CHAT
  */
-#chat {
+.chat {
     height: 250px;
-    overflow: scroll;
+    overflow-y: auto;
+    background-color: #eee;
+    padding: 15px;
 }
-#chat .msg {
+.chat .msg {
     padding: 10px 30px;
     margin-top: 10px;
     background: #9cc792;
-    border-radius: 10000px;
+    border-radius: 15px;
     position: relative;
     color: #fff;
 }
-#chat .msg.response {
+.chat .msg.response {
     background: #c9b594;
 }
-#chat .msg:after {
+.chat .msg:after {
     content: '';
     position: absolute;
     right: 0px;
@@ -36,7 +79,7 @@
     border-width: 0 0 20px 20px;
     border-color: transparent transparent #9cc792 transparent;
 }
-#chat .msg.response:after {
+.chat .msg.response:after {
     right: auto;
     left: 0;
     border-width: 20px 0 0 20px;
@@ -55,6 +98,7 @@
     padding: 10px;
     width: 80%;
     font-size: 20px;
+    border-bottom: 1px solid #eee;
 }
 #text-command:active,
 #text-command:focus {
@@ -68,14 +112,36 @@
 
 
 
+/* /////////////////////////////////   TESTS TABLE
+ */
+#test-series table td:last-child {
+    width: 400px;
+}
+#test-series table td:last-child .well {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
 /* /////////////////////////////////   API RESPONSE FIELD
  */
-#api-response {
+.json-response {
     font-family: Courier, Monospaced, SansSerif;
     padding: 10px;
     background: #eee;
+    height: 300px;
+    overflow-y: auto;
 }
 
+
+
+/* /////////////////////////////////   HTML RESPONSE FIELD
+ */
+.html-response {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+}
 
 
 

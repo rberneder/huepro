@@ -24,40 +24,198 @@
 
 
     <div class="row">
-        <div class="col-xs-6 col-xs-offset-3">
-            <div id="chat"></div>
+        <div class="divider"></div>
+
+
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <h3 class="text-center">Single Input</h3>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+
+
+
+                        <!-- - - - - - - - - - - - - - - - - - - - - - - input -->
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-4">
+                                <form action="/speech-portal/query" id="text-form">
+                                    <input type="text" id="text-command" placeholder="Type your request here" autofocus>
+                                    <button type="submit" id="text-command-submit"><span class="icon icon-search"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+
+
+
+                        <!-- - - - - - - - - - - - - - - - - - - - - - - api.ai -->
+                        <div class="col-xs-5 service-box active" id="api-box">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="input-group hidden">
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="api-active" checked>
+                        </span>
+                                        <label for="api-active" class="form-control">Active</label>
+                                    </div>
+
+                                    <div class="input-group hidden">
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="api-voice-feedback" checked>
+                        </span>
+                                        <label for="api-voice-feedback" class="form-control">Voice Feedback</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-8">
+                                    <img src="img/logo-api.png" class="img-responsive pull-right">
+                                </div>
+                            </div>
+
+                            <section class="content">
+                                <h5 class="hl-bg">Conversation</h5>
+                                <div id="api-chat" class="chat"></div>
+
+                                <h5 class="hl-bg">Response</h5> <a data-toggle="collapse" href="#api-response-cont" class="collapsed"><h5 class="hl-bg"><span class="glyphicon glyphicon-menu-down"></span><span class="glyphicon glyphicon-menu-up"></span></h5></a>
+                                <div id="api-response-cont" class="response-cont collapse in">
+                                    <div id="api-response" class="json-response"></div>
+                                </div>
+
+                                <div>
+                                    <h5 class="hl-bg">Saisonal Response</h5> <a data-toggle="collapse" href="#html-response-cont-api" class="collapsed"><h5 class="hl-bg"><span class="glyphicon glyphicon-menu-down"></span><span class="glyphicon glyphicon-menu-up"></span></h5></a>
+                                    <div id="html-response-cont-api" class="collapse in">
+                                        <div class="html-response" id="saisonal-response-api">
+                                            <div class="col-xs-12">
+                                                <i>nothing to show</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+
+
+                        <!-- - - - - - - - - - - - - - - - - - - - - - - wit.ai -->
+                        <div class="col-xs-5 col-xs-offset-2 service-box active" id="wit-box">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="input-group hidden">
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="wit-active" checked>
+                        </span>
+                                        <label for="wit-active" class="form-control">Active</label>
+                                    </div>
+
+                                    <div class="input-group hidden">
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="wit-voice-feedback" checked>
+                        </span>
+                                        <label for="wit-voice-feedback" class="form-control">Voice Feedback</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-8">
+                                    <img src="img/logo-wit.png" class="img-responsive pull-right">
+                                </div>
+                            </div>
+
+                            <section class="content">
+                                <h5 class="hl-bg">Conversation</h5>
+                                <div id="wit-chat" class="chat"></div>
+
+                                <h5 class="hl-bg">Response</h5> <a data-toggle="collapse" href="#wit-response-cont" class="collapsed"><h5 class="hl-bg"><span class="glyphicon glyphicon-menu-down"></span><span class="glyphicon glyphicon-menu-up"></span></h5></a>
+                                <div id="wit-response-cont" class="collapse in">
+                                    <div id="wit-response" class="json-response"></div>
+                                </div>
+
+                                <div>
+                                    <h5 class="hl-bg">Saisonal Response</h5> <a data-toggle="collapse" href="#html-response-cont-wit" class="collapsed"><h5 class="hl-bg"><span class="glyphicon glyphicon-menu-down"></span><span class="glyphicon glyphicon-menu-up"></span></h5></a>
+                                    <div id="html-response-cont-wit" class="collapse in">
+                                        <div class="html-response" id="saisonal-response-wit">
+                                            <div class="col-xs-12">
+                                                <i>nothing to show</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h3 class="text-center">Test Series</h3>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body" id="test-series">
+                        <span class="label label-default" id="label-src"></span>
+
+
+                        <button class="btn btn-default" id="start-all-tests">Test all commands</button>
+
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr class="bg-primary">
+                                    <th></th>
+                                    <th>Text</th>
+                                    <th>Action</th>
+                                    <th>Parameters</th>
+                                    <th>Plain Response</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr id="test-entry-src-row" data-test-nr="" class="hidden">
+                                    <th scope="row" class="entry-no" data-entry-no=""></th>
+                                    <td class="entry-text"></td>
+                                    <td class="entry-action"></td>
+                                    <td class="entry-parameters"></td>
+                                    <td class="entry-plain-response">
+                                        <a href="#entry-row-0" data-toggle="collapse" aria-expanded="false" class="btn btn-sm btn-default">toggle visibility</a>
+                                        <div class="collapse collapsing-content" id="entry-row-0">
+                                            <div class="well">
+                                                <div class="entry-json-response"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
-    <hr>
-
-
-    <form action="/speech-portal/query" id="text-form">
-        <input type="text" id="text-command" placeholder="Type your request here">
-        <button type="submit" id="text-command-submit"><span class="icon icon-search"></span></button>
-    </form>
 </div>
-
-<div class="container-fluid">
-    <hr>
-
-    <div class="divider"></div>
-    <div class="row">
-        <div class="col-xs-8">
-            <h4 class="hl-bg">Saisonal Response</h4>
-            <div id="saisonal-response"></div>
-        </div>
-
-        <div class="col-xs-4">
-            <h4 class="hl-bg">API AI Response</h4>
-            <div id="api-response"></div>
-        </div>
-    </div>
-</div>
-
 
 
 <!-- SCRIPTS -->
 <script src="js/lib/jquery-3.1.1.min.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/speech-services/SpeechService.js"></script>
+<script src="js/speech-services/ApiSpeechService.js"></script>
+<script src="js/speech-services/WitSpeechService.js"></script>
 <script src="js/script.js"></script>
 
 </body>
